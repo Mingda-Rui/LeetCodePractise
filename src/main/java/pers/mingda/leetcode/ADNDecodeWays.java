@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC91DecodeWays {
+public class ADNDecodeWays {
 
 }
 
