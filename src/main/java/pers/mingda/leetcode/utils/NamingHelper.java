@@ -60,9 +60,11 @@ public class NamingHelper {
 
     public static void main(String[] args) {
 
-        String numOf123 = getClassPrefixByNum(123);
-        System.out.println(numOf123);
-        System.out.println(getClassNumByPrefix(numOf123));
+        String prefix = "";
+        int num = 91;
+
+        System.out.println("Converted from prefix: " + prefix + " to num: " + getClassNumByPrefix(prefix));
+        System.out.println("Converted from num: " + num + " to prefix: " + getClassPrefixByNum(num));
         
     }
 }
