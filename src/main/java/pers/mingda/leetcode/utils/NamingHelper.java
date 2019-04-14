@@ -2,6 +2,7 @@ package pers.mingda.leetcode.utils;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 
 public class NamingHelper {
 
@@ -15,7 +16,7 @@ public class NamingHelper {
         return intToChar;
     }
     
-    public static String getClassNamePrefixByNum(int num) {
+    public static String getClassPrefixByNum(int num) {
         // AAA => 0
         // AAB => 1
         // ...
@@ -45,8 +46,23 @@ public class NamingHelper {
         return classNamePrefix;
     }
 
+    public static int getClassNumByPrefix(String prefix) {
+
+        int num = 0;
+
+        for (Character ch: Lists.charactersOf(prefix)) {
+            int temp = intToChar.inverse().get(ch);
+
+            num = num * 26 + temp;
+        }
+        return num;
+    }
+
     public static void main(String[] args) {
-        System.out.println(getClassNamePrefixByNum(123));
+
+        String numOf123 = getClassPrefixByNum(123);
+        System.out.println(numOf123);
+        System.out.println(getClassNumByPrefix(numOf123));
         
     }
 }
