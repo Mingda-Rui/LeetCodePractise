@@ -48,3 +48,30 @@ class SolutionOne {
         return sum;
     }  
 }
+
+class SolutionTwo {
+    public int numDecodings(String s) {
+        if (null == s || s.length() == 0) return 0;
+        int[] dp = new int[s.length() + 1];
+        dp[0] = 1; 
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        for (int i = 2; i <= s.length(); i++){
+            if (isValid(s.substring(i - 2, i))){
+                dp[i] += dp[i - 2];
+            }
+            if (isValid(s.substring(i - 1, i))){
+                dp[i] += dp[i - 1];
+            }
+        }
+        return dp[s.length()];
+        //        1 2 3 1 2
+        // index: 0 1 2 3 4
+        // dp:    
+    }
+    
+    private boolean isValid(String str){
+        if (str.charAt(0) == '0') return false;
+        int num = Integer.parseInt(str);
+        return num >= 1 && num <= 26;
+    }
+}
