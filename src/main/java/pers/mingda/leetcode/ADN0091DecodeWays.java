@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class ADNDecodeWays {
+public class ADN0091DecodeWays {
 
 }
 
