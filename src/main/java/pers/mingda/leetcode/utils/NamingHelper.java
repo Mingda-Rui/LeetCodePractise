@@ -11,7 +11,7 @@ public class NamingHelper {
     private static BiMap<Integer, Character> initIntToChar() {
         intToChar = HashBiMap.create();
         for (int i = 0; i < 26; i ++) {
-            intToChar.put(new Integer(i), new Character( (char)('A'+i) ));
+            intToChar.put(i, (char) ('A' + i));
         }
         return intToChar;
     }
@@ -31,7 +31,7 @@ public class NamingHelper {
             int result = num / 26;
             int remainder = num % 26;
             num = result;
-            sb.append( intToChar.get(new Integer(remainder)) );
+            sb.append( intToChar.get(remainder) );
         }
 
         if (sb.length() > 3) 
