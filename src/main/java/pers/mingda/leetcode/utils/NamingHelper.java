@@ -61,7 +61,7 @@ public class NamingHelper {
     public static void main(String[] args) {
 
         String prefix = "AAD";
-        int num = 91;
+        int num = 7;
 
         System.out.println("Converted from prefix: " + prefix + " to num: " + getClassNumByPrefix(prefix));
         System.out.println("Converted from num: " + num + " to prefix: " + getClassPrefixByNum(num));

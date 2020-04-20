@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class AADLengthOfLongestSubstring {
+public class AAD0003LengthOfLongestSubstring {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int i = solution.lengthOfLongestSubstring("abba");
