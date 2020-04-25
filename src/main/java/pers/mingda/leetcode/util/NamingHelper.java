@@ -33,7 +33,7 @@ public class NamingHelper {
         // ABA => 0026
         if (num < 1 || num > 17575) {
             throw new IllegalArgumentException(
-                    "Class number should in the field of 1 to 17576 (AAA to ZZZ)");
+                    "Class number should be in the field of 1 to 17576 (AAA to ZZZ)");
         }
         StringBuilder sb = new StringBuilder();
         while(num != 0) {
