@@ -1,30 +1,39 @@
 package pers.mingda.leetcode.utils;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NamingHelper {
 
-    private static BiMap<Integer, Character> intToChar = initIntToChar();
+    private static final Map<Integer, Character> intToChar = initIntToChar();
+    private static final Map<Character, Integer> charToInt = initCharToInt();
 
-    private static BiMap<Integer, Character> initIntToChar() {
-        intToChar = HashBiMap.create();
+    private static Map<Integer, Character> initIntToChar() {
+        Map<Integer, Character> intToChar = new HashMap<>();
         for (int i = 0; i < 26; i ++) {
             intToChar.put(i, (char) ('A' + i));
         }
-        return intToChar;
+        return Collections.unmodifiableMap(intToChar);
     }
-    
+
+    private static Map<Character, Integer> initCharToInt() {
+        Map<Character, Integer> charToInt = new HashMap<>();
+        for (int i = 0; i < 26; i ++) {
+            charToInt.put((char) ('A' + i), i);
+        }
+        return Collections.unmodifiableMap(charToInt);
+    }
+
     public static String getClassPrefixByNum(int num) {
-        // AAA => 0
-        // AAB => 1
+        // AAA => 0000
+        // AAB => 0001
         // ...
-        // AAZ => 25
-        // ABA => 26
-        if (num < 1 || num > 17576) {
+        // AAZ => 0025
+        // ABA => 0026
+        if (num < 1 || num > 17575) {
             throw new IllegalArgumentException(
-                "Class number should in the field of 1 to 17576 (AAA to ZZZ)");
+                    "Class number should in the field of 1 to 17576 (AAA to ZZZ)");
         }
         StringBuilder sb = new StringBuilder();
         while(num != 0) {
@@ -34,38 +43,46 @@ public class NamingHelper {
             sb.append( intToChar.get(remainder) );
         }
 
-        if (sb.length() > 3) 
-            throw new IllegalStateException("The lenght of prefix should be no longer than 3, now it is " + sb.length());
+        if (sb.length() > 3) {
+            throw new IllegalStateException(
+                    "The length of prefix should be no longer than 3, now it is " + sb.length());
+        }
 
         while (sb.length() != 3) {
             sb.append('A');
         }
 
-        String classNamePrefix = sb.reverse().toString();
-
-        return classNamePrefix;
+        return sb.reverse().toString();
     }
 
     public static int getClassNumByPrefix(String prefix) {
-
         int num = 0;
-
-        for (Character ch: Lists.charactersOf(prefix)) {
-            int temp = intToChar.inverse().get(ch);
-
+        for (Character ch: normalizePrefix(prefix).toCharArray()) {
+            int temp = charToInt.get(ch);
             num = num * 26 + temp;
         }
         return num;
     }
 
+    private static String normalizePrefix(String prefix) {
+        String normalizedPrefix = prefix;
+        if (prefix == null || ! prefix.matches("[a-zA-Z]{1,3}")) {
+            throw new IllegalArgumentException(
+                    "Illegal prefix format. The prefix should consist of 3 letters");
+        } else if (prefix.length() < 3) {
+            normalizedPrefix = "A".repeat( 3-(prefix.length()) ) + prefix;
+        }
+        return normalizedPrefix;
+    }
+
     public static void main(String[] args) {
 
-        String prefix = "AAD";
-        int num = 7;
+        String prefix = args[0];
+        int num = Integer.parseInt(args[1]);
 
         System.out.println("Converted from prefix: " + prefix + " to num: " + getClassNumByPrefix(prefix));
         System.out.println("Converted from num: " + num + " to prefix: " + getClassPrefixByNum(num));
-        
+
     }
 }
 
