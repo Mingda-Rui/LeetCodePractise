@@ -1,12 +1,12 @@
-package pers.mingda.leetcode.utils;
+package pers.mingda.leetcode.util;
 
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static pers.mingda.leetcode.utils.NamingHelper.getClassNumByPrefix;
-import static pers.mingda.leetcode.utils.NamingHelper.getClassPrefixByNum;
+import static pers.mingda.leetcode.util.NamingHelper.getClassNumByPrefix;
+import static pers.mingda.leetcode.util.NamingHelper.getClassPrefixByNum;
 
 public class NamingHelperTest {
 

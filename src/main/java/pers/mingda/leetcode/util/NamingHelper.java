@@ -1,4 +1,4 @@
-package pers.mingda.leetcode.utils;
+package pers.mingda.leetcode.util;
 
 import java.util.Collections;
 import java.util.HashMap;

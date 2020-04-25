@@ -1,4 +1,4 @@
-package pers.mingda.leetcode.utils;
+package pers.mingda.leetcode.util;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
