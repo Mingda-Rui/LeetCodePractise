@@ -1,4 +1,4 @@
-package pers.mingda.leetcode.util;
+#!/usr/bin/java --source 11
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -80,8 +80,8 @@ public class NamingHelper {
         if (args.length != 2) {
             throw new IllegalArgumentException(
                     "In order to use NamingHelper util, 2 args need to be provided.\n " +
-                            "The 1st is prefix no less than 3 letters,\n " +
-                            "The 2nd should be the number of leetcode problems");
+                    "The 1st is prefix no less than 3 letters,\n " +
+                    "The 2nd should be the number of leetcode problems");
         }
 
         String prefix = args[0];
