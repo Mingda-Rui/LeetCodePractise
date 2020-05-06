@@ -9,7 +9,7 @@ e.g.<br>
 `ADN0091DecodeWays`
 
 
-## Use NamingHelper
+# Use NamingHelper
 In Github UI, classes in the same package are sorted by class name initials. 
 If we want the leetcode problem sorted in the same order with their problem number, 
 we need to covert the problem number to string, 
