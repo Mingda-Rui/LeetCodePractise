@@ -3,11 +3,13 @@
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class NamingHelper {
 
     private static final Map<Integer, Character> intToChar = initIntToChar();
     private static final Map<Character, Integer> charToInt = initCharToInt();
+    private static final Pattern digitsOnly = Pattern.compile("\\d+");
 
     private static Map<Integer, Character> initIntToChar() {
         Map<Integer, Character> intToChar = new HashMap<>();
@@ -76,20 +78,32 @@ public class NamingHelper {
     }
 
     public static void main(String[] args) {
-
-        if (args.length != 2) {
+        if (args.length == 0) {
             throw new IllegalArgumentException(
-                    "In order to use NamingHelper util, 2 args need to be provided.\n " +
-                    "The 1st is prefix no less than 3 letters,\n " +
-                    "The 2nd should be the number of leetcode problems");
+                    "In order to use NamingHelper util, 1 or more args in the following format need to be provided.\n " +
+                            "1. Prefix no less than 3 letters, which will be converted to number\n " +
+                            "2. Or, number of leetcode problems, which will be converted to prefix");
         }
 
-        String prefix = args[0];
-        int num = Integer.parseInt(args[1]);
+        for (String arg : args) {
+            try {
+                parseArg(arg);
+            } catch (Exception ex) {
+                System.out.println("Arg: " + arg + " can not be processed. Cause by error: " + ex.getCause() + "\n" +
+                        "Error message: " + ex.getMessage());
+            }
+        }
+    }
 
-        System.out.println("Converted from prefix: " + prefix + " to num: " + getClassNumByPrefix(prefix));
-        System.out.println("Converted from num: " + num + " to prefix: " + getClassPrefixByNum(num));
-
+    private static void parseArg(String arg) {
+        if (digitsOnly.matcher(arg).matches()) {
+            int num = Integer.parseInt(arg);
+            String parsedPrefix = getClassPrefixByNum(num);
+            System.out.println("Converted from num: " + num + " to prefix: " + parsedPrefix);
+        } else {
+            int parsedNum = getClassNumByPrefix(arg);
+            System.out.println("Converted from prefix: " + arg + " to num: " + parsedNum);
+        }
     }
 }
 

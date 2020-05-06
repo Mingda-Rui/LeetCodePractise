@@ -4,9 +4,12 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 
+import java.util.regex.Pattern;
+
 public class NamingHelperWithGuavaDependency {
 
     private static BiMap<Integer, Character> intToChar = initIntToChar();
+    private static final Pattern digitsOnly = Pattern.compile("\\d+");
 
     private static BiMap<Integer, Character> initIntToChar() {
         intToChar = HashBiMap.create();
@@ -57,13 +60,32 @@ public class NamingHelperWithGuavaDependency {
     }
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException(
+                    "In order to use NamingHelper util, 1 or more args in the following format need to be provided.\n " +
+                            "1. Prefix no less than 3 letters, which will be converted to number\n " +
+                            "2. Or, number of leetcode problems, which will be converted to prefix");
+        }
 
-        String prefix = "AAD";
-        int num = 7;
+        for (String arg : args) {
+            try {
+                parseArg(arg);
+            } catch (Exception ex) {
+                System.out.println("Arg: " + arg + " can not be processed. Cause by error: " + ex.getCause() + "\n" +
+                        "Error message: " + ex.getMessage());
+            }
+        }
+    }
 
-        System.out.println("Converted from prefix: " + prefix + " to num: " + getClassNumByPrefix(prefix));
-        System.out.println("Converted from num: " + num + " to prefix: " + getClassPrefixByNum(num));
-        
+    private static void parseArg(String arg) {
+        if (digitsOnly.matcher(arg).matches()) {
+            int num = Integer.parseInt(arg);
+            String parsedPrefix = getClassPrefixByNum(num);
+            System.out.println("Converted from num: " + num + " to prefix: " + parsedPrefix);
+        } else {
+            int parsedNum = getClassNumByPrefix(arg);
+            System.out.println("Converted from prefix: " + arg + " to num: " + parsedNum);
+        }
     }
 }
 
