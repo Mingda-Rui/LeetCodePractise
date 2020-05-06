@@ -13,7 +13,8 @@ e.g.<br>
 In Github UI, classes in the same package are sorted by class name initials. 
 If we want the leetcode problem sorted in the same order with their problem number, 
 we need to covert the problem number to string, 
-and make sure github orders those string in the same way with the problem number's order.<br>
+and make sure github orders those string in the same way with the problem number's order.
+
 `NamingHelper` helps to convert the problem number to a prefix, so that we can prefix each class name with the prefix, 
 and those classes will be ordered in UI in the same way with their problem number.
 It can also convert the prefix back to problem number.
