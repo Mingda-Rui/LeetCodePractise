@@ -36,6 +36,22 @@ public class AHY0206ReverseLinkedList {
         newTail.next = null;
         return tempHead.next;
     }
+
+    public ListNode reverseList_refactor_v2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode tempHead = new ListNode(0, head);
+        ListNode newTail = head;
+
+        while (head != null) {
+            ListNode currentNext = head.next;
+            head.next = tempHead.next;
+            tempHead.next = head;
+            head = currentNext;
+        }
+
+        newTail.next = null;
+        return tempHead.next;
+    }
 }
 
 class ListNode {
