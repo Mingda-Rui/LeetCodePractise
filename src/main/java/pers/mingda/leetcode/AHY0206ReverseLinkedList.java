@@ -3,23 +3,38 @@ package pers.mingda.leetcode;
 public class AHY0206ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode newHead = new ListNode();
+        ListNode tempHead = new ListNode();
         while (head.next != null) {
             ListNode currentNext = head.next;
-            if (newHead.next != null) {
-                head.next = newHead.next;
-                newHead.next = head;
+            if (tempHead.next != null) {
+                head.next = tempHead.next;
+                tempHead.next = head;
             } else {
-                newHead.next = head;
+                tempHead.next = head;
                 head.next = null;
             }
             head = currentNext;
         }
-        head.next = newHead.next;
-        newHead.next = head;
+        head.next = tempHead.next;
+        tempHead.next = head;
 
+        return tempHead.next;
+    }
 
-        return newHead.next;
+    public ListNode reverseList_refactor(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode tempHead = new ListNode(0, head);
+        ListNode newTail = head;
+        while (head.next != null) {
+            ListNode currentNext = head.next;
+            head.next = tempHead.next;
+            tempHead.next = head;
+            head = currentNext;
+        }
+        head.next = tempHead.next;
+        tempHead.next = head;
+        newTail.next = null;
+        return tempHead.next;
     }
 }
 
