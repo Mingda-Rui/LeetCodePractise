@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.List;
+
 public class AHY0206ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
@@ -72,10 +74,23 @@ public class AHY0206ReverseLinkedList {
     }
 
     public ListNode reverseList_recursive(ListNode head) {
-
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode next = head.next;
+        ListNode newHead = reverseList_recursive(next);
+        next.next = head;
+        head.next = null;
+        return newHead;
     }
 
+    public static void main(String ... args) {
+        AHY0206ReverseLinkedList test = new AHY0206ReverseLinkedList();
+        ListNode five = new ListNode(5);
+        ListNode four = new ListNode(4, five);
+        ListNode three = new ListNode(3, four);
+        ListNode two = new ListNode(2, three);
+        ListNode one = new ListNode(1, two);
+        test.reverseList_recursive(one);
+    }
 
 }
 
