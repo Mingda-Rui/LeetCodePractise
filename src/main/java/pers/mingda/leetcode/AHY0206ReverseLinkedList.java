@@ -1,7 +1,5 @@
 package pers.mingda.leetcode;
 
-import java.util.List;
-
 public class AHY0206ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
