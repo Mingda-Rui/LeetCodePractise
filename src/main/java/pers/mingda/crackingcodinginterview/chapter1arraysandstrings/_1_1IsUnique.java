@@ -1,5 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter1arraysandstrings;
 
+import java.util.Arrays;
+
 /* Is Unique: Implement an algorithm to determine if a string has all unique characters. 
  * What if you cannot use additional data structures? 
  * */
@@ -13,6 +15,16 @@ public class _1_1IsUnique {
                 if (str.charAt(i) == str.charAt(j))
                     return false;
             }
+        }
+        return true;
+    }
+
+    public boolean isUniqueSorting(String str) {
+        char[] chars = str.toCharArray();
+        Arrays.sort(chars);
+        for (int i = 1; i < str.length(); i++) {
+            if (chars[i - 1] == chars[i])
+                return false;
         }
         return true;
     }
