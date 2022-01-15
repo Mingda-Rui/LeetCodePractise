@@ -6,9 +6,15 @@ package pers.mingda.crackingcodinginterview.chapter1arraysandstrings;
 
 public class _1_1IsUnique {
     
-    public boolean isUnique(String str) {
-        
-        return false;
+    public boolean isUniqueBrutalForce(String str) {
+        int strLength = str.length();
+        for (int i = 0; i < strLength; i++) {
+            for (int j = i + 1; j < strLength; j++) {
+                if (str.charAt(i) == str.charAt(j))
+                    return false;
+            }
+        }
+        return true;
     }
 
     public boolean isUniqueWithArrys(String str) {
