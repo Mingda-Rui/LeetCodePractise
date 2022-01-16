@@ -13,6 +13,9 @@ public class _1_2CheckPermutation {
      */
     
     public static boolean checkPermutation(String str1, String str2) {
+        if (str1.length() != str2.length())
+            return false;
+
         int[] charRecorder = new int[256];
         for (char c: str1.toCharArray()) {
             charRecorder[c] ++;
