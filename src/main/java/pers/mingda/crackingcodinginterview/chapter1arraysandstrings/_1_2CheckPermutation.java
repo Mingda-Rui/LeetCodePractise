@@ -1,5 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter1arraysandstrings;
 
+import java.util.Arrays;
+
 /*
  * Check Permutation: Given two strings, write a method to decide if one is a permutation of the other.
  * A permutation of a string is another string that contains same characters, only the order of characters can be different.
@@ -32,6 +34,16 @@ public class _1_2CheckPermutation {
                 return false;
         }
         return true;
+    }
+
+    public static boolean checkPermutationSorting(String str1, String str2) {
+        if (str1.length() != str2.length()) 
+            return false;
+        char[] charArr1 = str1.toCharArray();
+        char[] charArr2 = str2.toCharArray();
+        Arrays.sort(charArr1);
+        Arrays.sort(charArr2);
+        return Arrays.equals(charArr1, charArr2);
     }
 
 
