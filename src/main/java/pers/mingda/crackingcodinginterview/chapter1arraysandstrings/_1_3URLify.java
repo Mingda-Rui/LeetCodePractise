@@ -27,4 +27,22 @@ public class _1_3URLify {
         }
         return sb.toString();
     }
+
+    public static void urlifySameArray(char[] url, int length) {
+        int tailIndex = url.length - 1;
+        for (int i = length - 1; i >= 0; i--) {
+            if (url[i] == ' ') {
+                url[tailIndex] = '0';
+                tailIndex--;
+                url[tailIndex] = '2';
+                tailIndex--;
+                url[tailIndex] = '%';
+                tailIndex--;
+            } else {
+                url[tailIndex] = url[i];
+                tailIndex--;
+            }
+        }
+        
+    }
 }
