@@ -16,6 +16,16 @@ public class _1_2CheckPermutationTest {
         str1 = "aaabe";
         str2 = "aabbe";
         assertFalse(_1_2CheckPermutation.checkPermutation(str1, str2));
+
+        // check permuration with tailing white space
+        str1 = "a ab";
+        str2 = "aba ";
+        assertTrue(_1_2CheckPermutation.checkPermutation(str1, str1));
+
+        // check permutation with different number of white space
+        str1 = "aab  ";
+        str2 = "a ab";
+        assertFalse(_1_2CheckPermutation.checkPermutation(str1, str2));
     }
     
 }
