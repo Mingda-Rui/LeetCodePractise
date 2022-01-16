@@ -7,6 +7,11 @@ package pers.mingda.crackingcodinginterview.chapter1arraysandstrings;
 
 public class _1_2CheckPermutation {
 
+    /*
+     * Note, we need to ask whether the permutation is considered case sensitive.
+     * Also, whether white space is significant. e.g. "god   " vs "dog"
+     */
+    
     public static boolean checkPermutation(String str1, String str2) {
         int[] charRecorder = new int[256];
         for (char c: str1.toCharArray()) {
