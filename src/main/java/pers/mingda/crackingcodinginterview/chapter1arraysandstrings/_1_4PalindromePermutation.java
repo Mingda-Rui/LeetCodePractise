@@ -23,6 +23,8 @@ public class _1_4PalindromePermutation {
         int[] charCounter = new int[256];
         int oddCounter = 0;
         for (char c: str.toCharArray()) {
+            if (c == ' ')
+                continue;
             if (!caseSensitive)
                 c = Character.toLowerCase(c);
             charCounter[c] ++;
@@ -31,9 +33,9 @@ public class _1_4PalindromePermutation {
         for (int i: charCounter) {
             if (i % 2 != 0) 
                 oddCounter ++;
-            if (oddCounter > 2)
+            if (oddCounter > 1)
                 return false;
         }
-        return oddCounter % 2 == 0;
+        return true;
     }
 }
