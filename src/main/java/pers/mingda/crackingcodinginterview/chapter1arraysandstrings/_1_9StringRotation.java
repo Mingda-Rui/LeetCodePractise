@@ -7,8 +7,30 @@ package pers.mingda.crackingcodinginterview.chapter1arraysandstrings;
  */
 
 public class _1_9StringRotation {
-    
+
+
+    /**
+     * SOLUTION:
+     * s1 == xy = waterbottle
+     * x = wat
+     * y = erbottle
+     * s2 = yx = erbottlewat
+     * s1s1 = waterbottlewaterbottle
+     * isSubstring(s1s1, s2) == true if s1&s2 is rotation strings.
+     */
+    public static boolean stringRotation(String str1, String str2) {
+        if (str1.length() != str2.length())
+            return false;
+        
+        String str1str1 = str1 + str1;
+        return isSubstring(str1str1, str2);
+    }
+
     public static boolean isSubstring(String str1, String str2) {
         return str1.contains(str2);
     }
 }
+
+// a b c d
+//   b c d a
+//     c d a b
