@@ -19,5 +19,9 @@ public class _1_6StringCompressionTest {
 
         testStr = "aabbccddd";
         assertEquals("a2b2c2d3", _1_6StringCompression.stringCompression(testStr));
+
+        testStr = "aaabbbc";
+        assertEquals("a3b3c1", _1_6StringCompression.stringCompression(testStr));
     }
+
 }
