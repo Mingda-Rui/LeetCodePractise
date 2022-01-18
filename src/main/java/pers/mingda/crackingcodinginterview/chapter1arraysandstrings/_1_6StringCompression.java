@@ -23,6 +23,31 @@ public class _1_6StringCompression {
         }
         return sb.length() < str.length() ? sb.toString() : str;
     }
+
+    public static String stringCompressionCountFirst(String str) {
+        int consecutiveCounter = 0;
+        int compressedLenth = 0;
+        for (int i = 0; i < str.length(); i++) {
+            consecutiveCounter ++;
+            if (i == str.length() - 1 || str.charAt(i) != str.charAt(i + 1)) {
+                compressedLenth += 1 + String.valueOf(consecutiveCounter).length();
+                consecutiveCounter = 0;
+            }
+        }
+        if (compressedLenth >= str.length()) 
+            return str;
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            consecutiveCounter++;
+            if (i == str.length() - 1 || str.charAt(i) != str.charAt(i + 1)) {
+                sb.append(str.charAt(i)).append(consecutiveCounter);
+                consecutiveCounter = 0;
+            }
+        }
+
+        return sb.toString();
+    }
 }
 
 // aabbccdd
