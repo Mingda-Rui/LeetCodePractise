@@ -31,4 +31,12 @@ public class _1_7RotateMatrix {
         }
         
     }
+
+    public static void rotateByLayer(int[][] matrix) {
+        for (int layer = 0; layer < matrix.length / 2; layer++) {
+            for (int i = layer; i < matrix.length - layer - 1; i++) {
+                rotatePoint(matrix, layer, i);
+            }
+        }
+    }
 }
