@@ -29,4 +29,27 @@ public class _1_5OneAwayTest {
         testStr2 = "apale";
         assertTrue(_1_5OneAway.isOneAway(testStr1, testStr2));
     }
+
+    @Test
+    public void testIsOneAwayOneDirection() {
+        String testStr1 = "pale";
+        String testStr2 = "ple";
+        assertTrue(_1_5OneAway.isOneAwayOneDirection(testStr1, testStr2));
+
+        testStr1 = "pales";
+        testStr2 = "pale";
+        assertTrue(_1_5OneAway.isOneAwayOneDirection(testStr1, testStr2));
+
+        testStr1 = "pale";
+        testStr2 = "bale";
+        assertTrue(_1_5OneAway.isOneAwayOneDirection(testStr1, testStr2));
+
+        testStr1 = "pale";
+        testStr2 = "bae";
+        assertFalse(_1_5OneAway.isOneAwayOneDirection(testStr1, testStr2));
+
+        testStr1 = "pale";
+        testStr2 = "apale";
+        assertTrue(_1_5OneAway.isOneAwayOneDirection(testStr1, testStr2));
+    }
 }

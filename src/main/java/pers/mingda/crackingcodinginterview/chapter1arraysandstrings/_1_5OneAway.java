@@ -39,7 +39,6 @@ public class _1_5OneAway {
         
         int rest = shorterLen - sameIndex1;
         for (int i = 1; i < rest; i++) {
-            // System.out.println(str1.charAt(str1.length() - i) + " " + str2.charAt(str2.length() - i));
             if (str1.charAt(str1.length() - i) == str2.charAt(str2.length() - i)) {
                 sameCount2 = i;
             } else {
@@ -51,6 +50,26 @@ public class _1_5OneAway {
         System.out.println(sameIndex1 + " " + sameCount2);
         int longerLen = Math.max(str1.length(), str2.length());
         return sameCount + 1 == longerLen;
+    }
+
+    public static boolean isOneAwayOneDirection(String str1, String str2) {
+        if (Math.abs(str1.length() - str2.length()) > 1)
+            return false;
+
+        int diffCount = 0;
+        int shorterLen = Math.min(str1.length(), str2.length());
+        for (int i = 0, j = 0; Math.min(i, j) < shorterLen; i++, j++) {
+            if (str1.charAt(i) != str2.charAt(j)) {
+                if (diffCount > 0) 
+                    return false;
+                diffCount++;
+                if (str1.length() >= str2.length())
+                    i++;
+                if (str2.length() >= str1.length())
+                    j++;                
+            }
+        }
+        return true;
     }
 }
 
