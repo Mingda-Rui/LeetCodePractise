@@ -7,3 +7,4 @@ bin/
 .classpath
 build/
 .idea
+.DS_Store
