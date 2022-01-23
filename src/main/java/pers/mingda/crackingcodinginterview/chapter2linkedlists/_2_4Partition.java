@@ -13,9 +13,9 @@ package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 public class _2_4Partition {
     public static LinkedListNode partition(LinkedListNode node, int x) {
         LinkedListNode left = new LinkedListNode(null, x - 1);
-        LinkedListNode psudoLeftHead = left;
+        LinkedListNode pseudoLeftHead = left;
         node = new LinkedListNode(node, x);
-        LinkedListNode psudoRightHead = node;
+        LinkedListNode pseudoRightHead = node;
         while (node.next != null) {
             if (node.next.data < x) {
                 left.next = node.next;                
@@ -26,10 +26,13 @@ public class _2_4Partition {
                 node = node.next;
             }
         }
-        left.next = psudoRightHead.next;
-        psudoRightHead.next = null;
-        node = psudoLeftHead.next;
-        psudoLeftHead.next = null;
-        return node;
+        left.next = removePseudoHead(pseudoRightHead);
+        return removePseudoHead(pseudoLeftHead);
+    }
+
+    private static LinkedListNode removePseudoHead(LinkedListNode pseudoHead) {
+        LinkedListNode realHead = pseudoHead.next;
+        pseudoHead.next = null;
+        return realHead;
     }
 }
