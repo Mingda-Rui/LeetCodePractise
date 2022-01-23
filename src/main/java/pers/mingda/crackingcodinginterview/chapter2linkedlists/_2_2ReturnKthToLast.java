@@ -16,8 +16,32 @@ public class _2_2ReturnKthToLast {
                 kthToLast = kthToLast.next;
             }
         }
-        if (counter < k)
-            throw new IllegalArgumentException("The size of the list is " + counter + ", which is less than " + k);
+        checkSize(counter, k);
         return kthToLast.data;
+    }
+
+    public static int printKthToLastRecursive(LinkedListNode head, int k) {
+        int[] kthValHolder = new int[1];
+
+        int headToLast = printKthToLastRecursive(head, k, kthValHolder);
+        checkSize(headToLast, k);
+        return kthValHolder[0];
+    }
+
+    private static int printKthToLastRecursive(LinkedListNode head, int k, int[] kthVal) {
+        
+        if (head == null) {
+            return 0;
+        }
+        int currentLoc = printKthToLastRecursive(head.next, k, kthVal) + 1;
+        if (currentLoc == k) {
+            kthVal[0] = head.data;
+        }
+        return currentLoc;
+    }
+
+    private static void checkSize(int size, int k) {
+        if (size < k)
+            throw new IllegalArgumentException("The size of the list is " + size + ", which is less than " + k);
     }
 }
