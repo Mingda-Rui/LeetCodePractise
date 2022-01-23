@@ -1,12 +1,15 @@
 package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 2.2. Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
  */
 
 public class _2_2ReturnKthToLast {
     
-    public static int printKthToLast(LinkedListNode head, int k) {
+    public static LinkedListNode kthToLast(LinkedListNode head, int k) {
         int counter = 0;
         LinkedListNode kthToLast = head;
         while (head != null) {
@@ -17,25 +20,24 @@ public class _2_2ReturnKthToLast {
             }
         }
         checkSize(counter, k);
-        return kthToLast.data;
+        return kthToLast;
     }
 
-    public static int printKthToLastRecursive(LinkedListNode head, int k) {
-        int[] kthValHolder = new int[1];
+    public static LinkedListNode kthToLastRecursive(LinkedListNode head, int k) {
+        List<LinkedListNode> kthNode = new ArrayList<>();
 
-        int headToLast = printKthToLastRecursive(head, k, kthValHolder);
+        int headToLast = kthToLastRecursive(head, k, kthNode);
         checkSize(headToLast, k);
-        return kthValHolder[0];
+        return kthNode.get(0);
     }
 
-    private static int printKthToLastRecursive(LinkedListNode head, int k, int[] kthVal) {
-        
+    private static int kthToLastRecursive(LinkedListNode head, int k, List<LinkedListNode> kthNode) {
         if (head == null) {
             return 0;
         }
-        int currentLoc = printKthToLastRecursive(head.next, k, kthVal) + 1;
+        int currentLoc = kthToLastRecursive(head.next, k, kthNode) + 1;
         if (currentLoc == k) {
-            kthVal[0] = head.data;
+            kthNode.add(head);
         }
         return currentLoc;
     }

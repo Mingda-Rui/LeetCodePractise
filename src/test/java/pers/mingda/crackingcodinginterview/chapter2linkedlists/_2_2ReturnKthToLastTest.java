@@ -21,17 +21,17 @@ public class _2_2ReturnKthToLastTest {
     public void testPrintKthToLast() {
         List<Integer> nodeValues = List.of(1, 2, 3, 4, 5, 6);
         LinkedListNode node = testHelper.buildNodeList(nodeValues);        
-        int kth = _2_2ReturnKthToLast.printKthToLast(node, 4);
-        assertEquals(3, kth);
+        LinkedListNode kthNode = _2_2ReturnKthToLast.kthToLast(node, 4);
+        assertEquals(3, kthNode.data);
 
-        kth = _2_2ReturnKthToLast.printKthToLast(node, 1);
-        assertEquals(6, kth);
+        kthNode = _2_2ReturnKthToLast.kthToLast(node, 1);
+        assertEquals(6, kthNode.data);
 
-        kth = _2_2ReturnKthToLast.printKthToLast(node, 6);
-        assertEquals(1, kth);
+        kthNode = _2_2ReturnKthToLast.kthToLast(node, 6);
+        assertEquals(1, kthNode.data);
 
         Exception thrown = assertThrows(IllegalArgumentException.class, () -> {
-            _2_2ReturnKthToLast.printKthToLast(node, 10);
+            _2_2ReturnKthToLast.kthToLast(node, 10);
         });
         assertEquals("The size of the list is " + nodeValues.size() + ", which is less than " + 10, thrown.getMessage());
     }
@@ -40,17 +40,17 @@ public class _2_2ReturnKthToLastTest {
     public void testPrintKthToLastRecursive() {
         List<Integer> nodeValues = List.of(1, 2, 3, 4, 5, 6);
         LinkedListNode node = testHelper.buildNodeList(nodeValues);        
-        int kth = _2_2ReturnKthToLast.printKthToLastRecursive(node, 4);
-        assertEquals(3, kth);
+        LinkedListNode kthNode = _2_2ReturnKthToLast.kthToLastRecursive(node, 4);
+        assertEquals(3, kthNode.data);
 
-        kth = _2_2ReturnKthToLast.printKthToLastRecursive(node, 1);
-        assertEquals(6, kth);
+        kthNode = _2_2ReturnKthToLast.kthToLastRecursive(node, 1);
+        assertEquals(6, kthNode.data);
 
-        kth = _2_2ReturnKthToLast.printKthToLastRecursive(node, 6);
-        assertEquals(1, kth);
+        kthNode = _2_2ReturnKthToLast.kthToLastRecursive(node, 6);
+        assertEquals(1, kthNode.data);
 
         Exception thrown = assertThrows(IllegalArgumentException.class, () -> {
-            _2_2ReturnKthToLast.printKthToLastRecursive(node, 10);
+            _2_2ReturnKthToLast.kthToLastRecursive(node, 10);
         });
         assertEquals("The size of the list is " + nodeValues.size() + ", which is less than " + 10, thrown.getMessage());
     }
