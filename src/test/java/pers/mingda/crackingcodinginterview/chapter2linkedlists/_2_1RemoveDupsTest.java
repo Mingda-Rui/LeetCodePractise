@@ -28,5 +28,26 @@ public class _2_1RemoveDupsTest {
         _2_1RemoveDups.deleteDups(node);
         
         assertTrue(testHelper.equals(expectedNode, node));
+
+
+        nodeValues = Arrays.asList(1, 2, 3, 4, 5, 1, 6, 2, 7);
+        node = testHelper.buildNodeList(nodeValues);
+
+        expectedNodeValues = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        expectedNode = testHelper.buildNodeList(expectedNodeValues);
+        
+        _2_1RemoveDups.deleteDups(node);
+        
+        assertTrue(testHelper.equals(expectedNode, node));
+
+        nodeValues = Arrays.asList(1, 2, 3, 4);
+        node = testHelper.buildNodeList(nodeValues);
+
+        expectedNodeValues = nodeValues;
+        expectedNode = testHelper.buildNodeList(expectedNodeValues);
+        
+        _2_1RemoveDups.deleteDups(node);
+        
+        assertTrue(testHelper.equals(expectedNode, node));
     }
 }
