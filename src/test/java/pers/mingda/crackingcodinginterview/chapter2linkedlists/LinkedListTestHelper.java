@@ -27,4 +27,13 @@ public class LinkedListTestHelper {
 
         return node1 == null && node2 == null;
     }
+
+    public int getSize(LinkedListNode node) {
+        int size = 0;
+        while (node != null) {
+            size++;
+            node = node.next;
+        }
+        return size;
+    }
 }

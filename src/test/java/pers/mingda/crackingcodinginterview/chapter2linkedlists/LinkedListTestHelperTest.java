@@ -43,4 +43,20 @@ public class LinkedListTestHelperTest {
         LinkedListNode unequalNode = testHelper.buildNodeList(unequalNodeValues);
         assertFalse(testHelper.equals(node, unequalNode));
     }
+
+    @Test
+    public void testGetSize() {
+        List<Integer> nodeValues = List.of(0);
+        LinkedListNode node = testHelper.buildNodeList(nodeValues);
+
+        int nodeSize = testHelper.getSize(node);
+        assertEquals(nodeValues.size(), nodeSize);
+
+        
+        nodeValues = List.of(0, 1, 2, 3, 4);
+        node = testHelper.buildNodeList(nodeValues);
+
+        nodeSize = testHelper.getSize(node);
+        assertEquals(nodeValues.size(), nodeSize);
+    }
 }
