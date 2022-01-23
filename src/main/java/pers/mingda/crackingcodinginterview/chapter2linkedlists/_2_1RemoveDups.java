@@ -22,4 +22,21 @@ public class _2_1RemoveDups {
             }
         }
     }
+
+    public static void deleteDupsNoBuffer(LinkedListNode n) {
+        while (n != null) {
+            LinkedListNode previousRunner = n;
+            LinkedListNode runner = n.next;            
+            while (runner != null) {
+                if (runner.data == n.data) {
+                    previousRunner.next = runner.next;
+                    runner = previousRunner.next;
+                } else {
+                    previousRunner = runner;
+                    runner = runner.next;
+                }
+            }
+            n = n.next;
+        }
+    }
 }
