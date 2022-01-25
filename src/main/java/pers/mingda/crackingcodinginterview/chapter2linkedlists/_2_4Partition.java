@@ -30,6 +30,23 @@ public class _2_4Partition {
         return removePseudoHead(pseudoLeftHead);
     }
 
+    public static LinkedListNode partitionAddToHead(LinkedListNode node, int x) {
+        LinkedListNode head = node;
+
+        while (node.next != null) {
+            if (node.next.data < x) {
+                LinkedListNode tmp = node.next;
+                node.next = node.next.next;
+                tmp.next = head;
+                head = tmp;
+            } else {
+                node = node.next;
+            }
+            
+        }
+        return head;
+    }
+
     private static LinkedListNode removePseudoHead(LinkedListNode pseudoHead) {
         LinkedListNode realHead = pseudoHead.next;
         pseudoHead.next = null;
