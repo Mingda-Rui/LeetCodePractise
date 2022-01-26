@@ -42,4 +42,22 @@ public class _2_5SumLists {
         
         return sumHead;
     }
+
+    public static LinkedListNode sumListsRecursive(LinkedListNode l1, LinkedListNode l2) {
+        return sumListsRecursive(l1, l2, 0);
+    }
+
+    public static LinkedListNode sumListsRecursive(LinkedListNode l1, LinkedListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0)
+            return null;
+        int l1Data = (l1 == null) ? 0 : l1.data;
+        int l2Data = (l2 == null) ? 0 : l2.data;        
+        int currentSum = l1Data + l2Data + carry;
+        LinkedListNode result = new LinkedListNode(null, currentSum % 10);
+        LinkedListNode l1Next = (l1 == null) ? null : l1.next;
+        LinkedListNode l2Next = (l2 == null) ? null : l2.next;
+        result.next = sumListsRecursive(l1Next, l2Next, currentSum / 10);
+
+        return result;
+    }
 }
