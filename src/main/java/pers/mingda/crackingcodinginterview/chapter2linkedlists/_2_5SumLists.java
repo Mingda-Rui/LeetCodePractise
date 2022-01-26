@@ -14,5 +14,32 @@ package pers.mingda.crackingcodinginterview.chapter2linkedlists;
  */
 
 public class _2_5SumLists {
-    
+    public static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
+        
+        return null;
+    }
+
+    public static LinkedListNode sumLists(LinkedListNode l1, LinkedListNode l2) {        
+        int carry = 0;
+        LinkedListNode sum = new LinkedListNode(null, carry);
+        LinkedListNode sumHead = sum;
+        
+        while (l1 != null || l2 != null) {
+
+            int l1Data = (l1 == null) ? 0 : l1.data;
+            int l2Data = (l2 == null) ? 0 : l2.data;
+            carry = (sum.data + l1Data + l2Data) / 10;
+            sum.data = (sum.data + l1Data + l2Data) % 10;
+            
+            l1 = (l1 == null) ? l1 : l1.next;
+            l2 = (l2 == null) ? l2 : l2.next;
+
+            if (l1 != null || l2 != null || carry != 0) {
+                sum.next = new LinkedListNode(null, carry);
+                sum = sum.next;
+            }
+        }
+        
+        return sumHead;
+    }
 }
