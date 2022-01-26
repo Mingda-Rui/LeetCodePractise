@@ -60,4 +60,24 @@ public class _2_5SumLists {
 
         return result;
     }
+
+    public static LinkedListNode sumListsFollowUpReverse(LinkedListNode l1, LinkedListNode l2) {
+        LinkedListNode reversedL1 = reverse(l1);
+        LinkedListNode reversedL2 = reverse(l2);
+        LinkedListNode result = sumLists(reversedL1, reversedL2);        
+        return reverse(result);
+    }
+
+    private static LinkedListNode reverse(LinkedListNode list) {
+        return reverse(list, null);
+    }
+
+    private static LinkedListNode reverse(LinkedListNode list, LinkedListNode previous) {
+        if (list == null) {
+            return previous;
+        }
+        LinkedListNode next = list.next;
+        list.next = previous;
+        return reverse(next, list); 
+    }
 }
