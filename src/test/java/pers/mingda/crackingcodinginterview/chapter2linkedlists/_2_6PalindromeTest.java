@@ -31,5 +31,20 @@ public class _2_6PalindromeTest {
         testList = testHelper.buildNodeList(List.of(1, 2, 3, 3, 2, 1));
         assertTrue(_2_6Palindrome.isPalindrome(testList));
     }
+
+    @Test
+    public void testIsPalindromeRecursion() {
+        LinkedListNode testList = testHelper.buildNodeList(List.of(1, 2, 3));
+        assertFalse(_2_6Palindrome.isPalindromeRecursion(testList));
+
+        testList = testHelper.buildNodeList(List.of(1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursion(testList));
+
+        testList = testHelper.buildNodeList(List.of(1, 2, 3, 2, 1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursion(testList));
+
+        testList = testHelper.buildNodeList(List.of(1, 2, 3, 3, 2, 1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursion(testList));
+    }
     
 }
