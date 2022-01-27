@@ -28,22 +28,22 @@ public class _2_6Palindrome {
 
     public static boolean isPalindromeRecursion(LinkedListNode node) {
         int size = getSize(node);
-        return isPalindromeRecursion(node, null, 0, size);
+        return isPalindromeRecursion(node, null, size);
     }
 
-    private static boolean isPalindromeRecursion(LinkedListNode node, LinkedListNode copied, int counter, int totalSize) {
+    private static boolean isPalindromeRecursion(LinkedListNode node, LinkedListNode copied, int remainSize) {
         if (node == null) 
             return true;
-        if (counter > (totalSize - 1) / 2 && node.data != copied.data) 
+        if (remainSize < 1 && node.data != copied.data) 
             return false;
             
-        if (counter < totalSize / 2) {
+        if (remainSize > 1) {
             LinkedListNode head = new LinkedListNode(copied, node.data);
             copied = head;            
-        } else if (counter > (totalSize - 1) / 2) {
+        } else if (remainSize < 1) {
             copied = copied.next;            
         }
-        return isPalindromeRecursion(node.next, copied, counter + 1, totalSize);
+        return isPalindromeRecursion(node.next, copied, remainSize - 2);
     }
 
     private static int getSize(LinkedListNode node) {
