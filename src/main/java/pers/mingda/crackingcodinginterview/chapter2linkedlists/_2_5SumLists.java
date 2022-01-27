@@ -116,4 +116,51 @@ public class _2_5SumLists {
             list = list.next;
         }
     }
+
+    public static LinkedListNode sumListsFollowUpRecursion(LinkedListNode l1, LinkedListNode l2) {
+        int l1Size = getListSize(l1);
+        int l2Size = getListSize(l2);
+
+        LinkedListNode list = sumListsFollowUpRecursion(l1, l1Size, l2, l2Size);
+        if (list.data >= 10) {
+            LinkedListNode head = new LinkedListNode(list, list.data / 10);
+            list.data = list.data % 10;
+            list = head;
+        }
+
+        return list;
+    }
+
+    public static LinkedListNode sumListsFollowUpRecursion(LinkedListNode l1, int l1Size, LinkedListNode l2, int l2Size) {
+        // termination condition
+        if (l1.next == null && l2.next == null) {
+            return new LinkedListNode(null, l1.data + l2.data);
+        }
+
+        // recursion body
+        LinkedListNode l1Next = (l1Size >= l2Size) ? l1.next : l1;
+        int l1NextSize = (l1Size >= l2Size) ? l1Size - 1 : l1Size;
+        LinkedListNode l2Next = (l2Size >= l1Size) ? l2.next : l1;
+        int l2NextSize = (l2Size >= l1Size) ? l2Size - 1 : l2Size;
+
+        LinkedListNode previous = sumListsFollowUpRecursion(l1Next, l1NextSize, l2Next, l2NextSize);
+
+        int l1CurrentData = (l1Size >= l2Size) ? l1.data : 0;
+        int l2CurrentData = (l2Size >= l1Size) ? l2.data : 0;
+        LinkedListNode current = new LinkedListNode(previous, l1CurrentData + l2CurrentData + previous.data / 10);
+        previous.data = previous.data % 10;
+
+        // return
+        return current;
+
+    }
+
+    private static int getListSize(LinkedListNode list) {
+        int size = 0;
+        while (list != null) {
+            list = list.next;
+            size++;
+        }
+        return size;
+    }
 }
