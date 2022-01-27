@@ -1,5 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 
+import java.util.Stack;
+
 /**
  *  2.5 Sum Lists: You have two numbers represented by a linked list, where each node contains a single
  *  digit. THe digits are stored in reverse order, such that the 1's digit is at the head of the list. Write a 
@@ -79,5 +81,39 @@ public class _2_5SumLists {
         LinkedListNode next = list.next;
         list.next = previous;
         return reverse(next, list); 
+    }
+
+    public static LinkedListNode sumListsFollowUp(LinkedListNode l1, LinkedListNode l2) {
+        Stack<Integer> l1Stack = convertToStack(l1);
+        Stack<Integer> l2Stack = convertToStack(l2);
+        
+        int carry = 0;
+        LinkedListNode list = new LinkedListNode(null, carry);
+        while (!l1Stack.empty() || !l2Stack.empty()) {
+            int data1 = l1Stack.empty() ? 0 : l1Stack.pop();
+            int data2 = l2Stack.empty() ? 0 : l2Stack.pop();
+            int sum = data1 + data2 + carry;
+            list.data = sum % 10;
+            carry = sum / 10;
+            if (!l1Stack.empty() || !l2Stack.empty() || carry != 0) {
+                LinkedListNode head = new LinkedListNode(list, carry);
+                list = head;
+            }
+        }
+        
+        return list;
+    }
+
+    private static Stack<Integer> convertToStack(LinkedListNode list) {
+        Stack<Integer> stack = new Stack<>();
+        pushStack(stack, list);
+        return stack;
+    }
+
+    private static void pushStack(Stack<Integer> stack, LinkedListNode list) {
+        while (list != null) {
+            stack.push(list.data);
+            list = list.next;
+        }
     }
 }
