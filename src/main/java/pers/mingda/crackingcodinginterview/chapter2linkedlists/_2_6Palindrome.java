@@ -1,5 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 
+import java.util.Stack;
+
 /**
  *  2.6 Palindrome: Implement a function to check if a linked list is a palindrome 
  */
@@ -53,5 +55,27 @@ public class _2_6Palindrome {
             node = node.next;
         }
         return size;
+    }
+
+    public static boolean isPalindromeTwoPointer(LinkedListNode node) {
+        LinkedListNode fast = node;
+        LinkedListNode slow = node;
+        Stack<Integer> stack = new Stack<>();
+        while (fast != null && fast.next != null) {
+            stack.push(slow.data);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null)
+            slow = slow.next;
+        
+        while (slow != null) {
+            if (slow.data != stack.pop()) {
+                return false;
+            }
+            slow = slow.next;
+        }
+
+        return true;
     }
 }
