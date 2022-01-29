@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class _2_6PalindromeTest {
-    
 
     private LinkedListTestHelper testHelper;
 
@@ -49,6 +48,21 @@ public class _2_6PalindromeTest {
     }
 
     @Test
+    public void testIsPalindromeRecursionVw() {
+        LinkedListNode testList = testHelper.buildNodeList(List.of(1, 2, 3));
+        assertFalse(_2_6Palindrome.isPalindromeRecursionV2(testList));
+
+        testList = testHelper.buildNodeList(List.of(1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursionV2(testList));
+
+        testList = testHelper.buildNodeList(List.of(1, 2, 3, 2, 1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursionV2(testList));
+
+        testList = testHelper.buildNodeList(List.of(1, 2, 3, 3, 2, 1));
+        assertTrue(_2_6Palindrome.isPalindromeRecursionV2(testList));
+    }
+
+    @Test
     public void testIsPalindromeTwoPointer() {
         LinkedListNode testList = testHelper.buildNodeList(List.of(1, 2, 3));
         assertFalse(_2_6Palindrome.isPalindromeTwoPointer(testList));
@@ -62,5 +76,4 @@ public class _2_6PalindromeTest {
         testList = testHelper.buildNodeList(List.of(1, 2, 3, 3, 2, 1));
         assertTrue(_2_6Palindrome.isPalindromeTwoPointer(testList));
     }
-    
 }

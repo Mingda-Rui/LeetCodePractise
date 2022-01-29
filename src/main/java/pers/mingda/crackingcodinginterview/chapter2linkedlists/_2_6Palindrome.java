@@ -3,7 +3,7 @@ package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 import java.util.Stack;
 
 /**
- *  2.6 Palindrome: Implement a function to check if a linked list is a palindrome 
+ *  2.6 Palindrome: Implement a function to check if a linked list is a palindrome
  */
 
 public class _2_6Palindrome {
@@ -21,7 +21,7 @@ public class _2_6Palindrome {
     private static LinkedListNode reverse(LinkedListNode node) {
         LinkedListNode reversed = null;
         while (node != null) {
-            LinkedListNode head = new LinkedListNode(reversed, node.data);            
+            LinkedListNode head = new LinkedListNode(reversed, node.data);
             reversed = head;
             node = node.next;
         }
@@ -34,16 +34,16 @@ public class _2_6Palindrome {
     }
 
     private static boolean isPalindromeRecursion(LinkedListNode node, LinkedListNode copied, int remainSize) {
-        if (node == null) 
+        if (node == null)
             return true;
-        if (remainSize < 1 && node.data != copied.data) 
+        if (remainSize < 1 && node.data != copied.data)
             return false;
-            
+
         if (remainSize > 1) {
             LinkedListNode head = new LinkedListNode(copied, node.data);
-            copied = head;            
+            copied = head;
         } else if (remainSize < 1) {
-            copied = copied.next;            
+            copied = copied.next;
         }
         return isPalindromeRecursion(node.next, copied, remainSize - 2);
     }
@@ -57,6 +57,27 @@ public class _2_6Palindrome {
         return size;
     }
 
+    public static boolean isPalindromeRecursionV2(LinkedListNode node) {
+        int size = getSize(node);
+        LinkedListNode[] restHolder = new LinkedListNode[1];
+        return isPalindromeRecursionV2(node, size, restHolder);
+    }
+
+    public static boolean isPalindromeRecursionV2(LinkedListNode node, int size, LinkedListNode[] restHolder) {
+        if (size > 1) {
+            if (! isPalindromeRecursionV2(node.next, size - 2, restHolder))
+                return false;
+        } else {
+            restHolder[0] = (size == 1) ? node.next : node;
+            return true;
+        }
+
+        if (node.data != restHolder[0].data)
+            return false;
+        restHolder[0] = restHolder[0].next;
+        return true;
+    }
+
     public static boolean isPalindromeTwoPointer(LinkedListNode node) {
         LinkedListNode fast = node;
         LinkedListNode slow = node;
@@ -68,7 +89,7 @@ public class _2_6Palindrome {
         }
         if (fast != null)
             slow = slow.next;
-        
+
         while (slow != null) {
             if (slow.data != stack.pop()) {
                 return false;
