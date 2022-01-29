@@ -64,13 +64,13 @@ public class _2_6Palindrome {
     }
 
     public static boolean isPalindromeRecursionV2(LinkedListNode node, int size, LinkedListNode[] restHolder) {
-        if (size > 1) {
-            if (! isPalindromeRecursionV2(node.next, size - 2, restHolder))
-                return false;
-        } else {
+        if (size <= 1) {
             restHolder[0] = (size == 1) ? node.next : node;
             return true;
         }
+
+        if ( ! isPalindromeRecursionV2(node.next, size - 2, restHolder))
+            return false;
 
         if (node.data != restHolder[0].data)
             return false;
