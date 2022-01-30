@@ -22,7 +22,23 @@ public class _2_7IntersectionTest {
         LinkedListNode l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
         LinkedListNode l2 = testHelper.buildNodeList(List.of(4, 6, 7, 2, 1));
 
-        assertNull(_2_7Intersection.findIntersection(l1, l2));
+        LinkedListNode actualIntersection = _2_7Intersection.findIntersection(l1, l2);
+        assertNull(actualIntersection);
+
+
+        l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
+        l2 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
+
+        actualIntersection = _2_7Intersection.findIntersection(l1, l2);
+        assertNull(actualIntersection);
+
+
+        l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
+        l2 = l1;
+
+        actualIntersection = _2_7Intersection.findIntersection(l1, l2);
+        assertTrue(testHelper.equals(l1, actualIntersection));
+
 
         LinkedListNode l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
         LinkedListNode l2Front = testHelper.buildNodeList(List.of(4, 6));
@@ -30,7 +46,17 @@ public class _2_7IntersectionTest {
         l1Front.next = intersection;
         l2Front.next = intersection;
 
-        LinkedListNode actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
+        actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
+        assertTrue(testHelper.equals(intersection, actualIntersection));
+
+
+        l1Front = testHelper.buildNodeList(List.of(5, 9));
+        l2Front = testHelper.buildNodeList(List.of(4, 6));
+        intersection = testHelper.buildNodeList(List.of(7, 2, 1));
+        l1Front.next = intersection;
+        l2Front.next = intersection;
+
+        actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
         assertTrue(testHelper.equals(intersection, actualIntersection));
 
 
@@ -42,14 +68,5 @@ public class _2_7IntersectionTest {
 
         actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
         assertTrue(testHelper.equals(intersection, actualIntersection));
-
-
-        l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
-        l2Front = l1Front;
-        l1Front.next = intersection;
-        l2Front.next = intersection;
-
-        actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
-        assertTrue(testHelper.equals(l1Front, actualIntersection));
     }
 }
