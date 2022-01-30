@@ -31,4 +31,36 @@ public class _2_7Intersection {
 
         return null;
     }
+
+    public static LinkedListNode findIntersectionChopOff(LinkedListNode list1, LinkedListNode list2) {
+        int l1Size = getSize(list1);
+        int l2Size = getSize(list2);
+
+        list1 = (l1Size > l2Size) ? getKthNode(list1, l1Size - l2Size) : list1;
+        list2 = (l2Size > l1Size) ? getKthNode(list2, l2Size - l1Size) : list2;
+
+        while (list1 != list2) {
+            list1 = list1.next;
+            list2 = list2.next;
+        }
+        return list1;
+    }
+
+    private static int getSize(LinkedListNode node) {
+        int size = 0;
+        while (node != null) {
+            size++;
+            node = node.next;
+        }
+        return size;
+    }
+
+    private static LinkedListNode getKthNode(LinkedListNode node, int k) {
+        LinkedListNode kth = node;
+        while (k > 0) {
+            kth = kth.next;
+            k--;
+        }
+        return kth;
+    }
 }
