@@ -37,7 +37,7 @@ public class _2_7IntersectionTest {
         l2 = l1;
 
         actualIntersection = _2_7Intersection.findIntersection(l1, l2);
-        assertTrue(testHelper.equals(l1, actualIntersection));
+        assertTrue(l1 == actualIntersection);
 
 
         LinkedListNode l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
@@ -47,7 +47,7 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
 
 
         l1Front = testHelper.buildNodeList(List.of(5, 9));
@@ -57,7 +57,7 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
 
 
         l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
@@ -67,7 +67,7 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class _2_7IntersectionTest {
         l2 = l1;
 
         actualIntersection = _2_7Intersection.findIntersectionChopOff(l1, l2);
-        assertTrue(testHelper.equals(l1, actualIntersection));
+        assertTrue(l1 == actualIntersection);
 
 
         LinkedListNode l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
@@ -100,7 +100,7 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
 
 
         l1Front = testHelper.buildNodeList(List.of(5, 9));
@@ -110,7 +110,7 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
 
 
         l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
@@ -120,6 +120,6 @@ public class _2_7IntersectionTest {
         l2Front.next = intersection;
 
         actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
-        assertTrue(testHelper.equals(intersection, actualIntersection));
+        assertTrue(intersection == actualIntersection);
     }
 }
