@@ -32,5 +32,24 @@ public class _2_7IntersectionTest {
 
         LinkedListNode actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
         assertTrue(testHelper.equals(intersection, actualIntersection));
+
+
+        l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
+        l2Front = testHelper.buildNodeList(List.of(4, 6));
+        intersection = testHelper.buildNodeList(List.of(7));
+        l1Front.next = intersection;
+        l2Front.next = intersection;
+
+        actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
+        assertTrue(testHelper.equals(intersection, actualIntersection));
+
+
+        l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
+        l2Front = l1Front;
+        l1Front.next = intersection;
+        l2Front.next = intersection;
+
+        actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
+        assertTrue(testHelper.equals(l1Front, actualIntersection));
     }
 }
