@@ -1,6 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter2linkedlists;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -22,5 +23,14 @@ public class _2_7IntersectionTest {
         LinkedListNode l2 = testHelper.buildNodeList(List.of(4, 6, 7, 2, 1));
 
         assertNull(_2_7Intersection.findIntersection(l1, l2));
+
+        LinkedListNode l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
+        LinkedListNode l2Front = testHelper.buildNodeList(List.of(4, 6));
+        LinkedListNode intersection = testHelper.buildNodeList(List.of(7, 2, 1));
+        l1Front.next = intersection;
+        l2Front.next = intersection;
+
+        LinkedListNode actualIntersection = _2_7Intersection.findIntersection(l1Front, l2Front);
+        assertTrue(testHelper.equals(intersection, actualIntersection));
     }
 }
