@@ -12,34 +12,26 @@ public class _3_2StackMin {
 }
 
 class StackWithMin extends Stack<NodeWithMin> {
-    int min = Integer.MAX_VALUE;
-
     public int min() {
-        return min;
-    }
-
-    @Override
-    public NodeWithMin pop() {
-        NodeWithMin node = super.pop();
-        if (node.val == min)
-            min = node.previousMin;
-        return node;
+        if (this.isEmpty()) {
+            return Integer.MAX_VALUE;
+        }
+        return this.peek().min;
     }
 
     public NodeWithMin push(int val) {
-        NodeWithMin node = new NodeWithMin(val, this.min);
-        super.push(node);
-        min = val < min ? val : min;
-        return node;
+        int min = Math.min(min(), val);
+        NodeWithMin node = new NodeWithMin(val, min);
+        return super.push(node);
     }
 }
 
 class NodeWithMin {
     int val;
-    int previousMin;
+    int min;
 
-    public NodeWithMin(int val, int previousMin) {
+    public NodeWithMin(int val, int min) {
         this.val = val;
-        this.previousMin = previousMin;
+        this.min = min;
     }
 }
