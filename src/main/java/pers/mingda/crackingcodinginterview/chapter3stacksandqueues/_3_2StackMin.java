@@ -35,3 +35,31 @@ class NodeWithMin {
         this.min = min;
     }
 }
+
+class StackWithMinStack extends Stack<Integer> {
+
+    private Stack<Integer> min;
+
+    public StackWithMinStack() {
+        this.min = new Stack<Integer>();
+    }
+
+    public int min() {
+         return min.isEmpty() ? Integer.MAX_VALUE : min.peek();
+    }
+
+    @Override
+    public Integer pop() {
+        int val = super.pop();
+        if (min() == val)
+            min.pop();
+        return val;
+    }
+
+    @Override
+    public Integer push(Integer val) {
+        if (val <= min())
+            min.push(val);
+        return super.push(val);
+    }
+}
