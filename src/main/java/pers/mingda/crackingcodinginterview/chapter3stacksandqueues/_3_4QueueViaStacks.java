@@ -23,11 +23,11 @@ public class _3_4QueueViaStacks {
 
     public int remove() {
         if (out.isEmpty())
-            transfer();
+            shiftStacks();
         return out.pop();
     }
 
-    private void transfer() {
+    private void shiftStacks() {
         while (!in.isEmpty()) {
             out.push(in.pop());
         }
