@@ -15,7 +15,7 @@ public class _3_4QueueViaStacksTest {
     }
 
     @Test
-    public void test() {
+    public void testQueueViaStacks() {
         qvs.add(1);
         assertEquals(1, qvs.remove());
 
