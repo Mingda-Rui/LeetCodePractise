@@ -64,18 +64,65 @@ public class _3_6AnimalShelter {
     }
 }
 
+class AnimalQueue {
+    Queue<Dog> dogQueue;
+    Queue<Cat> catQueue;
+    int counter;
+
+    public AnimalQueue() {
+        dogQueue = new LinkedList<>();
+        catQueue = new LinkedList<>();
+    }
+
+    public void enqueue(Animal animal) {
+        counter++;
+        animal.number = counter;
+        if (animal instanceof Dog) {
+            Dog dog = (Dog) animal;
+            dogQueue.offer(dog);
+        } else if (animal instanceof Cat) {
+            Cat cat = (Cat) animal;
+            catQueue.offer(cat);
+        } else {
+            throw new IllegalArgumentException("Unknown type of animal");
+        }
+    }
+
+    public Dog dequeueDog() {
+        return dogQueue.poll();
+    }
+
+    public Cat dequeueCat() {
+        return catQueue.poll();
+    }
+
+    public Animal dequeueAny() {
+        if (dogQueue.isEmpty())
+            return catQueue.poll();
+        else if (catQueue.isEmpty())
+            return dogQueue.poll();
+
+        boolean pollDogQueue = dogQueue.peek().number < catQueue.peek().number;
+        return pollDogQueue ? dogQueue.poll() : catQueue.poll();
+    }
+}
+
 abstract class Animal {
     boolean isAdopted;
     int number;
 }
 
 class Cat extends Animal {
+    public Cat() {}
+
     public Cat(int number) {
         this.number = number;
     }
 }
 
 class Dog extends Animal {
+    public Dog() {}
+
     public Dog(int number) {
         this.number = number;
     }
