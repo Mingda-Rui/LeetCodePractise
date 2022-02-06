@@ -44,16 +44,10 @@ public class _3_5SortStack {
     public void sort(Stack<Integer> stack) {
         while (!stack.isEmpty()) {
             int val = stack.pop();
-            int counter = 0;
             while(!tmp.isEmpty() && tmp.peek() > val) {
                 stack.push(tmp.pop());
-                counter++;
             }
             tmp.push(val);
-            while (counter > 0) {
-                tmp.push(stack.pop());
-                counter--;
-            }
         }
         while (!tmp.isEmpty()) {
             stack.push(tmp.pop());
