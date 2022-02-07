@@ -56,3 +56,95 @@ class FixedMultiStack {
         return currentSizes[stackNum] >= getMaxSize(stackNum);
     }
 }
+
+
+class MultiStack {
+    int[] values;
+    StackInfo[] stacks;
+
+    public MultiStack(int numberOfStacks, int defaultCapacity) {
+        values = new int[numberOfStacks * defaultCapacity];
+        stacks = new StackInfo[numberOfStacks];
+        for (int i = 0; i < numberOfStacks; i++) {
+            int start = i * defaultCapacity;
+            StackInfo stackInfo = new StackInfo(start, defaultCapacity);
+            stacks[i] = stackInfo;
+        }
+    }
+
+    public int pop(int stackNum) {
+        int val = peek(stackNum);
+        values[getStackCurrentIndex(stackNum)] = 0;
+        StackInfo stackInfo = getStackInfo(stackNum);
+        stackInfo.decreaseSizeByOne();
+        return val;
+    }
+
+    public int push(int stackNum, int val) {
+        if (getTotalSize() >= values.length)
+            throw new RuntimeException("The stacks are all full!");
+
+        StackInfo stackInfo = getStackInfo(stackNum);
+
+        return 0;
+    }
+
+    public int peek(int stackNum) {
+        if (isEmpty(stackNum)) {
+            throw new EmptyStackException();
+        }
+        return values[getStackCurrentIndex(stackNum)];
+    }
+
+    private int getTotalSize() {
+        int totalSize = 0;
+        for (StackInfo stackInfo: stacks) {
+            totalSize += stackInfo.getSize();
+        }
+        return totalSize;
+    }
+
+    private boolean checkStackNum(int stackNum) {
+        return stackNum < stacks.length;
+    }
+
+    private int getStackCurrentIndex(int stackNum) {
+        StackInfo stackInfo = getStackInfo(stackNum);
+        int start = stackInfo.getStartIndex();
+        int size = stackInfo.getSize();
+        return (start + size - 1) % values.length;
+    }
+
+    public boolean isEmpty(int stackNum) {
+        StackInfo stackInfo = stacks[stackNum];
+        int size = stackInfo.getSize();
+        return size > 0;
+    }
+
+    private StackInfo getStackInfo(int stackNum) {
+        return stacks[stackNum];
+    }
+}
+
+class StackInfo {
+    private int start;
+    private int size;
+    private int capacity;
+
+    public StackInfo(int start, int capacity) {
+        this.start = start;
+        this.capacity = capacity;
+    }
+
+    public int getStartIndex() {
+        return this.start;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public void decreaseSizeByOne() {
+        this.size--;
+    }
+}
