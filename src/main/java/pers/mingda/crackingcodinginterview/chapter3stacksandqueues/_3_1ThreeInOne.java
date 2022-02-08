@@ -29,7 +29,7 @@ class FixedMultiStack {
         stack[getCurrentIndex(stackNum)] = val;
     }
 
-    public int pull(int stackNum) {
+    public int pop(int stackNum) {
         if (isEmpty(stackNum)) {
             throw new EmptyStackException();
         }
