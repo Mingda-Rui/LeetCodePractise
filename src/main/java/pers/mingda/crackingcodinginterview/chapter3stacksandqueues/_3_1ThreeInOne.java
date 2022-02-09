@@ -67,14 +67,14 @@ class MultiStack {
         stacks = new StackInfo[numberOfStacks];
         for (int i = 0; i < numberOfStacks; i++) {
             int start = i * defaultCapacity;
-            StackInfo stackInfo = new StackInfo(start, defaultCapacity);
+            StackInfo stackInfo = new StackInfo(start);
             stacks[i] = stackInfo;
         }
     }
 
     public int pop(int stackNum) {
         int val = peek(stackNum);
-        values[getStackCurrentIndex(stackNum)] = 0;
+        values[getStackEndIndex(stackNum)] = 0;
         StackInfo stackInfo = getStackInfo(stackNum);
         stackInfo.decreaseSizeByOne();
         return val;
@@ -83,32 +83,45 @@ class MultiStack {
     public int push(int stackNum, int val) {
         if (getTotalSize() >= values.length)
             throw new RuntimeException("The stacks are all full!");
-
-        StackInfo stackInfo = getStackInfo(stackNum);
-
-        return 0;
+        shift(stackNum);
+        values[getNextIndex(getStackEndIndex(stackNum))] = val;
+        getStackInfo(stackNum).increaseSizeByOne();
+        return val;
     }
 
     public int peek(int stackNum) {
         if (isEmpty(stackNum)) {
             throw new EmptyStackException();
         }
-        return values[getStackCurrentIndex(stackNum)];
+        return values[getStackEndIndex(stackNum)];
+    }
+
+    private void shift(int stackNum) {
+
+        int stackEndIndex = getStackEndIndex(stackNum);
+        int nextStackNum = (stackNum + 1) % stacks.length;
+        StackInfo nextStackInfo = getStackInfo(nextStackNum);
+        if (getNextIndex(stackEndIndex) == nextStackInfo.getStartIndex()) {
+            shift(nextStackNum);
+            int nextStackStartIndex = nextStackInfo.getStartIndex();
+            for (int i = getStackEndIndex(nextStackNum); i >= nextStackStartIndex; i--) {
+                values[getNextIndex(i)] = values[i];
+            }
+            values[nextStackStartIndex] = 0;
+            getStackInfo(nextStackNum).setStartIndex(getNextIndex(nextStackStartIndex));
+        }
     }
 
     private int getTotalSize() {
         int totalSize = 0;
         for (StackInfo stackInfo: stacks) {
-            totalSize += stackInfo.getSize();
+            int size = stackInfo.getSize();
+            totalSize += Math.min(1, size);
         }
         return totalSize;
     }
 
-    private boolean checkStackNum(int stackNum) {
-        return stackNum < stacks.length;
-    }
-
-    private int getStackCurrentIndex(int stackNum) {
+    private int getStackEndIndex(int stackNum) {
         StackInfo stackInfo = getStackInfo(stackNum);
         int start = stackInfo.getStartIndex();
         int size = stackInfo.getSize();
@@ -118,22 +131,24 @@ class MultiStack {
     public boolean isEmpty(int stackNum) {
         StackInfo stackInfo = stacks[stackNum];
         int size = stackInfo.getSize();
-        return size > 0;
+        return size <= 0;
     }
 
     private StackInfo getStackInfo(int stackNum) {
         return stacks[stackNum];
+    }
+
+    private int getNextIndex(int index) {
+        return (index + 1) % values.length;
     }
 }
 
 class StackInfo {
     private int start;
     private int size;
-    private int capacity;
 
-    public StackInfo(int start, int capacity) {
+    public StackInfo(int start) {
         this.start = start;
-        this.capacity = capacity;
     }
 
     public int getStartIndex() {
@@ -146,5 +161,13 @@ class StackInfo {
 
     public void decreaseSizeByOne() {
         this.size--;
+    }
+
+    public void increaseSizeByOne() {
+        this.size++;
+    }
+
+    public void setStartIndex(int startIndex) {
+        this.start = startIndex;
     }
 }

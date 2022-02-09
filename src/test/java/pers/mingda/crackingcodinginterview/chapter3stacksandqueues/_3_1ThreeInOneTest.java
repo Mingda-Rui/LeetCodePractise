@@ -28,4 +28,39 @@ public class _3_1ThreeInOneTest {
         assertEquals(2, fms.pop(1));
     }
 
+    @Test
+    public void testMultiStack() {
+        MultiStack ms = new MultiStack(3, 2);
+        ms.push(0, 1);
+        ms.push(1, 2);
+        ms.push(2, 3);
+        ms.push(0, 4);
+        ms.push(0, 5);
+        ms.push(2, 6);
+
+        assertEquals(5, ms.pop(0));
+        assertEquals(4, ms.pop(0));
+        assertEquals(1, ms.pop(0));
+
+        assertEquals(6, ms.pop(2));
+        assertEquals(2, ms.pop(1));
+        assertEquals(3, ms.pop(2));
+
+        ms = new MultiStack(3, 2);
+        ms.push(0, 1);
+        ms.push(0, 2);
+        ms.push(0, 3);
+        ms.push(2, 4);
+        ms.push(2, 5);
+        ms.push(1, 6);
+
+        assertEquals(6, ms.pop(1));
+
+        assertEquals(5, ms.pop(2));
+        assertEquals(4, ms.pop(2));
+
+        assertEquals(3, ms.pop(0));
+        assertEquals(2, ms.pop(0));
+        assertEquals(1, ms.pop(0));
+    }
 }
