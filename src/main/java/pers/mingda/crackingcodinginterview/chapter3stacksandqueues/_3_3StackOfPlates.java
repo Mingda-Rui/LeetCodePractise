@@ -58,7 +58,60 @@ class SetOfStacks {
         return val;
     }
 
+    public int popAt(int index) {
+        if (index >= getTotalSize() - 1)
+            return pop();
+        int val = peekAt(index);
+        int stackNumber = (index + 1) / threshold;
+        int indexInStack = (index + 1) % threshold;
+        if (indexInStack == 0)
+            stacks.get(stackNumber - 1).pop();
+        shift(stackNumber, indexInStack);
+        if (getCurrentStack().isEmpty())
+            currentStackIndex--;
+
+        return val;
+    }
+
+    public int peekAt(int index) {
+        int stackNumber = index / threshold;
+        int indexInStack = index % threshold;
+        Stack<Integer> stack = stacks.get(stackNumber);
+        int stackSize = stack.size();
+        int[] tmp = new int[stackSize];
+        for (int i = stackSize - 1; i >= indexInStack; i--) {
+            tmp[i] = stack.pop();
+        }
+        for (int i = indexInStack; i < stackSize; i++) {
+            stack.push(tmp[i]);
+        }
+        return tmp[indexInStack];
+    }
+
+    private void shift(int startStack, int startIndex) {
+        Stack<Integer> stack = stacks.get(startStack);
+        int stackSize = stack.size();
+        int[] tmp = new int[stackSize];
+        for (int i = stackSize - 1; i >= 0; i--) {
+            tmp[i] = stack.pop();
+        }
+        for (int i = 0; i < stackSize - 1; i++) {
+            int val = i < startIndex - 1? tmp[i] : tmp[i + 1];
+            stack.push(val);
+        }
+        if (startIndex == 0)
+            stacks.get(startStack - 1).push(tmp[0]);
+        if (currentStackIndex >= startStack + 1)
+            shift(startStack + 1, 0);
+    }
+
     private Stack<Integer> getCurrentStack() {
         return stacks.get(currentStackIndex);
+    }
+
+    private int getTotalSize() {
+        int currentSize = getCurrentStack().size();
+        currentSize += currentStackIndex * threshold;
+        return currentSize;
     }
 }
