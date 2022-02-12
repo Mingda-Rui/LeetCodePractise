@@ -27,8 +27,8 @@ public class _3_3StackOfPlatesTest {
     }
 
     @Test
-    public void testStackOfPlatesPopAt() {
-        SetOfStacks sos = new SetOfStacks(2);
+    public void testStackOfPlatesShiftPopAt() {
+        SetOfStacksShiftPopAt sos = new SetOfStacksShiftPopAt(2);
         sos.push(1);
         sos.push(2);
         sos.push(3);
@@ -43,7 +43,7 @@ public class _3_3StackOfPlatesTest {
         assertEquals(1, sos.popAt(0));
         assertThrows(EmptyStackException.class, () -> sos.popAt(0));
 
-        SetOfStacks sos2 = new SetOfStacks(2);
+        SetOfStacksShiftPopAt sos2 = new SetOfStacksShiftPopAt(2);
         sos2.push(1);
         sos2.push(2);
         sos2.push(3);
@@ -58,7 +58,7 @@ public class _3_3StackOfPlatesTest {
         assertEquals(6, sos2.popAt(0));
         assertThrows(EmptyStackException.class, () -> sos2.popAt(0));
 
-        SetOfStacks sos3 = new SetOfStacks(2);
+        SetOfStacksShiftPopAt sos3 = new SetOfStacksShiftPopAt(2);
         sos3.push(1);
         sos3.push(2);
         sos3.push(3);
