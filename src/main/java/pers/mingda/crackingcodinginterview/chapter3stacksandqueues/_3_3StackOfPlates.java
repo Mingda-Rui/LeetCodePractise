@@ -65,8 +65,8 @@ class SetOfStacks {
         int stackNumber = (index + 1) / threshold;
         int indexInStack = (index + 1) % threshold;
         if (indexInStack == 0)
-            stacks.get(stackNumber - 1).pop();
-        shift(stackNumber, indexInStack);
+            getTargetShiftStack(stackNumber, indexInStack, 1).pop();
+        shiftByOne(stackNumber, indexInStack);
         if (getCurrentStack().isEmpty())
             currentStackIndex--;
 
@@ -76,33 +76,33 @@ class SetOfStacks {
     public int peekAt(int index) {
         int stackNumber = index / threshold;
         int indexInStack = index % threshold;
-        Stack<Integer> stack = stacks.get(stackNumber);
-        int stackSize = stack.size();
-        int[] tmp = new int[stackSize];
-        for (int i = stackSize - 1; i >= indexInStack; i--) {
-            tmp[i] = stack.pop();
-        }
-        for (int i = indexInStack; i < stackSize; i++) {
-            stack.push(tmp[i]);
-        }
-        return tmp[indexInStack];
+        return shift(stackNumber, indexInStack, 0);
     }
 
-    private void shift(int startStack, int startIndex) {
+    private void shiftByOne(int startStack, int startIndex) {
+        shift(startStack, startIndex, 1);
+        if (currentStackIndex >= startStack + 1)
+            shiftByOne(startStack + 1, 0);
+    }
+
+    private int shift(int startStack, int startIndex, int shifts) {
         Stack<Integer> stack = stacks.get(startStack);
         int stackSize = stack.size();
         int[] tmp = new int[stackSize];
-        for (int i = stackSize - 1; i >= 0; i--) {
+        for (int i = stackSize - 1; i >= Math.max(startIndex - shifts, 0); i--) {
             tmp[i] = stack.pop();
         }
-        for (int i = 0; i < stackSize - 1; i++) {
-            int val = i < startIndex - 1? tmp[i] : tmp[i + 1];
-            stack.push(val);
+        for (int i = startIndex; i < stackSize; i++) {
+            Stack<Integer> nextStack = getTargetShiftStack(startStack, i, shifts);
+            nextStack.push(tmp[i]);
         }
-        if (startIndex == 0)
-            stacks.get(startStack - 1).push(tmp[0]);
-        if (currentStackIndex >= startStack + 1)
-            shift(startStack + 1, 0);
+        return tmp[startIndex];
+    }
+
+    private Stack<Integer> getTargetShiftStack(int currentStack, int startIndex, int shifts) {
+        int restInStack = threshold - (startIndex + 1);
+        int offset = (shifts + restInStack) / threshold;
+        return stacks.get(currentStack - offset);
     }
 
     private Stack<Integer> getCurrentStack() {
