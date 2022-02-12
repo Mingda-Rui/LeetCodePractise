@@ -130,3 +130,94 @@ class SetOfStacksShiftPopAt extends SetOfStacks {
         return currentSize;
     }
 }
+
+class SetOfStacksNonShiftPopAt extends SetOfStacks {
+
+    private List<Integer> subStackSizes;
+    private int totalSize;
+
+    public SetOfStacksNonShiftPopAt(int threshold) {
+        super(threshold);
+        this.subStackSizes = new ArrayList<>();
+        subStackSizes.add(0);
+        this.totalSize = 0;
+    }
+
+    @Override
+    public int pop() {
+        if (totalSize == 0)
+            throw new EmptyStackException();
+        Stack<Integer> stack = getStack(currentStackIndex);
+        int val = stack.pop();
+        totalSize--;
+        subStackSizes.set(currentStackIndex, stack.size());
+        if (stack.isEmpty()) {
+            subStackSizes.remove(currentStackIndex);
+            currentStackIndex--;
+        }
+        return val;
+    }
+
+    @Override
+    public int push(int val) {
+        super.push(val);
+        totalSize++;
+        int stackSize = getStack(currentStackIndex).size();
+        if (currentStackIndex == subStackSizes.size())
+            subStackSizes.add(0);
+        subStackSizes.set(currentStackIndex, stackSize);
+        return val;
+    }
+
+    public int popAt(int index) {
+        if (index >= totalSize)
+            throw new IllegalArgumentException("The index exceeds total size, index: " + index);
+
+        int stackNum = getStackNum(index);
+        int indexInStack = getIndexInStack(index);
+        int stackSize = subStackSizes.get(stackNum);
+
+        int val = remove(stackNum, indexInStack);
+
+        subStackSizes.set(stackNum, stackSize - 1);
+        totalSize--;
+        if (stackNum == currentStackIndex && stackSize == 0) {
+            subStackSizes.remove(stackNum);
+            currentStackIndex--;
+        }
+
+        return val;
+    }
+
+    private int remove(int stackNum, int indexInStack) {
+        Stack<Integer> stack = getStack(stackNum);
+        int stackSize = stack.size();
+        int[] tmp = new int[stackSize];
+        for (int i = stackSize - 1; i >= indexInStack; i--) {
+            tmp[i] = stack.pop();
+        }
+        for (int i = indexInStack + 1; i < stackSize; i++) {
+            stack.push(tmp[i]);
+        }
+
+        return tmp[indexInStack];
+    }
+
+    private int getStackNum(int index) {
+        int stackIndex = 0;
+        for (int i = 0; i < subStackSizes.size() && index >= 0; i++) {
+            index -= subStackSizes.get(i);
+            stackIndex = i;
+        }
+        return stackIndex;
+    }
+
+    private int getIndexInStack(int index) {
+        int stackIndex = index;
+        for (int i = 0; i < subStackSizes.size() && index >= 0; i++) {
+            stackIndex = index;
+            index -= subStackSizes.get(i);
+        }
+        return stackIndex;
+    }
+}
