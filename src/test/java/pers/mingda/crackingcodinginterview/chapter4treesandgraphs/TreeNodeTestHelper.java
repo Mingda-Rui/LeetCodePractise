@@ -25,12 +25,12 @@ public class TreeNodeTestHelper {
     public String treeNodeSerialize(TreeNode node) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(node);
-        String serial = treeNodeSerializer(queue, new StringBuilder());
+        String serial = treeNodeSerialize(queue, new StringBuilder());
         serial = removeTailingNull(serial);
         return "[" + serial + "]";
     }
 
-    protected String treeNodeSerializer(Queue<TreeNode> queue, StringBuilder strBuilder) {
+    protected String treeNodeSerialize(Queue<TreeNode> queue, StringBuilder strBuilder) {
         if (queue.isEmpty()) {
             return strBuilder.toString();
         }
@@ -44,7 +44,7 @@ public class TreeNodeTestHelper {
             queue.add(node.right);
         }
         strBuilder.append(serial).append(", ");
-        return treeNodeSerializer(queue, strBuilder);
+        return treeNodeSerialize(queue, strBuilder);
     }
 
     protected String removeTailingNull(String str) {
