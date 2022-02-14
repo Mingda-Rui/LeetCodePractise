@@ -83,4 +83,24 @@ public class TreeNodeTestHelperTest {
         root2 = testHelper.createTreeNode(1, new TreeNode(2), null);
         assertFalse(testHelper.compare(root1, root2));
     }
+
+    @Test
+    public void testGetNextIndex() {
+        String serial = "[]";
+        assertEquals(-1, testHelper.getNextIndex(serial, 0));
+
+        serial = "[1, 22, 333, null, 4]";
+        //        01234567890123456789
+        assertEquals(1, testHelper.getNextIndex(serial, 0));
+        assertEquals(4, testHelper.getNextIndex(serial, 1));
+        assertEquals(8, testHelper.getNextIndex(serial, 5));
+        assertEquals(13, testHelper.getNextIndex(serial, 11));
+        assertEquals(19, testHelper.getNextIndex(serial, 15));
+        assertEquals(-1, testHelper.getNextIndex(serial, 25));
+    }
+
+    @Test
+    public void testGetValue() {
+
+    }
 }
