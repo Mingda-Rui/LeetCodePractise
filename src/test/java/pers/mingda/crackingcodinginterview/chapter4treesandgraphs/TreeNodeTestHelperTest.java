@@ -30,24 +30,24 @@ public class TreeNodeTestHelperTest {
     }
 
     @Test
-    public void testTreeNodeSerializer() {
+    public void testSerializeTreeNode() {
         TreeNode root = testHelper.createTreeNode(1, 2, 3);
-        assertEquals("[1, 2, 3]", testHelper.treeNodeSerialize(root));
+        assertEquals("[1, 2, 3]", testHelper.serializeTreeNode(root));
 
         TreeNode left = testHelper.createTreeNode(2, 4, 5);
         TreeNode right = testHelper.createTreeNode(3, 6, 7);
         root = testHelper.createTreeNode(1, left, right);
-        assertEquals("[1, 2, 3, 4, 5, 6, 7]", testHelper.treeNodeSerialize(root));
+        assertEquals("[1, 2, 3, 4, 5, 6, 7]", testHelper.serializeTreeNode(root));
 
         root = testHelper.createTreeNode(1, new TreeNode(2), right);
         right = testHelper.createTreeNode(3, 6, 7);
-        assertEquals("[1, 2, 3, null, null, 6, 7]", testHelper.treeNodeSerialize(root));
+        assertEquals("[1, 2, 3, null, null, 6, 7]", testHelper.serializeTreeNode(root));
 
         TreeNode five = testHelper.createTreeNode(5, 7, 8);
         left = testHelper.createTreeNode(2, null, five);
         right = testHelper.createTreeNode(3, null, new TreeNode(6));
         root = testHelper.createTreeNode(1, left, right);
-        assertEquals("[1, 2, 3, null, 5, null, 6, 7, 8]", testHelper.treeNodeSerialize(root));
+        assertEquals("[1, 2, 3, null, 5, null, 6, 7, 8]", testHelper.serializeTreeNode(root));
     }
 
     @Test
@@ -117,19 +117,19 @@ public class TreeNodeTestHelperTest {
     }
 
     @Test
-    public void testTreeNodeDeserialize() {
+    public void testDeserializeTreeNode() {
         String serial = "[]";
-        assertNull(testHelper.treeNodeDeserialize(serial));
+        assertNull(testHelper.deserializeTreeNode(serial));
 
 
         serial = "[1, 2, 3]";
-        TreeNode node = testHelper.treeNodeDeserialize(serial);
+        TreeNode node = testHelper.deserializeTreeNode(serial);
         TreeNode expectedNode = testHelper.createTreeNode(1, 2, 3);
         assertTrue(testHelper.compare(expectedNode, node));
 
 
         serial = "[1, 2, 3, 4, 5, 6, 7]";
-        node = testHelper.treeNodeDeserialize(serial);
+        node = testHelper.deserializeTreeNode(serial);
         TreeNode left = testHelper.createTreeNode(2, 4, 5);
         TreeNode right = testHelper.createTreeNode(3, 6, 7);
         expectedNode = testHelper.createTreeNode(1, left, right);
@@ -137,14 +137,14 @@ public class TreeNodeTestHelperTest {
 
 
         serial = "[1, 2, 3, null, null, 6, 7]";
-        node = testHelper.treeNodeDeserialize(serial);
+        node = testHelper.deserializeTreeNode(serial);
         right = testHelper.createTreeNode(3, 6, 7);
         expectedNode = testHelper.createTreeNode(1, new TreeNode(2), right);
         assertTrue(testHelper.compare(expectedNode, node));
 
 
         serial = "[1, 2, 3, null, 5, null, 6, 7, 8]";
-        node = testHelper.treeNodeDeserialize(serial);
+        node = testHelper.deserializeTreeNode(serial);
         TreeNode five = testHelper.createTreeNode(5, 7, 8);
         left = testHelper.createTreeNode(2, null, five);
         right = testHelper.createTreeNode(3, null, new TreeNode(6));

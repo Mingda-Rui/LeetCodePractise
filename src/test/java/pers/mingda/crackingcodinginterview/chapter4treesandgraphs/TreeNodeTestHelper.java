@@ -22,15 +22,15 @@ public class TreeNodeTestHelper {
         return isEqual;
     }
 
-    public String treeNodeSerialize(TreeNode node) {
+    public String serializeTreeNode(TreeNode node) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(node);
-        String serial = treeNodeSerialize(queue, new StringBuilder());
+        String serial = serializeTreeNode(queue, new StringBuilder());
         serial = removeTailingNull(serial);
         return "[" + serial + "]";
     }
 
-    protected String treeNodeSerialize(Queue<TreeNode> queue, StringBuilder strBuilder) {
+    protected String serializeTreeNode(Queue<TreeNode> queue, StringBuilder strBuilder) {
         if (queue.isEmpty()) {
             return strBuilder.toString();
         }
@@ -44,10 +44,10 @@ public class TreeNodeTestHelper {
             queue.add(node.right);
         }
         strBuilder.append(serial).append(", ");
-        return treeNodeSerialize(queue, strBuilder);
+        return serializeTreeNode(queue, strBuilder);
     }
 
-    public TreeNode treeNodeDeserialize(String treeSerial) {
+    public TreeNode deserializeTreeNode(String treeSerial) {
         Queue<TreeNode> queue = new LinkedList<>();
         TreeNode root = null;
         int valIndex = getNextIndex(treeSerial, 0);
@@ -57,11 +57,11 @@ public class TreeNodeTestHelper {
 
         root = new TreeNode(Integer.parseInt(val));
         queue.add(root);
-        treeNodeDeserialize(treeSerial, queue, valIndex);
+        deserializeTreeNode(treeSerial, queue, valIndex);
         return root;
     }
 
-    private void treeNodeDeserialize(String treeSerial, Queue<TreeNode> queue, int prevIndex) {
+    private void deserializeTreeNode(String treeSerial, Queue<TreeNode> queue, int prevIndex) {
         if (queue.isEmpty()) {
             return;
         }
@@ -80,7 +80,7 @@ public class TreeNodeTestHelper {
             head.right = new TreeNode(Integer.parseInt(val));
             queue.add(head.right);
         }
-        treeNodeDeserialize(treeSerial, queue, nextIndex);
+        deserializeTreeNode(treeSerial, queue, nextIndex);
     }
 
     protected int getNextIndex(String treeSerial, int currentIndex) {
