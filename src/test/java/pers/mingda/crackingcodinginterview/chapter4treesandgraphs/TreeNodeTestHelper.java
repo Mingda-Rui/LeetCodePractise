@@ -52,11 +52,10 @@ public class TreeNodeTestHelper {
         TreeNode root = null;
         int valIndex = getNextIndex(treeSerial, 0);
         String val = getValue(treeSerial, valIndex);
-        if (val == null)
+        if (val == "")
             return root;
 
         root = new TreeNode(Integer.parseInt(val));
-        queue.add(root);
         queue.add(root);
         treeNodeDeserialize(treeSerial, queue, valIndex);
         return root;
@@ -70,14 +69,14 @@ public class TreeNodeTestHelper {
         TreeNode head = queue.remove();
         int nextIndex = getNextIndex(treeSerial, prevIndex);
         String val = getValue(treeSerial, nextIndex);
-        if (val != "null") {
+        if (!val.equals("null") && !val.isEmpty()) {
             head.left = new TreeNode(Integer.parseInt(val));
             queue.add(head.left);
         }
 
         nextIndex = getNextIndex(treeSerial, nextIndex);
         val = getValue(treeSerial, nextIndex);
-        if (val != "null") {
+        if (!val.equals("null") && !val.isEmpty()) {
             head.right = new TreeNode(Integer.parseInt(val));
             queue.add(head.right);
         }
@@ -86,7 +85,7 @@ public class TreeNodeTestHelper {
 
     protected int getNextIndex(String treeSerial, int currentIndex) {
         int invalidIndex = -1;
-        if (currentIndex >= treeSerial.length())
+        if (currentIndex < 0 || currentIndex >= treeSerial.length())
             return invalidIndex;
         for (int i = currentIndex + 1; i < treeSerial.length(); i++) {
             char c = treeSerial.charAt(i);
@@ -102,6 +101,8 @@ public class TreeNodeTestHelper {
     }
 
     protected String getValue(String treeSerial, int index) {
+        if (index < 0 || index >= treeSerial.length())
+            return "";
         StringBuilder sb = new StringBuilder();
         for (int i = index; i < treeSerial.length(); i++) {
             char c = treeSerial.charAt(i);
@@ -109,7 +110,7 @@ public class TreeNodeTestHelper {
                 return sb.toString();
             sb.append(c);
         }
-        return null;
+        return "";
     }
 
     protected String removeTailingNull(String str) {

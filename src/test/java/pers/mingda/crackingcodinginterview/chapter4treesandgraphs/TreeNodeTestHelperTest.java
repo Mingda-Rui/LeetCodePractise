@@ -101,6 +101,54 @@ public class TreeNodeTestHelperTest {
 
     @Test
     public void testGetValue() {
+        String serial = "[]";
+        assertTrue(testHelper.getValue(serial, 0).isEmpty());
 
+        serial = "[1, 22, 333, null, 4]";
+        //        01234567890123456789
+        assertEquals("", testHelper.getValue(serial, 0));
+        assertEquals("1", testHelper.getValue(serial, 1));
+        assertEquals("", testHelper.getValue(serial, 3));
+        assertEquals("22", testHelper.getValue(serial, 4));
+        assertEquals("333", testHelper.getValue(serial, 8));
+        assertEquals("null", testHelper.getValue(serial, 13));
+        assertEquals("4", testHelper.getValue(serial, 19));
+        assertEquals("", testHelper.getValue(serial, 25));
+    }
+
+    @Test
+    public void testTreeNodeDeserialize() {
+        String serial = "[]";
+        assertNull(testHelper.treeNodeDeserialize(serial));
+
+
+        serial = "[1, 2, 3]";
+        TreeNode node = testHelper.treeNodeDeserialize(serial);
+        TreeNode expectedNode = testHelper.createTreeNode(1, 2, 3);
+        assertTrue(testHelper.compare(expectedNode, node));
+
+
+        serial = "[1, 2, 3, 4, 5, 6, 7]";
+        node = testHelper.treeNodeDeserialize(serial);
+        TreeNode left = testHelper.createTreeNode(2, 4, 5);
+        TreeNode right = testHelper.createTreeNode(3, 6, 7);
+        expectedNode = testHelper.createTreeNode(1, left, right);
+        assertTrue(testHelper.compare(expectedNode, node));
+
+
+        serial = "[1, 2, 3, null, null, 6, 7]";
+        node = testHelper.treeNodeDeserialize(serial);
+        right = testHelper.createTreeNode(3, 6, 7);
+        expectedNode = testHelper.createTreeNode(1, new TreeNode(2), right);
+        assertTrue(testHelper.compare(expectedNode, node));
+
+
+        serial = "[1, 2, 3, null, 5, null, 6, 7, 8]";
+        node = testHelper.treeNodeDeserialize(serial);
+        TreeNode five = testHelper.createTreeNode(5, 7, 8);
+        left = testHelper.createTreeNode(2, null, five);
+        right = testHelper.createTreeNode(3, null, new TreeNode(6));
+        expectedNode = testHelper.createTreeNode(1, left, right);
+        assertTrue(testHelper.compare(expectedNode, node));
     }
 }
