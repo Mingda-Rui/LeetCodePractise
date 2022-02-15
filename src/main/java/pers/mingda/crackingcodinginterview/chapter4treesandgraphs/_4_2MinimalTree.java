@@ -20,10 +20,8 @@ public class _4_2MinimalTree {
 
         int midIndex = getMidIndex(start, end);
         TreeNode mid = new TreeNode(array[midIndex]);
-        TreeNode left = createMinimalBST(array, start, midIndex);
-        TreeNode right = createMinimalBST(array, midIndex + 1, end);
-        mid.setLeftChild(left);
-        mid.setRightChild(right);
+        mid.left = createMinimalBST(array, start, midIndex);
+        mid.right = createMinimalBST(array, midIndex + 1, end);
         return mid;
     }
 
