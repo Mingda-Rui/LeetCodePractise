@@ -1,9 +1,7 @@
 package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 
 /**
@@ -14,38 +12,23 @@ import java.util.Queue;
 public class _4_3ListOfDepths {
 
     public static List<List<TreeNode>> createLevelLinkedList(TreeNode root) {
-        List<List<TreeNode>> result = new ArrayList<>();
+        List<List<TreeNode>> result = new LinkedList<>();
         if (root == null)
             return result;
 
-        List<TreeNode> currentList = new LinkedList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-
-        queue.add(root);
-        int currentLevelSize = queue.size();
-        int nextLevelSize = 0;
-
-        while (!queue.isEmpty()) {
-            TreeNode current = queue.remove();
-            currentList.add(current);
-            currentLevelSize--;
-            if (current.left != null) {
-                queue.add(current.left);
-                nextLevelSize++;
-            }
-            if (current.right != null) {
-                queue.add(current.right);
-                nextLevelSize++;
-            }
-
-            if (currentLevelSize == 0) {
-                currentLevelSize = nextLevelSize;
-                nextLevelSize = 0;
-                result.add(currentList);
-                currentList = new LinkedList<>();
+        List<TreeNode> current = new LinkedList<>();
+        current.add(root);
+        while (!current.isEmpty()) {
+            List<TreeNode> previous = current;
+            current = new LinkedList<>();
+            result.add(previous);
+            for (TreeNode node: previous) {
+                if (node.left != null)
+                    current.add(node.left);
+                if (node.right != null)
+                    current.add(node.right);
             }
         }
-
         return result;
     }
 }
