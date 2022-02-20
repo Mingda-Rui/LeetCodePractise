@@ -42,7 +42,7 @@ public class _4_3ListOfDepths {
     public static void createLevelLinkedListRecursive(TreeNode node, List<List<TreeNode>> lists, int currentLevel) {
         if (node == null)
             return;
-        if (lists.size() < currentLevel + 1) {
+        if (lists.size() == currentLevel) {
             lists.add(new LinkedList<>());
         }
         List<TreeNode> currentList = lists.get(currentLevel);
