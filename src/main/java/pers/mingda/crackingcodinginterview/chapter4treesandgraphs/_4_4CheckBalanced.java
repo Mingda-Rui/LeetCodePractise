@@ -8,20 +8,26 @@ package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
 public class _4_4CheckBalanced {
 
-    public static boolean isBalanced(TreeNode node) {
-        if (node == null)
-            return false;
-        int leftHeight = getMaxHeight(node.left);
-        int rightHeight = getMaxHeight(node.right);
+    private static final int UNBALANCED_CODE = Integer.MIN_VALUE;
 
-        return Math.abs(leftHeight - rightHeight) <= 1;
+    public static boolean isBalanced(TreeNode node) {
+        int height = getMaxHeight(node);
+        return height != UNBALANCED_CODE;
     }
 
     private static int getMaxHeight(TreeNode node) {
         if (node == null)
             return 0;
         int leftMaxHeight = getMaxHeight(node.left);
+        if (leftMaxHeight == UNBALANCED_CODE)
+            return UNBALANCED_CODE;
         int rightMaxHeight = getMaxHeight(node.right);
+        if (rightMaxHeight == UNBALANCED_CODE)
+            return UNBALANCED_CODE;
+
+        boolean isUnbalanced = Math.abs(leftMaxHeight - rightMaxHeight) > 1;
+        if (isUnbalanced)
+            return UNBALANCED_CODE;
 
         return Math.max(leftMaxHeight, rightMaxHeight) + 1;
     }
