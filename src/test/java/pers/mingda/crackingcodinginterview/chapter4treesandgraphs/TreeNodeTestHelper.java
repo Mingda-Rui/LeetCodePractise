@@ -128,6 +128,16 @@ public class TreeNodeTestHelper {
         return createTreeNode(head, leftNode, rightNode);
     }
 
+    public TreeNode createTreeNode(int head, TreeNode left, int right) {
+        TreeNode rightNode = new TreeNode(right);
+        return createTreeNode(head, left, rightNode);
+    }
+
+    public TreeNode createTreeNode(int head, int left, TreeNode right) {
+        TreeNode leftNode = new TreeNode(left);
+        return createTreeNode(head, leftNode, right);
+    }
+
     public TreeNode createTreeNode(int head, TreeNode left, TreeNode right) {
         TreeNode root = new TreeNode(head);
         root.setLeftChild(left);
