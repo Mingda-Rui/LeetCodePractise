@@ -30,6 +30,19 @@ public class _4_5ValidateBst {
         return checkBst(node.right, node, result);
     }
 
+    public static boolean checkBstMinMax(TreeNode node) {
+        return checkBstMinMax(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    public static boolean checkBstMinMax(TreeNode node, int min, int max) {
+        if (node == null)
+            return true;
+
+        if (node.data <= min || node.data > max)
+            return false;
+
+        return checkBstMinMax(node.left, min, node.data) && checkBstMinMax(node.right, node.data, max);
+    }
 }
 
 class ResultRecorder {
