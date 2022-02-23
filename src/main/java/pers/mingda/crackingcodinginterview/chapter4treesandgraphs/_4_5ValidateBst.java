@@ -5,15 +5,33 @@ package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
  */
 
 public class _4_5ValidateBst {
-
     public static boolean checkBst(TreeNode node) {
-        if (node == null)
-            return true;
-        if (node.left != null && node.left.data > node.data)
-            return false;
-        if (node.right != null && node.right.data <= node.data)
-            return false;
-
-        return checkBst(node.left) && checkBst(node.right);
+        ResultRecorder result = new ResultRecorder();
+        checkBst(node, new TreeNode(Integer.MIN_VALUE), result);
+        return result.isValide;
     }
+
+    public static TreeNode checkBst(TreeNode node, TreeNode previous, ResultRecorder result) {
+        if (!result.isValide)
+            return node;
+        if (node == null)
+            return previous;
+
+        if (previous.data >= node.data) {
+            result.isValide = false;
+            return node;
+        }
+
+        previous = checkBst(node.left, previous, result);
+        if (previous.data > node.data) {
+            result.isValide = false;
+            return node;
+        }
+        return checkBst(node.right, node, result);
+    }
+
+}
+
+class ResultRecorder {
+    boolean isValide = true;
 }

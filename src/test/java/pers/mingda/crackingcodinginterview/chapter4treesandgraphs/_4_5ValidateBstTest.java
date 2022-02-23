@@ -37,5 +37,9 @@ public class _4_5ValidateBstTest {
         two = testHelper.createTreeNode(2, null, new TreeNode(2));
         node = testHelper.createTreeNode(3, two, null);
         assertFalse(_4_5ValidateBst.checkBst(node));
+
+        TreeNode one = testHelper.createTreeNode(1, null, 3);
+        node = testHelper.createTreeNode(2, one, null);
+        assertFalse(_4_5ValidateBst.checkBst(node));
     }
 }
