@@ -11,7 +11,7 @@ public class _4_5ValidateBst {
         return result.isValide;
     }
 
-    public static TreeNode checkBst(TreeNode node, TreeNode previous, ResultRecorder result) {
+    private static TreeNode checkBst(TreeNode node, TreeNode previous, ResultRecorder result) {
         if (!result.isValide)
             return node;
         if (node == null)
