@@ -23,14 +23,15 @@ import java.util.Set;
 
 public class _4_7BuildOrder {
     public static String[] findBuildOrder(String[] projects, String[][] dependencies) {
-        Map<String, Set<String>> blockerTable = new HashMap<>();
+        Map<String, Integer> blockerTable = new HashMap<>();
         Map<String, Set<String>> dependentTable = new HashMap<>();
 
 
         for (String[] dependency: dependencies) {
             String first = dependency[0];
             String second = dependency[1];
-            blockerTable.computeIfAbsent(second, blocker -> new HashSet<>()).add(first);
+            int numOfBlockers = blockerTable.computeIfAbsent(second, k -> 0);
+            blockerTable.put(second, numOfBlockers + 1);
             dependentTable.computeIfAbsent(first, dependent -> new HashSet<>()).add(second);
         }
 
@@ -44,19 +45,19 @@ public class _4_7BuildOrder {
             String project = readyProjects.remove();
             result.add(project);
 
-
             for (String dependent: dependentTable.getOrDefault(project, Collections.emptySet())) {
 
-                if (blockerTable.containsKey(dependent)) {
-                    Set<String> blockers = blockerTable.get(dependent);
-                    blockers.remove(project);
-                    if (blockers.isEmpty()) {
-                        readyProjects.add(dependent);
-                        blockerTable.remove(dependent);
-                    }
+                int numOfBlockers = blockerTable.computeIfPresent(dependent, (k, v) -> v - 1);
+                if (numOfBlockers == 0) {
+                    readyProjects.add(dependent);
+                    blockerTable.remove(dependent);
                 }
             }
 
+        }
+
+        if (!blockerTable.isEmpty()) {
+            throw new RuntimeException("Circule dependencies on projects found");
         }
 
         return result.toArray(String[]::new);
