@@ -57,7 +57,7 @@ public class _4_7BuildOrder {
         }
 
         if (!blockerTable.isEmpty()) {
-            throw new RuntimeException("Circule dependencies on projects found");
+            throw new RuntimeException("Loop dependencies found!");
         }
 
         return result.toArray(String[]::new);
@@ -79,7 +79,7 @@ public class _4_7BuildOrder {
         }
         for (String project: projects) {
             if (!findBuildOrderDfs(project, result, processed, blockerTable))
-                return null;
+                throw new RuntimeException("Loop dependencies found!");
         }
 
         return result.toArray(String[]::new);
