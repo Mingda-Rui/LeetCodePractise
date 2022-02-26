@@ -62,4 +62,44 @@ public class _4_7BuildOrder {
 
         return result.toArray(String[]::new);
     }
+
+    private static final int UNPROCESSED = 0;
+    private static final int PROCESSING = 1;
+    private static final int PROCESSED = 2;
+
+    public static String[] findBuildOrderDfs(String[] projects, String[][]dependencies) {
+        List<String> result = new LinkedList<>();
+        Map<String, Integer> processed = new HashMap<>();
+        Map<String, Set<String>> blockerTable = new HashMap<>();
+        for (String[] dependency: dependencies) {
+            String blocker = dependency[0];
+            String project = dependency[1];
+            Set<String> blockers = blockerTable.computeIfAbsent(project, p -> new HashSet<>());
+            blockers.add(blocker);
+        }
+        for (String project: projects) {
+            if (!findBuildOrderDfs(project, result, processed, blockerTable))
+                return null;
+        }
+
+        return result.toArray(String[]::new);
+    }
+
+    private static boolean findBuildOrderDfs(String project, List<String> result, Map<String, Integer> processed, Map<String, Set<String>> blockerTable) {
+        int processStatus = processed.getOrDefault(project, UNPROCESSED);
+        if (processStatus == PROCESSED)
+            return true;
+        if (processStatus == PROCESSING)
+            return false;
+        processed.put(project, PROCESSING);
+        for (String blocker: blockerTable.getOrDefault(project, Collections.emptySet())) {
+            if (!findBuildOrderDfs(blocker, result, processed, blockerTable))
+                return false;
+        }
+        processed.put(project, PROCESSED);
+        result.add(project);
+        return true;
+    }
+
+
 }
