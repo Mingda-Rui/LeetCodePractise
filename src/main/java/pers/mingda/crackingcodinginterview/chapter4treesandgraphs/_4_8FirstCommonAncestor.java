@@ -13,7 +13,7 @@ public class _4_8FirstCommonAncestor {
     public static TreeNode commonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         List<TreeNode> result = new LinkedList<>();
         if (!commonAncestor(root, p, q, result))
-            throw new RuntimeException("No common Ancestor!");
+            throw new RuntimeException("No common ancestor!");
 
         return result.get(0);
     }
@@ -30,5 +30,27 @@ public class _4_8FirstCommonAncestor {
             result.add(node);
 
         return left || right;
+    }
+
+    public static TreeNode commonAncestorReturnNode(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode commonAncestor = commonAncestorReturnNodeRecursive(root, p, q);
+        if (commonAncestor == p || commonAncestor == q || commonAncestor == null) {
+            throw new RuntimeException("No common ancestor!");
+        }
+        return commonAncestor;
+    }
+
+    private static TreeNode commonAncestorReturnNodeRecursive(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q)
+            return root;
+
+        TreeNode left = commonAncestorReturnNodeRecursive(root.left, p, q);
+        TreeNode right = commonAncestorReturnNodeRecursive(root.right, p, q);
+
+        if (left != null && right != null)
+            return root;
+
+        return left == null ? right : left;
+
     }
 }
