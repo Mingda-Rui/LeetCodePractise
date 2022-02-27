@@ -18,13 +18,13 @@ public class _4_10CheckSubtree {
     }
 
     private static boolean containsSubtree(TreeNode t1, TreeNode t2) {
-        if (t1 == null && t2 == null)
+        if (t2 == null)
             return true;
-        if (t1 == null || t2 == null)
+        if (t1 == null && t2 != null)
             return false;
 
         if (t1.data == t2.data) {
-            return containsTree(t1.left, t2.left) && containsTree(t1.right, t2.right);
+            return containsSubtree(t1.left, t2.left) && containsSubtree(t1.right, t2.right);
         }
         return false;
     }
