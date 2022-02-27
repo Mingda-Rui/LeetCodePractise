@@ -45,6 +45,8 @@ public class _4_8FirstCommonAncestor {
             return root;
 
         TreeNode left = commonAncestorReturnNodeRecursive(root.left, p, q);
+        if (left != null && left != p && left != q)
+            return left;
         TreeNode right = commonAncestorReturnNodeRecursive(root.right, p, q);
 
         if (left != null && right != null)
