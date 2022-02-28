@@ -10,22 +10,22 @@ package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
 public class _4_10CheckSubtree {
     public static boolean containsTree(TreeNode t1, TreeNode t2) {
-        boolean containsSubtree = containsSubtree(t1, t2);
+        boolean containsSubtree = matchTree(t1, t2);
         if (!containsSubtree && t1 != null)
             return containsTree(t1.left, t2) || containsTree(t1.right, t2);
 
         return containsSubtree;
     }
 
-    private static boolean containsSubtree(TreeNode t1, TreeNode t2) {
-        if (t2 == null)
+    private static boolean matchTree(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null)
             return true;
-        if (t1 == null && t2 != null)
+        if (t1 == null || t2 == null)
             return false;
 
-        if (t1.data == t2.data) {
-            return containsSubtree(t1.left, t2.left) && containsSubtree(t1.right, t2.right);
-        }
+        if (t1.data == t2.data)
+            return matchTree(t1.left, t2.left) && matchTree(t1.right, t2.right);
+
         return false;
     }
 
