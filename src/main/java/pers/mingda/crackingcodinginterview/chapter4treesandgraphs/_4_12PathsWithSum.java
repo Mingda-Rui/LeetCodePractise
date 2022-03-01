@@ -34,6 +34,7 @@ public class _4_12PathsWithSum {
 
     public static int countPathsWithSumOptimized(TreeNode node, int targetSum) {
         Map<Integer, Integer> sumRecords = new HashMap<>();
+        sumRecords.put(0, 1);
         return countPathsWithSumOptimized(node, targetSum, 0, sumRecords);
     }
 
@@ -41,23 +42,24 @@ public class _4_12PathsWithSum {
         if (node == null)
             return 0;
 
-        int counter = 0;
         int currentSum = previousSum + node.data;
 
         int offset = currentSum - targetSum;
-        int numOfSameValueWithOffset = sumRecords.computeIfAbsent(offset, n -> 0);
-        counter += numOfSameValueWithOffset;
+        int counter = sumRecords.computeIfAbsent(offset, n -> 0);
 
-        int value = sumRecords.computeIfAbsent(currentSum, n -> 0);
-        sumRecords.put(currentSum, value + 1);
-
+        incrementHashTable(sumRecords, currentSum, 1);
         counter += countPathsWithSumOptimized(node.left, targetSum, currentSum, sumRecords);
         counter += countPathsWithSumOptimized(node.right, targetSum, currentSum, sumRecords);
+        incrementHashTable(sumRecords, currentSum, -1);
 
-        sumRecords.put(currentSum, sumRecords.get(currentSum) - 1);
         return counter;
     }
 
+    private static void incrementHashTable(Map<Integer, Integer> sumRecords, int key, int amount) {
+        int value = sumRecords.computeIfAbsent(key, n -> 0);
+        int newValue = value + amount;
+        sumRecords.put(key, newValue);
+    }
 
 
 }
