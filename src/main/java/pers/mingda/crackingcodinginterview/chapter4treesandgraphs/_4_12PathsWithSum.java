@@ -43,11 +43,12 @@ public class _4_12PathsWithSum {
 
         int counter = 0;
         int currentSum = previousSum + node.data;
+
         int offset = currentSum - targetSum;
-        if (sumRecords.getOrDefault(offset, 0) > 0) {
-            counter++;
-        }
-        int value = sumRecords.computeIfAbsent(currentSum, (sum) -> 0);
+        int numOfSameValueWithOffset = sumRecords.computeIfAbsent(offset, n -> 0);
+        counter += numOfSameValueWithOffset;
+
+        int value = sumRecords.computeIfAbsent(currentSum, n -> 0);
         sumRecords.put(currentSum, value + 1);
 
         counter += countPathsWithSumOptimized(node.left, targetSum, currentSum, sumRecords);
