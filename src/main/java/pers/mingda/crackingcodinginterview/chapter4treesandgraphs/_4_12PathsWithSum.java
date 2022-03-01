@@ -1,5 +1,8 @@
 package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *  4.12 Paths with Sum: You are given a binary tree in which each node contains an integer value (which
  *  might be positive or negative). Design an algorithm to count the number of paths that sum to a
@@ -28,4 +31,32 @@ public class _4_12PathsWithSum {
         counter += countPathsWithRemainSum(node.right, remainSum - node.data);
         return counter;
     }
+
+    public static int countPathsWithSumOptimized(TreeNode node, int targetSum) {
+        Map<Integer, Integer> sumRecords = new HashMap<>();
+        return countPathsWithSumOptimized(node, targetSum, 0, sumRecords);
+    }
+
+    private static int countPathsWithSumOptimized(TreeNode node, int targetSum, int previousSum, Map<Integer, Integer> sumRecords) {
+        if (node == null)
+            return 0;
+
+        int counter = 0;
+        int currentSum = previousSum + node.data;
+        int offset = currentSum - targetSum;
+        if (sumRecords.getOrDefault(offset, 0) > 0) {
+            counter++;
+        }
+        int value = sumRecords.computeIfAbsent(currentSum, (sum) -> 0);
+        sumRecords.put(currentSum, value + 1);
+
+        counter += countPathsWithSumOptimized(node.left, targetSum, currentSum, sumRecords);
+        counter += countPathsWithSumOptimized(node.right, targetSum, currentSum, sumRecords);
+
+        sumRecords.put(currentSum, sumRecords.get(currentSum) - 1);
+        return counter;
+    }
+
+
+
 }
