@@ -12,9 +12,6 @@ public class _4_12PathsWithSum {
         if (node == null)
             return 0;
 
-        // int targetRemain = targetSum - node.data;
-        // counter += countPathsWithSum(node.left, targetRemain);
-        // counter += countPathsWithSum(node.right, targetRemain);
         int counter = countPathsWithRemainSum(node, targetSum);
         counter += countPathsWithSum(node.left, targetSum);
         counter += countPathsWithSum(node.right, targetSum);
