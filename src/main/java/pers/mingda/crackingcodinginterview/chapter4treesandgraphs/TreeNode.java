@@ -11,7 +11,13 @@ public class TreeNode {
     }
 
     public void insertInOrder(int d) {
-
+        TreeNode nextNode = d > data ? right : left;
+        if (nextNode != null)
+            nextNode.insertInOrder(d);
+        else if (d > data)
+            right = new TreeNode(d);
+        else if (d <= data)
+            left = new TreeNode(d);
     }
 
     public int size() {
