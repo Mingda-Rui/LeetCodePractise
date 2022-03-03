@@ -1,7 +1,9 @@
 package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *  4.8 First Common Ancestor: Design an algorithm and write code to find the first common ancestor
@@ -54,5 +56,21 @@ public class _4_8FirstCommonAncestor {
 
         return left == null ? right : left;
 
+    }
+
+    public static TreeNode commonAncestorLinksToParents(TreeNode p, TreeNode q) {
+        if (p == null || q == null)
+            return null;
+        Set<TreeNode> parents = new HashSet<>();
+        while (p.parent != null) {
+            parents.add(p.parent);
+            p = p.parent;
+        }
+        while (q.parent != null) {
+            if (parents.contains(q.parent))
+                return q.parent;
+            q = q.parent;
+        }
+        throw new RuntimeException("No common ancestor!");
     }
 }
