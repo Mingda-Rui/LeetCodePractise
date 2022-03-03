@@ -142,6 +142,10 @@ public class TreeNodeTestHelper {
         TreeNode root = new TreeNode(head);
         root.setLeftChild(left);
         root.setRightChild(right);
+        if (left != null)
+            left.parent = root;
+        if (right != null)
+            right.parent = root;
         return root;
     }
 }

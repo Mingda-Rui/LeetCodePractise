@@ -72,6 +72,15 @@ public class TreeNodeTestHelperTest {
     }
 
     @Test
+    public void testCreateTreeNodeParentReference() {
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new  TreeNode(3);
+        TreeNode root = testHelper.createTreeNode(1, left, right);
+        assertTrue(root == left.parent);
+        assertTrue(root == right.parent);
+    }
+
+    @Test
     public void testCompare() {
         final TreeNode root1 = testHelper.createTreeNode(1, 2, 3);
         TreeNode root2 = testHelper.createTreeNode(1, 2, 3);
