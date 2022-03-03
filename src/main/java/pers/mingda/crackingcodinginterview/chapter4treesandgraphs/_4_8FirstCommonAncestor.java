@@ -73,4 +73,30 @@ public class _4_8FirstCommonAncestor {
         }
         throw new RuntimeException("No common ancestor!");
     }
+
+    public static TreeNode commonAncestorCheckCoverTheOtherNode(TreeNode p, TreeNode q) {
+        if (p == null || q == null)
+            return null;
+        if (isChild(p, q))
+            return p;
+        if (isChild(q, p))
+            return q;
+
+        while (p.parent != null) {
+            TreeNode parent = p.parent;
+            TreeNode sibling = parent.left == p ? parent.right : parent.left;
+            if (isChild(sibling, q))
+                return parent;
+            p = p.parent;
+        }
+        throw new RuntimeException("No common ancestor!");
+    }
+
+    private static boolean isChild(TreeNode node, TreeNode child) {
+        if (node == null)
+            return false;
+        if (node == child)
+            return true;
+        return isChild(node.left, child) || isChild(node.right, child);
+    }
 }
