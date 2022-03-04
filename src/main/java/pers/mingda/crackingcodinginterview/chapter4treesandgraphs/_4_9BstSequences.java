@@ -31,24 +31,29 @@ public class _4_9BstSequences {
         if (activeNodes.isEmpty()) {
             List<Integer> currentList = List.copyOf(current);
             result.add(currentList);
-            // current.clear();
             return result;
         }
         List<TreeNode> copyOfActive = List.copyOf(activeNodes);
         for (TreeNode next: copyOfActive) {
             current.add(next.data);
             activeNodes.remove(next);
-            addNode(activeNodes, next.left);
-            addNode(activeNodes, next.right);
-            allSequences(activeNodes, result, current);
+
+            Set<TreeNode> withChildNodes = addChildNode(activeNodes, next);
+            allSequences(withChildNodes, result, current);
             activeNodes.add(next);
             current.remove(current.size() - 1);
         }
         return result;
     }
 
-    private static void addNode(Set<TreeNode> activeNodes, TreeNode node) {
-        if (node != null)
-            activeNodes.add(node);
+    private static Set<TreeNode> addChildNode(Set<TreeNode> activeNodes, TreeNode node) {
+        Set<TreeNode> withChildNodes = new HashSet<>(activeNodes);
+        if (node == null)
+            return withChildNodes;
+        if (node.left != null)
+            withChildNodes.add(node.left);
+        if (node.right != null)
+            withChildNodes.add(node.right);
+        return withChildNodes;
     }
 }

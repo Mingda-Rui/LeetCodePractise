@@ -1,5 +1,6 @@
 package pers.mingda.crackingcodinginterview.chapter4treesandgraphs;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -27,10 +28,20 @@ public class _4_9BstSequencesTest {
         int[][] expected = {{2, 1, 3}, {2, 3, 1}};
         Set<int[]> expectedSet = new HashSet<>();
         Collections.addAll(expectedSet, expected);
-        assertTrue(arrayEquals(expectedSet, result));
+        assertTrue(arrayDeepEquals(expectedSet, result));
+
+        TreeNode ten = testHelper.createTreeNode(10, 5, 15);
+        TreeNode twenty = testHelper.createTreeNode(20, ten, 25);
+        TreeNode seventy = testHelper.createTreeNode(70, 65, 80);
+        TreeNode sixty = testHelper.createTreeNode(60, null, seventy);
+        node = testHelper.createTreeNode(50, twenty, sixty);
+        result = _4_9BstSequences.allSequences(node);
+
+        // this tree should have 2016 sequences in total.
+        assertEquals(2016, result.size());
     }
 
-    private boolean arrayEquals(Set<int[]> expected, List<List<Integer>> results) {
+    private boolean arrayDeepEquals(Set<int[]> expected, List<List<Integer>> results) {
         if (expected.size() != results.size())
             return false;
         for (List<Integer> result: results) {
