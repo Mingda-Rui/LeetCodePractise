@@ -5,6 +5,37 @@ import java.util.Set;
 
 public class CXV1971FindIfPathExistsInGraph {
 
+    public boolean validPathUnionFind(int n, int[][] edges, int source, int destination) {
+        int[] unionTable = new int[n];
+        unionEdges(edges, unionTable);
+
+        return find(unionTable, source) == find(unionTable, destination);
+    }
+
+    private void unionEdges(int[][] edges, int[] unionTable) {
+        for (int i = 0; i < unionTable.length; i++) {
+            unionTable[i] = -1;
+        }
+        for (int[] edge: edges) {
+            union(unionTable, edge[0], edge[1]);
+        }
+    }
+
+    private void union(int[] unionTable, int a, int b) {
+        int root = find(unionTable, b);
+        if (unionTable[a] == -1)
+            unionTable[a] = root == a ? -1 : root;
+        else
+            union(unionTable, find(unionTable, a), root);
+    }
+
+    private int find(int[] unionTable, int node) {
+        if (unionTable[node] == -1)
+            return node;
+        else
+            return find(unionTable, unionTable[node]);
+    }
+
     // BFS
     public boolean validPathIteration(int n, int[][] edges, int source, int destination) {
         boolean[] visited = new boolean[n];
