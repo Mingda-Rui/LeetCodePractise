@@ -1,6 +1,8 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AAB0001TwoSum {
 
@@ -39,6 +41,18 @@ public class AAB0001TwoSum {
                 return new int[]{nums[first], nums[second]};
             first = sum < target ? first + 1 : first;
             second = sum > target ? second - 1 : second;
+        }
+        throw new RuntimeException("No solution found!");
+    }
+
+    public int[] twoSumHash(int[] nums, int target) {
+        Map<Integer, Integer> record = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int current = nums[i];
+            int expect = target - current;
+            if (record.containsKey(expect))
+                return new int[]{record.get(expect), i};
+            record.put(current, i);
         }
         throw new RuntimeException("No solution found!");
     }
