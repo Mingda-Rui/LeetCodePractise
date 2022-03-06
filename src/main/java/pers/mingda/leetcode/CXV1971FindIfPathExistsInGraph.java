@@ -14,7 +14,7 @@ public class CXV1971FindIfPathExistsInGraph {
 
     private void unionEdges(int[][] edges, int[] unionTable) {
         for (int i = 0; i < unionTable.length; i++) {
-            unionTable[i] = -1;
+            unionTable[i] = i;
         }
         for (int[] edge: edges) {
             union(unionTable, edge[0], edge[1]);
@@ -22,15 +22,15 @@ public class CXV1971FindIfPathExistsInGraph {
     }
 
     private void union(int[] unionTable, int a, int b) {
-        int root = find(unionTable, b);
-        if (unionTable[a] == -1)
-            unionTable[a] = root == a ? -1 : root;
-        else
-            union(unionTable, find(unionTable, a), root);
+        int rootA = find(unionTable, a);
+        int rootB = find(unionTable, b);
+        if (rootA != rootB) {
+            unionTable[rootA] = rootB;
+        }
     }
 
     private int find(int[] unionTable, int node) {
-        if (unionTable[node] == -1)
+        if (unionTable[node] == node)
             return node;
         else
             return find(unionTable, unionTable[node]);
