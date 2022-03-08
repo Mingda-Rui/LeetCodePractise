@@ -22,4 +22,23 @@ public class AFW0152MaximumProductSubarray {
         }
         return max;
     }
+
+    public int maxProduct2(int[] nums) {
+        int maxPositive = 1;
+        int minNegative = 1;
+        int result = nums[0];
+
+        for (int num: nums) {
+            int currentPositive = Math.max(maxPositive, minNegative);
+            int currentNegative = Math.min(maxPositive, minNegative);
+            int nextPositive = (num > 0 ? currentPositive : currentNegative) * num;
+            int nextNegative = (num > 0 ? currentNegative : currentPositive) * num;
+
+            maxPositive = Math.max(nextPositive, num);
+            minNegative = Math.min(nextNegative, num);
+
+            result = Math.max(result, maxPositive);
+        }
+        return result;
+    }
 }
