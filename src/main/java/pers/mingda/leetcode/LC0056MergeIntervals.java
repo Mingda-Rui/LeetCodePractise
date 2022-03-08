@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class ACE0056MergeIntervals {
+public class LC0056MergeIntervals {
 
     /**
      * O(n), iterate three times.
@@ -87,7 +87,7 @@ public class ACE0056MergeIntervals {
     }
 
     public static void main(String ... args) {
-        ACE0056MergeIntervals test = new ACE0056MergeIntervals();
+        LC0056MergeIntervals test = new LC0056MergeIntervals();
         List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
 
 

@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class AJE0238ProductOfArrayExceptSelf {
+public class LC0238ProductOfArrayExceptSelf {
     public int[] productExceptSelf(int[] nums) {
         return productExceptSelfTraverse(nums);
     }

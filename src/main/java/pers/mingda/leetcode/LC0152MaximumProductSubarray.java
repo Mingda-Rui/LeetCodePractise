@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class AFW0152MaximumProductSubarray {
+public class LC0152MaximumProductSubarray {
 
     public int maxProduct(int[] nums) {
         int max = Integer.MIN_VALUE;

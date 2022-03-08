@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class ABC0053MaximumSubarray {
+public class LC0053MaximumSubarray {
     public int maxSubArray(int[] nums) {
         int min = 0;
         int currentMax = nums[0];

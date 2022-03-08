@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class AHY0206ReverseLinkedList {
+public class LC0206ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
         ListNode tempHead = new ListNode();
@@ -81,7 +81,7 @@ public class AHY0206ReverseLinkedList {
     }
 
     public static void main(String ... args) {
-        AHY0206ReverseLinkedList test = new AHY0206ReverseLinkedList();
+        LC0206ReverseLinkedList test = new LC0206ReverseLinkedList();
         ListNode five = new ListNode(5);
         ListNode four = new ListNode(4, five);
         ListNode three = new ListNode(3, four);

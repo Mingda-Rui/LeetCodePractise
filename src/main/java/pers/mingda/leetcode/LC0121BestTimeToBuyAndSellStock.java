@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class AER0121BestTimeToBuyAndSellStock {
+public class LC0121BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
         int maxProfit = Integer.MIN_VALUE;

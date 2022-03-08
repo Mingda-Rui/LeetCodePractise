@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class AAH0007ReverseInteger {
+public class LC0007ReverseInteger {
 }
 
 class Solution_String {

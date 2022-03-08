@@ -3,7 +3,7 @@ package pers.mingda.leetcode;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CXV1971FindIfPathExistsInGraph {
+public class LC1971FindIfPathExistsInGraph {
 
     public boolean validPathUnionFind(int n, int[][] edges, int source, int destination) {
         int[] unionTable = new int[n];

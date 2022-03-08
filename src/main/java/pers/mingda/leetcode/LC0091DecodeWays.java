@@ -1,6 +1,6 @@
 package pers.mingda.leetcode;
 
-public class ADN0091DecodeWays {
+public class LC0091DecodeWays {
 
 }
 
@@ -18,7 +18,7 @@ class SolutionOne {
                     currentPossibility = 0;
                     break;
                 }
-                
+
                 keNengFenGe = "";
             } else if ((i+1)>=s.length()) {
                 currentPossibility = currentPossibility * getPossibility(keNengFenGe);
@@ -26,14 +26,14 @@ class SolutionOne {
         }
         return currentPossibility;
     }
-    
+
     public int getPossibility(String s) {
         int length = s.length();
         if (s.charAt(length-1) == '0') {
             length -= 2;
         } else if (length >= 2 && s.charAt(length-2) == '2') {
             if (s.charAt(length-1) == '7' ||
-                s.charAt(length-1) == '8' || 
+                s.charAt(length-1) == '8' ||
                 s.charAt(length-1) == '9') {
                 length -= 1;
             }
@@ -43,17 +43,17 @@ class SolutionOne {
             int current = length - i;
             sum += (current)*(current-1)/i/(i-1);
         }
-        
+
         if (sum<=0) sum = 1;
         return sum;
-    }  
+    }
 }
 
 class SolutionTwo {
     public int numDecodings(String s) {
         if (null == s || s.length() == 0) return 0;
         int[] dp = new int[s.length() + 1];
-        dp[0] = 1; 
+        dp[0] = 1;
         dp[1] = s.charAt(0) == '0' ? 0 : 1;
         for (int i = 2; i <= s.length(); i++){
             if (isValid(s.substring(i - 2, i))){
@@ -66,9 +66,9 @@ class SolutionTwo {
         return dp[s.length()];
         //        1 2 3 1 2
         // index: 0 1 2 3 4
-        // dp:    
+        // dp:
     }
-    
+
     private boolean isValid(String str){
         if (str.charAt(0) == '0') return false;
         int num = Integer.parseInt(str);

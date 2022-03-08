@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AAB0001TwoSum {
+public class LC0001TwoSum {
 
     public int[] twoSumBruteForce(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
