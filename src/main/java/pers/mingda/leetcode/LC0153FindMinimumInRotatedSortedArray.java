@@ -9,14 +9,14 @@ public class LC0153FindMinimumInRotatedSortedArray {
         return 0;
     }
 
-    public int findMin(int[] nums) {
+    public int findMinBinarySearchRecursive(int[] nums) {
         if (nums[0] <= nums[nums.length - 1])
             return nums[0];
-        int index = findMin(nums, 0, nums.length);
+        int index = findMinBinarySearchRecursive(nums, 0, nums.length);
         return nums[index + 1];
     }
 
-    private int findMin(int[] nums, int start, int end) {
+    private int findMinBinarySearchRecursive(int[] nums, int start, int end) {
         if (start == end)
             return start;
 
@@ -25,6 +25,20 @@ public class LC0153FindMinimumInRotatedSortedArray {
         int nextStart = greaterThanStart ? index : start;
         int nextEnd =   greaterThanStart ? end   : index;
 
-        return findMin(nums, nextStart, nextEnd);
+        return findMinBinarySearchRecursive(nums, nextStart, nextEnd);
+    }
+
+    public int findMin(int[] nums) {
+        if (nums[0] <= nums[nums.length - 1])
+            return nums[0];
+        int start = 0;
+        int end = nums.length;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            boolean greaterThanStart = nums[mid] > nums[start];
+            start = greaterThanStart ? mid : start;
+            end = greaterThanStart   ? end : mid;
+        }
+        return nums[start + 1];
     }
 }
