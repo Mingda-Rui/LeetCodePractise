@@ -67,4 +67,24 @@ public class LC0033SearchInRotatedSortedArray {
 
         return -1;
     }
+
+    public int searchInf(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] == target)
+                return mid;
+            else if (start == mid)
+                return -1;
+
+            boolean midAndTargetOnSameSide = (target >= nums[0]) == (nums[mid] >= nums[0]);
+            int inf = target > nums[mid] ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            nums[mid] = midAndTargetOnSameSide ? nums[mid] : inf;
+
+            start = target > nums[mid] ? mid : start;
+            end = target > nums[mid] ? end : mid;
+        }
+        return -1;
+    }
 }
