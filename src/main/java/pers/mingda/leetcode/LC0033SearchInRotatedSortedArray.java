@@ -41,49 +41,30 @@ public class LC0033SearchInRotatedSortedArray {
         return findStartIndex(nums, start, end);
     }
 
-    public int search2(int[] nums, int target) {
+    // 行百里者半九十
+    public int searchIterative(int[] nums, int target) {
         int start = 0;
         int end = nums.length;
 
         while (start < end) {
             int mid = (start + end) / 2;
-            System.out.println("nums[" + start + "] = " + nums[start] + " nums[" + (end - 1) + "] = " + nums[end - 1]);
-
             int current = nums[mid];
-            System.out.println("nums[" + mid + "] = " + current);
             if (current == target)
                 return mid;
-            else if (nums[start] == target)
-                return start;
-            else if (nums[end - 1] == target)
-                return end - 1;
-            if (current < nums[start]) {
-                if (target < nums[start] && current < target)
-                    start = mid;
-                else if (target > nums[end - 1] || target < nums[start] && current > target)
-                    end = mid;
-            } else if (current > nums[end - 1]) {
-                if (target < nums[start] || target > nums[end - 1] && current < target)
-                    start = mid;
-                else if (target > nums[end - 1] && current > target)
-                    end = mid;
-            } else if (target > nums[start] && target < nums[end - 1]) {
-                if (target > current)
-                    start = mid;
-                else if (target < current)
-                    end = mid;
-            } else
+            else if (start == end - 1)
                 return -1;
+
+            boolean getFirstHalf = true;
+            if (target <= nums[end - 1])
+                getFirstHalf = ! (current < target || current > nums[end - 1]);
+            else if (target >= nums[start])
+                getFirstHalf = current > target || current < nums[start];
+            // else // fast break
+            //     return - 1;
+            start = getFirstHalf ? start : mid;
+            end = getFirstHalf ? mid : end;
         }
 
         return -1;
     }
-
-    // 行百里者半九十
 }
-
-//[4,5,6,7,8,1,2,3]
-// 0,1,2,3,4,5,6,7,8 5
-// i = 4 -> 8, 0 - 4
-// i = 2 -> 6, 0 - 2
-// i = 1 -> 5
