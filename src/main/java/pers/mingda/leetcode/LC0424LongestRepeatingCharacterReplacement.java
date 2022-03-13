@@ -1,5 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class LC0424LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
         int max = 0;
@@ -22,5 +25,34 @@ public class LC0424LongestRepeatingCharacterReplacement {
         }
         int lastLength = s.length() - start + numsOfOps;
         return Math.max(max, Math.min(s.length(), lastLength));
+    }
+
+    public int characterReplacementTraverseLetters(String s, int k) {
+        int max = 0;
+        for (char c = 'A'; c <= 'Z'; c++) {
+            int maxForChar = characterReplacementForChar(s, k, c);
+            max = Math.max(max, maxForChar);
+        }
+        return max;
+    }
+
+    private int characterReplacementForChar(String s, int k, char c) {
+        int max = 0;
+        int head = 0;
+        List<Integer> replacements = new LinkedList<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (c != s.charAt(i)) {
+                replacements.add(i);
+
+                if (replacements.size() > k) {
+                    int index = replacements.remove(0);
+                    while (index + 1 < s.length() && s.charAt(index + 1) != c && replacements.size() > 0)
+                        index = replacements.remove(0);
+                    head = index + 1;
+                }
+            }
+            max = Math.max(max, i - head + 1);
+        }
+        return max;
     }
 }
