@@ -1,6 +1,5 @@
 package pers.mingda.leetcode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -89,14 +88,21 @@ public class LC0015ThreeSum {
         int end = nums.length - 1;
         while (start < end) {
             int sum = nums[index] + nums[start] + nums[end];
-            if (sum == 0)
+            if (sum == 0) {
                 result.add(Arrays.asList(nums[index], nums[start], nums[end]));
-
-            if (sum >= 0)
                 end = getFirstSameIndex(nums, end) - 1;
-
-            if (sum <= 0)
                 start = getLastSameIndex(nums, start) + 1;
+            } else if (sum > 0) {
+                end--;
+                // why
+                // end--;
+                // is much faster in leetcode test case than e.g. averagely 20ms v.s. 35ms
+                // end = getFirstSameIndex(nums, end) - 1;
+                // ???
+                // my guess is the test case doesn't have a lot of duplicated values.
+            } else {
+                start++;
+            }
 
         }
     }
