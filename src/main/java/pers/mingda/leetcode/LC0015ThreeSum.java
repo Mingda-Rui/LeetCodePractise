@@ -72,4 +72,39 @@ public class LC0015ThreeSum {
         }
         return index;
     }
+
+    public List<List<Integer>> threeSumTwoSum(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            twoSum(nums, i, result);
+            i = getLastSameIndex(nums, i);
+        }
+
+        return result;
+    }
+
+    private void twoSum(int[] nums, int index, List<List<Integer>> result) {
+        int start = index + 1;
+        int end = nums.length - 1;
+        while (start < end) {
+            int sum = nums[index] + nums[start] + nums[end];
+            if (sum == 0)
+                result.add(Arrays.asList(nums[index], nums[start], nums[end]));
+
+            if (sum >= 0)
+                end = getFirstSameIndex(nums, end) - 1;
+
+            if (sum <= 0)
+                start = getLastSameIndex(nums, start) + 1;
+
+        }
+    }
+
+    private int getFirstSameIndex(int[] nums, int index) {
+        int current = nums[index];
+        while (index > 0 && nums[index - 1] == current)
+            index--;
+        return index;
+    }
 }
