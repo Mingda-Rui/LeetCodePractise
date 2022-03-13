@@ -45,4 +45,18 @@ public class LC0003LongestSubstringWithoutRepeatingCharacters {
         }
         return maxLength;
     }
+
+    public int lengthOfLongestSubstringHeadIndex(String s) {
+        int[] nextHead = new int[256];
+        int head = 0;
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            head = Math.max(head, nextHead[c]);
+            nextHead[c] = i + 1;
+            int currentLength = i - head + 1;
+            maxLength = Math.max(currentLength, maxLength);
+        }
+        return maxLength;
+    }
 }
