@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -44,7 +45,7 @@ public class LC0015ThreeSum {
         for (int num: nums) {
             valueMap.putIfAbsent(num, 1);
         }
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length && nums[i] <= 0; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 int firstVal = nums[i];
                 int secondVal = nums[j];
@@ -60,7 +61,6 @@ public class LC0015ThreeSum {
         }
 
         return result;
-
     }
 
     private int getLastSameIndex(int[] nums, int index) {
