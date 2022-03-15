@@ -55,4 +55,25 @@ public class LC0424LongestRepeatingCharacterReplacement {
         }
         return max;
     }
+
+    public int characterReplacementSlidingWindow(String s, int k) {
+        int maxLength = 0;
+        int maxCount = 0;
+        int[] counter = new int[128];
+        int start = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            counter[c]++;
+            maxCount = Math.max(maxCount, counter[c]);
+            int currentLength = i - start + 1;
+            if (currentLength > maxCount + k) {
+                char charAtStart = s.charAt(start);
+                counter[charAtStart]--;
+                start++;
+            } else
+                maxLength = Math.max(maxLength, currentLength);
+        }
+
+        return maxLength;
+    }
 }
