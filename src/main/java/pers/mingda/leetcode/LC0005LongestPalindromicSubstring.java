@@ -5,8 +5,7 @@ public class LC0005LongestPalindromicSubstring {
         String longest = "";
         for (int i = 0; i < s.length(); i++) {
             longest = getLongest(s, longest, i - 1, i + 1);
-            if (i + 1 < s.length() && isEquals(s, i, i + 1))
-                longest = getLongest(s, longest, i, i + 1);
+            longest = getLongest(s, longest, i, i + 1);
         }
         return longest;
     }
