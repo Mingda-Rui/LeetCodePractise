@@ -2,30 +2,25 @@ package pers.mingda.leetcode;
 
 public class LC0005LongestPalindromicSubstring {
     public String longestPalindromeBruteForce(String s) {
-        String longest = "";
+        int head = 0;
+        int len = 0;
         for (int i = 0; i < s.length(); i++) {
-            longest = getLongest(s, longest, i - 1, i + 1);
-            longest = getLongest(s, longest, i, i + 1);
+            int oddLen = getLongest(s, i, i);
+            int evenLen = getLongest(s, i, i + 1);
+            int curLongest = Math.max(oddLen, evenLen);
+            if (curLongest > len) {
+                len = curLongest;
+                head = i - (len - 1) / 2;
+            }
         }
-        return longest;
+        return s.substring(head, head + len);
     }
 
-    private String getLongest(String s, String longest, int left, int right) {
-        int longestLeft = 0;
-        int longestRight = 0;
-        while (left >= 0 && right < s.length() && isEquals(s, left, right)) {
-            if (right - left > longestRight - longestLeft) {
-                longestLeft = left;
-                longestRight = right;
-            }
+    private int getLongest(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
         }
-        String currentLongest = s.substring(longestLeft, longestRight + 1);
-        return currentLongest.length() > longest.length() ? currentLongest : longest;
-    }
-
-    private boolean isEquals(String s, int left, int right) {
-        return Character.toLowerCase(s.charAt(left)) == Character.toLowerCase(s.charAt(right));
+        return right - left - 1;
     }
 }
