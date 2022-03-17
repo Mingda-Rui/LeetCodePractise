@@ -44,32 +44,24 @@ public class LC0076MinimumWindowSubstring {
         int minLeft = 0;
         int minRight = Integer.MAX_VALUE;
         int[] record = new int[128];
-        boolean[] tArray = new boolean[128];
-        for (char c: t.toCharArray()) {
+        for (char c: t.toCharArray())
             record[c]++;
-            tArray[c] = true;
-        }
 
         int numOfIncludedChar = 0;
         for (int left = 0, right = 0; right < s.length(); right++) {
             char rightChar = s.charAt(right);
-            if (tArray[rightChar]) {
-                record[rightChar]--;
-                if (record[rightChar] >= 0)
-                    numOfIncludedChar++;
-                while (numOfIncludedChar == t.length()) {
-                    if (right - left < minRight - minLeft) {
-                        minLeft = left;
-                        minRight = right;
-                    }
-                    char leftChar = s.charAt(left);
-                    left++;
-                    if (tArray[leftChar]) {
-                        record[leftChar]++;
-                        if (record[leftChar] > 0)
-                            numOfIncludedChar--;
-                    }
+
+            record[rightChar]--;
+            numOfIncludedChar = record[rightChar] >= 0 ? numOfIncludedChar + 1 : numOfIncludedChar;
+            while (numOfIncludedChar == t.length()) {
+                if (right - left < minRight - minLeft) {
+                    minLeft = left;
+                    minRight = right;
                 }
+                char leftChar = s.charAt(left);
+                left++;
+                record[leftChar]++;
+                numOfIncludedChar = record[leftChar] > 0 ? numOfIncludedChar - 1 : numOfIncludedChar;
             }
         }
 
