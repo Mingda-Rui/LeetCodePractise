@@ -12,10 +12,6 @@ public class LC0242ValidAnagram {
             if (record[cInT] < 0)
                 return false;
         }
-        for (int count: record) {
-            if (count < 0)
-                return false;
-        }
         return true;
     }
 }
