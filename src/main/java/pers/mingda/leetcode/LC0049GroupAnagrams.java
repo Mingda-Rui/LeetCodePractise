@@ -1,8 +1,10 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class LC0049GroupAnagrams {
     public List<List<String>> groupAnagramsBruteForce(String[] strs) {
@@ -65,5 +67,18 @@ public class LC0049GroupAnagrams {
             }
         }
         return result;
+    }
+
+    public List<List<String>> groupAnagramsJavaSort(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str: strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String sorted = new String(chars);
+            map.putIfAbsent(sorted, new LinkedList<>());
+            map.get(sorted).add(str);
+        }
+
+        return map.values().stream().toList();
     }
 }
