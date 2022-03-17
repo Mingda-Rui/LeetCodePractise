@@ -32,4 +32,22 @@ public class LC0125ValidPalindrome {
     private boolean isEqualsCaseInsensitive(char a, char b) {
         return Character.toLowerCase(a) == Character.toLowerCase(b);
     }
+
+    public boolean isPalindromeRefactored(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            if (!isAlphnumeric(s.charAt(left)))
+                left++;
+            else if (!isAlphnumeric(s.charAt(right)))
+                right--;
+            else if (!isEqualsCaseInsensitive(s.charAt(left), s.charAt(right)))
+                return false;
+            else {
+                left++;
+                right--;
+            }
+        }
+        return true;
+    }
 }
