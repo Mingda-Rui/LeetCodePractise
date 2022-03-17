@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,5 +45,25 @@ public class LC0049GroupAnagrams {
                 return false;
         }
         return true;
+    }
+
+    public List<List<String>> groupAnagramsWorseThanBruteForce(String[] strs) {
+        List<List<String>> result = new LinkedList<>();
+        for (int i = 0; i < strs.length; i++) {
+            String current = strs[i];
+            boolean foundAnagrams = false;
+            for (List<String> anagrams: result) {
+                if (!foundAnagrams && isAnagram(anagrams.get(0), current)) {
+                    anagrams.add(current);
+                    foundAnagrams = true;
+                }
+            }
+
+            if (!foundAnagrams) {
+                List<String> anagrams = new LinkedList<>(Arrays.asList(current));
+                result.add(anagrams);
+            }
+        }
+        return result;
     }
 }
