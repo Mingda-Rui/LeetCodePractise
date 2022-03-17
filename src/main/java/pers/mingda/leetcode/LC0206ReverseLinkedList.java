@@ -90,6 +90,23 @@ public class LC0206ReverseLinkedList {
         test.reverseList_recursive(one);
     }
 
+    public ListNode reverseListLatest(ListNode head) {
+        ListNode pseudoHead = new ListNode();
+        ListNode tail = reverseListRecursive(head, pseudoHead);
+        tail.next = null;
+        ListNode newHead = pseudoHead.next;
+        pseudoHead.next = null;
+        return newHead;
+    }
+
+    private ListNode reverseListRecursive(ListNode head, ListNode pseudoHead) {
+        if (head == null)
+            return pseudoHead;
+
+        ListNode parent = reverseListRecursive(head.next, pseudoHead);
+        parent.next = head;
+        return head;
+    }
 }
 
 class ListNode {
