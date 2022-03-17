@@ -107,6 +107,21 @@ public class LC0206ReverseLinkedList {
         parent.next = head;
         return head;
     }
+
+    public ListNode reverseListIterative(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode oldHead = head;
+        ListNode tail = head;
+        while (tail != null) {
+            ListNode tmp = tail;
+            tail = tail.next;
+            tmp.next = head;
+            head = tmp;
+        }
+        oldHead.next = null;
+        return head;
+    }
 }
 
 class ListNode {
