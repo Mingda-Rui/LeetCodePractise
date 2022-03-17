@@ -81,4 +81,29 @@ public class LC0049GroupAnagrams {
 
         return map.values().stream().toList();
     }
+
+    public List<List<String>> groupAnagramsNativeSort(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str: strs) {
+            String sorted = sort(str);
+            map.putIfAbsent(sorted, new LinkedList<>());
+            map.get(sorted).add(str);
+        }
+
+        return map.values().stream().toList();
+    }
+
+    private String sort(String str) {
+        int[] record = new int[128];
+        for (char c: str.toCharArray())
+            record[c]++;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < record.length; i++) {
+            int num = record[i];
+            for (int j = 0; j < num; j++) {
+                sb.append(i);
+            }
+        }
+        return sb.toString();
+    }
 }
