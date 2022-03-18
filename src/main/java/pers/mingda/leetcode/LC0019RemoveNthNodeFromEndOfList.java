@@ -35,9 +35,9 @@ public class LC0019RemoveNthNodeFromEndOfList {
     }
 
     public ListNode removeNthFromEndRecursive(ListNode head, int n) {
-        ListNode pseudoHead = new ListNode(-1, head);
-        removeNthFromEndHelper(pseudoHead, n);
-        return pseudoHead.next;
+        int count = removeNthFromEndHelper(head, n);
+        head = count == n ? head.next : head;
+        return head;
     }
 
     private int removeNthFromEndHelper(ListNode head, int n) {
