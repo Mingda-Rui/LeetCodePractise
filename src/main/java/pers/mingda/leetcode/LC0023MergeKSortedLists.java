@@ -68,12 +68,10 @@ public class LC0023MergeKSortedLists {
     public ListNode mergeKListsPriorityQueue(ListNode[] lists) {
         Comparator<ListNode> comparator = (o1, o2) -> {return o1.val - o2.val;};
         Queue<ListNode> pQueue = new PriorityQueue<>(comparator);
-        for (ListNode node: lists) {
-            while (node != null) {
+        for (ListNode node: lists)
+            if (node != null)
                 pQueue.add(node);
-                node = node.next;
-            }
-        }
+
         return generateListNode(pQueue);
     }
 
@@ -81,6 +79,8 @@ public class LC0023MergeKSortedLists {
         if (pQueue.isEmpty())
             return null;
         ListNode node = pQueue.remove();
+        if (node.next != null)
+            pQueue.add(node.next);
         node.next =  generateListNode(pQueue);
         return node;
     }
