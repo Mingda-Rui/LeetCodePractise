@@ -22,7 +22,7 @@ public class LC0023MergeKSortedLists {
         return smallest;
     }
 
-    public ListNode mergeTwoLists(ListNode[] lists) {
+    public ListNode mergeKListsOneByOne(ListNode[] lists) {
         ListNode sorted = null;
         for (ListNode list: lists)
             sorted = mergeTwoLists(sorted, list);
@@ -42,7 +42,7 @@ public class LC0023MergeKSortedLists {
         return small;
     }
 
-    public ListNode mergeTwoListsSortVal(ListNode[] lists) {
+    public ListNode mergeKListsSortVal(ListNode[] lists) {
         List<Integer> values = new ArrayList<>();
         for (ListNode node: lists) {
             while (node != null) {
