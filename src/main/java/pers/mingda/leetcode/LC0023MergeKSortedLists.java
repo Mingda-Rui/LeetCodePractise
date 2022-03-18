@@ -1,5 +1,9 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class LC0023MergeKSortedLists {
     public ListNode mergeKListsBruteForce(ListNode[] lists) {
         ListNode smallest = null;
@@ -36,5 +40,25 @@ public class LC0023MergeKSortedLists {
         ListNode larget = list1.val < list2.val ? list2 : list1;
         small.next = mergeTwoLists(small.next, larget);
         return small;
+    }
+
+    public ListNode mergeTwoListsSortVal(ListNode[] lists) {
+        List<Integer> values = new ArrayList<>();
+        for (ListNode node: lists) {
+            while (node != null) {
+                values.add(node.val);
+                node = node.next;
+            }
+        }
+        Collections.sort(values);
+        return generateListNode(values, 0);
+    }
+
+    private ListNode generateListNode(List<Integer> vals, int index) {
+        if (vals.size() == index)
+            return null;
+        ListNode node = new ListNode(vals.get(index));
+        node.next = generateListNode(vals, index + 1);
+        return node;
     }
 }
