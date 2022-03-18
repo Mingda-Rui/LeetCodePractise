@@ -2,7 +2,10 @@ package pers.mingda.leetcode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class LC0023MergeKSortedLists {
     public ListNode mergeKListsBruteForce(ListNode[] lists) {
@@ -59,6 +62,26 @@ public class LC0023MergeKSortedLists {
             return null;
         ListNode node = new ListNode(vals.get(index));
         node.next = generateListNode(vals, index + 1);
+        return node;
+    }
+
+    public ListNode mergeKListsPriorityQueue(ListNode[] lists) {
+        Comparator<ListNode> comparator = (o1, o2) -> {return o1.val - o2.val;};
+        Queue<ListNode> pQueue = new PriorityQueue<>(comparator);
+        for (ListNode node: lists) {
+            while (node != null) {
+                pQueue.add(node);
+                node = node.next;
+            }
+        }
+        return generateListNode(pQueue);
+    }
+
+    private ListNode generateListNode(Queue<ListNode> pQueue) {
+        if (pQueue.isEmpty())
+            return null;
+        ListNode node = pQueue.remove();
+        node.next =  generateListNode(pQueue);
         return node;
     }
 }
