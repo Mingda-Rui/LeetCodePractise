@@ -84,4 +84,20 @@ public class LC0023MergeKSortedLists {
         node.next =  generateListNode(pQueue);
         return node;
     }
+
+    public ListNode mergeKListsDivideAndConquer(ListNode[] lists) {
+        if (lists.length == 0)
+            return null;
+        return mergeKListsDivideAndConquer(lists, 0, lists.length);
+    }
+
+    private ListNode mergeKListsDivideAndConquer(ListNode[] lists, int start, int end) {
+        if (start + 1 == end)
+            return lists[start];
+        int mid = (start + end) / 2;
+        ListNode left = mergeKListsDivideAndConquer(lists, start, mid);
+        ListNode right = mergeKListsDivideAndConquer(lists, mid, end);
+
+        return mergeTwoLists(left, right);
+    }
 }
