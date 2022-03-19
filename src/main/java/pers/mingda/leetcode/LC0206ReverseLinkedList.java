@@ -132,5 +132,19 @@ public class LC0206ReverseLinkedList {
         head.next = null;
         return newHead;
     }
+
+    public ListNode reverseListInPlaceRecursive(ListNode head) {
+        return reverseListInPlaceRecursive(head, head);
+    }
+
+    private ListNode reverseListInPlaceRecursive(ListNode head, ListNode tail) {
+        if (head == null || tail.next == null)
+            return head;
+        ListNode next = tail.next;
+        tail.next = next.next;
+        next.next = head;
+        head = next;
+        return reverseListInPlaceRecursive(head, tail);
+    }
 }
 
