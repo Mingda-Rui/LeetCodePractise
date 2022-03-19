@@ -122,5 +122,15 @@ public class LC0206ReverseLinkedList {
         oldHead.next = null;
         return head;
     }
+
+    public ListNode reverseListRecursiveNoPseudoHead(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode newHead = reverseListRecursiveNoPseudoHead(head.next);
+        ListNode next = head.next;
+        next.next = head;
+        head.next = null;
+        return newHead;
+    }
 }
 
