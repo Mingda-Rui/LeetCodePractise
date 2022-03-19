@@ -5,7 +5,7 @@ public class LC0143ReorderList {
         reorderListRecursive(head, new ListNode[1], 0, new int[1]);
     }
 
-    private ListNode reorderListRecursive(ListNode head, ListNode[] tailHolder, int index, int[] length) {
+    public ListNode reorderListRecursive(ListNode head, ListNode[] tailHolder, int index, int[] length) {
         if (head == null) {
             length[0] = index - 1;
             return head;
@@ -30,5 +30,33 @@ public class LC0143ReorderList {
             newHead.next = head;
             return newHead;
         }
+    }
+
+    public ListNode reorderListReverseAndMerge(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode reversedSecondHalf = reverseListNode(slow.next, null);
+        slow.next = null;
+        return merge(head, reversedSecondHalf);
+    }
+
+    private ListNode reverseListNode(ListNode head, ListNode newHead) {
+        if (head == null)
+            return newHead;
+        ListNode node = head.next;
+        head.next = newHead;
+        return reverseListNode(node, head);
+    }
+
+    private ListNode merge(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        l1.next = merge(l2, l1.next);
+        return l1;
     }
 }
