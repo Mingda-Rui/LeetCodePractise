@@ -59,4 +59,22 @@ public class LC0143ReorderList {
         l1.next = merge(l2, l1.next);
         return l1;
     }
+
+    public ListNode reorderListBetterRecursive(ListNode head) {
+        return reorderListBetterRecursive(head, head);
+    }
+
+    private ListNode reorderListBetterRecursive(ListNode slow, ListNode fast) {
+        if (fast.next == null)
+            return slow;
+        if (fast.next.next == null)
+            return slow.next;
+        ListNode mid = reorderListBetterRecursive(slow.next, fast.next.next);
+        ListNode next = slow.next;
+        ListNode target = mid.next;
+        mid.next = target.next;
+        slow.next = target;
+        target.next = next;
+        return mid;
+    }
 }
