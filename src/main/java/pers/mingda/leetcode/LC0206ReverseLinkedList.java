@@ -146,5 +146,17 @@ public class LC0206ReverseLinkedList {
         head = next;
         return reverseListInPlaceRecursive(head, tail);
     }
+
+    public ListNode reverseListInPlaceRecursive2(ListNode head) {
+        return reverseListInPlaceRecursive2(head, null);
+    }
+
+    private ListNode reverseListInPlaceRecursive2(ListNode current, ListNode newHead) {
+        if (current == null)
+            return newHead;
+        ListNode next = current.next;
+        current.next = newHead;
+        return reverseListInPlaceRecursive2(next, current);
+    }
 }
 
