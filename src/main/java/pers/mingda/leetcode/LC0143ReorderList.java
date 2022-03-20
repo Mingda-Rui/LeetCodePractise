@@ -77,4 +77,29 @@ public class LC0143ReorderList {
         target.next = next;
         return mid;
     }
+
+    public ListNode reorderListTwoPointers(ListNode head) {
+        ListNode[] leftHolder = new ListNode[]{head};
+        reorderListTwoPointers(leftHolder, head);
+        return head;
+    }
+
+    private ListNode reorderListTwoPointers(ListNode[] leftHolder, ListNode right) {
+        if (right == null)
+            return null;
+
+        ListNode tail = reorderListTwoPointers(leftHolder, right.next);
+        if (tail != null)
+            return tail;
+        right.next = tail;
+        ListNode left = leftHolder[0];
+        if (left == right || left.next == right)
+            return right;
+
+        ListNode next = left.next;
+        left.next = right;
+        right.next = next;
+        leftHolder[0] = next;
+        return null;
+    }
 }
