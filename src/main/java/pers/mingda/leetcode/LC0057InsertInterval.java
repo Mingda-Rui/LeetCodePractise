@@ -6,32 +6,27 @@ import java.util.List;
 public class LC0057InsertInterval {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> result = new LinkedList<>();
-        boolean newIntervalMerged = false;
-        if (intervals.length == 0)
-            return new int[][]{newInterval};
-        for (int i = 0; i < intervals.length; i++) {
-            int[] current = intervals[i];
-            if (!newIntervalMerged && newInterval[0] < current[0]) {
-                current = newInterval;
-                newIntervalMerged = true;
-                i--;
+        int index = 0;
+        while (index < intervals.length || newInterval != null) {
+            int[] next = newInterval;
+            newInterval = null;
+            int[] current = index < intervals.length ? intervals[index] : null;
+            if (next == null || (index < intervals.length && current[0] < next[0]) ) {
+                newInterval = next;
+                next = current;
+                index++;
             }
-            addInterval(result, current);
+            addInterval(result, next);
         }
-        if (!newIntervalMerged)
-            addInterval(result, newInterval);
+
         return result.toArray(int[][]::new);
     }
 
     private void addInterval(List<int[]> result, int[] interval) {
-        if (result.isEmpty())
+        int[] last = result.isEmpty() ? null : result.get(result.size() - 1);
+        if (!result.isEmpty() && last[1] >= interval[0])
+            last[1] = Math.max(last[1], interval[1]);
+        else
             result.add(interval);
-        else {
-            int[] last = result.get(result.size() - 1);
-            if (last[1] < interval[0])
-                result.add(interval);
-            else
-                last[1] = Math.max(last[1], interval[1]);
-        }
     }
 }
