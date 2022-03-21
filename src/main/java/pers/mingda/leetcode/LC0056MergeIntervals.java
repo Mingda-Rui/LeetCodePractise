@@ -1,9 +1,10 @@
 package pers.mingda.leetcode;
 
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class LC0056MergeIntervals {
 
@@ -86,14 +87,22 @@ public class LC0056MergeIntervals {
         return merged.toArray(new int[merged.size()][]);
     }
 
-    public static void main(String ... args) {
-        LC0056MergeIntervals test = new LC0056MergeIntervals();
-        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
+    public int[][] mergetSort(int[][] intervals) {
+        List<int[]> result = new LinkedList<>();
+        Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
+        Queue<int[]> pQueue = new PriorityQueue<>(comparator);
+        for (int[] interval: intervals)
+            pQueue.add(interval);
 
-
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
-        queue.add(2);
+        while (!pQueue.isEmpty()) {
+            int[] current = pQueue.remove();
+            int[] last = result.isEmpty() ? null : result.get(result.size() - 1);
+            if (last == null || last[1] < current[0])
+                result.add(current);
+            else
+                last[1] = Math.max(last[1], current[1]);
+        }
+        return result.toArray(int[][]::new);
     }
-
 
 }
