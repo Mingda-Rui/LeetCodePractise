@@ -49,4 +49,29 @@ public class LC0057InsertInterval {
 
         return result.toArray(int[][]::new);
     }
+
+    public int[][] insertFastestSolution(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new LinkedList<>();
+        int index = 0;
+        int length = intervals.length;
+        int newStart = newInterval[0];
+        int newEnd = newInterval[1];
+        while (index < length && intervals[index][1] < newStart) {
+            result.add(intervals[index]);
+            index++;
+        }
+        while (index < length && intervals[index][0] <= newEnd) {
+            newStart = Math.min(intervals[index][0], newStart);
+            newEnd = Math.max(intervals[index][1], newEnd);
+            index++;
+        }
+        newInterval[0] = newStart;
+        newInterval[1] = newEnd;
+        result.add(newInterval);
+        while (index < length) {
+            result.add(intervals[index]);
+            index++;
+        }
+        return result.toArray(int[][]::new);
+    }
 }
