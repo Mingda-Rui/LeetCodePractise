@@ -29,4 +29,24 @@ public class LC0057InsertInterval {
         else
             result.add(interval);
     }
+
+    public int[][] insertRefactored(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new LinkedList<>();
+
+        int[] next = newInterval;
+        for (int[] interval: intervals) {
+            if (interval[1] < next[0])
+                result.add(interval);
+            else if (next[1] < interval[0]) {
+                result.add(next);
+                next = interval;
+            } else {
+                next[0] = Math.min(next[0], interval[0]);
+                next[1] = Math.max(next[1], interval[1]);
+            }
+        }
+        result.add(next);
+
+        return result.toArray(int[][]::new);
+    }
 }
