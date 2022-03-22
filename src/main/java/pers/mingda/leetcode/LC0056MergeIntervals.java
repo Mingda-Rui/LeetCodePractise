@@ -105,4 +105,24 @@ public class LC0056MergeIntervals {
         return result.toArray(int[][]::new);
     }
 
+    public int[][] mergeSortTwice(int[][] intervals) {
+        List<int[]> result = new LinkedList<>();
+        Queue<Integer> startQueue = new PriorityQueue<>();
+        Queue<Integer> endQueue = new PriorityQueue<>();
+        for (int[] interval: intervals) {
+            startQueue.add(interval[0]);
+            endQueue.add(interval[1]);
+        }
+
+        while (!startQueue.isEmpty()) {
+            int currentStart = startQueue.remove();
+            int currentEnd = endQueue.remove();
+            while (!startQueue.isEmpty() && startQueue.peek() <= currentEnd) {
+                startQueue.remove();
+                currentEnd = endQueue.remove();
+            }
+            result.add(new int[]{currentStart, currentEnd});
+        }
+        return result.toArray(int[][]::new);
+    }
 }
