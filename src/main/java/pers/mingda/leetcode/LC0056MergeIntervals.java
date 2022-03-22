@@ -125,4 +125,33 @@ public class LC0056MergeIntervals {
         }
         return result.toArray(int[][]::new);
     }
+
+    public int[][] mergeArray(int[][] intervals) {
+        int max = Integer.MIN_VALUE;
+        for (int[] interval: intervals)
+            max = Math.max(max, interval[1]);
+        max++;
+
+        List<int[]> result = new LinkedList<>();
+        int[] lefts = new int[max];
+        int[] rights = new int[max];
+        for (int[] interval: intervals) {
+            lefts[interval[0]]++;
+            rights[interval[1]]++;
+        }
+
+        int offset = 0;
+        int currentLeft = -1;
+        for (int i = 0; i < max; i++) {
+            if (lefts[i] != 0 && currentLeft == -1)
+                currentLeft = i;
+            offset += lefts[i];
+            offset -= rights[i];
+            if (offset == 0 && rights[i] != 0) {
+                result.add(new int[]{currentLeft, i});
+                currentLeft = -1;
+            }
+        }
+        return result.toArray(int[][]::new);
+    }
 }
