@@ -22,4 +22,21 @@ public class LC0435NonOverlappingIntervals {
         }
         return counter;
     }
+
+    public int eraseOverlapIntervalsSortEnd(int[][] intervals) {
+        Comparator<int[]> comparator = Comparator.comparingInt(i -> i[1]);
+        Arrays.sort(intervals, comparator);
+
+        int counter = 0;
+        int prevEnd = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            int[] current = intervals[i];
+            if (current[0] < prevEnd)
+                counter++;
+            else
+                prevEnd = current[1];
+        }
+
+        return counter;
+    }
 }
