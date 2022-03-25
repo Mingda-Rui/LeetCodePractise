@@ -26,4 +26,24 @@ public class LC0133CloneGraph {
 
         return newNode;
     }
+
+    public Node cloneGraphArray(Node node) {
+        if (node == null) return node;
+        Node[] array = new Node[101];
+        return cloneGraphArray(node, array);
+    }
+
+    public Node cloneGraphArray(Node node, Node[] array) {
+        if (array[node.val] != null)
+            return array[node.val];
+
+        Node newNode = new Node(node.val);
+        array[node.val] = newNode;
+
+        for (Node neighbor: node.neighbors) {
+            Node newNeighbor = cloneGraphArray(neighbor, array);
+            newNode.neighbors.add(newNeighbor);
+        }
+        return newNode;
+    }
 }
