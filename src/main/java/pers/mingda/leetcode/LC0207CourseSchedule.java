@@ -39,4 +39,37 @@ public class LC0207CourseSchedule {
 
         return numCourses == 0;
     }
+
+    public boolean canFinishDfs(int numCourses, int[][] prerequisites) {
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int[] prereq: prerequisites) {
+            int preCourse = prereq[1];
+            int course = prereq[0];
+            map.putIfAbsent(course, new HashSet<>());
+            map.get(course).add(preCourse);
+        }
+
+        boolean[] visited = new boolean[numCourses];
+        while (!map.isEmpty()) {
+            int course = map.keySet().stream().findFirst().get();
+            if ( ! canFinishDfs(course, map, visited) )
+                return false;
+        }
+
+        return true;
+    }
+
+    private boolean canFinishDfs(int course, Map<Integer, Set<Integer>> map, boolean[] visited) {
+        if (!map.containsKey(course))
+            return true;
+        if (visited[course])
+            return false;
+        visited[course] = true;
+        for (int preCourse: map.getOrDefault(course, Collections.emptySet())) {
+            if ( ! canFinishDfs(preCourse, map, visited) )
+                return false;
+        }
+        map.remove(course);
+        return true;
+    }
 }
