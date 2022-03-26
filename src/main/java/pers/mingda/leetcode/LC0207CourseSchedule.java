@@ -60,8 +60,6 @@ public class LC0207CourseSchedule {
     }
 
     private boolean canFinishDfs(int course, Map<Integer, Set<Integer>> map, boolean[] visited) {
-        if (!map.containsKey(course))
-            return true;
         if (visited[course])
             return false;
         visited[course] = true;
@@ -69,7 +67,6 @@ public class LC0207CourseSchedule {
             if ( ! canFinishDfs(preCourse, map, visited) )
                 return false;
         }
-        map.remove(course);
         return true;
     }
 }
