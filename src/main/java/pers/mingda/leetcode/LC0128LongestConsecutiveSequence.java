@@ -1,7 +1,9 @@
 package pers.mingda.leetcode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LC0128LongestConsecutiveSequence {
     public int longestConsecutive(int[] nums) {
@@ -29,5 +31,34 @@ public class LC0128LongestConsecutiveSequence {
             counter = 0;
         }
         return maxCount;
+    }
+
+    public int longestConsecutiveSet(int[] nums) {
+        int maxCount = 0;
+        Set<Integer> set = new HashSet<>();
+        for (int num: nums)
+            set.add(num);
+
+        int counter = 0;
+        for (int num: nums) {
+            if (set.remove(num)) {
+                counter++;
+                counter += consecutives(set, num + 1, 1);
+                counter += consecutives(set, num - 1, -1);
+                maxCount = Math.max(maxCount, counter);
+                counter = 0;
+            }
+        }
+
+        return maxCount;
+    }
+
+    private int consecutives(Set<Integer> set, int start, int offset) {
+        int counter = 0;
+        while (set.remove(start)) {
+            counter++;
+            start += offset;
+        }
+        return counter;
     }
 }
