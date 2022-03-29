@@ -1,21 +1,20 @@
 package pers.mingda.leetcode;
 
 public class LC0572SubtreeOfAnotherTree {
-    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        if (compareSubtree(root, subRoot))
+    public boolean isSubtreeDfs(TreeNode root, TreeNode subRoot) {
+        if (isSameTree(root, subRoot))
             return true;
         if (root == null || subRoot == null)
             return false;
 
-        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+        return isSubtreeDfs(root.left, subRoot) || isSubtreeDfs(root.right, subRoot);
     }
 
-    private boolean compareSubtree(TreeNode root, TreeNode subRoot) {
-        if (root == null && subRoot == null)
-            return true;
-        if (root == null || subRoot == null || root.val != subRoot.val)
-            return false;
-
-        return compareSubtree(root.left, subRoot.left) && compareSubtree(root.right, subRoot.right);
+    private boolean isSameTree(TreeNode root, TreeNode subRoot) {
+        if (root == null || subRoot == null)
+            return root == subRoot;
+        return root.val == subRoot.val
+                && isSameTree(root.left, subRoot.left)
+                && isSameTree(root.right, subRoot.right);
     }
 }
