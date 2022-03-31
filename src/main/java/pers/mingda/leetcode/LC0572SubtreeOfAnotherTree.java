@@ -35,4 +35,22 @@ public class LC0572SubtreeOfAnotherTree {
             getStringPreOrder(root.right, sb);
         }
     }
+
+    public boolean isSubtreePostorder(TreeNode root, TreeNode subRoot) {
+        StringBuilder sbRoot = new StringBuilder(",");
+        getStringPostorder(root, sbRoot);
+        StringBuilder sbSubRoot = new StringBuilder(",");
+        getStringPostorder(subRoot, sbSubRoot);
+        return sbRoot.toString().contains(sbSubRoot.toString());
+    }
+
+    private void getStringPostorder(TreeNode root, StringBuilder sb) {
+        if (root == null)
+            sb.append("#,");
+        else {
+            getStringPostorder(root.left, sb);
+            getStringPostorder(root.right, sb);
+            sb.append(root.val).append(",");
+        }
+    }
 }
