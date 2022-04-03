@@ -7,21 +7,20 @@ public class LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal {
             int val = inorder[i];
             inorderMap[val + 3000] = i;
         }
-        return buildTree(preorder, new int[1], 0, inorder.length, inorderMap);
+        return buildTree(preorder, 0, 0, inorder.length, inorderMap);
     }
 
-    private TreeNode buildTree(int[] preorder, int[] indexHolder, int inL, int inR, int[] inorderMap) {
+    private TreeNode buildTree(int[] preorder, int index, int inL, int inR, int[] inorderMap) {
         if (inL == inR)
             return null;
-        int index = indexHolder[0];
-        indexHolder[0]++;
+
         int parentVal = preorder[index];
         TreeNode parent = new TreeNode(parentVal);
-
-        // int pValInorder = findInorder(inorder, inL, inR, parentVal);
         int pValInorder = inorderMap[parentVal + 3000];
-        parent.left = buildTree(preorder, indexHolder, inL, pValInorder, inorderMap);
-        parent.right = buildTree(preorder, indexHolder, pValInorder + 1, inR, inorderMap);
+
+        parent.left = buildTree(preorder, index + 1, inL, pValInorder, inorderMap);
+        index = index + (pValInorder - inL + 1);
+        parent.right = buildTree(preorder, index, pValInorder + 1, inR, inorderMap);
         return parent;
     }
 }
