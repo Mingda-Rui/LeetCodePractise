@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC0098ValidateBinarySearchTree {
     public boolean isValidBST(TreeNode root) {
         boolean[] resultHolder = new boolean[]{true};
@@ -31,4 +33,32 @@ public class LC0098ValidateBinarySearchTree {
             return false;
         return isValidBstMinMax(root.left, min, root.val) && isValidBstMinMax(root.right, root.val, max);
     }
+
+    public boolean isValidBstIterative(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        long current = Integer.MIN_VALUE;
+        current--;
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                while (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+            }
+            root = stack.pop();
+            if (current >= root.val)
+                return false;
+            current = root.val;
+            root = root.right;
+        }
+        return true;
+    }
 }
+
+//    1
+//  2   3
+// 4 5 6 7
+// both
+// left
+// right
+// null
