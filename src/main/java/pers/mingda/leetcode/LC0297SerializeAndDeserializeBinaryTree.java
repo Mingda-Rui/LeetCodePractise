@@ -67,6 +67,43 @@ public class LC0297SerializeAndDeserializeBinaryTree {
         int intVal = Integer.parseInt(val);
         return new TreeNode(intVal);
     }
+
+    public String serializePreorder(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        serializePreorder(root, sb);
+        return sb.toString();
+    }
+
+    private void serializePreorder(TreeNode root, StringBuilder sb) {
+        if (root == null)
+            sb.append("#,");
+        else {
+            sb.append(root.val).append(",");
+            serializePreorder(root.left, sb);
+            serializePreorder(root.right, sb);
+        }
+    }
+
+    public TreeNode deserializePreorder(String data) {
+        String[] arr = data.split(",");
+        int[] indexHolder = new int[1];
+        return deserializePreorder(arr, indexHolder);
+    }
+
+    private TreeNode deserializePreorder(String[] arr, int[] indexHolder) {
+        int index = indexHolder[0];
+        if (index >= arr.length)
+            return null;
+        indexHolder[0]++;
+        String val = arr[index];
+        if (val.equals("#"))
+            return null;
+        int num = Integer.parseInt(val);
+        TreeNode root = new TreeNode(num);
+        root.left = deserializePreorder(arr, indexHolder);
+        root.right = deserializePreorder(arr, indexHolder);
+        return root;
+    }
 }
 
 // Your Codec object will be instantiated and called as such:
