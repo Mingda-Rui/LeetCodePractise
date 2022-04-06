@@ -168,17 +168,12 @@ public class LC0297SerializeAndDeserializeBinaryTree {
         stack.push(result);
         for (int i = 1; i + 1 < arr.length; i++) {
             TreeNode node = createNode(arr[i]);
-            if (stack.peek().left == null) {
-                stack.peek().left = node;
-                if (node == null) {
-                    i++;
-                    node = createNode(arr[i]);
-                    stack.pop().right = node;
-                }
-            } else
+            if (stack.peek() == null) {
+                stack.pop();
                 stack.pop().right = node;
-            if (node != null)
-                stack.push(node);
+            } else
+                stack.peek().left = node;
+            stack.push(node);
         }
         return result;
     }
