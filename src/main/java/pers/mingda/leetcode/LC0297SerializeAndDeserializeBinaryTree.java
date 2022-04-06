@@ -143,9 +143,53 @@ public class LC0297SerializeAndDeserializeBinaryTree {
         int intVal = Integer.parseInt(val);
         return new TreeNode(intVal);
     }
+
+    public String serializeIterativePreorder(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                stack.push(root);
+                sb.append(root.val).append(",");
+                root = root.left;
+            } else {
+                sb.append("#,");
+                root = stack.pop();
+                root = root.right;
+            }
+        }
+        return sb.toString();
+    }
+
+    public TreeNode deserializeIterativePreorder(String data) {
+        String[] arr = data.split(",");
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode result = createNode(arr[0]);
+        stack.push(result);
+        for (int i = 1; i + 1 < arr.length; i++) {
+            TreeNode node = createNode(arr[i]);
+            if (stack.peek().left == null) {
+                stack.peek().left = node;
+                if (node == null) {
+                    i++;
+                    node = createNode(arr[i]);
+                    stack.pop().right = node;
+                }
+            } else
+                stack.pop().right = node;
+            if (node != null)
+                stack.push(node);
+        }
+        return result;
+    }
 }
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
 // Codec deser = new Codec();
 // TreeNode ans = deser.deserialize(ser.serialize(root));
+
+//        1
+//    2       3
+//  4   5   6   7
+// # # # # # # # #
