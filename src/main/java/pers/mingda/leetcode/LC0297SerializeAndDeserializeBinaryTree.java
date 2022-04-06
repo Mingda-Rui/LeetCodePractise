@@ -2,6 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class LC0297SerializeAndDeserializeBinaryTree {
     // Encodes a tree to a single string.
@@ -101,6 +102,46 @@ public class LC0297SerializeAndDeserializeBinaryTree {
         root.left = deserializePreorder(arr, indexHolder);
         root.right = deserializePreorder(arr, indexHolder);
         return root;
+    }
+
+    public String serializeIterativeBfs(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            sb.append(root == null ? "#" : root.val).append(",");
+            if (root != null) {
+                queue.offer(root.left);
+                queue.offer(root.right);
+            }
+        }
+        return sb.toString();
+    }
+
+    public TreeNode deserializeIterativeBfs(String data) {
+        String[] arr = data.split(",");
+        Queue<TreeNode> queue = new LinkedList<>();
+        TreeNode result = createNode(arr[0]);
+        queue.offer(result);
+        for (int i = 1; i + 1 < arr.length; i++) {
+            TreeNode root = queue.poll();
+            root.left = createNode(arr[i]);
+            i++;
+            root.right = createNode(arr[i]);
+            if (root.left != null)
+                queue.offer(root.left);
+            if (root.right != null)
+                queue.offer(root.right);
+        }
+        return result;
+    }
+
+    private TreeNode createNode(String val) {
+        if (val.equals("#") || val.isEmpty())
+            return null;
+        int intVal = Integer.parseInt(val);
+        return new TreeNode(intVal);
     }
 }
 
