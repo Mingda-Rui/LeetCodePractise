@@ -92,8 +92,6 @@ public class LC0297SerializeAndDeserializeBinaryTree {
 
     private TreeNode deserializePreorder(String[] arr, int[] indexHolder) {
         int index = indexHolder[0];
-        if (index >= arr.length)
-            return null;
         indexHolder[0]++;
         String val = arr[index];
         if (val.equals("#"))
