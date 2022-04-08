@@ -38,15 +38,13 @@ class WordDictionary {
     }
 
     private boolean search(String word, int index) {
-        if (index == word.length())
-            return false;
         char c = word.charAt(index);
         if (c == '.') {
             for (WordDictionary wd: record) {
                 if (wd != null) {
-                    if (index == word.length() - 1 && wd.isEnd)
-                        return true;
-                    if (wd.search(word, index + 1))
+                    if (index == word.length() - 1) {
+                       if (wd.isEnd) return true;
+                    } else if (wd.search(word, index + 1))
                         return true;
                 }
             }
