@@ -24,11 +24,15 @@ class WordDictionary {
 
     private void addWord(String word, int index) {
         if (index < word.length()) {
+            if (record['.'] == null)
+                record['.'] = new WordDictionary();
             char c = word.charAt(index);
             if (record[c] == null)
                 record[c] = new WordDictionary();
-            if (index == word.length() - 1)
+            if (index == word.length() - 1) {
                 record[c].isEnd = true;
+                record['.'].isEnd = true;
+            }
             record[c].addWord(word, index + 1);
         }
     }
@@ -39,20 +43,16 @@ class WordDictionary {
 
     private boolean search(String word, int index) {
         char c = word.charAt(index);
-        if (c == '.') {
-            for (WordDictionary wd: record) {
-                if (wd != null) {
-                    if (index == word.length() - 1) {
-                       if (wd.isEnd) return true;
-                    } else if (wd.search(word, index + 1))
-                        return true;
-                }
-            }
-        }
         if (record[c] == null)
             return false;
         if (index == word.length() - 1)
             return record[c].isEnd;
+        if (c == '.') {
+            for (WordDictionary wd: record) {
+                if (wd != null && wd.search(word, index + 1))
+                    return true;
+            }
+        }
         return record[c].search(word, index + 1);
     }
 }
