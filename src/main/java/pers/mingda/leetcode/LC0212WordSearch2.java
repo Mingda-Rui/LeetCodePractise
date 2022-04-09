@@ -1,7 +1,9 @@
 package pers.mingda.leetcode;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class LC0212WordSearch2 {
     public List<String> findWords(char[][] board, String[] words) {
@@ -35,5 +37,69 @@ public class LC0212WordSearch2 {
         found = found || findWordReverse(board, x, y - 1, word, index, visited);
         visited[x][y] = false;
         return found;
+    }
+
+    public List<String> findWordsTrie(char[][] board, String[] words) {
+        Set<String> set = new HashSet<>();
+        TrieNode trie = buildTrie(words);
+        int row = board.length;
+        int column = board[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                findWordsFromTrie(board, i, j, trie, set, new boolean[row][column]);
+            }
+        }
+        return List.copyOf(set);
+    }
+
+    private TrieNode buildTrie(String[] words) {
+        TrieNode root = new TrieNode();
+        for (String word: words)
+            root.add(word);
+        return root;
+    }
+
+    private boolean findWordsFromTrie(char[][] board, int x, int y, TrieNode trie, Set<String> result, boolean[][] visited) {
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length || visited[x][y])
+            return false;
+        char c = board[x][y];
+        if (trie.record[c] == null)
+            return false;
+        visited[x][y] = true;
+        TrieNode subTrie = trie.record[c];
+        if (subTrie.word != null)
+            result.add(subTrie.word);
+
+        findWordsFromTrie(board, x + 1, y, subTrie, result, visited);
+        findWordsFromTrie(board, x - 1, y, subTrie, result, visited);
+        findWordsFromTrie(board, x, y + 1, subTrie, result, visited);
+        findWordsFromTrie(board, x, y - 1, subTrie, result, visited);
+
+        visited[x][y] = false;
+        return true;
+    }
+}
+
+class TrieNode {
+    String word;
+    TrieNode[] record;
+
+    public TrieNode() {
+        this.word = null;
+        this.record = new TrieNode[128];
+    }
+
+    public void add(String word) {
+        addRecursive(word, 0);
+    }
+
+    private void addRecursive(String word, int index) {
+        char c = word.charAt(index);
+        if (this.record[c] == null)
+            this.record[c] = new TrieNode();
+        if (index == word.length() - 1)
+            this.record[c].word = word;
+        else
+        record[c].addRecursive(word, index + 1);
     }
 }
