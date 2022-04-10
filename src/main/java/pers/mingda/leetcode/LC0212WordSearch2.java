@@ -53,7 +53,7 @@ public class LC0212WordSearch2 {
     }
 
     private TrieNode buildTrie(String[] words) {
-        TrieNode root = new TrieNode();
+        TrieNode root = new TrieNode('.');
         for (String word: words)
             root.add(word);
         return root;
@@ -67,13 +67,16 @@ public class LC0212WordSearch2 {
             return false;
         visited[x][y] = true;
         TrieNode subTrie = trie.record[c];
-        if (subTrie.word != null)
+        if (subTrie.word != null) {
             result.add(subTrie.word);
+        }
 
         findWordsFromTrie(board, x + 1, y, subTrie, result, visited);
         findWordsFromTrie(board, x - 1, y, subTrie, result, visited);
         findWordsFromTrie(board, x, y + 1, subTrie, result, visited);
         findWordsFromTrie(board, x, y - 1, subTrie, result, visited);
+
+        trie.remove(c);
 
         visited[x][y] = false;
         return true;
@@ -83,10 +86,20 @@ public class LC0212WordSearch2 {
 class TrieNode {
     String word;
     TrieNode[] record;
+    TrieNode parent;
+    char c;
+    int size;
 
-    public TrieNode() {
+    public TrieNode(char c) {
+        this(null, c);
+    }
+
+    public TrieNode(TrieNode parent, char c) {
         this.word = null;
         this.record = new TrieNode[128];
+        this.parent = parent;
+        this.c = c;
+        this.size = 0;
     }
 
     public void add(String word) {
@@ -95,11 +108,23 @@ class TrieNode {
 
     private void addRecursive(String word, int index) {
         char c = word.charAt(index);
-        if (this.record[c] == null)
-            this.record[c] = new TrieNode();
+        if (this.record[c] == null) {
+            this.record[c] = new TrieNode(this, c);
+            this.size++;
+        }
+
         if (index == word.length() - 1)
             this.record[c].word = word;
         else
-        record[c].addRecursive(word, index + 1);
+            record[c].addRecursive(word, index + 1);
+    }
+
+    public void remove(char c) {
+        if (this.record[c] != null && this.record[c].size == 0) {
+            this.record[c] = null;
+            size--;
+        }
+        if (parent != null)
+            parent.remove(this.c);
     }
 }
