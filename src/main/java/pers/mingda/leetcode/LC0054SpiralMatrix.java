@@ -38,6 +38,33 @@ public class LC0054SpiralMatrix {
         fastForwardLine(matrix, coord, result, -1, 0, rowL - 1);
     }
 
+    public List<Integer> spiralOrderIterativeRefactored(int[][] matrix) {
+        List<Integer> result = new LinkedList<>();
+        int rowL = matrix.length;
+        int columnL = matrix[0].length;
+        int[] coord = new int[]{0, 0};
+        while(rowL > 0 && columnL > 0) {
+            fastForwardCircleRefactored(matrix, coord, result, rowL, columnL);
+            coord[0]++;
+            coord[1]++;
+            rowL -= 2;
+            columnL -= 2;
+        }
+
+        return result;
+    }
+
+    private void fastForwardCircleRefactored(int[][] matrix, int[] coord, List<Integer> result, int rowL, int columnL) {
+        int columnB = columnL - (rowL == 1 ? 0 : 1);
+        int rowB = rowL - (columnL == 1 && rowL != 1? 0 : 1);
+        fastForwardLine(matrix, coord, result, 0, 1, columnB);
+        fastForwardLine(matrix, coord, result, 1, 0, rowB);
+        if (rowL > 1 && columnL > 1) {
+            fastForwardLine(matrix, coord, result, 0, -1, columnB);
+            fastForwardLine(matrix, coord, result, -1, 0, rowB);
+        }
+    }
+
     private void fastForwardLine(int[][] matrix, int[] coord, List<Integer> result, int xOffset, int yOffset, int length) {
         for (int i = 0; i < length; i++) {
             int val = getVal(matrix, coord);
@@ -52,5 +79,4 @@ public class LC0054SpiralMatrix {
         int y = coord[1];
         return matrix[x][y];
     }
-
 }
