@@ -79,4 +79,46 @@ public class LC0054SpiralMatrix {
         int y = coord[1];
         return matrix[x][y];
     }
+
+    public List<Integer> spiralOrderRecursive(int[][] matrix) {
+        int[] coord = new int[]{0, 0};
+        int[] boundary = new int[]{0, 0};
+        List<Integer> result = new LinkedList<>();
+        return spiralOrderRecursive(matrix, coord, boundary, result);
+    }
+
+    private List<Integer> spiralOrderRecursive(int[][] matrix, int[] coord, int[] boundary, List<Integer> result) {
+        int x = coord[0];
+        int y = coord[1];
+
+        int top = boundary[0];
+        int bottom = matrix.length - top - 1;
+        int left = boundary[1];
+        int right = matrix[0].length - left - 1;
+
+        if (top > bottom || left > right)
+            return result;
+        if (x < top || x > bottom || y < left || y > right)
+            return result;
+
+        int val = matrix[x][y];
+        result.add(val);
+        boolean onTop = x == top;
+        boolean onBottom = x == bottom;
+        boolean onLeft = y == left;
+        boolean onRight = y == right;
+
+        if ((onTop && !onRight) || (onBottom && !onLeft))
+            coord[1] += (onTop ? 1 : -1);
+        else if ((onLeft && !onTop) || (onRight && !onBottom))
+            coord[0] += (onRight ? 1 : -1);
+
+        if (top == coord[0] && left == coord[1]) {
+            coord[0]++;
+            coord[1]++;
+            boundary[0]++;
+            boundary[1]++;
+        }
+        return spiralOrderRecursive(matrix, coord, boundary, result);
+    }
 }
