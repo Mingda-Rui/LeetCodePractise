@@ -9,20 +9,19 @@ import java.util.Queue;
 
 public class LC0023MergeKSortedLists {
     public ListNode mergeKListsBruteForce(ListNode[] lists) {
-        ListNode smallest = null;
-        int index = -1;
+        int smallest = 0;
         for (int i = 0; i < lists.length; i++) {
-            ListNode list = lists[i];
-            if (list != null && (smallest == null || smallest.val > list.val)) {
-                index = i;
-                smallest = list;
-            }
+            ListNode curr = lists[i];
+            if (curr != null && ( lists[smallest] == null || curr.val <= lists[smallest].val) )
+                smallest = i;
         }
-        if (smallest == null)
+
+        if (lists.length == 0 || lists[smallest] == null)
             return null;
-        lists[index] = lists[index].next;
-        smallest.next = mergeKListsBruteForce(lists);
-        return smallest;
+        ListNode smallestNode = lists[smallest];
+        lists[smallest] = smallestNode.next;
+        smallestNode.next = mergeKListsBruteForce(lists);
+        return smallestNode;
     }
 
     public ListNode mergeKListsOneByOne(ListNode[] lists) {
