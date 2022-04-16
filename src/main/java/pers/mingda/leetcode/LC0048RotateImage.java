@@ -22,4 +22,17 @@ public class LC0048RotateImage {
             }
         }
     }
+
+    public void rotateShorter(int[][] matrix) {
+        int lastEle = matrix.length - 1;
+        for (int i = 0; i < (matrix.length + 1) / 2; i++) {
+            for (int j = 0; j < matrix[0].length / 2; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[lastEle - j][i];
+                matrix[lastEle - j][i] = matrix[lastEle - i][lastEle - j];
+                matrix[lastEle - i][lastEle - j] = matrix[j][lastEle - i];
+                matrix[j][lastEle - i] = tmp;
+            }
+        }
+    }
 }
