@@ -14,10 +14,14 @@ public class LC0347TopKFrequentElements {
             int val = map.getOrDefault(num, 0);
             map.put(num, val + 1);
         }
-        Comparator<Map.Entry<Integer, Integer>> comparator = (o1, o2) -> o2.getValue() - o1.getValue();
+        Comparator<Map.Entry<Integer, Integer>> comparator = Comparator.comparingInt(Map.Entry::getValue);
         Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>(comparator);
-        for (Map.Entry<Integer, Integer> entry: map.entrySet())
+        for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
             queue.offer(entry);
+            if (queue.size() > k)
+                queue.poll();
+        }
+
         for (int i = 0; i < k; i++)
             result[i] = queue.poll().getKey();
 
