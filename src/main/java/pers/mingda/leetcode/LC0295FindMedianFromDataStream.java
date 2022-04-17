@@ -18,11 +18,17 @@ class MedianFinder {
     }
 
     public void addNum(int num) {
-        if (bigQueue.isEmpty() || num < bigQueue.peek())
-            smallQueue.offer(num);
-        else
-            bigQueue.offer(num);
-        rebalance();
+        boolean isEven = smallQueue.size() == bigQueue.size();
+        Queue<Integer> from = isEven ? bigQueue : smallQueue;
+        Queue<Integer> to = isEven ? smallQueue : bigQueue;
+
+        boolean needRebalance = isEven && !from.isEmpty() && num > from.peek();
+        needRebalance = needRebalance || (!isEven && num < from.peek());
+        if (isEven && !from.isEmpty() && num > from.peek()) {
+            from.offer(num);
+            num = from.poll();
+        }
+        to.offer(num);
     }
 
     public double findMedian() {
@@ -31,16 +37,5 @@ class MedianFinder {
             return sum / 2;
         }
         return smallQueue.peek();
-    }
-
-    private void rebalance() {
-        int sizeDiff = smallQueue.size() - bigQueue.size();
-        while (sizeDiff != 0 && sizeDiff != 1) {
-            Queue<Integer> longer = sizeDiff > 0 ? smallQueue : bigQueue;
-            Queue<Integer> shorter = sizeDiff > 0 ? bigQueue : smallQueue;
-            int num = longer.poll();
-            shorter.offer(num);
-            sizeDiff = smallQueue.size() - bigQueue.size();
-        }
     }
 }
