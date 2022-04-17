@@ -22,9 +22,8 @@ class MedianFinder {
         Queue<Integer> from = isEven ? bigQueue : smallQueue;
         Queue<Integer> to = isEven ? smallQueue : bigQueue;
 
-        boolean needRebalance = isEven && !from.isEmpty() && num > from.peek();
-        needRebalance = needRebalance || (!isEven && num < from.peek());
-        if (isEven && !from.isEmpty() && num > from.peek()) {
+        boolean needRebalance = !from.isEmpty() && (isEven ? num > from.peek() : num < from.peek());
+        if (needRebalance) {
             from.offer(num);
             num = from.poll();
         }
