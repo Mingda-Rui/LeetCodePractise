@@ -18,13 +18,12 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
 
         for (int i = 0; i <  recipes.length; i++) {
             String recipe = recipes[i];
-            for (String ingredient: ingredients.get(i)) {
-                int count = ingredMap.getOrDefault(recipe, 0);
-                ingredMap.put(recipe, count + 1);
-
+            List<String> ingreds = ingredients.get(i);
+            for (String ingredient: ingreds) {
                 cookableMap.putIfAbsent(ingredient, new HashSet<>());
                 cookableMap.get(ingredient).add(recipe);
             }
+            ingredMap.put(recipe, ingreds.size());
         }
 
         Queue<String> supplyQueue = new LinkedList<>();
