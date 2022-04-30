@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,5 +43,43 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
             }
         }
         return result;
+    }
+
+    public List<String> findAllRecipesDfs(String[] recipes, List<List<String>> ingredients, String[] supplies) {
+        List<String> result = new LinkedList<>();
+        Set<String> supplySet = new HashSet<>(Arrays.asList(supplies));
+        Map<String, Set<String>> ingredMap = new HashMap<>();
+        for (int i = 0; i < recipes.length; i++) {
+            String recipe = recipes[i];
+            List<String> ingreds = ingredients.get(i);
+            ingredMap.putIfAbsent(recipe, new HashSet<>());
+            ingredMap.get(recipe).addAll(ingreds);
+        }
+        Set<String> visited = new HashSet<>();
+
+        for (String recipe: recipes) {
+            if (findRecipe(recipe, ingredMap, supplySet, visited)) {
+                result.add(recipe);
+            }
+        }
+        return result;
+    }
+
+    private boolean findRecipe(String recipe, Map<String, Set<String>> ingredMap, Set<String> supplySet, Set<String> visited) {
+        if (supplySet.contains(recipe))
+            return true;
+        if (visited.contains(recipe))
+            return false;
+        if (!ingredMap.containsKey(recipe))
+            return false;
+        visited.add(recipe);
+        for (String ingred: ingredMap.get(recipe)) {
+            if (!supplySet.contains(ingred) && !findRecipe(ingred, ingredMap, supplySet, visited)) {
+                return false;
+            }
+        }
+        supplySet.add(recipe);
+        visited.remove(recipe);
+        return true;
     }
 }
