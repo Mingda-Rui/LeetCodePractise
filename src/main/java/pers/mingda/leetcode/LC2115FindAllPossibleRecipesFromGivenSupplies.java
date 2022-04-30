@@ -57,27 +57,23 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
         }
         Set<String> visited = new HashSet<>();
 
-        for (String recipe: recipes) {
-            if (findRecipe(recipe, ingredMap, supplySet, visited)) {
+        for (String recipe: recipes)
+            if (findRecipe(recipe, ingredMap, supplySet, visited))
                 result.add(recipe);
-            }
-        }
+
         return result;
     }
 
     private boolean findRecipe(String recipe, Map<String, Set<String>> ingredMap, Set<String> supplySet, Set<String> visited) {
         if (supplySet.contains(recipe))
             return true;
-        if (visited.contains(recipe))
-            return false;
-        if (!ingredMap.containsKey(recipe))
+        if (visited.contains(recipe) || !ingredMap.containsKey(recipe))
             return false;
         visited.add(recipe);
-        for (String ingred: ingredMap.get(recipe)) {
-            if (!supplySet.contains(ingred) && !findRecipe(ingred, ingredMap, supplySet, visited)) {
+        for (String ingred: ingredMap.get(recipe))
+            if (!supplySet.contains(ingred) && !findRecipe(ingred, ingredMap, supplySet, visited))
                 return false;
-            }
-        }
+
         supplySet.add(recipe);
         visited.remove(recipe);
         return true;
