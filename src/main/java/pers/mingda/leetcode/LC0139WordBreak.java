@@ -5,7 +5,6 @@ import java.util.List;
 public class LC0139WordBreak {
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] record = new boolean[s.length()];
-        char[] c = s.toCharArray();
         for (int i = 0; i < s.length(); i++) {
             for (String word: wordDict) {
                 int prevIndex = i - word.length();
