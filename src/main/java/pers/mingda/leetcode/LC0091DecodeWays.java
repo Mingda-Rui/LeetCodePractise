@@ -2,20 +2,19 @@ package pers.mingda.leetcode;
 
 public class LC0091DecodeWays {
     public int numDecodings(String s) {
-        int[] asSingle = new int[s.length()];
-        int[] asDouble = new int[s.length()];
+        int[] record = new int[s.length()];
         if (!checkOneDigi(s, 0))
             return 0;
-        asSingle[0] = 1;
+        record[0] = 1;
         for (int i = 1; i < s.length(); i++) {
             if (checkOneDigi(s, i))
-                asSingle[i] = asSingle[i - 1] + asDouble[i - 1];
+                record[i] += record[i - 1];
             if (checkTwoDigi(s, i - 1, i))
-                asDouble[i] = asSingle[i - 1];
-            if (asSingle[i] == 0 && asDouble[i] == 0)
+                record[i] += (i < 2 ? 1 : record[i - 2]);
+            if (record[i] == 0)
                 return 0;
         }
-        return asSingle[s.length() - 1] + asDouble[s.length() - 1];
+        return record[s.length() - 1];
     }
 
     private boolean checkOneDigi(String s, int index) {
