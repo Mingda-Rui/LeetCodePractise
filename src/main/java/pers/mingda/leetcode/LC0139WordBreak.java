@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.List;
+
 public class LC0139WordBreak {
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] record = new boolean[s.length()];
