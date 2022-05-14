@@ -21,4 +21,13 @@ public class LC0203RemoveLinkedListElements {
         }
         return newHead.val == val ? null : newHead;
     }
+
+    public ListNode removeElementsRecursive(ListNode head, int val) {
+        if (head == null)
+            return null;
+        if (head.val == val)
+            return removeElementsRecursive(head.next, val);
+        head.next = removeElementsRecursive(head.next, val);
+        return head;
+    }
 }
