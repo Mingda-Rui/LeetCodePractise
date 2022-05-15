@@ -10,10 +10,9 @@ public class LC0213HouseRobberII {
     }
 
     private int rob(int[] nums, int start, int finish) {
-        int beforePrev = nums[start];
-        int prev = start + 1 < finish ? nums[start + 1] : 0;
-        prev = Math.max(beforePrev, prev);
-        for (int i = start + 2; i < finish; i++) {
+        int beforePrev = 0;
+        int prev = 0;
+        for (int i = start; i < finish; i++) {
             int val = nums[i] + beforePrev;
             beforePrev = prev;
             prev = Math.max(prev, val);
