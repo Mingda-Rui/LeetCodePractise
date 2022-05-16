@@ -8,22 +8,20 @@ public class LC0061RotateList {
         int rotate = k % length;
         if (rotate == 0)
             return head;
-        int startIndex = length - rotate - 1;
-        ListNode pointer = head;
-        for (int i = 0; i < length; i++) {
-            if (i == startIndex) {
-                ListNode newHead = pointer.next;
-                ListNode tmp = pointer;
-                while (pointer.next != null)
-                    pointer = pointer.next;
-                tmp.next = null;
-                pointer.next = head;
-                return newHead;
-            } else {
-                pointer = pointer.next;
-            }
-        }
-        return head;
+        int splitIndex = length - rotate - 1;
+        ListNode newTail = head;
+
+        for (int i = 0; i < splitIndex; i++)
+            newTail = newTail.next;
+        ListNode newHead = newTail.next;
+        newTail.next = null;
+
+        ListNode tail = newHead;
+        while (tail.next != null)
+            tail = tail.next;
+
+        tail.next = head;
+        return newHead;
     }
 
     private int getLength(ListNode head) {
