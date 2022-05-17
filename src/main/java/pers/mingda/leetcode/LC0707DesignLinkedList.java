@@ -4,12 +4,12 @@ public class LC0707DesignLinkedList {
 
 }
 
-class MyLinkedList {
+class MyDoublyLinkedList {
     int size;
     Node head;
     Node tail;
 
-    public MyLinkedList() {
+    public MyDoublyLinkedList() {
         size = 0;
     }
 
@@ -120,6 +120,88 @@ class MyLinkedList {
     }
 }
 
+class MySinglyLinkedList {
+
+    int size;
+    Node head;
+    Node tail;
+
+    public MySinglyLinkedList() {
+
+    }
+
+    public int get(int index) {
+        if (! checkIndex(index))
+            return -1;
+        return getNode(index).val;
+    }
+
+    private boolean checkIndex(int index) {
+        return index >= 0 && index < size;
+    }
+
+    private Node getNode(int index) {
+        Node node = head;
+        while (index > 0) {
+            node = node.next;
+            index--;
+        }
+        return node;
+    }
+
+    public void addAtHead(int val) {
+        head = new Node(val, head);
+        size++;
+        if (size == 1)
+            tail = head;
+    }
+
+    public void addAtTail(int val) {
+        Node oldTail = tail;
+        tail = new Node(val);
+        if (size == 0)
+            head = tail;
+        else
+            oldTail.next = tail;
+        size++;
+    }
+
+    public void addAtIndex(int index, int val) {
+        if (index == 0) {
+            addAtHead(val);
+        } else if (index == size) {
+            addAtTail(val);
+        } else if (checkIndex(index)) {
+            Node prev = getNode(index - 1);
+            Node node = new Node(val, prev.next);
+            prev.next = node;
+            size++;
+        }
+    }
+
+    public void deleteAtIndex(int index) {
+        if (!checkIndex(index))
+            return;
+        if (index == 0) {
+            Node oldHead = head;
+            head = head.next;
+            oldHead.next = null;
+        } else {
+            Node prev = getNode(index - 1);
+            Node deleted = prev.next;
+            prev.next = deleted.next;
+            deleted.next = null;
+            if (index == size - 1)
+                tail = prev;
+        }
+        size--;
+        if (size == 0) {
+            head = null;
+            tail = null;
+        }
+    }
+}
+
 class Node {
     int val;
     Node next;
@@ -127,6 +209,11 @@ class Node {
 
     public Node(int val) {
         this.val = val;
+    }
+
+    // for singly list
+    public Node(int val, Node next) {
+        this(val, null, next);
     }
 
     public Node(int val, Node prev, Node next) {
