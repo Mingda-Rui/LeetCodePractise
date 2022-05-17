@@ -5,60 +5,42 @@ public class LC0707DesignLinkedList {
 }
 
 class MyLinkedList {
-
-    int val;
     int size;
-    MyLinkedList next;
-    MyLinkedList prev;
-    MyLinkedList head;
-    MyLinkedList tail;
+    Node head;
+    Node tail;
 
     public MyLinkedList() {
         size = 0;
     }
 
-    private MyLinkedList(int val) {
-        this();
-        this.val = val;
-    }
-
-    private MyLinkedList(int val, MyLinkedList prev, MyLinkedList next) {
-        this();
-        this.val = val;
-        this.prev = prev;
-        this.next = next;
-    }
-
     public int get(int index) {
-        MyLinkedList node = getNode(index);
+        Node node = getNode(index);
         return node == null ? -1 : node.val;
     }
 
     public void addAtHead(int val) {
-        MyLinkedList newHead = new MyLinkedList(val);
-        if (head != null) {
-            newHead.next = head;
-            head.prev = newHead;
-        }
-        head = newHead;
+        Node oldHead = head;
+        head = new Node(val);
+        head.next = oldHead;
+        if (oldHead != null)
+            oldHead.prev = head;
         if (size == 0)
             tail = head;
         size++;
     }
 
     public void addAtTail(int val) {
-        MyLinkedList newTail = new MyLinkedList(val);
-        if(tail != null) {
-            newTail.prev = tail;
-            tail.next = newTail;
-        }
-        tail = newTail;
+        Node oldTail = tail;
+        tail = new Node(val);
+        tail.prev = oldTail;
+        if (oldTail != null)
+            oldTail.next = tail;
         if (size == 0)
             head = tail;
         size++;
     }
 
-    private MyLinkedList getNode(int index) {
+    private Node getNode(int index) {
         if (index < 0 || index >= size)
             return null;
         if (index < size / 2)
@@ -67,8 +49,8 @@ class MyLinkedList {
             return getFromTail(index);
     }
 
-    private MyLinkedList getFromHead(int index) {
-        MyLinkedList node = this.head;
+    private Node getFromHead(int index) {
+        Node node = this.head;
         while (index > 0) {
             node = node.next;
             index--;
@@ -76,8 +58,8 @@ class MyLinkedList {
         return node;
     }
 
-    private MyLinkedList getFromTail(int index) {
-        MyLinkedList node = this.tail;
+    private Node getFromTail(int index) {
+        Node node = this.tail;
         int counterFromTail = size - index - 1;
         while (counterFromTail > 0) {
             node = node.prev;
@@ -93,10 +75,10 @@ class MyLinkedList {
         else if (index == size)
             addAtTail(val);
         else {
-            MyLinkedList prevNode = getNode(index - 1);
+            Node prevNode = getNode(index - 1);
             if (prevNode != null) {
-                MyLinkedList nextNode = prevNode.next;
-                MyLinkedList node = new MyLinkedList(val, prevNode, nextNode);
+                Node nextNode = prevNode.next;
+                Node node = new Node(val, prevNode, nextNode);
                 prevNode.next = node;
                 nextNode.prev = node;
                 size++;
@@ -107,7 +89,7 @@ class MyLinkedList {
 
     public void deleteAtIndex(int index) {
         if (index == 0) {
-            MyLinkedList oldHead = head;
+            Node oldHead = head;
             head = head.next;
             oldHead.next = null;
             if (head != null)
@@ -115,7 +97,7 @@ class MyLinkedList {
             if (size == 1)
                 tail = null;
         } else if (index == size - 1) {
-            MyLinkedList oldTail = tail;
+            Node oldTail = tail;
             tail = tail.prev;
             oldTail.prev = null;
             if (tail != null)
@@ -123,11 +105,11 @@ class MyLinkedList {
             if (size == 1)
                 head = null;
         } else {
-            MyLinkedList prevNode = getNode(index - 1);
+            Node prevNode = getNode(index - 1);
             if (prevNode == null || prevNode.next == null)
                 return;
-            MyLinkedList deleteNode = prevNode.next;
-            MyLinkedList nextNode = deleteNode.next;
+            Node deleteNode = prevNode.next;
+            Node nextNode = deleteNode.next;
 
             prevNode.next = nextNode;
             deleteNode.prev = null;
@@ -135,6 +117,22 @@ class MyLinkedList {
             deleteNode.next = null;
         }
         size--;
+    }
+}
+
+class Node {
+    int val;
+    Node next;
+    Node prev;
+
+    public Node(int val) {
+        this.val = val;
+    }
+
+    public Node(int val, Node prev, Node next) {
+        this(val);
+        this.prev = prev;
+        this.next = next;
     }
 }
 
