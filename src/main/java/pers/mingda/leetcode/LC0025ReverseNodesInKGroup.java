@@ -1,28 +1,26 @@
 package pers.mingda.leetcode;
 
 public class LC0025ReverseNodesInKGroup {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode ite = head;
-        ListNode prev = null;
+    public ListNode reverseKGroupIterative(ListNode head, int k) {
+        ListNode dummyHead = new ListNode(-1, head);
+        ListNode prev = dummyHead;
         int counter = 1;
-        while (ite != null) {
+        while (head != null) {
             if (counter == k) {
-                ListNode next = ite.next;
-                ListNode newTail = prev == null ? head : prev.next;
-                ite.next = null;
+                ListNode next = head.next;
+                ListNode newTail = prev.next;
+                head.next = null;
                 ListNode newHead = reverse(prev, newTail);
-                head = prev == null ? newHead : head;
                 newTail.next = next;
                 prev = newTail;
-                ite = next;
+                head = next;
                 counter = 1;
             } else {
                 counter++;
-                ite = ite.next;
+                head = head.next;
             }
         }
-
-        return head;
+        return dummyHead.next;
     }
 
     public ListNode reverseKGroupRecursive(ListNode head, int k) {
