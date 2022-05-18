@@ -10,7 +10,7 @@ public class LC0025ReverseNodesInKGroup {
                 ListNode next = head.next;
                 ListNode newTail = prev.next;
                 head.next = null;
-                ListNode newHead = reverse(prev, newTail);
+                reverse(prev, newTail);
                 newTail.next = next;
                 prev = newTail;
                 head = next;
@@ -40,7 +40,7 @@ public class LC0025ReverseNodesInKGroup {
         t1.next = null;
 
         reverse(h1);
-        h1.next = reverseKGroup(h2, k);
+        h1.next = reverseKGroupRecursive(h2, k);
         return t1;
     }
 
