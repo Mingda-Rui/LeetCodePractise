@@ -32,6 +32,41 @@ public class LC0138CopyListWithRandomPointer {
         copyByNext(origin.next, next, map);
         return next;
     }
+
+    public Node copyRandomListZeroSpaceComplexity(Node head) {
+        Node oriIte = head;
+        while (oriIte != null) {
+            Node node = new Node(oriIte.val);
+            node.next = oriIte.next;
+            oriIte.next = node;
+            oriIte = node.next;
+        }
+
+        oriIte = head;
+        while (oriIte != null) {
+            Node oriRandom = oriIte.random;
+            Node copy = oriIte.next;
+            copy.random = oriRandom == null ? null : oriRandom.next;
+            oriIte = copy.next;
+        }
+
+        Node dummyOri = new Node(-1);
+        Node dummyCopy = new Node(-1);
+        Node copydummyHead = dummyCopy;
+
+        oriIte = head;
+        while (oriIte != null) {
+            dummyOri.next = oriIte;
+            oriIte = oriIte.next;
+            dummyCopy.next = oriIte;
+            oriIte = oriIte.next;
+            dummyOri = dummyOri.next;
+            dummyCopy = dummyCopy.next;
+        }
+        dummyOri.next = null;
+
+        return copydummyHead.next;
+    }
 }
 
 class Node {
