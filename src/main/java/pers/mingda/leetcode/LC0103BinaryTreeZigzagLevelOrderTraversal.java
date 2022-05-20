@@ -43,12 +43,12 @@ public class LC0103BinaryTreeZigzagLevelOrderTraversal {
             return result;
         if (result.size() < level)
             result.add(new LinkedList<>());
-        LinkedList<Integer> currentLevel = (LinkedList<Integer>) result.get(level - 1);
+        List<Integer> currentLevel = result.get(level - 1);
         boolean leftToRight = level % 2 == 1;
         if (leftToRight)
             currentLevel.add(root.val);
         else
-            currentLevel.addFirst(root.val);
+            currentLevel.add(0, root.val);
         zigzagLevelOrderRecursive(root.left, level + 1, result);
         zigzagLevelOrderRecursive(root.right, level + 1, result);
         return result;
