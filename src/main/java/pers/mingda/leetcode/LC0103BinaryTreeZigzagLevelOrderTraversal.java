@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -29,6 +30,27 @@ public class LC0103BinaryTreeZigzagLevelOrderTraversal {
             leftToRight = !leftToRight;
             result.add(currentLayer);
         }
+        return result;
+    }
+
+    public List<List<Integer>> zigzagLevelOrderRecursive(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        return zigzagLevelOrderRecursive(root, 1, result);
+    }
+
+    private List<List<Integer>> zigzagLevelOrderRecursive(TreeNode root, int level, List<List<Integer>> result) {
+        if (root == null)
+            return result;
+        if (result.size() < level)
+            result.add(new LinkedList<>());
+        LinkedList<Integer> currentLevel = (LinkedList<Integer>) result.get(level - 1);
+        boolean leftToRight = level % 2 == 1;
+        if (leftToRight)
+            currentLevel.add(root.val);
+        else
+            currentLevel.addFirst(root.val);
+        zigzagLevelOrderRecursive(root.left, level + 1, result);
+        zigzagLevelOrderRecursive(root.right, level + 1, result);
         return result;
     }
 }
