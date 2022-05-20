@@ -23,6 +23,21 @@ public class LC0589NAryTreePreorderTraversal {
         }
         return result;
     }
+
+    public List<Integer> preorderRecursive(Node root) {
+        List<Integer> result = new LinkedList<>();
+        return preorderRecursive(root, result);
+    }
+
+    private List<Integer> preorderRecursive(Node root, List<Integer> result) {
+        if (root == null)
+            return result;
+        result.add(root.val);
+
+        for (Node child: root.children)
+            preorderRecursive(child, result);
+        return result;
+    }
 }
 
 class Node {
