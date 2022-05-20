@@ -25,4 +25,19 @@ public class LC0590NAryTreePostorderTraversal {
         }
         return result;
     }
+
+    public List<Integer> postorderRecursive(Node root) {
+        List<Integer> result = new LinkedList<>();
+        return postorderRecursive(root, result);
+    }
+
+    private List<Integer> postorderRecursive(Node root, List<Integer> result) {
+        if (root == null)
+            return result;
+
+        for (Node child: root.children)
+            postorderRecursive(child, result);
+        result.add(root.val);
+        return result;
+    }
 }
