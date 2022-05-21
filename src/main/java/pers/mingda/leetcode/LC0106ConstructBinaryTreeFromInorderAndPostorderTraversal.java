@@ -44,17 +44,14 @@ public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
             if (i == postorder.length - 1)
                 rootPointer = root;
             int inorderIndex = map.get(rootVal);
-            while (!stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 TreeNode parent = stack.peek();
-                if (map.get(parent.val) < inorderIndex) {
+                if (map.get(parent.val) < inorderIndex)
                     parent.right = root;
-                    break;
-                }
-                parent = stack.pop();
-                if (stack.isEmpty()) {
-                    parent.left = root; break;
-                } else if (map.get(parent.val) > inorderIndex && map.get(stack.peek().val) < inorderIndex) {
-                    parent.left = root; break;
+                else {
+                    do parent = stack.pop();
+                    while (!stack.isEmpty() && map.get(stack.peek().val) > inorderIndex);
+                    parent.left = root;
                 }
             }
             stack.push(root);
