@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class LC0889ConstructBinaryTreeFromPreorderAndPostorderTraversal {
@@ -24,6 +26,31 @@ public class LC0889ConstructBinaryTreeFromPreorderAndPostorderTraversal {
         }
         return root;
     }
+
+    public TreeNode constructFromPrePostRecursive(int[] preorder, int[] postorder) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < postorder.length; i++)
+            map.put(postorder[i], i);
+        return constructFromPrePostRecursive(preorder, new int[]{0}, postorder, postorder.length, map);
+    }
+
+    private TreeNode constructFromPrePostRecursive(int[] preorder, int[] preIndexHolder, int[] postorder, int postBoundray, Map<Integer, Integer> map) {
+        int preIndex = preIndexHolder[0];
+        if (preIndex >= preorder.length)
+            return null;
+        int val = preorder[preIndex];
+        int postIndex = map.get(val);
+        if (postIndex > postBoundray)
+            return null;
+        TreeNode node = new TreeNode(val);
+        preIndexHolder[0]++;
+
+        node.left = constructFromPrePostRecursive(preorder, preIndexHolder, postorder, postIndex, map);
+        node.right = constructFromPrePostRecursive(preorder, preIndexHolder, postorder, postIndex, map);
+
+        return node;
+    }
+
 }
 
 
