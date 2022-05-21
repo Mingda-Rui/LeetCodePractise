@@ -21,20 +21,14 @@ public class LC0114FlattenBinaryTreeToLinkedList {
         Stack<TreeNode> stack = new Stack<>();
         if (root != null)
             stack.push(root);
-        TreeNode dummyHead = new TreeNode(-1, null, root);
-        root = dummyHead;
         while (!stack.isEmpty()) {
-            TreeNode current = stack.pop();
-            root.right = current;
-            if (current.right != null) {
-                stack.push(current.right);
-                current.right = null;
-            }
-            if (current.left != null) {
-                stack.push(current.left);
-                current.left = null;
-            }
-            root = current;
+            root = stack.pop();
+            if (root.right != null)
+                stack.push(root.right);
+            if (root.left != null)
+                stack.push(root.left);
+            root.right = stack.isEmpty() ? null : stack.peek();
+            root.left = null;
         }
     }
 }
