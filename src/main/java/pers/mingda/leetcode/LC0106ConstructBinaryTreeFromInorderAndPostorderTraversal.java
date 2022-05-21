@@ -2,6 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
     public TreeNode buildTreeRecursive(int[] inorder, int[] postorder) {
@@ -29,5 +30,35 @@ public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
         TreeNode left = buildTree(inorder, start, inorderIndex, postorder, postIndexHolder, map);
         TreeNode root = new TreeNode(rootVal, left, right);
         return root;
+    }
+
+    public TreeNode buildTreeIterative(int[] inorder, int[] postorder) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++)
+            map.put(inorder[i], i);
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode rootPointer = null;
+        for (int i = postorder.length - 1; i >= 0; i--) {
+            int rootVal = postorder[i];
+            TreeNode root = new TreeNode(rootVal);
+            if (i == postorder.length - 1)
+                rootPointer = root;
+            int inorderIndex = map.get(rootVal);
+            while (!stack.isEmpty()) {
+                TreeNode parent = stack.peek();
+                if (map.get(parent.val) < inorderIndex) {
+                    parent.right = root;
+                    break;
+                }
+                parent = stack.pop();
+                if (stack.isEmpty()) {
+                    parent.left = root; break;
+                } else if (map.get(parent.val) > inorderIndex && map.get(stack.peek().val) < inorderIndex) {
+                    parent.left = root; break;
+                }
+            }
+            stack.push(root);
+        }
+        return rootPointer;
     }
 }
