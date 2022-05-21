@@ -7,16 +7,14 @@ public class LC0114FlattenBinaryTreeToLinkedList {
         if (root == null || root.left == null && root.right == null)
             return root;
 
-        TreeNode rootRight = root.right;
-        if (root.left != null) {
-            TreeNode leftTail = flattenRecursive(root.left);
-            leftTail.right = rootRight;
-            root.right = root.left;
-            root.left = null;
-            if (rootRight == null)
-                return leftTail;
-        }
-        return flattenRecursive(rootRight);
+        TreeNode leftTail = flattenRecursive(root.left);
+        TreeNode rightTail = flattenRecursive(root.right);
+
+        if (leftTail != null)
+            leftTail.right = root.right;
+        root.right = root.left != null ? root.left : root.right;
+        root.left = null;
+        return rightTail == null ? leftTail : rightTail;
     }
 
     public void flattenIterative(TreeNode root) {
