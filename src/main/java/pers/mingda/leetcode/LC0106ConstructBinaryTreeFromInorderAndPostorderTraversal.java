@@ -59,29 +59,24 @@ public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
         return rootPointer;
     }
 
-    public TreeNode buildTreeNoMap(int[] inorder, int[] postorder) {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
         int ip = inorder.length - 1;
         int rootVal = postorder[postorder.length - 1];
         TreeNode root = new TreeNode(rootVal);
+
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         for (int pp = postorder.length - 2; pp >= 0; pp--) {
-            int val = postorder[pp];
-            TreeNode node = new TreeNode(val);
-            TreeNode parent = stack.peek();
-            if (node.val != inorder[ip])
-                parent.right = node;
-            else {
-                while (parent.val == inorder[ip - 1]) {
-                    node = stack.pop();
-                    parent = stack.peek();
+            TreeNode node = new TreeNode(postorder[pp]);
+            if (stack.peek().val != inorder[ip]) {
+                stack.peek().right = node;
+            } else {
+                TreeNode parent = stack.peek();
+                while (!stack.isEmpty() && stack.peek().val == inorder[ip]) {
+                    parent = stack.pop();
                     ip--;
                 }
-                parent = node;
-                pp--;
-                node = new TreeNode(postorder[pp]);
                 parent.left = node;
-                ip--;
             }
             stack.push(node);
         }
