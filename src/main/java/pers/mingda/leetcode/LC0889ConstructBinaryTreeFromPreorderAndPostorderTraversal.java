@@ -5,23 +5,21 @@ import java.util.Map;
 import java.util.Stack;
 
 public class LC0889ConstructBinaryTreeFromPreorderAndPostorderTraversal {
-    public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+    public TreeNode constructFromPrePostRefactored(int[] preorder, int[] postorder) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode root = new TreeNode(preorder[0]);
         stack.push(root);
         int postI = 0;
         for (int i = 1; i < preorder.length; i++) {
             TreeNode node = new TreeNode(preorder[i]);
-            TreeNode parent = stack.peek();
-            if (parent.val != postorder[postI]) {
-                parent.left = node;
-            } else {
-                while (stack.peek().val == postorder[postI]) {
-                    parent = stack.pop();
-                    postI++;
-                }
-                stack.peek().right = node;
+            while (stack.peek().val == postorder[postI]) {
+                stack.pop();
+                postI++;
             }
+            if (stack.peek().left == null)
+                stack.peek().left = node;
+            else
+                stack.peek().right = node;
             stack.push(node);
         }
         return root;
