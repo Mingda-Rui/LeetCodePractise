@@ -21,4 +21,20 @@ public class LC1008ConstructBinarySearchTreeFromPreorderTraversal {
         }
         return root;
     }
+
+    public TreeNode bstFromPreorderRecursive(int[] preorder, int[] indexHolder, int min, int max) {
+        int index = indexHolder[0] + 1;
+        if (index >= preorder.length)
+            return null;
+        int val = preorder[index];
+        if (val < min || val > max)
+            return null;
+        TreeNode node = new TreeNode(preorder[index]);
+        indexHolder[0]++;
+        TreeNode left = bstFromPreorderRecursive(preorder, indexHolder, min, val);
+        TreeNode right = bstFromPreorderRecursive(preorder, indexHolder, val, max);
+        node.left = left;
+        node.right = right;
+        return node;
+    }
 }
