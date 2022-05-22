@@ -69,7 +69,28 @@ public class LC0889ConstructBinaryTreeFromPreorderAndPostorderTraversal {
         node.right = constructFromPrePostRecursiveStartEnd(preorder, preIndexHolder, postorder, postIndex + 1, postE - 1, map);
         return node;
     }
+
+    public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+        return constructFromPrePostRecursiveSimplest(preorder, new int[]{0}, postorder, new int[]{0});
+    }
+
+    private TreeNode constructFromPrePostRecursiveSimplest(int[] preorder, int[] preIndexHolder, int[] postorder, int[] postIndexHolder) {
+        int preIndex = preIndexHolder[0];
+        int val = preorder[preIndex];
+        TreeNode root = new TreeNode(val);
+        preIndexHolder[0]++;
+
+        if (val != postorder[postIndexHolder[0]])
+            root.left = constructFromPrePostRecursiveSimplest(preorder, preIndexHolder, postorder, postIndexHolder);
+        if (val != postorder[postIndexHolder[0]])
+            root.right = constructFromPrePostRecursiveSimplest(preorder, preIndexHolder, postorder, postIndexHolder);
+        postIndexHolder[0]++;
+        return root;
+    }
 }
+
+// preorder = [1,2,4,5,3,6,7],
+// postorder = [4,5,2,6,7,3,1]
 
 
 
