@@ -38,4 +38,25 @@ public class LC0222CountCompleteTreeNodes {
             return leftCount;
         return 0;
     }
+
+    public int countNodesShortest(TreeNode root) {
+        if (root == null)
+            return 0;
+        boolean GO_LEFT = true;
+        int leftDepth = nodeDepth(root.left, GO_LEFT);
+        int rightDepth = nodeDepth(root.right, !GO_LEFT);
+        if (leftDepth == rightDepth)
+            return (1 << leftDepth + 1) - 1;
+        else
+            return countNodesShortest(root.left) + countNodesShortest(root.right) + 1;
+    }
+
+    private int nodeDepth(TreeNode root, boolean goLeft) {
+        int count = 0;
+        while (root != null) {
+            count++;
+            root = goLeft ? root.left : root.right;
+        }
+        return count;
+    }
 }
