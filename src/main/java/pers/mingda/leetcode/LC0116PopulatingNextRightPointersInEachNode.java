@@ -26,6 +26,28 @@ public class LC0116PopulatingNextRightPointersInEachNode {
         return root;
     }
 
+    public Node connectIterativeNoStack(Node root) {
+        if (root == null)
+            return root;
+        Node ite = root;
+        Node nextLevel = ite.left;
+        while (ite != null) {
+            if (ite.left != null) {
+                ite.left.next = ite.right;
+                if (ite.next != null)
+                    ite.right.next = ite.next.left;
+            }
+            if (ite.next == null) {
+                ite = nextLevel;
+                if (ite != null)
+                    nextLevel = ite.left;
+            } else {
+                ite = ite.next;
+            }
+        }
+        return root;
+    }
+
     public Node connectRecursive(Node root) {
         if (root == null || root.left == null)
             return root;
