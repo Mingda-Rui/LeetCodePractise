@@ -17,4 +17,16 @@ public class LC0096UniqueBinarySearchTrees {
         record[distance] = count;
         return count;
     }
+
+    public int numTreesIterative(int n) {
+        int[] record = new int[n + 1];
+        record[0] = 1;
+        record[1] = 1;
+
+        for (int i = 2; i < record.length; i++)
+            for (int j = 1; j < i + 1; j++)
+                record[i] += record[j - 1] * record[i - j];
+
+        return record[n];
+    }
 }
