@@ -37,12 +37,11 @@ public class LC0116PopulatingNextRightPointersInEachNode {
                 if (ite.next != null)
                     ite.right.next = ite.next.left;
             }
-            if (ite.next == null) {
+
+            ite = ite.next;
+            if (ite == null && nextLevel != null) {
                 ite = nextLevel;
-                if (ite != null)
-                    nextLevel = ite.left;
-            } else {
-                ite = ite.next;
+                nextLevel = ite.left;
             }
         }
         return root;
