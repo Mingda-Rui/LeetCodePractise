@@ -25,6 +25,17 @@ public class LC0116PopulatingNextRightPointersInEachNode {
         }
         return root;
     }
+
+    public Node connectRecursive(Node root) {
+        if (root == null || root.left == null)
+            return root;
+        root.left.next = root.right;
+        if (root.next != null)
+            root.right.next = root.next.left;
+        connectRecursive(root.left);
+        connectRecursive(root.right);
+        return root;
+    }
 }
 
 class Node {
