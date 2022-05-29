@@ -44,15 +44,13 @@ class BSTIteratorSmallInit {
     }
 
     public int next() {
-        int next;
         while (root != null) {
             stack.push(root);
             root = root.left;
         }
-        root = stack.pop();
-        next = root.val;
-        root = root.right;
-        return next;
+        TreeNode next = stack.pop();
+        root = next.right;
+        return next.val;
     }
 
     public boolean hasNext() {
