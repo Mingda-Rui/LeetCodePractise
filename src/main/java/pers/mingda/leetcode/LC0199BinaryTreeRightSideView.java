@@ -5,9 +5,7 @@ import java.util.List;
 
 public class LC0199BinaryTreeRightSideView {
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> result = new LinkedList<>();
-        rightSideView(root, 0, result);
-        return result;
+        return rightSideView(root, 0, new LinkedList<>());
     }
 
     private List<Integer> rightSideView(TreeNode root, int level, List<Integer> result) {
