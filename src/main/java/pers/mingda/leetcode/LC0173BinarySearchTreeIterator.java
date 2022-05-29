@@ -37,23 +37,25 @@ class BSTIterator {
 
 class BSTIteratorSmallInit {
     private Stack<TreeNode> stack;
-    private TreeNode root;
     public BSTIteratorSmallInit(TreeNode root) {
         this.stack = new Stack<>();
-        this.root = root;
+        pushAllLeft(root);
     }
 
     public int next() {
-        while (root != null) {
-            stack.push(root);
-            root = root.left;
-        }
         TreeNode next = stack.pop();
-        root = next.right;
+        pushAllLeft(next.right);
         return next.val;
     }
 
     public boolean hasNext() {
-        return root != null || !stack.isEmpty();
+        return !stack.isEmpty();
+    }
+
+    private void pushAllLeft(TreeNode node) {
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
+        }
     }
 }
