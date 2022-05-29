@@ -17,8 +17,7 @@ public class LC0662MaximumWidthOfBinaryTree {
             min.add(num);
             width.add(1);
         } else {
-            int currentWidth = width.get(level);
-            int maxWidth = Math.max(currentWidth, num - min.get(level) + 1);
+            int maxWidth = num - min.get(level) + 1;
             width.set(level, maxWidth);
         }
         int leftWidth = widthOfBinaryTree(root.left, num * 2, level + 1, min, width);
