@@ -2,6 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class LC0173BinarySearchTreeIterator {
 
@@ -31,5 +32,30 @@ class BSTIterator {
             list.add(root);
             constructList(root.right, list);
         }
+    }
+}
+
+class BSTIteratorSmallInit {
+    private Stack<TreeNode> stack;
+    private TreeNode root;
+    public BSTIteratorSmallInit(TreeNode root) {
+        this.stack = new Stack<>();
+        this.root = root;
+    }
+
+    public int next() {
+        int next;
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
+        }
+        root = stack.pop();
+        next = root.val;
+        root = root.right;
+        return next;
+    }
+
+    public boolean hasNext() {
+        return root != null || !stack.isEmpty();
     }
 }
