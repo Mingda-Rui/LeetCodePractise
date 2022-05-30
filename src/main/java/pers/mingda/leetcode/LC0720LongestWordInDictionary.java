@@ -1,5 +1,9 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class LC0720LongestWordInDictionary {
     public String longestWord(String[] words) {
         Trie root = new Trie();
@@ -29,6 +33,22 @@ public class LC0720LongestWordInDictionary {
             String child = getLongest(trie.arr[i]);
             if (child.length() > result.length())
                 result = child;
+        }
+        return result;
+    }
+
+    public String longestWordSortingSolution(String[] words) {
+        Arrays.sort(words);
+        String result = "";
+        Set<String> validWords = new HashSet<>();
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            int wordLen = word.length();
+            String prev = word.substring(0, wordLen - 1);
+            if (wordLen == 1 || validWords.contains(prev)) {
+                validWords.add(word);
+                result = wordLen > result.length() ? word : result;
+            }
         }
         return result;
     }
