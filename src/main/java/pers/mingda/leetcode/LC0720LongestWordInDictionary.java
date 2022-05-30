@@ -2,24 +2,22 @@ package pers.mingda.leetcode;
 
 public class LC0720LongestWordInDictionary {
     public String longestWord(String[] words) {
-        Trie root = constructTrie(words);
+        Trie root = new Trie();
+        root.word = "";
+        for (String word: words)
+            constructTrie(root, word);
         return getLongest(root);
     }
 
-    private Trie constructTrie(String[] words) {
-        Trie root = new Trie();
-        root.word = "";
-        for (String word: words) {
-            Trie trie = root;
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (trie.arr[c] == null)
-                    trie.arr[c] = new Trie();
-                trie = trie.arr[c];
-                if (i == word.length() - 1)
-                    trie.word = word;
-            }
+    private Trie constructTrie(Trie root, String word) {
+        Trie trie = root;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if (trie.arr[c] == null)
+                trie.arr[c] = new Trie();
+            trie = trie.arr[c];
         }
+        trie.word = word;
         return root;
     }
 
