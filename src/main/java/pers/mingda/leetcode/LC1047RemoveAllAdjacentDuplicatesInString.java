@@ -18,23 +18,13 @@ public class LC1047RemoveAllAdjacentDuplicatesInString {
         char[] arr = s.toCharArray();
         int current = 0;
         for (int i = 1; i < arr.length; i++) {
-            if (arr[current] == arr[i]) {
-                if (current == 0) {
-                    if (i == arr.length - 1) {
-                        return "";
-                    } else {
-                        i++;
-                        arr[current] = arr[i];
-                    }
-                } else {
-                    current--;
-                }
-            } else {
+            if (current < 0 || arr[current] != arr[i]) {
                 current++;
                 arr[current] = arr[i];
+            } else {
+                current--;
             }
         }
-
         return String.valueOf(arr, 0, current + 1);
     }
 }
