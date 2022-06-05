@@ -10,7 +10,9 @@ public class LC0071SimplifyPath {
         char[] arr = path.toCharArray();
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
+            boolean startWithDot = false;
             if (current >= 0 && arr[current] == '/' && arr[i] == '.') {
+                startWithDot = true;
                 if (i + 1 == arr.length || arr[i + 1] == '/') {
                     i++;
                 } else if ((i + 2 == arr.length && arr[i + 1] == '.')|| (arr[i + 1] == '.' && arr[i + 2] == '/') ) {
@@ -19,10 +21,10 @@ public class LC0071SimplifyPath {
                     current = stack.peek();
                     i += 2;
                 } else {
-                    current++;
-                    arr[current] = arr[i];
+                    startWithDot = false;
                 }
-            } else if (current < 0 || arr[current] != '/' || arr[i] != '/') {
+            }
+            if (!startWithDot && (current < 0 || arr[current] != '/' || arr[i] != '/') ) {
                 current++;
                 arr[current] = arr[i];
                 if (arr[current] == '/')
