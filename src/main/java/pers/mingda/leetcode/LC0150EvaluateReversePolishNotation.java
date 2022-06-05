@@ -29,4 +29,30 @@ public class LC0150EvaluateReversePolishNotation {
         }
         return stack.pop();
     }
+
+    public int evalRPNRecursive(String[] tokens) {
+        int[] indexHolder = {tokens.length - 1};
+        Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+        return evalRPNRecursive(tokens, indexHolder, operators);
+    }
+
+    public int evalRPNRecursive(String[] tokens, int[] indexHolder, Set<String> operators) {
+        int index = indexHolder[0];
+        String token = tokens[index];
+        indexHolder[0]--;
+        if (operators.contains(token)) {
+            int second = evalRPNRecursive(tokens, indexHolder, operators);
+            int first = evalRPNRecursive(tokens, indexHolder, operators);
+            int result = 0;
+            switch (token) {
+                case "+": result = first + second; break;
+                case "-": result = first - second; break;
+                case "*": result = first * second; break;
+                case "/": result = first / second; break;
+                default:
+            }
+            return result;
+        }
+        return Integer.parseInt(token);
+    }
 }
