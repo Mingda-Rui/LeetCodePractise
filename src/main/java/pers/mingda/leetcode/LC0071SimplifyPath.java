@@ -1,5 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class LC0071SimplifyPath {
@@ -35,6 +38,23 @@ public class LC0071SimplifyPath {
             current--;
         String result = String.valueOf(arr, 0, current + 1);
         return result;
+    }
+
+    public String simplifyPathShortSolution(String path) {
+        String[] dirArr = path.split("/");
+        StringBuilder sb = new StringBuilder();
+        Stack<String> stack = new Stack<>();
+        Set<String> set = new HashSet<>(Arrays.asList("", ".", ".."));
+        for (String dir: dirArr) {
+            if ("..".equals(dir) && !stack.isEmpty()) {
+                stack.pop();
+            } else if (!set.contains(dir)) {
+                stack.push(dir);
+            }
+        }
+        for (String dir: stack)
+            sb.append("/").append(dir);
+        return sb.isEmpty() ? "/" : sb.toString();
     }
 }
 
