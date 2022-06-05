@@ -5,30 +5,28 @@ import java.util.Stack;
 public class LC0227BasicCalculator2 {
     public int calculate(String s) {
         Stack<Integer> nums = new Stack<>();
-        char prevOperator = ' ';
+        int val = 0;
+        char prevOp = '+';
         for (int i = 0; i< s.length(); i++) {
             char current = s.charAt(i);
             if (Character.isDigit(current)) {
-                int num = current - '0';
-                while (i + 1 < s.length() && s.charAt(i + 1) >= '0' && s.charAt(i + 1) <= '9') {
-                    i++;
-                    int next = s.charAt(i) - '0';
-                    num = num * 10 + next;
-                }
-                switch (prevOperator) {
+                val = val * 10 + (current - '0');
+            }
+            if ((current != ' ' && !Character.isDigit(current)) || i == s.length() - 1) {
+                switch (prevOp) {
                     case '+':
-                        nums.push(num); break;
+                        nums.push(val); break;
                     case '-':
-                        nums.push(-num); break;
+                        nums.push(-val); break;
                     case '*':
-                        nums.push(nums.pop() * num); break;
+                        nums.push(nums.pop() * val); break;
                     case '/':
-                        nums.push(nums.pop() / num); break;
+                        nums.push(nums.pop() / val); break;
                     default:
-                        nums.push(num); break;
+                        nums.push(val); break;
                 }
-            } else if (current != ' ') {
-                prevOperator = current;
+                prevOp = current;
+                val = 0;
             }
         }
         int result = 0;
