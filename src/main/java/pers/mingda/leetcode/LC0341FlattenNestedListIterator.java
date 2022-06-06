@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Stack;
 
 public class LC0341FlattenNestedListIterator {
@@ -69,6 +70,44 @@ class NestedIteratorFlatAsYouGo implements Iterator<Integer> {
             NestedInteger next = nestedList.get(i);
             stack.push(next);
         }
+    }
+}
+
+class NestedIteratorWithIteratorStack implements Iterator<Integer> {
+
+    Stack<ListIterator<NestedInteger>> stack;
+
+    public NestedIteratorWithIteratorStack(List<NestedInteger> nestedList) {
+        this.stack = new Stack<>();
+        populateStack(nestedList);
+    }
+
+    @Override
+    public Integer next() {
+        return stack.peek().next().getInteger();
+    }
+
+    @Override
+    public boolean hasNext() {
+        while (!stack.isEmpty()) {
+            ListIterator<NestedInteger> ite = stack.peek();
+            if (ite.hasNext()) {
+                NestedInteger next = ite.next();
+                if (next.isInteger()) {
+                    ite.previous();
+                    return true;
+                } else {
+                    populateStack(next.getList());
+                }
+            } else {
+                stack.pop();
+            }
+        }
+        return false;
+    }
+
+    private void populateStack(List<NestedInteger> nestedList) {
+        stack.push(nestedList.listIterator());
     }
 }
 
