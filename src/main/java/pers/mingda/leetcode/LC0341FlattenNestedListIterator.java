@@ -56,18 +56,13 @@ class NestedIteratorFlatAsYouGo implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (stack.isEmpty())
-            return false;
-        NestedInteger next = stack.peek();
-        if (next.isInteger())
-            return true;
-
-        stack.pop();
-        if (!next.getList().isEmpty())
+        while (!stack.isEmpty() && !stack.peek().isInteger()) {
+            NestedInteger next = stack.pop();
             populateStack(next.getList());
-
-        return hasNext();
+        }
+        return !stack.isEmpty();
     }
+
 
     private void populateStack(List<NestedInteger> nestedList) {
         for (int i = nestedList.size() - 1; i >= 0; i--) {
