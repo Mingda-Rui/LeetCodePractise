@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 import java.util.List;
+import java.util.Stack;
 
 public class LC0385MiniParser {
     public NestedInteger deserialize(String s) {
@@ -34,6 +35,39 @@ public class LC0385MiniParser {
             indexHolder[0]++;
             return constructNestedInteger(arr, indexHolder);
         }
+    }
+
+    public NestedInteger deserializeStackSolution(String s) {
+        if (s.charAt(0) != '[') {
+            int val = Integer.parseInt(s);
+            return new NestedInteger(val);
+        }
+
+        NestedInteger result = null;
+        Stack<NestedInteger> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '[') {
+                NestedInteger next = new NestedInteger();
+                if (!stack.isEmpty())
+                    stack.peek().add(next);
+                stack.push(next);
+            } else if (Character.isDigit(c) || c == '-') {
+                if (c == '-')
+                    i++;
+                int val = s.charAt(i) - '0';
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    i++;
+                    val = val * 10 + (s.charAt(i) - '0');
+                }
+                val *= (c == '-') ? -1 : 1;
+                NestedInteger next = new NestedInteger(val);
+                stack.peek().add(next);
+            } else if (c == ']') {
+                result = stack.pop();
+            }
+        }
+        return result;
     }
 }
 
