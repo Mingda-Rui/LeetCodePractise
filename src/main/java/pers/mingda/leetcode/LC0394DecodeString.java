@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC0394DecodeString {
     public String decodeString(String s) {
         int[] indexHolder = {0};
@@ -27,5 +29,30 @@ public class LC0394DecodeString {
             indexHolder[0]++;
         }
         return null;
+    }
+
+    public String decodeStringTwoStacks(String s) {
+        Stack<String> strings = new Stack<>();
+        Stack<Integer> nums = new Stack<>();
+        String current = "";
+        int multiply = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                multiply = multiply * 10 + (c - '0');
+            } else if (c == '[') {
+                nums.push(multiply);
+                multiply = 0;
+                strings.push(current);
+                current = "";
+            } else if (c == ']') {
+                int repeat = nums.pop();
+                String head = strings.pop();
+                current = head + current.repeat(repeat);
+            } else {
+                current += c;
+            }
+        }
+        return current;
     }
 }
