@@ -8,26 +8,19 @@ public class LC0394DecodeString {
     }
 
     private String decodeStringRecursive(String s, int[] indexHolder) {
-        int paraCounter = 0;
-        int multiply = 1;
         StringBuilder current = new StringBuilder();
+        int multiply = 0;
         while (indexHolder[0] < s.length()) {
             char c = s.charAt(indexHolder[0]);
             if (Character.isDigit(c)) {
-                if (paraCounter == 0) {
-                    multiply = c - '0';
-                    while (indexHolder[0] + 1 < s.length() && Character.isDigit(s.charAt(indexHolder[0] + 1))) {
-                        multiply = multiply * 10 + (s.charAt(indexHolder[0] + 1) - '0');
-                        indexHolder[0]++;
-                    }
-                } else if (paraCounter == 1) {
-                    String part = decodeStringRecursive(s, indexHolder);
-                    current.append(part);
-                }
+                multiply = multiply * 10 + (c - '0');
             } else if (c == '[') {
-                paraCounter++;
+                indexHolder[0]++;
+                String part = decodeStringRecursive(s, indexHolder);
+                current.append(part.repeat(multiply));
+                multiply = 0;
             } else if (c == ']') {
-                return current.toString().repeat(multiply);
+                return current.toString();
             } else {
                 current.append(c);
             }
