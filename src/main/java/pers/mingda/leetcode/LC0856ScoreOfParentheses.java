@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC0856ScoreOfParentheses {
     public int scoreOfParentheses(String s) {
         return score(s, new int[1]);
@@ -20,5 +22,31 @@ public class LC0856ScoreOfParentheses {
                 return score;
         }
         return score;
+    }
+
+    public int scoreOfParenthesesStackSolution(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int currentScore = 0;
+        char prev = '(';
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (prev == '(' && c == '(') {
+                stack.push(0);
+            } else if (prev == '(' && c == ')') {
+                int currentSum = stack.pop();
+                currentScore = 1;
+                stack.push(currentSum + currentScore);
+            } else if (prev == ')' && c == '(') {
+                currentScore = 0;
+            } else if (prev == ')' && c == ')') {
+                int prevSum = stack.pop();
+                int currentSum = stack.pop() + prevSum * 2;
+                stack.push(currentSum);
+            }
+
+            prev = c;
+        }
+
+        return stack.pop();
     }
 }
