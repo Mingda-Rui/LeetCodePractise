@@ -26,27 +26,17 @@ public class LC0856ScoreOfParentheses {
 
     public int scoreOfParenthesesStackSolution(String s) {
         Stack<Integer> stack = new Stack<>();
-        int currentScore = 0;
-        char prev = '(';
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (prev == '(' && c == '(') {
+        stack.push(0);
+        for (char c: s.toCharArray()) {
+            if (c == '(') {
                 stack.push(0);
-            } else if (prev == '(' && c == ')') {
-                int currentSum = stack.pop();
-                currentScore = 1;
-                stack.push(currentSum + currentScore);
-            } else if (prev == ')' && c == '(') {
-                currentScore = 0;
-            } else if (prev == ')' && c == ')') {
-                int prevSum = stack.pop();
-                int currentSum = stack.pop() + prevSum * 2;
-                stack.push(currentSum);
+            } else if (c == ')') {
+                int currentVal = stack.pop();
+                int prevVal = stack.pop();
+                prevVal += Math.max(currentVal * 2, 1);
+                stack.push(prevVal);
             }
-
-            prev = c;
         }
-
         return stack.pop();
     }
 }
