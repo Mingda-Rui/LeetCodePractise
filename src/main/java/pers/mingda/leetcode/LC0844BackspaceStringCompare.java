@@ -27,4 +27,36 @@ public class LC0844BackspaceStringCompare {
                 stack.pop();
         }
     }
+
+    public boolean backspaceCompareTwoPointers(String s, String t) {
+        int sPointer = s.length() - 1;
+        int tPointer = t.length() - 1;
+        int sBackspaceCount = 0;
+        int tBackspaceCount = 0;
+        while (sPointer >= 0 || tPointer >= 0) {
+            while (sPointer >= 0 && (s.charAt(sPointer) == '#' || sBackspaceCount != 0)) {
+                if (s.charAt(sPointer) == '#')
+                    sBackspaceCount++;
+                else
+                    sBackspaceCount--;
+                sPointer--;
+            }
+            int sCurrent = sPointer >= 0 ? s.charAt(sPointer) : '#';
+
+            while (tPointer >= 0 && (t.charAt(tPointer) == '#' || tBackspaceCount != 0)) {
+                if (t.charAt(tPointer) == '#')
+                    tBackspaceCount++;
+                else
+                    tBackspaceCount--;
+                tPointer--;
+            }
+            int tCurrent = tPointer >= 0 ? t.charAt(tPointer) : '#';
+
+            if (sCurrent != tCurrent)
+                return false;
+            sPointer--;
+            tPointer--;
+        }
+        return sPointer == tPointer;
+    }
 }
