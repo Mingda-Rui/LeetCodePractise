@@ -37,4 +37,22 @@ public class LC0856ScoreOfParentheses {
         }
         return score;
     }
+
+    public int scoreOfParenthesesO1SpaceComplexity(String s) {
+        int result = 0;
+        int depth = 0;
+        char prev = '(';
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                depth++;
+            } else {
+                depth--;
+                if (prev == '(')
+                    result += Math.pow(2, depth);
+            }
+            prev = c;
+        }
+        return result;
+    }
 }
