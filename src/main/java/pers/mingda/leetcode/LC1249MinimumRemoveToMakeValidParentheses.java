@@ -5,28 +5,25 @@ import java.util.Stack;
 public class LC1249MinimumRemoveToMakeValidParentheses {
     public String minRemoveToMakeValid(String s) {
         Stack<Integer> stack = new Stack<>();
-        boolean[] removeChars = new boolean[s.length()];
+
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == '(') {
+            boolean isPrevLeftParenth = !stack.isEmpty() && s.charAt(stack.peek()) == '(';
+            if (c == ')' && isPrevLeftParenth) {
+                stack.pop();
+            } else if (!Character.isLetter(c)) {
                 stack.push(i);
-            } else if (c == ')') {
-                if (stack.isEmpty()) {
-                    removeChars[i] = true;
-                } else {
-                    stack.pop();
-                }
             }
         }
-        while (!stack.isEmpty()) {
-            int removeIndex = stack.pop();
-            removeChars[removeIndex] = true;
-        }
+
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            if (!removeChars[i])
+        int toBeRemoved = s.length();
+        for (int i = s.length() - 1; i >= 0; i++) {
+            if (toBeRemoved > i && !stack.isEmpty())
+                toBeRemoved = stack.pop();
+            if (i != toBeRemoved)
                 sb.append(s.charAt(i));
         }
-        return sb.toString();
+        return sb.reverse().toString();
     }
 }
