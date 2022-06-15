@@ -26,4 +26,36 @@ public class LC1249MinimumRemoveToMakeValidParentheses {
         }
         return sb.reverse().toString();
     }
+
+    public String minRemoveToMakeValidNoStack(String s) {
+        int balance = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            if (c == '(') {
+                balance++;
+            } else if (c == ')') {
+                if (balance > 0)
+                    balance--;
+                else
+                    chars[i] = '*';
+            }
+        }
+
+        for (int i = chars.length - 1; i >= 0 && balance > 0; i--) {
+            if (chars[i] == '(') {
+                chars[i] = '*';
+                balance--;
+            }
+        }
+
+        int index = 0;
+        for (char c: chars) {
+            if (c != '*') {
+                chars[index] = c;
+                index++;
+            }
+        }
+        return String.valueOf(chars, 0, index);
+    }
 }
