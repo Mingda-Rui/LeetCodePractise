@@ -14,17 +14,18 @@ public class LC0636ExclusiveTimeOfFunctions {
             String op = parsedLog[1];
             int timestamp = Integer.valueOf(parsedLog[2]);
 
+            if (!funcIdStack.isEmpty()) {
+                int prevFuncId = funcIdStack.peek();
+                result[prevFuncId] += timestamp - prevTs;
+            }
+
             if ("start".equals(op)) {
-                if (!funcIdStack.isEmpty()) {
-                    int prevFuncId = funcIdStack.peek();
-                    result[prevFuncId] += timestamp - prevTs;
-                }
                 funcIdStack.push(funcId);
                 prevTs = timestamp;
             } else {
-                funcId = funcIdStack.pop();
-                result[funcId] += timestamp - prevTs + 1;
+                funcIdStack.pop();
                 prevTs = timestamp + 1;
+                result[funcId]++;
             }
         }
         return result;
