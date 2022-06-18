@@ -50,37 +50,24 @@ public class LC0726NumberOfAtoms {
     }
 
     public String countOfAtomsRecursive(String formula) {
-        Map<String, Integer> map = countOfAtomsRecursive(formula.toCharArray(), 0, formula.length());
+        Map<String, Integer> map = countOfAtomsRecursive(formula.toCharArray(), new int[1]);
         return generateCountOfAtoms(map);
     }
 
-    private Map<String, Integer> countOfAtomsRecursive(char[] formula, int start, int end) {
+    private Map<String, Integer> countOfAtomsRecursive(char[] formula, int[] indexHolder) {
         Map<String, Integer> map = new TreeMap<>();
         String currentElement = "";
         int magnitude = 0;
-        for (int i = start; i < end; i++) {
-            char c = formula[i];
+        while (indexHolder[0] < formula.length) {
+            int index = indexHolder[0];
+            char c = formula[indexHolder[0]];
             if (c == '(') {
-                if (!currentElement.isEmpty()) {
-                    int prevVal = map.getOrDefault(currentElement, 0);
-                    map.put(currentElement, prevVal + Math.max(1, magnitude));
-                }
-                currentElement = "";
-                start = i + 1;
-                int balance = 1;
-                while (balance != 0) {
-                    i++;
-                    if (formula[i] == ')')
-                        balance--;
-                    else if (formula[i] == '(')
-                        balance++;
-                }
-
-                Map<String, Integer> innerMap = countOfAtomsRecursive(formula, start, i);
+                indexHolder[0]++;
+                Map<String, Integer> innerMap = countOfAtomsRecursive(formula, indexHolder);
                 magnitude = 0;
-                while (i + 1 < formula.length && Character.isDigit(formula[i + 1])) {
-                    i++;
-                    magnitude = magnitude * 10 + (formula[i] - '0');
+                while (indexHolder[0] + 1 < formula.length && Character.isDigit(formula[indexHolder[0] + 1])) {
+                    indexHolder[0]++;
+                    magnitude = magnitude * 10 + (formula[indexHolder[0]] - '0');
                 }
                 magnitude = Math.max(1, magnitude);
                 for (String element: innerMap.keySet()) {
@@ -89,22 +76,23 @@ public class LC0726NumberOfAtoms {
                     map.put(element, val + currentVal);
                 }
                 magnitude = 0;
+            } else if (c == ')') {
+                return map;
             } else if (Character.isLetter(c)) {
-                if (!currentElement.isEmpty() && Character.isUpperCase(c)) {
-                    int val = map.getOrDefault(currentElement, 0);
-                    map.put(currentElement, val + Math.max(1, magnitude));
-                    currentElement = "";
-                    magnitude = 0;
-                }
                 currentElement += c;
             } else if (Character.isDigit(c)) {
-                magnitude = magnitude * 10 + (formula[i] - '0');
+                magnitude = magnitude * 10 + (formula[index] - '0');
             }
 
-            if (i + 1 == end && !currentElement.isEmpty()) {
-                int val = map.getOrDefault(currentElement, 0);
-                map.put(currentElement, val + Math.max(1, magnitude));
+            boolean atTail = index + 1 == formula.length;
+            boolean foundElement = atTail || !currentElement.isEmpty() && !Character.isDigit(formula[index + 1]) && !Character.isLowerCase(formula[index + 1]);
+            if (foundElement) {
+                int prevVal = map.getOrDefault(currentElement, 0);
+                map.put(currentElement, prevVal + Math.max(1, magnitude));
+                currentElement = "";
+                magnitude = 0;
             }
+            indexHolder[0]++;
         }
         return map;
     }
