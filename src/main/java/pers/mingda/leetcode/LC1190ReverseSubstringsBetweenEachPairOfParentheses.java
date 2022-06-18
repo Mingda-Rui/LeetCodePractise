@@ -42,4 +42,33 @@ public class LC1190ReverseSubstringsBetweenEachPairOfParentheses {
         }
         return sb.toString();
     }
+
+    public String reverseParenthesesFlipSolution(String s) {
+        Stack<Integer> parentheseStack = new Stack<>();
+        int[] pair = new int[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                parentheseStack.push(i);
+            } else if (c == ')') {
+                int openP = parentheseStack.pop();
+                pair[openP] = i;
+                pair[i] = openP;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int offset = 1;
+        for (int i = 0; i < s.length(); i += offset) {
+            char c = s.charAt(i);
+            if (c == '(' || c == ')') {
+                i = pair[i];
+                offset = -offset;
+            } else {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
+    }
 }
