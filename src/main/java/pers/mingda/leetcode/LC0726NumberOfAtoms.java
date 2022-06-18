@@ -35,6 +35,10 @@ public class LC0726NumberOfAtoms {
             }
         }
 
+        return generateCountOfAtoms(map);
+    }
+
+    private String generateCountOfAtoms(Map<String, Integer> map) {
         StringBuilder sb = new StringBuilder();
         for (String e: map.keySet()) {
             int val = map.get(e);
@@ -43,5 +47,65 @@ public class LC0726NumberOfAtoms {
                 sb.append(val);
         }
         return sb.toString();
+    }
+
+    public String countOfAtomsRecursive(String formula) {
+        Map<String, Integer> map = countOfAtomsRecursive(formula.toCharArray(), 0, formula.length());
+        return generateCountOfAtoms(map);
+    }
+
+    private Map<String, Integer> countOfAtomsRecursive(char[] formula, int start, int end) {
+        Map<String, Integer> map = new TreeMap<>();
+        String currentElement = "";
+        int magnitude = 0;
+        for (int i = start; i < end; i++) {
+            char c = formula[i];
+            if (c == '(') {
+                if (!currentElement.isEmpty()) {
+                    int prevVal = map.getOrDefault(currentElement, 0);
+                    map.put(currentElement, prevVal + Math.max(1, magnitude));
+                }
+                currentElement = "";
+                start = i + 1;
+                int balance = 1;
+                while (balance != 0) {
+                    i++;
+                    if (formula[i] == ')')
+                        balance--;
+                    else if (formula[i] == '(')
+                        balance++;
+                }
+
+                Map<String, Integer> innerMap = countOfAtomsRecursive(formula, start, i);
+                magnitude = 0;
+                while (i + 1 < formula.length && Character.isDigit(formula[i + 1])) {
+                    i++;
+                    magnitude = magnitude * 10 + (formula[i] - '0');
+                }
+                magnitude = Math.max(1, magnitude);
+                for (String element: innerMap.keySet()) {
+                    int val = innerMap.get(element) * magnitude;
+                    int currentVal = map.getOrDefault(element, 0);
+                    map.put(element, val + currentVal);
+                }
+                magnitude = 0;
+            } else if (Character.isLetter(c)) {
+                if (!currentElement.isEmpty() && Character.isUpperCase(c)) {
+                    int val = map.getOrDefault(currentElement, 0);
+                    map.put(currentElement, val + Math.max(1, magnitude));
+                    currentElement = "";
+                    magnitude = 0;
+                }
+                currentElement += c;
+            } else if (Character.isDigit(c)) {
+                magnitude = magnitude * 10 + (formula[i] - '0');
+            }
+
+            if (i + 1 == end && !currentElement.isEmpty()) {
+                int val = map.getOrDefault(currentElement, 0);
+                map.put(currentElement, val + Math.max(1, magnitude));
+            }
+        }
+        return map;
     }
 }
