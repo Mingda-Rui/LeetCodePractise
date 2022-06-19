@@ -13,11 +13,9 @@ public class LC0084LargestRectangleInHistogram {
                 currentBoundray = leftIndexStack.pop();
 
             leftIndexStack.push(i);
-            int area = currentH * (i - currentBoundray + 1);
-            int prevArea = 0;
-            if (heights[currentBoundray] != 0)
-                prevArea = (leftHighests[currentBoundray] / heights[currentBoundray] * currentH) - currentH;
-            leftHighests[i] = area + Math.max(0, prevArea);
+            int distance = i - currentBoundray + 1;
+            int prevDistance = Math.max(0, leftHighests[currentBoundray] - 1);
+            leftHighests[i] = distance + prevDistance;
         }
 
         int[] rightHighests = new int[heights.length];
@@ -29,16 +27,16 @@ public class LC0084LargestRectangleInHistogram {
                 currentBoundray = rightIndexStack.pop();
 
             rightIndexStack.push(i);
-            int area = currentH * (currentBoundray - i + 1);
-            int prevArea = 0;
-            if (heights[currentBoundray] != 0)
-                prevArea = (rightHighests[currentBoundray] / heights[currentBoundray] * currentH) - currentH;
-            rightHighests[i] = area + Math.max(0, prevArea);
+            int distance = currentBoundray - i + 1;
+            int prevDistance = Math.max(0, rightHighests[currentBoundray] - 1);
+            rightHighests[i] = distance + prevDistance;
         }
 
         int result = 0;
-        for (int i = 0; i < heights.length; i++)
-            result = Math.max(result, leftHighests[i] + rightHighests[i] - heights[i]);
+        for (int i = 0; i < heights.length; i++) {
+            int area = (leftHighests[i] + rightHighests[i] - 1) * heights[i];
+            result = Math.max(result, area);
+        }
         return result;
     }
 }
