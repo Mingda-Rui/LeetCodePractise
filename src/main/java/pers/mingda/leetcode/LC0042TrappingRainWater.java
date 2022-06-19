@@ -33,6 +33,29 @@ public class LC0042TrappingRainWater {
         }
         return result;
     }
+
+    public int trapDpSolution(int[] height) {
+        int leftHighest = 0;
+        int[] leftHighests = new int[height.length];
+        for (int i = 0; i < height.length; i++) {
+            leftHighest = Math.max(leftHighest, height[i]);
+            leftHighests[i] = leftHighest;
+        }
+
+        int rightHighest = 0;
+        int[] rightHighests = new int[height.length];
+        for (int i = height.length - 1; i >= 0; i--) {
+            rightHighest = Math.max(rightHighest, height[i]);
+            rightHighests[i] = rightHighest;
+        }
+
+        int result = 0;
+        for (int i = 0; i < height.length; i++) {
+            int maxCap = Math.min(leftHighests[i], rightHighests[i]);
+            result += Math.max(maxCap - height[i], 0);
+        }
+        return result;
+    }
 }
 
 // -    -
