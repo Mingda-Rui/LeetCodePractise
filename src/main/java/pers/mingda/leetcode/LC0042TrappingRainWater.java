@@ -5,29 +5,16 @@ import java.util.Stack;
 public class LC0042TrappingRainWater {
     public int trap(int[] height) {
         int result = 0;
-        int[] capacityRecord = new int[height.length];
-        Stack<Integer> stack = new Stack<>(); // index
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < height.length; i++) {
             int currentH = height[i];
-            if (!stack.isEmpty() && height[stack.peek()] < currentH) {
-                while (stack.size() > 1 && height[stack.peek()] < currentH)
-                    stack.pop();
-
-                int prevIndex = stack.peek();
-                int newWaterHeight = Math.min(height[prevIndex], currentH);
-
-                int currentCap = 0;
-                for (int j = prevIndex; j < i; j++)
-                    currentCap += Math.max(0, newWaterHeight - height[j]);
-
-                capacityRecord[i] = capacityRecord[prevIndex] + currentCap;
-
-                if (height[prevIndex] <= currentH)
-                    stack.pop();
-
-                result = Math.max(result, capacityRecord[i]);
-            } else if (i - 1 >= 0) {
-                capacityRecord[i] = capacityRecord[i - 1];
+            while (!stack.isEmpty() && height[stack.peek()] < currentH) {
+                int target = stack.pop();
+                int left = stack.isEmpty() ? target : stack.peek();
+                int minBoard = Math.min(height[left], currentH);
+                int distance = i - left - 1;
+                int capacity = (minBoard - height[target]) * distance;
+                result += Math.max(0, capacity);
             }
             stack.push(i);
         }
