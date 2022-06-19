@@ -56,8 +56,24 @@ public class LC0042TrappingRainWater {
         }
         return result;
     }
-}
 
-// -    -
-//    --
-//  --
+    public int trapTwoPointers(int[] height) {
+        int result = 0;
+        int left = 0;
+        int highestLeft = 0;
+        int right = height.length - 1;
+        int highestRight = 0;
+        while (left < right) {
+            highestLeft = Math.max(highestLeft, height[left]);
+            highestRight = Math.max(highestRight, height[right]);
+            if (highestLeft < highestRight) {
+                result += Math.max(highestLeft - height[left], 0);
+                left++;
+            } else {
+                result += Math.max(highestRight - height[right], 0);
+                right--;
+            }
+        }
+        return result;
+    }
+}
