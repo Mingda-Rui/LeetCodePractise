@@ -13,8 +13,9 @@ public class LC1046LastStoneWeight {
         while (queue.size() > 1) {
             int stone1 = queue.remove();
             int stone2 = queue.remove();
-            queue.add(Math.abs(stone1 - stone2));
+            if (stone1 != stone2)
+                queue.add(Math.abs(stone1 - stone2));
         }
-        return queue.remove();
+        return queue.isEmpty() ? 0 : queue.remove();
     }
 }
