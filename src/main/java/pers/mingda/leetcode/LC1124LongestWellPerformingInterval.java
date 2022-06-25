@@ -26,4 +26,31 @@ public class LC1124LongestWellPerformingInterval {
         }
         return max;
     }
+
+    public int longestWPIBruteForce(int[] hours) {
+        int[] record = new int[hours.length];
+        int current = 0;
+        int max = 0;
+        for (int i = 0; i < hours.length; i++) {
+            int hour = hours[i];
+            if (hour > 8)
+                current++;
+            else
+                current--;
+
+            record[i] = current;
+            if (current < 1) {
+                for (int j = 0; j < i; j++) {
+                    if (current - record[j] > 0) {
+                        max = Math.max(max, i - j);
+                        break;
+                    }
+                }
+            } else {
+                max = Math.max(max, i + 1);
+            }
+
+        }
+        return max;
+    }
 }
