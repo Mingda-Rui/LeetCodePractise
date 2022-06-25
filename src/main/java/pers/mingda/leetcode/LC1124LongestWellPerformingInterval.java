@@ -1,6 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LC1124LongestWellPerformingInterval {
@@ -73,6 +75,54 @@ public class LC1124LongestWellPerformingInterval {
             }
 
         }
+        return result;
+    }
+
+    public int longestWPIExample(int[] hours) {
+        List<Integer> nt = new ArrayList<>();
+        nt.add(-1);
+
+        int result = 0;
+        int sum = 0;
+        for (int i = 0; i < hours.length; i++) {
+
+            sum += hours[i] > 8 ? -1 : 1;
+
+            if (sum < 0) {
+                result = i + 1;
+            } else {
+                if (nt.size() > sum + 1)
+                    result = Math.max(result, i - nt.get(sum + 1));
+                if (nt.size() < sum + 1)
+                    nt.add(i);
+            }
+        }
+        return result;
+    }
+
+    public int longestWPIArraySolution(int[] hours) {
+        int result = 0;
+        int sum = 0;
+        int[] record = new int[hours.length + 1];
+        int numOfRelaxDay = -1;
+        for (int i = 0; i < hours.length; i++) {
+            int hour = hours[i];
+            sum += hour > 8 ? 1 : -1;
+
+            if (sum > 0) {
+                result = i + 1;
+            } else {
+                int netRelaxDay = Math.abs(sum);
+                if (netRelaxDay > numOfRelaxDay) {
+                    numOfRelaxDay = netRelaxDay;
+                    record[numOfRelaxDay] = i;
+                }
+                if (netRelaxDay + 1 <= numOfRelaxDay)
+                    result = Math.max(result, i - record[netRelaxDay + 1]);
+            }
+
+        }
+
         return result;
     }
 }
