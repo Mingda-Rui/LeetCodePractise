@@ -1,5 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LC1124LongestWellPerformingInterval {
     public int longestWPI(int[] hours) {
         int[] tiringDays = new int[hours.length];
@@ -52,5 +55,24 @@ public class LC1124LongestWellPerformingInterval {
 
         }
         return max;
+    }
+
+    public int longestWPIMapSolution(int[] hours) {
+        int result = 0;
+        int score = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < hours.length; i++) {
+            int hour = hours[i];
+            score += hour > 8 ? 1 : -1;
+            if (score > 0)
+                result = i + 1;
+            else {
+                map.putIfAbsent(score, i);
+                int start = map.getOrDefault(score - 1, i);
+                result = Math.max(result, i - start);
+            }
+
+        }
+        return result;
     }
 }
