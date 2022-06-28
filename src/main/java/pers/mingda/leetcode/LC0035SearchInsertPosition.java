@@ -9,17 +9,14 @@ public class LC0035SearchInsertPosition {
             mid = start + (end - start) / 2;
             int current = nums[mid];
 
-            if (current == target) {
+            if (current == target)
                 return mid;
-            } else if (start + 1 == end) {
-                return current < target ? mid + 1 : mid;
-            } else if (current > target) {
+            else if (current > target)
                 end = mid;
-            } else if (current < target) {
-                start = mid;
-            }
+            else if (current < target)
+                start = mid + 1;
         }
 
-        return mid;
+        return start;
     }
 }
