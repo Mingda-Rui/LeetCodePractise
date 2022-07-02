@@ -19,4 +19,15 @@ public class LC0162FindPeakElement {
 
         return -1;
     }
+
+    public int findPeakElementBruteForce(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int val = nums[i];
+            boolean greaterThanLeft = i == 0 || nums[i - 1] < val;
+            boolean greaterThanRight = i == nums.length - 1 || nums[i + 1] < val;
+            if (greaterThanLeft && greaterThanRight)
+                return i;
+        }
+        return -1;
+    }
 }
