@@ -44,13 +44,12 @@ public class LC0209MinimumSizeSubarraySum {
         int minimal = Integer.MAX_VALUE;
         int currentVal = 0;
         while (fast < nums.length || slow < nums.length) {
-            if (currentVal >= target) {
-                minimal = Math.min(minimal, fast - slow);
-            }
             if (currentVal < target && fast < nums.length) {
                 currentVal += nums[fast];
                 fast++;
             } else {
+                if (currentVal >= target)
+                    minimal = Math.min(minimal, fast - slow);
                 currentVal -= nums[slow];
                 slow++;
             }
