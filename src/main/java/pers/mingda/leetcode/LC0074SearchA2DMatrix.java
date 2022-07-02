@@ -27,20 +27,17 @@ public class LC0074SearchA2DMatrix {
         int column = matrix[0].length;
         int start = 0;
         int end = row;
-        int rowNum = 0;
         while (start < end) {
-            rowNum = start + (end - start) / 2;
-            int val = matrix[rowNum][0];
+            int mid = start + (end - start) / 2;
+            int val = matrix[mid][0];
             if (val == target)
                 return true;
-            else if (start + 1 == end)
-                break;
             else if (val < target)
-                start = rowNum;
+                start = mid + 1;
             else
-                end = rowNum;
+                end = mid;
         }
-
+        int rowNum = Math.max(start - 1, 0);
         start = 0;
         end = column;
         while (start < end) {
