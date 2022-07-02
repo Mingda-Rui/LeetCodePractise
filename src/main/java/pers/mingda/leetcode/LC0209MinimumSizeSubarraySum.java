@@ -37,4 +37,24 @@ public class LC0209MinimumSizeSubarraySum {
 
         return start - 1;
     }
+
+    public int minSubArrayLenTwoPointers(int target, int[] nums) {
+        int fast = 0;
+        int slow = 0;
+        int minimal = Integer.MAX_VALUE;
+        int currentVal = 0;
+        while (fast < nums.length || slow < nums.length) {
+            if (currentVal >= target) {
+                minimal = Math.min(minimal, fast - slow);
+            }
+            if (currentVal < target && fast < nums.length) {
+                currentVal += nums[fast];
+                fast++;
+            } else {
+                currentVal -= nums[slow];
+                slow++;
+            }
+        }
+        return minimal == Integer.MAX_VALUE ? 0 : minimal;
+    }
 }
