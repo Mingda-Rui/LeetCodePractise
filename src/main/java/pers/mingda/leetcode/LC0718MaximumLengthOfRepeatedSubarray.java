@@ -9,19 +9,16 @@ public class LC0718MaximumLengthOfRepeatedSubarray {
             int mid = start + (end - start) / 2;
             int val = nums[mid];
 
-            int nextIndex = mid + 1;
-            int nextVal = nums[nums.length - 1];
-            while (nextIndex < nums.length && nums[nextIndex] == val)
-                nextIndex++;
-            if (nextIndex < nums.length)
-                nextVal = nums[nextIndex];
-
             if (val == target)
                 return true;
-            boolean midOnLeft = val > nextVal || nextVal > head;
+
+            boolean midOnLeft = val > head;
             boolean targetOnLeft = target >= head;
             boolean midTargetSameSide = (midOnLeft && targetOnLeft) || (!midOnLeft && !targetOnLeft);
-            if ((midTargetSameSide && val < target) || (!midTargetSameSide && midOnLeft))
+
+            if (nums[start] == val)
+                start++;
+            else if ((midTargetSameSide && val < target) || (!midTargetSameSide && midOnLeft))
                 start = mid + 1;
             else
                 end = mid;
