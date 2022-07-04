@@ -30,4 +30,24 @@ public class LC0387FirstUniqueCharacterInAString {
         }
         return map.isEmpty() ? -1 : map.entrySet().iterator().next().getValue();
     }
+
+    public int firstUniqCharTwoPointers(String s) {
+        int slow = 0;
+        int fast = 1;
+        int[] record = new int[128];
+        record[s.charAt(slow)]++;
+        while (slow < fast) {
+            if (fast < s.length()) {
+                if (s.charAt(slow) == s.charAt(fast))
+                    slow++;
+                record[s.charAt(fast)]++;
+                fast++;
+            } else if (record[s.charAt(slow)] > 1) {
+                slow++;
+            } else {
+                return slow;
+            }
+        }
+        return -1;
+    }
 }
