@@ -12,4 +12,18 @@ public class LC0027RemoveElement {
         }
         return slow;
     }
+
+    public int removeElementOptimized(int[] nums, int val) {
+        int head = 0;
+        int tail = nums.length;
+        while (head < tail) {
+            if (nums[head] == val) {
+                tail--;
+                nums[head] = nums[tail];
+            } else {
+                head++;
+            }
+        }
+        return tail;
+    }
 }
