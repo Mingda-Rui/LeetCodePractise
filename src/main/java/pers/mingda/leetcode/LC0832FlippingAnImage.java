@@ -6,9 +6,10 @@ public class LC0832FlippingAnImage {
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < (column + 1) / 2; j++) {
                 int exchangeCol = column - j - 1;
-                int tmp = image[i][j] == 0 ? 1 : 0;
-                image[i][j] = image[i][exchangeCol] == 0 ? 1 : 0;
-                image[i][exchangeCol] = tmp;
+                if (image[i][j] == image[i][exchangeCol]) {
+                    image[i][j] ^= 1;
+                    image[i][exchangeCol] = image[i][j];
+                }
             }
         }
         return image;
