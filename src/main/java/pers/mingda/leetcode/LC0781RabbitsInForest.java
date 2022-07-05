@@ -2,17 +2,14 @@ package pers.mingda.leetcode;
 
 public class LC0781RabbitsInForest {
     public int numRabbits(int[] answers) {
-        int max = 0;
-        for (int num: answers)
-            max = Math.max(num, max);
-        int[] record = new int[max + 1];
-        for (int num: answers)
-            record[num]++;
+        int[] record = new int[1001];
         int total = 0;
-        for (int i = 0; i < record.length; i++) {
-            int count = record[i];
-            int numOfColor = count / (i + 1) + (count % (i + 1) > 0 ? 1 : 0);
-            total += numOfColor * (i + 1);
+        for (int i = 0; i < answers.length; i++) {
+            int num = answers[i] + 1;
+            int curVal = record[num];
+            if (curVal % num == 0)
+                total += num;
+            record[num]++;
         }
         return total;
     }
