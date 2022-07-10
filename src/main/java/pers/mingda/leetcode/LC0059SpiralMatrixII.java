@@ -22,7 +22,6 @@ public class LC0059SpiralMatrixII {
         return result;
     }
 
-
     public int[][] generateMatrixCalcNum(int n) {
         int[][] result = new int[n][n];
         for (int i = 0; i < n; i++) {
@@ -59,5 +58,28 @@ public class LC0059SpiralMatrixII {
             return startNumOfTheLayer + length * 2 + (length - y);
         else
             return startNumOfTheLayer + length * 3 + (length - x);
+    }
+
+    public int[][] generateMatrixFourDir(int n) {
+        int[][] result = new int[n][n];
+        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int counter = 0;
+        int x = 0;
+        int y = 0;
+        int dir = 0;
+        while (counter < n * n) {
+            counter++;
+            boolean boundaryCheck = x >= 0 && x < n && y >= 0 && y < n;
+            if (!boundaryCheck || result[x][y] != 0) {
+                int prevDir = dir;
+                dir = (dir + 1) % 4;
+                x = x - dirs[prevDir][0] + dirs[dir][0];
+                y = y - dirs[prevDir][1] + dirs[dir][1];
+            }
+            result[x][y] = counter;
+            x += dirs[dir][0];
+            y += dirs[dir][1];
+        }
+        return result;
     }
 }
