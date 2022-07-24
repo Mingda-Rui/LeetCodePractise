@@ -18,7 +18,7 @@ public class LC0016ThreeSumClosest {
                 else if (val > target)
                     end--;
                 else
-                    start = end;
+                    return val;
             }
         }
 
