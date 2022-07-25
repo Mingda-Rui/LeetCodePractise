@@ -1,8 +1,10 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class LC0018FourSum {
     public List<List<Integer>> fourSum(int[] nums, int target) {
@@ -41,5 +43,31 @@ public class LC0018FourSum {
             }
         }
         return result;
+    }
+
+    public List<List<Integer>> fourSumRefactored(int[] nums, int target) {
+        Set<List<Integer>> result = new HashSet<>();
+        int[] sorted = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(sorted);
+
+        for (int outerL = 0; outerL < sorted.length; outerL++) {
+            for (int outerR = sorted.length - 1; outerR > outerL; outerR--) {
+                int innerL = outerL + 1;
+                int innerR = outerR - 1;
+                while (innerL < innerR) {
+                    long val = (long)sorted[outerL] + (long)sorted[innerL] + (long)sorted[innerR] + (long)sorted[outerR];
+                    if (val == target) {
+                        List<Integer> list = Arrays.asList(sorted[outerL], sorted[innerL], sorted[innerR], sorted[outerR]);
+                        result.add(list);
+                    }
+
+                    if (val <= target)
+                        innerL++;
+                    else
+                        innerR--;
+                }
+            }
+        }
+        return result.stream().toList();
     }
 }
