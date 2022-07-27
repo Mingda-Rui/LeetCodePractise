@@ -25,6 +25,21 @@ public class LC0690EmployeeImportance {
         }
         return totalImportance;
     }
+
+    public int getImportanceDfs(List<Employee> employees, int id) {
+        Map<Integer, Employee> map = new HashMap<>();
+        for (Employee employee: employees)
+            map.put(employee.id, employee);
+        return getImportanceDfsHelper(map, id);
+    }
+
+    private int getImportanceDfsHelper(Map<Integer, Employee> map, int id) {
+        Employee employee = map.get(id);
+        int totalImportance = employee.importance;
+        for (int subId: employee.subordinates)
+            totalImportance += getImportanceDfsHelper(map, subId);
+        return totalImportance;
+    }
 }
 
 class Employee {
