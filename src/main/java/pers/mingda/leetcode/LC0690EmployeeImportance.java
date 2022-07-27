@@ -10,12 +10,11 @@ public class LC0690EmployeeImportance {
     public int getImportance(List<Employee> employees, int id) {
         Map<Integer, Employee> map = new HashMap<>();
         Queue<Employee> queue = new LinkedList<>();
-        for (Employee employee: employees) {
+        for (Employee employee: employees)
             map.put(employee.id, employee);
-            if (employee.id == id)
-                queue.add(employee);
-        }
         int totalImportance = 0;
+        Employee theBoss = map.get(id);
+        queue.add(theBoss);
         while (!queue.isEmpty()) {
             Employee employee = queue.remove();
             totalImportance += employee.importance;
