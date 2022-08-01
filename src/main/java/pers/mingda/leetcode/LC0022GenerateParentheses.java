@@ -46,5 +46,26 @@ public class LC0022GenerateParentheses {
 
         return result.get(n);
     }
+
+    public List<String> generateParenthesisDpRecursive(int n) {
+        return generateParenthesisDpRecursive(n, new ArrayList<>());
+    }
+
+    private List<String> generateParenthesisDpRecursive(int n, List<List<String>> result) {
+        if (n == 0)
+            return List.of("");
+        if (result.size() > n)
+            return result.get(n);
+
+        List<String> currList = new LinkedList<>();
+        for (int leftSize = 0; leftSize < n; leftSize++) {
+            int rightSize = n - leftSize - 1;
+            for (String left: generateParenthesisDpRecursive(leftSize, result))
+                for (String right: generateParenthesisDpRecursive(rightSize, result))
+                    currList.add("(" + left + ")" + right);
+        }
+        result.add(currList);
+        return currList;
+    }
 }
 
