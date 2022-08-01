@@ -32,10 +32,8 @@ public class LC0022GenerateParentheses {
     public List<String> generateParenthesisDp(int n) {
         List<List<String>> result = new ArrayList<>();
         List<String> list0 = List.of("");
-        List<String> list1 = List.of("()");
         result.add(list0);
-        result.add(list1);
-        for (int length = 2; length <= n; length++) {
+        for (int length = 1; length <= n; length++) {
             List<String> currList = new LinkedList<>();
             for (int leftSize = 0; leftSize < length; leftSize++)  {
                 int rightSize = length - leftSize - 1;
