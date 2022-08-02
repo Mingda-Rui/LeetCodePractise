@@ -11,18 +11,15 @@ public class LC0875KokoEatingBananas {
 
         int start = Math.max(1, total / h);
         int end = maxPile + 1;
-        int speed = 0;
         while (start < end) {
             int mid = start + (end - start) / 2;
             int hours = calcHours(piles, mid);
-            if (hours > h) {
+            if (hours > h)
                 start = mid + 1;
-            } else if (hours <= h) {
-                speed = mid;
+            else if (hours <= h)
                 end = mid;
-            }
         }
-        return speed;
+        return end;
     }
 
     private int calcHours(int[] piles, int speed) {
