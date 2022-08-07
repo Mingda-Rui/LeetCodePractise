@@ -51,22 +51,17 @@ public class LC0567PermutationInString {
         while (tail < s2.length()) {
             char tailC = s2.charAt(tail);
             tail++;
-            int count = map.getOrDefault(tailC, 0) + 1;
-            map.put(tailC, count);
-            if (count > 0) {
+            int count = map.getOrDefault(tailC, 0);
+            map.put(tailC, count + 1);
+            while (map.get(tailC) > 0) {
                 char headC = s2.charAt(head);
                 head++;
                 int headCount = map.getOrDefault(headC, 0) - 1;
                 map.put(headC, headCount);
-                while (headCount != 0) {
-                    headC = s2.charAt(head);
-                    head++;
-                    headCount = map.getOrDefault(headC, 0) - 1;
-                    map.put(headC, headCount);
-                }
-            } else if (tail - head == s1.length()) {
-                return true;
             }
+            if (tail - head == s1.length())
+                return true;
+
         }
 
         return false;
