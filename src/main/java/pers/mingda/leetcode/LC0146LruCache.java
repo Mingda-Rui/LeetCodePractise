@@ -20,8 +20,9 @@ class LRUCache {
 
     public int get(int key) {
         if (map.containsKey(key)) {
-            refreshKey(key);
-            return map.get(key).getValue();
+            int val = map.get(key).getValue();
+            refreshKey(key, val);
+            return val;
         }
 
         return -1;
@@ -29,8 +30,7 @@ class LRUCache {
 
     public void put(int key, int value) {
         if (map.containsKey(key)) {
-            refreshKey(key);
-            tail.setValue(value);
+            refreshKey(key, value);
         } else {
             DoubleLinkedNode node = new DoubleLinkedNode(key, value);
             if (map.isEmpty())
@@ -43,9 +43,10 @@ class LRUCache {
             removeHead();
     }
 
-    private void refreshKey(int key) {
+    private void refreshKey(int key, int value) {
         DoubleLinkedNode node = map.get(key);
         moveToTail(node);
+        tail.setValue(value);
     }
 
     private void removeHead() {
