@@ -19,3 +19,15 @@ class Solution {
         return counter;
     }
 }
+
+class ArraySolution {
+    public int numIdenticalPairs(int[] nums) {
+        int[] map = new int[101];
+        int counter = 0;
+        for (int num: nums) {
+            counter += map[num];
+            map[num]++;
+        }
+        return counter;
+    }
+}
