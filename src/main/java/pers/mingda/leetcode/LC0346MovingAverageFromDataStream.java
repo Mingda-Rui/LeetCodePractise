@@ -28,3 +28,30 @@ class MovingAverage {
         return sum / queue.size();
     }
 }
+
+class MovingAverageArraySolution {
+    int[] queue;
+    int size;
+    int counter;
+    int pointer;
+    double sum;
+
+    public MovingAverageArraySolution(int size) {
+        this.queue = new int[size];
+        this.size = size;
+        this.counter = 0;
+        this.sum = 0;
+        this.pointer = 0;
+    }
+
+    public double next(int val) {
+        if (counter >= size) {
+            sum -= queue[pointer];
+        }
+        counter++;
+        queue[pointer] = val;
+        sum += val;
+        pointer = (pointer + 1) % size;
+        return sum / Math.min(counter, size);
+    }
+}
