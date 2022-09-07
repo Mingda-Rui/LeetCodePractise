@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -50,6 +51,18 @@ class PriorityQueueSolution {
             if (lastFinish > interval[0])
                 return false;
             lastFinish = interval[1];
+        }
+        return true;
+    }
+}
+
+class SortingSolution {
+    public boolean canAttendMeetings(int[][] intervals) {
+        Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
+        Arrays.sort(intervals, comparator);
+        for (int i = 0; i < intervals.length - 1; i++) {
+            if (intervals[i][1] > intervals[i + 1][0])
+                return false;
         }
         return true;
     }
