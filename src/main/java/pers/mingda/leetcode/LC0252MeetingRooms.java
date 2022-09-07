@@ -1,5 +1,9 @@
 package pers.mingda.leetcode;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class LC0252MeetingRooms {
 
 }
@@ -29,6 +33,23 @@ class Solution {
                 startCounter--;
             if (startCounter > 1)
                 return false;
+        }
+        return true;
+    }
+}
+
+class PriorityQueueSolution {
+    public boolean canAttendMeetings(int[][] intervals) {
+        Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
+        Queue<int[]> queue = new PriorityQueue<>(comparator);
+        for (int[] interval: intervals)
+            queue.add(interval);
+        int lastFinish = 0;
+        while(!queue.isEmpty()) {
+            int[] interval = queue.poll();
+            if (lastFinish > interval[0])
+                return false;
+            lastFinish = interval[1];
         }
         return true;
     }
