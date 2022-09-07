@@ -27,3 +27,26 @@ class Solution {
         return pointer == word.length();
     }
 }
+
+class RefactoredSolution {
+    public boolean validWordAbbreviation(String word, String abbr) {
+        int pointer = 0;
+        int num = 0;
+
+        for (char c: abbr.toCharArray()) {
+            if (Character.isDigit(c)) {
+                if (num == 0 && c == '0')
+                    return false;
+                num = num * 10 + (c - '0');
+            } else {
+                pointer += num;
+                num = 0;
+                if (pointer >= word.length() || word.charAt(pointer) != c)
+                    return false;
+                pointer++;
+            }
+        }
+        pointer += num;
+        return pointer == word.length();
+    }
+}
