@@ -1,8 +1,12 @@
 package pers.mingda.leetcode;
 
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 public class LC0987VerticalOrderTraversalOfABinaryTree {
 
@@ -76,5 +80,65 @@ class Coord {
         this.x = x;
         this.y = y;
         this.val = val;
+    }
+}
+
+class IterateByLaySolution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>> result = new LinkedList<>();
+        Queue<CoordNode> queue = new LinkedList<>();
+        CoordNode coordRoot = new CoordNode(0, 0, root);
+        queue.offer(coordRoot);
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        int leftMostColumn = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            Map<Integer, List<Integer>> layerMap = new HashMap<>();
+            for (int i = 0; i < size; i++) {
+                CoordNode coordNode = queue.poll();
+                int x = coordNode.x;
+                int y = coordNode.y;
+                TreeNode node = coordNode.node;
+                layerMap.putIfAbsent(y, new LinkedList<>());
+                layerMap.get(y).add(node.val);
+                if (node.left != null) {
+                    CoordNode left = new CoordNode(x + 1, y - 1, node.left);
+                    queue.offer(left);
+                }
+
+                if (node.right != null) {
+                    CoordNode right = new CoordNode(x + 1, y + 1, node.right);
+                    queue.offer(right);
+                }
+
+                leftMostColumn = Math.min(leftMostColumn, y);
+            }
+            for (int y: layerMap.keySet()) {
+                List<Integer> list = layerMap.get(y);
+                Collections.sort(list);
+                map.putIfAbsent(y, new LinkedList<>());
+                map.get(y).addAll(list);
+            }
+        }
+
+        int pointer = leftMostColumn;
+        while (map.containsKey(pointer)) {
+            List<Integer> column = map.get(pointer);
+            result.add(column);
+            pointer++;
+        }
+
+        return result;
+    }
+}
+
+class CoordNode {
+    int x;
+    int y;
+    TreeNode node;
+    public CoordNode(int x, int y, TreeNode node) {
+        this.x = x;
+        this.y = y;
+        this.node = node;
     }
 }
