@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class LC0253MeetingRoomsII {
 
@@ -10,21 +8,21 @@ public class LC0253MeetingRoomsII {
 
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
-        List<Integer> startTime = new ArrayList<>(intervals.length);
-        List<Integer> endTime = new ArrayList<>(intervals.length);
+        int[] startTime = new int[intervals.length];
+        int[] endTime = new int[intervals.length];
         for (int i = 0; i < intervals.length; i++) {
-            startTime.add(intervals[i][0]);
-            endTime.add(intervals[i][1]);
+            startTime[i] = intervals[i][0];
+            endTime[i] = intervals[i][1];
         }
-        Collections.sort(startTime);
-        Collections.sort(endTime);
+        Arrays.sort(startTime);
+        Arrays.sort(endTime);
 
         int maxOverlap = 0;
         int overlap = 0;
         int start = 0;
         int end = 0;
         while (start < intervals.length) {
-            if (startTime.get(start) < endTime.get(end)) {
+            if (startTime[start] < endTime[end]) {
                 overlap++;
                 start++;
             } else {
