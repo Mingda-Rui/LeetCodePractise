@@ -1,6 +1,8 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class LC0253MeetingRoomsII {
 
@@ -26,6 +28,26 @@ class Solution {
                 endIndex++;
         }
 
+        return maxRooms;
+    }
+}
+
+class TreeMapSolution {
+    public int minMeetingRooms(int[][] intervals) {
+        Map<Integer, Integer> map = new TreeMap<>();
+        for (int[] interval: intervals) {
+            int start = interval[0];
+            int end = interval[1];
+            map.put(start, map.getOrDefault(start, 0) + 1);
+            map.put(end, map.getOrDefault(end, 0) - 1);
+        }
+
+        int maxRooms = 0;
+        int rooms = 0;
+        for (int count: map.values()) {
+            rooms += count;
+            maxRooms = Math.max(maxRooms, rooms);
+        }
         return maxRooms;
     }
 }
