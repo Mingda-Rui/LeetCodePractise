@@ -17,20 +17,15 @@ class Solution {
         Arrays.sort(startTime);
         Arrays.sort(endTime);
 
-        int maxOverlap = 0;
-        int overlap = 0;
-        int start = 0;
-        int end = 0;
-        while (start < intervals.length) {
-            if (startTime[start] < endTime[end]) {
-                overlap++;
-                start++;
-            } else {
-                overlap--;
-                end++;
-            }
-            maxOverlap = Math.max(maxOverlap, overlap);
+        int endIndex = 0;
+        int maxRooms = 0;
+        for (int startIndex = 0; startIndex < startTime.length; startIndex++) {
+            if (startTime[startIndex] < endTime[endIndex])
+                maxRooms++;
+            else
+                endIndex++;
         }
-        return maxOverlap;
+
+        return maxRooms;
     }
 }
