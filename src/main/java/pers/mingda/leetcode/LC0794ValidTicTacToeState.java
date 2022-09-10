@@ -46,12 +46,10 @@ class Solution {
             if (i < 3)
                 difference += num;
         }
-        if (winsForO >= 1 && winsForX >= 1)
+        if (winsForX > 0 && winsForO > 0)
             return false;
-        if (winsForO == 1)
-            return difference == 0;
-        if (winsForX >= 1)
-            return difference == 1;
-        return difference == 1 || difference == 0;
+        else if (winsForX == 0 && winsForO == 0)
+            return difference == 0 || difference == 1;
+        return (winsForX > 0 && difference == 1) || (winsForO > 0 && difference == 0);
     }
 }
