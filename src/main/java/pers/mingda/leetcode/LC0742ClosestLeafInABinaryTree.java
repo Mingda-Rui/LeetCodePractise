@@ -1,7 +1,11 @@
 package pers.mingda.leetcode;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 
 public class LC0742ClosestLeafInABinaryTree {
@@ -98,5 +102,63 @@ class NodeCloestLeaf {
         this.node = node;
         this.cloestLeafNode = cloestLeafNode;
         this.distance = distance;
+    }
+}
+
+
+class BfsSolution {
+
+    public int findClosestLeaf(TreeNode root, int k) {
+        Map<TreeNode, TreeNode> childToParent = new HashMap<>();
+        TreeNode kNode = buildChildToParentMap(root, k, childToParent);
+
+        Set<TreeNode> seen = new HashSet<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(kNode);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            seen.add(node);
+            if (isLeaf(node))
+                return node.val;
+
+            if (node.left != null && !seen.contains(node.left))
+                queue.add(node.left);
+
+            if (node.right != null && !seen.contains(node.right))
+                queue.add(node.right);
+
+            TreeNode parent = childToParent.getOrDefault(node, null);
+            if (parent != null && !seen.contains(parent))
+                queue.add(parent);
+        }
+        return -1;
+    }
+
+    /**
+     * build child -> parent map for the path between root to target
+     */
+    private TreeNode buildChildToParentMap(TreeNode node, int target, Map<TreeNode, TreeNode> map) {
+        if (node == null)
+            return null;
+
+        if (node.val == target)
+            return node;
+
+        TreeNode targetInLeft = buildChildToParentMap(node.left, target, map);
+        if (targetInLeft != null) {
+            map.put(node.left, node);
+            return targetInLeft;
+        }
+
+        TreeNode targetInRight = buildChildToParentMap(node.right, target, map);
+        if (targetInRight != null) {
+            map.put(node.right, node);
+            return targetInRight;
+        }
+        return null;
+    }
+
+    private boolean isLeaf(TreeNode node) {
+        return node != null && node.left == null && node.right == null;
     }
 }
