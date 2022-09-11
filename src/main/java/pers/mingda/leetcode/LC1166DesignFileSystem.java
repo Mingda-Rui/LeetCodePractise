@@ -56,6 +56,32 @@ class File {
     }
 }
 
+class HashMapFileSystem {
+
+    Map<String, Integer> map;
+
+    public HashMapFileSystem() {
+        this.map = new HashMap<>();
+    }
+
+    public boolean createPath(String path, int value) {
+        if (path == null || path.isEmpty() || "/".equals(path.trim()))
+            return false;
+        if (map.containsKey(path))
+            return false;
+        int lastSlashIndex = path.lastIndexOf("/");
+        String parentPath = path.substring(0, lastSlashIndex);
+        if (!parentPath.isEmpty() && !map.containsKey(parentPath))
+            return false;
+        map.put(path, value);
+        return true;
+    }
+
+    public int get(String path) {
+        return map.getOrDefault(path, -1);
+    }
+}
+
 /**
  * Your FileSystem object will be instantiated and called as such:
  * FileSystem obj = new FileSystem();
