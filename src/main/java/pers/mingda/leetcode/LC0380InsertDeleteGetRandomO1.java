@@ -33,20 +33,27 @@ class RandomizedSet {
     public boolean remove(int val) {
         if (!map.containsKey(val))
             return false;
-        int index = map.remove(val);
+        int index = map.get(val);
+        swapWithTail(index);
         int tailIndex = list.size() - 1;
-        if (index != tailIndex) {
-            int tailVal = list.get(tailIndex);
-            list.set(index, tailVal);
-            map.put(tailVal, index);
-        }
         list.remove(tailIndex);
+        map.remove(val);
         return true;
     }
 
     public int getRandom() {
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
+    }
+
+    private void swapWithTail(int index) {
+        int val = list.get(index);
+        int tailIndex = list.size() - 1;
+        int tailVal = list.get(tailIndex);
+        list.set(index, tailVal);
+        list.set(tailIndex, val);
+        map.put(val, tailIndex);
+        map.put(tailVal, index);
     }
 }
 
