@@ -11,59 +11,40 @@ public class LC1584MinCostToConnectAllPoints {
 }
 
 class Solution {
-
-    Map<int[], Integer> map = new HashMap<>();
-
     public int minCostConnectPoints(int[][] points) {
-        Comparator<int[][]> edgeComparator = Comparator.comparingInt(this::getLengthOfEdge);
-        Queue<int[][]> queue = new PriorityQueue<>(edgeComparator);
+        int[] minDist = new int[points.length];
 
         for (int i = 0; i < points.length; i++)
-            map.put(points[i], i);
+            minDist[i] = Integer.MAX_VALUE;
+        minDist[0] = 0;
 
         boolean[] seen = new boolean[points.length];
-        int numOfEdge = 0;
+        int numOfNode = 0;
         int sumOfEdge = 0;
-        int[] firstNode = points[0];
-        int[][] fakeEdge = {firstNode, firstNode};
-        queue.offer(fakeEdge);
-        while (!queue.isEmpty() && numOfEdge < points.length - 1) {
-            int[][] edge = queue.poll();
-            if (!circleCheck(seen, edge))
-                continue;
-            int[] node = getUnseenNodeFromEdge(seen, edge);
-            seen[map.get(node)] = true;
+
+        while (numOfNode < points.length) {
+            int minLen = Integer.MAX_VALUE;
+            int nearestNode = -1;
             for (int i = 0; i < points.length; i++) {
-                if (!seen[i]) {
-                    int[][] newEdge = {node, points[i]};
-                    queue.offer(newEdge);
+                if (!seen[i] && minLen > minDist[i]) {
+                    minLen = minDist[i];
+                    nearestNode = i;
                 }
             }
-            int edgeLen = getLengthOfEdge(edge);
-            numOfEdge += edgeLen == 0 ? 0 : 1;
-            sumOfEdge += edgeLen;
+            seen[nearestNode] = true;
+            sumOfEdge += minLen;
+            numOfNode++;
+            for (int i = 0; i < points.length; i++) {
+                if (!seen[i])
+                    minDist[i] = Math.min(minDist[i], getLengthOfEdge(points[nearestNode], points[i]));
+            }
         }
         return sumOfEdge;
     }
 
-    private int[] getUnseenNodeFromEdge(boolean[] seen, int[][] edge) {
-        int[] point1 = edge[0];
-        int[] point2 = edge[1];
-        return seen[map.get(point1)] ? point2 : point1;
-    }
-
-    private int getLengthOfEdge(int[][] edge) {
-        int[] point1 = edge[0];
-        int[] point2 = edge[1];
+    private int getLengthOfEdge(int[] point1, int[] point2) {
         return Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]);
     }
-
-    private boolean circleCheck(boolean[] seen, int[][] edge) {
-        int point1 = map.get(edge[0]);
-        int point2 = map.get(edge[1]);
-        return !seen[point1] || !seen[point2];
-    }
-
 }
 
 class UnionFindSolution {
