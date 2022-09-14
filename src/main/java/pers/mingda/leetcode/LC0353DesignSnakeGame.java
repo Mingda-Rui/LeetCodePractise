@@ -34,17 +34,7 @@ class SnakeGame {
     }
 
     public int move(String direction) {
-        List<Integer> currentHead = snakeBody.get(0);
-
-        int headX = currentHead.get(0);
-        int headY = currentHead.get(1);
-        List<Integer> newHead = switch (direction) {
-                case "L" -> Arrays.asList(headX, headY - 1);
-                case "R" -> Arrays.asList(headX, headY + 1);
-                case "U" -> Arrays.asList(headX - 1, headY);
-                case "D" -> Arrays.asList(headX + 1, headY);
-                default -> null;
-        };
+        List<Integer> newHead = getNextPos(direction);
 
         if (!tryEatNextFood(newHead)) {
             List<Integer> oldTail = snakeBody.remove(getTailIndex());
@@ -58,6 +48,19 @@ class SnakeGame {
         bodySet.add(newHead);
         return score;
 
+    }
+
+    private List<Integer> getNextPos(String direction) {
+        List<Integer> currentHead = snakeBody.get(0);
+        int headX = currentHead.get(0);
+        int headY = currentHead.get(1);
+        return switch (direction) {
+            case "L" -> Arrays.asList(headX, headY - 1);
+            case "R" -> Arrays.asList(headX, headY + 1);
+            case "U" -> Arrays.asList(headX - 1, headY);
+            case "D" -> Arrays.asList(headX + 1, headY);
+            default -> null;
+        };
     }
 
     private boolean tryEatNextFood(List<Integer> head) {
