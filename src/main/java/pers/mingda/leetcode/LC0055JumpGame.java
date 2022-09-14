@@ -1,27 +1,24 @@
 package pers.mingda.leetcode;
 
 public class LC0055JumpGame {
-    public boolean canJumpArray(int[] nums) {
-        boolean[] canReach = new boolean[nums.length];
-        canReach[0] = true;
-        for (int i = 0; i < nums.length; i++) {
-            if (canReach[i]) {
-                for (int next = i + 1; next <= i + nums[i] && next < nums.length; next++) {
-                    canReach[next] = true;
-                }
-            }
+    public boolean canJumpReversed(int[] nums) {
+        int currentAt = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            int step = nums[i];
+            if (i + step >= currentAt)
+                currentAt = i;
         }
-        return canReach[nums.length - 1];
+
+        return currentAt == 0;
     }
 
     public boolean canJump(int[] nums) {
-        int furthest = 0;
+        int currentAt = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (furthest < i)
+            int step = nums[i];
+            if (currentAt < i)
                 return false;
-            furthest = Math.max(furthest, i + nums[i]);
-            if (furthest >= nums.length - 1)
-                return true;
+            currentAt = Math.max(currentAt, i + step);
         }
         return true;
     }
