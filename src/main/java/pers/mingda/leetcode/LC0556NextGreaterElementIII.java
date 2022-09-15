@@ -6,7 +6,9 @@ import java.util.Stack;
 
 public class LC0556NextGreaterElementIII {
 
-}class Solution {
+}
+
+class Solution {
     public int nextGreaterElement(int n) {
         String s = String.valueOf(n);
         Stack<Character> stack = new Stack<>();
@@ -38,3 +40,4 @@ public class LC0556NextGreaterElementIII {
         long result = Long.valueOf(originalPart);
         return result > Integer.MAX_VALUE ? -1 : (int) result;
     }
+}
