@@ -84,9 +84,7 @@ class ArraySolution {
         int head = start;
         int tail = end - 1;
         while (head < tail) {
-            char tmp = chars[head];
-            chars[head] = chars[tail];
-            chars[tail] = tmp;
+            swap(chars, head, tail);
             head++;
             tail--;
         }
