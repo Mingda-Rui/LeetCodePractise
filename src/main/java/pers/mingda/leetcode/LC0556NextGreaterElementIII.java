@@ -46,27 +46,18 @@ class ArraySolution {
     public int nextGreaterElement(int n) {
         char[] chars = String.valueOf(n).toCharArray();
         int len = chars.length;
-        int swapIndex = len - 1;
-        for (int i = len - 2; i >= 0; i--) {
-            char toBeSwapped = chars[i];
-            char next = chars[i + 1];
-            if (toBeSwapped < next) {
-                swapIndex = i;
-                break;
-            }
-        }
 
-        if (swapIndex == len - 1)
+        int swapIndex = len - 2;
+        while (swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1])
+            swapIndex--;
+
+        if (swapIndex < 0)
             return -1;
-        int nextGreaterIndex = len - 1;
+
+        int nextGreaterIndex = swapIndex;
         char toBeSwapped = chars[swapIndex];
-        for (int i = swapIndex + 1; i < len; i++) {
-            char c = chars[i];
-            if (toBeSwapped < c)
-                nextGreaterIndex = i;
-            else
-                break;
-        }
+        while (nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped)
+            nextGreaterIndex++;
 
         swap(chars, swapIndex, nextGreaterIndex);
         reverse(chars, swapIndex + 1, len);
