@@ -44,35 +44,51 @@ class Solution {
 
 class ArraySolution {
     public int nextGreaterElement(int n) {
-        String s = String.valueOf(n);
-        int len = s.length();
-        int nextGreaterIndex = len - 1;
+        char[] chars = String.valueOf(n).toCharArray();
+        int len = chars.length;
+        int swapIndex = len - 1;
         for (int i = len - 2; i >= 0; i--) {
-            char c = s.charAt(i);
-            char nextC = s.charAt(i + 1);
-            if (c < nextC) {
-                nextGreaterIndex = i;
+            char toBeSwapped = chars[i];
+            char next = chars[i + 1];
+            if (toBeSwapped < next) {
+                swapIndex = i;
                 break;
             }
         }
-        if (nextGreaterIndex == len - 1)
-            return -1;
-        int swapIndex = len - 1;
-        Queue<Character> queue = new PriorityQueue<>();
 
-        for (int i = nextGreaterIndex; i < len; i++) {
-            char c = s.charAt(i);
-            if (c > s.charAt(nextGreaterIndex))
-                swapIndex = i;
-            if (c <= s.charAt(nextGreaterIndex) || (i + 1 < len && s.charAt(i + 1) > s.charAt(nextGreaterIndex)))
-                queue.offer(c);
+        if (swapIndex == len - 1)
+            return -1;
+        int nextGreaterIndex = len - 1;
+        char toBeSwapped = chars[swapIndex];
+        for (int i = swapIndex + 1; i < len; i++) {
+            char c = chars[i];
+            if (toBeSwapped < c)
+                nextGreaterIndex = i;
+            else
+                break;
         }
 
-        StringBuilder sb = new StringBuilder(s.substring(0, nextGreaterIndex));
-        sb.append(s.charAt(swapIndex));
-        while (!queue.isEmpty())
-            sb.append(queue.poll());
-        long result = Long.valueOf(sb.toString());
+        swap(chars, swapIndex, nextGreaterIndex);
+        reverse(chars, swapIndex + 1, len);
+        long result = Long.valueOf(String.valueOf(chars));
         return result > Integer.MAX_VALUE ? -1 : (int) result;
+    }
+
+    private void swap(char[] chars, int index1, int index2) {
+        char tmp = chars[index1];
+        chars[index1] = chars[index2];
+        chars[index2] = tmp;
+    }
+
+    private void reverse(char[] chars, int start, int end) {
+        int head = start;
+        int tail = end - 1;
+        while (head < tail) {
+            char tmp = chars[head];
+            chars[head] = chars[tail];
+            chars[tail] = tmp;
+            head++;
+            tail--;
+        }
     }
 }
