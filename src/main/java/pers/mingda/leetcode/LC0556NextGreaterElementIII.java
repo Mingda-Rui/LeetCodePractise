@@ -41,3 +41,38 @@ class Solution {
         return result > Integer.MAX_VALUE ? -1 : (int) result;
     }
 }
+
+class ArraySolution {
+    public int nextGreaterElement(int n) {
+        String s = String.valueOf(n);
+        int len = s.length();
+        int nextGreaterIndex = len - 1;
+        for (int i = len - 2; i >= 0; i--) {
+            char c = s.charAt(i);
+            char nextC = s.charAt(i + 1);
+            if (c < nextC) {
+                nextGreaterIndex = i;
+                break;
+            }
+        }
+        if (nextGreaterIndex == len - 1)
+            return -1;
+        int swapIndex = len - 1;
+        Queue<Character> queue = new PriorityQueue<>();
+
+        for (int i = nextGreaterIndex; i < len; i++) {
+            char c = s.charAt(i);
+            if (c > s.charAt(nextGreaterIndex))
+                swapIndex = i;
+            if (c <= s.charAt(nextGreaterIndex) || (i + 1 < len && s.charAt(i + 1) > s.charAt(nextGreaterIndex)))
+                queue.offer(c);
+        }
+
+        StringBuilder sb = new StringBuilder(s.substring(0, nextGreaterIndex));
+        sb.append(s.charAt(swapIndex));
+        while (!queue.isEmpty())
+            sb.append(queue.poll());
+        long result = Long.valueOf(sb.toString());
+        return result > Integer.MAX_VALUE ? -1 : (int) result;
+    }
+}
