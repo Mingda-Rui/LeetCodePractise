@@ -23,12 +23,10 @@ class TimeMap {
     }
 
     public String get(String key, int timestamp) {
-        if (map.containsKey(key)) {
-            Map.Entry<Integer, String> tsVal = map.get(key).floorEntry(timestamp);
-            return tsVal == null ? "" : tsVal.getValue();
-        } else {
+        if (!map.containsKey(key))
             return "";
-        }
+        Map.Entry<Integer, String> tsVal = map.get(key).floorEntry(timestamp);
+        return tsVal == null ? "" : tsVal.getValue();
     }
 }
 
