@@ -30,29 +30,21 @@ class Solution {
 
     public Result maxSumBSTHelper(TreeNode root) {
         if (root == null)
-            return null;
-        if (root.left == null && root.right == null) {
-            max = Math.max(max, root.val);
-            return new Result(root.val, root.val, root.val, true);
-        }
-
+            return new Result(Integer.MAX_VALUE, Integer.MIN_VALUE, 0);
 
         Result lResult = maxSumBSTHelper(root.left);
         Result rResult = maxSumBSTHelper(root.right);
 
-        int small = lResult == null ? root.val : lResult.small;
-        int larget = rResult == null ? root.val : rResult.large;
+        if (lResult == null || lResult.large >= root.val)
+            return null;
+        if (rResult == null || rResult.small <= root.val)
+            return null;
 
-        int leftSum = lResult == null ? 0 : lResult.sum;
-        int rightSum = rResult == null ? 0 : rResult.sum;
-        int sum = leftSum + rightSum + root.val;
-
-        boolean isLeftBst = lResult == null || (lResult.isBst && lResult.large < root.val);
-        boolean isRightBst = rResult == null || (rResult.isBst && rResult.small > root.val);
-        boolean isBst = isLeftBst && isRightBst;
-        if (isBst)
-            max = Math.max(max, sum);
-        return new Result(small, larget, sum, isLeftBst && isRightBst);
+        int small = Math.min(root.val, lResult.small);
+        int larget = Math.max(root.val, rResult.large);
+        int sum = lResult.sum + rResult.sum + root.val;
+        max = Math.max(max, sum);
+        return new Result(small, larget, sum);
     }
 }
 
@@ -60,12 +52,10 @@ class Result {
     int small;
     int large;
     int sum;
-    boolean isBst;
 
-    public Result(int small, int large, int sum, boolean isBst) {
+    public Result(int small, int large, int sum) {
         this.small = small;
         this.large = large;
         this.sum = sum;
-        this.isBst = isBst;
     }
 }
