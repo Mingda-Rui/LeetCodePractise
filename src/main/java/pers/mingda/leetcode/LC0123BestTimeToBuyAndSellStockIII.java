@@ -37,3 +37,26 @@ class Solution {
         return maxProfitTwoTrans;
     }
 }
+
+class SpaceComplexityO1Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice1 = Integer.MAX_VALUE;
+        int maxProfit1 = 0;
+
+        int minPrice2 = Integer.MAX_VALUE;
+        int maxProfit2 = 0;
+
+        for (int price: prices) {
+            minPrice1 = Math.min(minPrice1, price);
+            int profit1 = price - minPrice1;
+            maxProfit1 = Math.max(maxProfit1, profit1);
+
+            int price2 = price - maxProfit1;
+            minPrice2 = Math.min(minPrice2, price2);
+            int profit2 = price - minPrice2;
+            maxProfit2 = Math.max(maxProfit2, profit2);
+        }
+
+        return maxProfit2;
+    }
+}
