@@ -7,6 +7,8 @@ public class LC0188BestTimeToBuyAndSellStockIV {
 class Solution {
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
+        if (k * 2 >= len)
+            return highFrequencyTrading(prices);
         int[][] record = new int[k + 1][len];
 
         for (int i = 1; i <= k; i++) {
@@ -22,5 +24,15 @@ class Solution {
             }
         }
         return record[k][len - 1];
+    }
+
+    private int highFrequencyTrading(int[] prices) {
+        int maxProfit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            int prevPrice = prices[i - 1];
+            int profit = Math.max(0, prices[i] - prevPrice);
+            maxProfit += profit;
+        }
+        return maxProfit;
     }
 }
