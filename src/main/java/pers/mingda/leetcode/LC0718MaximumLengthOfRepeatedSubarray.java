@@ -1,29 +1,35 @@
 package pers.mingda.leetcode;
 
 public class LC0718MaximumLengthOfRepeatedSubarray {
-    public boolean search(int[] nums, int target) {
-        int head = nums[0];
-        int start = 0;;
-        int end = nums.length;
-        while (start < end) {
-            int mid = start + (end - start) / 2;
-            int val = nums[mid];
-
-            if (val == target)
-                return true;
-
-            boolean midOnLeft = val > head;
-            boolean targetOnLeft = target >= head;
-            boolean midTargetSameSide = (midOnLeft && targetOnLeft) || (!midOnLeft && !targetOnLeft);
-
-            if (nums[start] == val)
-                start++;
-            else if ((midTargetSameSide && val < target) || (!midTargetSameSide && midOnLeft))
-                start = mid + 1;
-            else
-                end = mid;
+    public int findLength(int[] nums1, int[] nums2) {
+        int maxLen = 0;
+        for (int i = 0; i < nums1.length; i++) {
+            int maxInDiagnal = diagnalTraverse(nums1, nums2, i, 0);
+            maxLen = Math.max(maxLen, maxInDiagnal);
         }
 
-        return false;
+        for (int j = 1; j < nums2.length; j++) {
+            int maxInDiagnal = diagnalTraverse(nums1, nums2, 0, j);
+            maxLen = Math.max(maxLen, maxInDiagnal);
+        }
+
+        return maxLen;
+    }
+
+    private int diagnalTraverse(int[] nums1, int[] nums2, int x, int y) {
+        int maxLen = 0;
+        int currentLen = 0;
+        while (x < nums1.length && y < nums2.length) {
+            if (nums1[x] == nums2[y]) {
+                currentLen++;
+            } else {
+                maxLen = Math.max(maxLen, currentLen);
+                currentLen = 0;
+            }
+            x++;
+            y++;
+        }
+        maxLen = Math.max(maxLen, currentLen);
+        return maxLen;
     }
 }
