@@ -13,6 +13,28 @@ public class LC0448FindAllNumbersDisappearedInAnArray {
         for (int num: nums)
             set.remove(num);
         return new LinkedList<>(set);
+    }
 
+    public List<Integer> findDisappearedNumbersInPlaceSolution(int[] nums) {
+        int index = 0;
+        while (index < nums.length) {
+            int val = nums[index];
+            if (val != index + 1 && nums[val - 1] != val)
+                swap(nums, index, val - 1);
+            else
+                index++;
+        }
+
+        List<Integer> result = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++)
+            if (nums[i] != i + 1)
+                result.add(i + 1);
+        return result;
+    }
+
+    private void swap(int[] nums, int index1, int index2) {
+        int tmp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = tmp;
     }
 }
