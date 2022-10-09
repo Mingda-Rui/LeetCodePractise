@@ -37,4 +37,19 @@ public class LC0448FindAllNumbersDisappearedInAnArray {
         nums[index1] = nums[index2];
         nums[index2] = tmp;
     }
+
+    public List<Integer> findDisappearedNumbersInPlaceSolutionV2(int[] nums) {
+        for (int num: nums) {
+            int absNum = Math.abs(num);
+            int index = absNum - 1;
+            int absVal = Math.abs(nums[index]);
+            nums[index] = -absVal;
+        }
+
+        List<Integer> result = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++)
+            if (nums[i] > 0)
+                result.add(i + 1);
+        return result;
+    }
 }
