@@ -1,62 +1,76 @@
 package pers.mingda.leetcode;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class LC0692TopKFrequentWords {
     public List<String> topKFrequent(String[] words, int k) {
-        List<String> result = new LinkedList<>();
-        Trie root = new Trie();
-        for (String word: words)
-            buildTrie(root, word);
-        Comparator<Trie> comparator = (o1, o2) -> {
-            if (o1.count == o2.count)
-                return o1.word.compareTo(o2.word);
-            return o2.count - o1.count;
-        };
-        Queue<Trie> queue = new PriorityQueue<>(comparator);
-        sortWords(root, queue);
-        for (int i = 0; i < k; i++) {
-            Trie topWord = queue.remove();
-            result.add(topWord.word);
+        Map<String, Integer> map = new HashMap<>();
+        for (String word: words) {
+            int count = map.getOrDefault(word, 0);
+            map.put(word, count + 1);
         }
 
+        Trie[] bucket = new Trie[words.length + 1];
+        for (String word: map.keySet()) {
+            int count = map.get(word);
+            if (bucket[count] == null)
+                bucket[count] = new Trie('#');
+            bucket[count].add(word);
+        }
+
+        List<String> result = new LinkedList<>();
+        for (int i = bucket.length - 1; i > 0; i--) {
+            if (result.size() == k)
+                return result;
+            Trie trie = bucket[i];
+            if (trie != null)
+                addResult(result, trie, k);
+        }
         return result;
     }
 
-    private void buildTrie(Trie root, String word) {
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            if (root.arr[c] == null)
-                root.arr[c] = new Trie();
-            root = root.arr[c];
+    private void addResult(List<String> result, Trie trie, int k) {
+        List<String> words = new LinkedList<>();
+        trie.extraWords(words);
+        int index = 0;
+        while (index < words.size() && result.size() < k) {
+            result.add(words.get(index));
+            index++;
         }
-        root.word = word;
-        root.count++;
     }
-
-    private void sortWords(Trie root, Queue<Trie> queue) {
-        if (root == null)
-            return;
-        if (root.count != 0)
-            queue.add(root);
-        for (int i = 97; i <= 122; i++)
-            sortWords(root.arr[i], queue);
-    }
-
 }
 
 class Trie {
-    Trie[] arr;
+    Trie[] children;
+    char c;
     String word;
-    int count;
 
-    public Trie() {
-        this.arr = new Trie[128];
+    public Trie(char c) {
+        this.children = new Trie[128];
+        this.c = c;
         this.word = null;
-        this.count = 0;
+    }
+
+    public void add(String word) {
+        Trie pointer = this;
+
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
+            if (pointer.children[letter] == null)
+                pointer.children[letter] = new Trie(letter);
+            pointer = pointer.children[letter];
+            if (i == word.length() - 1)
+                pointer.word = word;
+        }
+    }
+
+    public void extraWords(List<String> list) {
+        for (Trie child: children) {
+            if (child != null) {
+                if (child.word != null)
+                    list.add(child.word);
+                child.extraWords(list);
+            }
+        }
     }
 }
