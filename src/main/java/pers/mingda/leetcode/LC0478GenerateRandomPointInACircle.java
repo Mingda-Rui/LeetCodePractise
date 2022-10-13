@@ -41,3 +41,32 @@ class LC0478Solution {
  * Solution obj = new Solution(radius, x_center, y_center);
  * double[] param_1 = obj.randPoint();
  */
+
+class LC0478RadianSolution {
+
+    private double radius;
+    private double xCenter;
+    private double yCenter;
+
+    public LC0478RadianSolution(double radius, double x_center, double y_center) {
+        this.radius = radius;
+        this.xCenter = x_center;
+        this.yCenter = y_center;
+    }
+
+    public double[] randPoint() {
+        double radian = generateRandom(0, 2 * Math.PI);
+
+        double random = generateRandom(0, 1) ;
+        double hypotenuse = Math.sqrt(random) * radius;
+        double x = Math.cos(radian) * hypotenuse;
+        double y = Math.sin(radian) * hypotenuse;
+
+        double[] result = {x + xCenter, y + yCenter};
+        return result;
+    }
+
+    private double generateRandom(double min, double max) {
+        return Math.random() * (max - min) + min;
+    }
+}
