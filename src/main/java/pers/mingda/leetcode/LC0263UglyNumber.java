@@ -10,9 +10,9 @@ public class LC0263UglyNumber {
         return n == 1;
     }
 
-    private int deepDivideBy(int n, int d) {
-        while (n % d == 0)
-            n /= d;
-        return n;
+    private int deepDivideBy(int dividend, int divisor) {
+        while (dividend % divisor == 0)
+            dividend /= divisor;
+        return dividend;
     }
 }
