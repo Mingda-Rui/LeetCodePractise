@@ -16,4 +16,13 @@ public class LC0191NumberOf1Bits {
         }
         return counter;
     }
+
+    public int hammingWeight3(int n) {
+        int counter = 0;
+        while (n != 0) {
+            counter++;
+            n &= n - 1;
+        }
+        return counter;
+    }
 }
