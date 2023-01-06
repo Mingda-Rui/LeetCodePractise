@@ -8,4 +8,11 @@ public class LC0268MissingNumber {
             sum -= num;
         return sum;
     }
+
+    public int missingNumberXorSolution(int[] nums) {
+        int max = nums.length;
+        for (int i = 0; i < nums.length; i++)
+            max ^= (i ^ nums[i]);
+        return max;
+    }
 }
