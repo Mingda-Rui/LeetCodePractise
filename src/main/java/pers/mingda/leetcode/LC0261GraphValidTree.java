@@ -37,3 +37,45 @@ class LC0261Solution {
         return true;
     }
 }
+
+class LC0261UnionFindSolution {
+    public boolean validTree(int n, int[][] edges) {
+        if (edges.length != n - 1)
+            return false;
+        UnionFind uf = new UnionFind(n);
+        for (int[] edge: edges)
+            uf.union(edge[0], edge[1]);
+
+        return uf.getSetCount() == 1;
+    }
+}
+
+class UnionFind {
+    private int[] parent;
+
+    public UnionFind(int size) {
+        this.parent = new int[size];
+        for (int i = 0; i < size; i++)
+            parent[i] = i;
+    }
+
+    private int find(int node) {
+        while (parent[node] != node)
+            node = parent[node];
+        return node;
+    }
+
+    public void union(int node1, int node2) {
+        int parent1 = find(node1);
+        int parent2 = find(node2);
+        parent[parent1] = parent2;
+    }
+
+    public int getSetCount() {
+        Set<Integer> set = new HashSet<>();
+        for (int node: parent)
+            set.add(find(node));
+
+        return set.size();
+    }
+}
