@@ -44,9 +44,10 @@ class LC0261UnionFindSolution {
             return false;
         UnionFind uf = new UnionFind(n);
         for (int[] edge: edges)
-            uf.union(edge[0], edge[1]);
+            if (!uf.union(edge[0], edge[1]))
+                return false;
 
-        return uf.getSetCount() == 1;
+        return true;
     }
 }
 
@@ -65,17 +66,14 @@ class UnionFind {
         return node;
     }
 
-    public void union(int node1, int node2) {
+    public boolean union(int node1, int node2) {
         int parent1 = find(node1);
         int parent2 = find(node2);
+
+        if (parent1 == parent2)
+            return false;
+
         parent[parent1] = parent2;
-    }
-
-    public int getSetCount() {
-        Set<Integer> set = new HashSet<>();
-        for (int node: parent)
-            set.add(find(node));
-
-        return set.size();
+        return true;
     }
 }
