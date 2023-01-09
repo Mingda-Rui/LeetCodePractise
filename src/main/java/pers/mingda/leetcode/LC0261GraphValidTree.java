@@ -53,17 +53,28 @@ class LC0261UnionFindSolution {
 
 class UnionFind {
     private int[] parent;
+    private int[] size;
 
-    public UnionFind(int size) {
-        this.parent = new int[size];
-        for (int i = 0; i < size; i++)
+    public UnionFind(int n) {
+        this.parent = new int[n];
+        this.size = new int[n];
+        for (int i = 0; i < n; i++) {
             parent[i] = i;
+            size[i] = 1;
+        }
     }
 
     private int find(int node) {
-        while (parent[node] != node)
-            node = parent[node];
-        return node;
+        int root = node;
+        while (parent[root] != root)
+            root = parent[root];
+
+        while (parent[node] != root) {
+            int oldParent = parent[node];
+            parent[node] = root;
+            node = oldParent;
+        }
+        return root;
     }
 
     public boolean union(int node1, int node2) {
@@ -73,7 +84,14 @@ class UnionFind {
         if (parent1 == parent2)
             return false;
 
-        parent[parent1] = parent2;
-        return true;
+        if (size[parent1] < size[parent2]) {
+            parent[parent1] = parent2;
+            size[parent2] += size[parent1];
+        } else {
+            parent[parent2] = parent1;
+            size[parent1] += size[parent2];
+        }
+
+         return true;
     }
 }
