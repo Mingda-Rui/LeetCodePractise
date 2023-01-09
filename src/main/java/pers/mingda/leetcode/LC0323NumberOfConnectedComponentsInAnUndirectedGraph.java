@@ -1,5 +1,10 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class LC0323NumberOfConnectedComponentsInAnUndirectedGraph {
 
 }
@@ -40,5 +45,38 @@ class UnionFind {
 
     public int getSetCount() {
         return setCount;
+    }
+}
+
+class LC0323DfsSolution {
+    public int countComponents(int n, int[][] edges) {
+        Set<Integer> unvisited = new HashSet<>();
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            unvisited.add(i);
+            graph.add(new ArrayList<>());
+        }
+
+        for (int[] edge: edges) {
+            graph.get(edge[0]).add(edge[1]);
+            graph.get(edge[1]).add(edge[0]);
+        }
+
+       int counter = 0;
+        while (!unvisited.isEmpty()) {
+            int node = unvisited.stream().findFirst().get();
+            traverseSet(node, unvisited, graph);
+            counter++;
+        }
+
+        return counter;
+    }
+
+    private void traverseSet(int node, Set<Integer> unvisted, List<List<Integer>> graph) {
+        unvisted.remove(node);
+        //System.out.println(unvisted.size());
+        for (int neighbour: graph.get(node))
+            if (unvisted.contains(neighbour))
+                traverseSet(neighbour, unvisted, graph);
     }
 }
