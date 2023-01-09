@@ -9,15 +9,17 @@ class LC0323UnionFindSolution {
         UnionFind uf = new UnionFind(n);
         for (int[] edge: edges)
             uf.union(edge[0], edge[1]);
-        return uf.countRootNode();
+        return uf.getSetCount();
     }
 }
 
 class UnionFind {
     private int[] parent;
+    private int setCount;
 
     public UnionFind(int n) {
         this.parent = new int[n];
+        this.setCount = n;
         for (int i = 0; i < n; i ++)
             parent[i] = i;
     }
@@ -31,14 +33,12 @@ class UnionFind {
     public void union(int node1, int node2) {
         int root1 = find(node1);
         int root2 = find(node2);
+        if (root1 != root2)
+            setCount--;
         parent[root1] = root2;
     }
 
-    public int countRootNode() {
-        int counter = 0;
-        for (int i = 0; i < parent.length; i++)
-            if (i == parent[i])
-                counter++;
-        return counter;
+    public int getSetCount() {
+        return setCount;
     }
 }
