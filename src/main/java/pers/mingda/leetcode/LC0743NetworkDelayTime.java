@@ -11,7 +11,7 @@ public class LC0743NetworkDelayTime {
 
 }
 
-class Solution {
+class LC0743Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         Map<Integer, Node> network = buildNetwork(times);
         Comparator<Node> comparator = Comparator.comparingInt(node -> node.time);

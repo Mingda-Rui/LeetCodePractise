@@ -9,7 +9,7 @@ public class LC0118PascalsTriangle {
 
 }
 
-class Solution {
+class LC0118Solution {
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new LinkedList<>();
         List<Integer> currentRow = Arrays.asList(1);

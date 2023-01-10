@@ -4,7 +4,7 @@ public class LC0188BestTimeToBuyAndSellStockIV {
 
 }
 
-class Solution {
+class LC0188Solution {
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
         if (k * 2 >= len)

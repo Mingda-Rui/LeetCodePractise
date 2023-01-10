@@ -8,7 +8,7 @@ public class LC0556NextGreaterElementIII {
 
 }
 
-class Solution {
+class LC0556Solution {
     public int nextGreaterElement(int n) {
         String s = String.valueOf(n);
         Stack<Character> stack = new Stack<>();

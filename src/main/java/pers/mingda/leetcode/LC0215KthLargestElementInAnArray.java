@@ -7,7 +7,7 @@ public class LC0215KthLargestElementInAnArray {
 
 }
 
-class Solution {
+class LC0215Solution {
     public int findKthLargest(int[] nums, int k) {
         shuffle(nums);
         return quickSelect(nums, 0, nums.length - 1, k);

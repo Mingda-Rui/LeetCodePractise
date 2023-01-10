@@ -4,7 +4,7 @@ public class LC1275FindWinnerOnATicTacToeGame {
 
 }
 
-class Solution {
+class LC1275Solution {
     public String tictactoe(int[][] moves) {
         // 0 - 2 row
         // 3 - 5 column

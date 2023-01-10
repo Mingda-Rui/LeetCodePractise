@@ -16,7 +16,7 @@ public class LC1152AnalyzeUserWebsiteVisitPattern {
 
 }
 
-class Solution {
+class LC1152Solution {
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
 
         Map<List<String>, Integer> patterns = new HashMap<>();

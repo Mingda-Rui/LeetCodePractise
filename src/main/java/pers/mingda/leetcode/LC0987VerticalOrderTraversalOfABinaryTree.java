@@ -27,7 +27,7 @@ public class LC0987VerticalOrderTraversalOfABinaryTree {
  *     }
  * }
  */
-class Solution {
+class LC0987Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<Coord> list = new LinkedList<>();
         generateCoord(root, 0, 0, list);

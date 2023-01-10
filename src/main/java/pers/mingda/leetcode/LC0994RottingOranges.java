@@ -7,7 +7,7 @@ public class LC0994RottingOranges {
 
 }
 
-class Solution {
+class LC0994Solution {
     public int orangesRotting(int[][] grid) {
         Queue<int[]> queue = new LinkedList<>();
 

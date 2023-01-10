@@ -8,7 +8,7 @@ public class LC0496NextGreaterElementI {
 
 }
 
-class Solution {
+class LC0496Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums2.length; i++) {

@@ -17,7 +17,7 @@ public class LC0269AlienDictionary {
 
 }
 
-class Solution {
+class LC0269Solution {
     public String alienOrder(String[] words) {
         Trie trie = new Trie('#');
         Set<Character> allLetters = new HashSet<>();

@@ -7,7 +7,7 @@ public class LC0140WordBreakII {
 
 }
 
-class Solution {
+class LC0140Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
         Trie root = buildTrie(wordDict);
         List<List<String>> result = new LinkedList<>();

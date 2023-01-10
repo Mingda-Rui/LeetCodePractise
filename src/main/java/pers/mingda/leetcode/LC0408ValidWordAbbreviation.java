@@ -4,7 +4,7 @@ public class LC0408ValidWordAbbreviation {
 
 }
 
-class Solution {
+class LC0408Solution {
     public boolean validWordAbbreviation(String word, String abbr) {
         int pointer = 0;
         for (int i = 0; i < abbr.length(); i++) {

@@ -27,7 +27,7 @@ public class LC0742ClosestLeafInABinaryTree {
  *     }
  * }
  */
-class Solution {
+class LC0742Solution {
     public int findClosestLeaf(TreeNode root, int k) {
         Map<TreeNode, NodeCloestLeaf> closestLeafMap = new HashMap<>();
         recordShortestDistanceToLeaf(root, closestLeafMap);

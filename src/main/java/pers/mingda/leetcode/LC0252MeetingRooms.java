@@ -9,7 +9,7 @@ public class LC0252MeetingRooms {
 
 }
 
-class Solution {
+class LC0252Solution {
     public boolean canAttendMeetings(int[][] intervals) {
         int size = 0;
         for (int[] interval: intervals)

@@ -19,7 +19,7 @@ public class LC1373MaximumSumBstInBinaryTree {
  *     }
  * }
  */
-class Solution {
+class LC1373Solution {
 
     int max = 0;
 

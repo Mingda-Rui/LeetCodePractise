@@ -11,7 +11,7 @@ public class LC0490TheMaze {
 
 }
 
-class Solution {
+class LC0490Solution {
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
         Set<List<Integer>> seen = new HashSet<>();
         return findPath(maze, Arrays.asList(start[0], start[1]), Arrays.asList(destination[0], destination[1]), seen);

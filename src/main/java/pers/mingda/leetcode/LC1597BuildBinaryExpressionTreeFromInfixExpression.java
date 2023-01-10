@@ -21,7 +21,7 @@ public class LC1597BuildBinaryExpressionTreeFromInfixExpression {
  *     }
  * }
  */
-class Solution {
+class LC1597Solution {
     public Node expTree(String s) {
         return expTree(s, 0, s.length());
     }

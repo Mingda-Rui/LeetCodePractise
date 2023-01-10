@@ -4,7 +4,7 @@ public class LC0123BestTimeToBuyAndSellStockIII {
 
 }
 
-class Solution {
+class LC0123Solution {
     public int maxProfit(int[] prices) {
         int[] leftMaxProfit = new int[prices.length];
         int[] rightMaxProfit = new int[prices.length];

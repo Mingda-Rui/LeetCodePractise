@@ -10,7 +10,7 @@ public class LC1584MinCostToConnectAllPoints {
 
 }
 
-class Solution {
+class LC1584Solution {
     public int minCostConnectPoints(int[][] points) {
         int[] minDist = new int[points.length];
 
@@ -47,7 +47,7 @@ class Solution {
     }
 }
 
-class UnionFindSolution {
+class LC1584UnionFindSolution {
     public int minCostConnectPoints(int[][] points) {
         Comparator<int[][]> edgeComparator = Comparator.comparingInt(this::getLengthOfEdge);
         Queue<int[][]> queue = new PriorityQueue<>(edgeComparator);

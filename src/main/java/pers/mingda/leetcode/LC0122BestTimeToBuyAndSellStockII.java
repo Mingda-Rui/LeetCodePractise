@@ -4,7 +4,7 @@ public class LC0122BestTimeToBuyAndSellStockII {
 
 }
 
-class Solution {
+class LC0122Solution {
     public int maxProfit(int[] prices) {
         int result = 0;
         int pointer = 0;

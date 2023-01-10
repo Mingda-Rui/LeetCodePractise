@@ -7,7 +7,7 @@ public class LC0136SingleNumber {
 
 }
 
-class Solution {
+class LC0136Solution {
     public int singleNumber(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int num: nums) {

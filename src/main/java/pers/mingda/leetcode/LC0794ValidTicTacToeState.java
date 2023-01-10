@@ -4,7 +4,7 @@ public class LC0794ValidTicTacToeState {
 
 }
 
-class Solution {
+class LC0794Solution {
     public boolean validTicTacToe(String[] board) {
         int playerX = 1;
         int playerO = -1;

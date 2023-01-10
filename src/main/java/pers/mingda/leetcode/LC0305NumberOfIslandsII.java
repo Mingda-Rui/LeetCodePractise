@@ -10,7 +10,7 @@ public class LC0305NumberOfIslandsII {
 
 }
 
-class Solution {
+class LC0305Solution {
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         UnionFind uf = new UnionFind(m, n);
         List<Integer> result = new LinkedList<>();

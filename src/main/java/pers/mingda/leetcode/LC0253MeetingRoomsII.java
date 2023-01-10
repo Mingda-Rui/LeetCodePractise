@@ -8,7 +8,7 @@ public class LC0253MeetingRoomsII {
 
 }
 
-class Solution {
+class LC0253Solution {
     public int minMeetingRooms(int[][] intervals) {
         int[] startTime = new int[intervals.length];
         int[] endTime = new int[intervals.length];

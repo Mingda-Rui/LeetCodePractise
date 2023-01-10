@@ -7,7 +7,7 @@ public class LC1512NumberOfGoodPairs {
 
 }
 
-class Solution {
+class LC1512Solution {
     public int numIdenticalPairs(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
         int counter = 0;
@@ -20,7 +20,7 @@ class Solution {
     }
 }
 
-class ArraySolution {
+class LC1512ArraySolution {
     public int numIdenticalPairs(int[] nums) {
         int[] map = new int[101];
         int counter = 0;
