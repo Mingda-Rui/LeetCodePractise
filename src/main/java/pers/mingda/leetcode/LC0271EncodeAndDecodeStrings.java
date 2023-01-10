@@ -11,42 +11,28 @@ class LC0271Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
-        String delimiter = "# ";
         StringBuilder sb = new StringBuilder();
         for (String str: strs) {
-            for (char c: str.toCharArray()) {
-                if (c == '#')
-                    sb.append('#');
-                sb.append(c);
-            }
-            sb.append(delimiter);
+            String encodedStr = str.replace("#", "##");
+            sb.append(encodedStr).append("@#@");
         }
+
         return sb.toString();
     }
 
     // Decodes a single string to a list of strings.
     public List<String> decode(String s) {
-        List<String> list = new LinkedList<>();
-        if (s.isEmpty())
-            return list;
 
-        String str = "";
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '#') {
-                i++;
-                char nextC = s.charAt(i);
-                if (nextC == '#') {
-                    str += c;
-                } else {
-                    list.add(str);
-                    str = "";
-                }
-            } else {
-                str += c;
-            }
+        List<String> result = new LinkedList<>();
+        String[] strs = s.split("@#@", -1);
+
+        for (String str: strs) {
+            String decodedStr = str.replace("##", "#");
+            result.add(decodedStr);
         }
-        return list;
+
+        result.remove(result.size() - 1);
+        return result;
     }
 }
 
