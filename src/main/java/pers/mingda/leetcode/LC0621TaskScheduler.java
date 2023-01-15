@@ -31,3 +31,24 @@ class LC0621Solution {
         return tasks.length + idleSlots;
     }
 }
+
+class LC0621MathSolution {
+    public int leastInterval(char[] tasks, int n) {
+        int[] freqs = new int[26];
+        int maxFreq = 0;
+        for (char l: tasks) {
+            freqs[l - 'A']++;
+            maxFreq = Math.max(maxFreq, freqs[l - 'A']);
+        }
+
+        int maxCount = 0;
+        for (int freq: freqs)
+            if (freq == maxFreq)
+                maxCount++;
+
+        int unitLen = Math.max(n + 1, maxCount);
+        int maxLen = (maxFreq - 1) * unitLen + maxCount;
+
+        return Math.max(tasks.length, maxLen);
+    }
+}
