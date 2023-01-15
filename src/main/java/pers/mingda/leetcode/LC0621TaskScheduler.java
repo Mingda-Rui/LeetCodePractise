@@ -46,9 +46,7 @@ class LC0621MathSolution {
             if (freq == maxFreq)
                 maxCount++;
 
-        int unitLen = Math.max(n + 1, maxCount);
-        int maxLen = (maxFreq - 1) * unitLen + maxCount;
-
+        int maxLen = (maxFreq - 1) * (n + 1) + maxCount;
         return Math.max(tasks.length, maxLen);
     }
 }
