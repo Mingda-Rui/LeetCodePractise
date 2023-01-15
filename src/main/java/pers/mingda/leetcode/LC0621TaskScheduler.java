@@ -27,6 +27,7 @@ class LC0621Solution {
             int filledIdleSlot = Math.min(maxFreq - 1, freq);
             idleSlots -= filledIdleSlot;
         }
-        return tasks.length + Math.max(0, idleSlots);
+        idleSlots = Math.max(0, idleSlots);
+        return tasks.length + idleSlots;
     }
 }
