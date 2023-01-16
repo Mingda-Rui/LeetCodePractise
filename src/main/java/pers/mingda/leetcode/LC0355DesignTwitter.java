@@ -1,10 +1,13 @@
 package pers.mingda.leetcode;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 public class LC0355DesignTwitter {
@@ -39,29 +42,21 @@ class LC0355Twitter {
         if (!followeeMap.containsKey(userId))
             return result;
 
-        Set<Tweet> headTweets = new HashSet<>();
+        Comparator<Tweet> comparator = Comparator.comparingInt(tweet -> tweet.ts);
+        Queue<Tweet> queue = new PriorityQueue<>(comparator.reversed());
         for (int followee: followeeMap.get(userId)) {
             Tweet userTweet = tweets.get(followee);
             if (userTweet != null)
-                headTweets.add(userTweet);
+                queue.add(userTweet);
         }
 
-        while (result.size() < FEED_LIMIT && !headTweets.isEmpty()) {
-            Tweet mostRecent = getMostRecentTweet(headTweets);
-            headTweets.remove(mostRecent);
+        while (result.size() < FEED_LIMIT && !queue.isEmpty()) {
+            Tweet mostRecent = queue.poll();
             if (mostRecent.next != null)
-                headTweets.add(mostRecent.next);
+                queue.add(mostRecent.next);
             result.add(mostRecent.tId);
         }
         return result;
-    }
-
-    private Tweet getMostRecentTweet(Set<Tweet> tweets) {
-        Tweet mostRecent = null;
-        for (Tweet tweet: tweets)
-            if (mostRecent == null || mostRecent.ts < tweet.ts)
-                mostRecent = tweet;
-        return mostRecent;
     }
 
     public void follow(int followerId, int followeeId) {
@@ -73,6 +68,8 @@ class LC0355Twitter {
     }
 
     public void unfollow(int followerId, int followeeId) {
+        if (followerId == followeeId)
+            return;
         if (followeeMap.containsKey(followerId))
             followeeMap.get(followerId).remove(followeeId);
     }
