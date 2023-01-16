@@ -42,7 +42,7 @@ class LC0286Solution {
                 continue;
             int neighX = neighbour[0];
             int neighY = neighbour[1];
-            if (rooms[neighX][neighY] > distance + 1)
+            if (rooms[neighX][neighY] == Integer.MAX_VALUE)
                 queue.add(neighbour);
         }
     }
