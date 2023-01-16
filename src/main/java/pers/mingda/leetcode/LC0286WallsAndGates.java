@@ -8,6 +8,8 @@ public class LC0286WallsAndGates {
 }
 
 class LC0286Solution {
+    int[][] directions = {{1, 0}, {- 1, 0}, {0, 1}, {0, - 1}};
+
     public void wallsAndGates(int[][] rooms) {
         Queue<int[]> queue = new LinkedList<>();
         for (int i = 0; i < rooms.length; i++) {
@@ -18,32 +20,20 @@ class LC0286Solution {
                 }
             }
         }
-        int distance = 0;
 
         while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                int[] node = queue.poll();
-                int x = node[0];
-                int y = node[1];
-                rooms[x][y] = Math.min(rooms[x][y], distance);
-                enqueueSurrondings(node, rooms, distance, queue);
+            int[] node = queue.poll();
+            int parentX = node[0];
+            int parentY = node[1];
+            for (int[] dir: directions) {
+                int x = node[0] + dir[0];
+                int y = node[1] + dir[1];
+                int[] child = {x, y};
+                if (!checkCoord(child, rooms) || rooms[x][y] != Integer.MAX_VALUE)
+                    continue;
+                rooms[x][y] = rooms[parentX][parentY] + 1;
+                queue.add(child);
             }
-            distance++;
-        }
-    }
-
-    private void enqueueSurrondings(int[] coord, int[][] rooms, int distance, Queue<int[]> queue) {
-        int x = coord[0];
-        int y = coord[1];
-        int[][] directions = {{x + 1, y}, {x - 1, y}, {x, y + 1}, {x, y - 1}};
-        for (int[] neighbour: directions) {
-            if (!checkCoord(neighbour, rooms))
-                continue;
-            int neighX = neighbour[0];
-            int neighY = neighbour[1];
-            if (rooms[neighX][neighY] == Integer.MAX_VALUE)
-                queue.add(neighbour);
         }
     }
 
