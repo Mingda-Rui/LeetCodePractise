@@ -6,21 +6,21 @@ public class LC0707DesignLinkedList {
 
 class MyDoublyLinkedList {
     int size;
-    Node head;
-    Node tail;
+    LC0707Node head;
+    LC0707Node tail;
 
     public MyDoublyLinkedList() {
         size = 0;
     }
 
     public int get(int index) {
-        Node node = getNode(index);
-        return node == null ? -1 : node.val;
+        LC0707Node LC0707Node = getLC0707Node(index);
+        return LC0707Node == null ? -1 : LC0707Node.val;
     }
 
     public void addAtHead(int val) {
-        Node oldHead = head;
-        head = new Node(val);
+        LC0707Node oldHead = head;
+        head = new LC0707Node(val);
         head.next = oldHead;
         if (oldHead != null)
             oldHead.prev = head;
@@ -30,8 +30,8 @@ class MyDoublyLinkedList {
     }
 
     public void addAtTail(int val) {
-        Node oldTail = tail;
-        tail = new Node(val);
+        LC0707Node oldTail = tail;
+        tail = new LC0707Node(val);
         tail.prev = oldTail;
         if (oldTail != null)
             oldTail.next = tail;
@@ -40,7 +40,7 @@ class MyDoublyLinkedList {
         size++;
     }
 
-    private Node getNode(int index) {
+    private LC0707Node getLC0707Node(int index) {
         if (index < 0 || index >= size)
             return null;
         if (index < size / 2)
@@ -49,23 +49,23 @@ class MyDoublyLinkedList {
             return getFromTail(index);
     }
 
-    private Node getFromHead(int index) {
-        Node node = this.head;
+    private LC0707Node getFromHead(int index) {
+        LC0707Node LC0707Node = this.head;
         while (index > 0) {
-            node = node.next;
+            LC0707Node = LC0707Node.next;
             index--;
         }
-        return node;
+        return LC0707Node;
     }
 
-    private Node getFromTail(int index) {
-        Node node = this.tail;
+    private LC0707Node getFromTail(int index) {
+        LC0707Node LC0707Node = this.tail;
         int counterFromTail = size - index - 1;
         while (counterFromTail > 0) {
-            node = node.prev;
+            LC0707Node = LC0707Node.prev;
             counterFromTail--;
         }
-        return node;
+        return LC0707Node;
 
     }
 
@@ -75,12 +75,12 @@ class MyDoublyLinkedList {
         else if (index == size)
             addAtTail(val);
         else {
-            Node prevNode = getNode(index - 1);
-            if (prevNode != null) {
-                Node nextNode = prevNode.next;
-                Node node = new Node(val, prevNode, nextNode);
-                prevNode.next = node;
-                nextNode.prev = node;
+            LC0707Node prevLC0707Node = getLC0707Node(index - 1);
+            if (prevLC0707Node != null) {
+                LC0707Node nextLC0707Node = prevLC0707Node.next;
+                LC0707Node LC0707Node = new LC0707Node(val, prevLC0707Node, nextLC0707Node);
+                prevLC0707Node.next = LC0707Node;
+                nextLC0707Node.prev = LC0707Node;
                 size++;
             }
         }
@@ -89,7 +89,7 @@ class MyDoublyLinkedList {
 
     public void deleteAtIndex(int index) {
         if (index == 0) {
-            Node oldHead = head;
+            LC0707Node oldHead = head;
             head = head.next;
             oldHead.next = null;
             if (head != null)
@@ -97,7 +97,7 @@ class MyDoublyLinkedList {
             if (size == 1)
                 tail = null;
         } else if (index == size - 1) {
-            Node oldTail = tail;
+            LC0707Node oldTail = tail;
             tail = tail.prev;
             oldTail.prev = null;
             if (tail != null)
@@ -105,16 +105,16 @@ class MyDoublyLinkedList {
             if (size == 1)
                 head = null;
         } else {
-            Node prevNode = getNode(index - 1);
-            if (prevNode == null || prevNode.next == null)
+            LC0707Node prevLC0707Node = getLC0707Node(index - 1);
+            if (prevLC0707Node == null || prevLC0707Node.next == null)
                 return;
-            Node deleteNode = prevNode.next;
-            Node nextNode = deleteNode.next;
+            LC0707Node deleteLC0707Node = prevLC0707Node.next;
+            LC0707Node nextLC0707Node = deleteLC0707Node.next;
 
-            prevNode.next = nextNode;
-            deleteNode.prev = null;
-            nextNode.prev = prevNode;
-            deleteNode.next = null;
+            prevLC0707Node.next = nextLC0707Node;
+            deleteLC0707Node.prev = null;
+            nextLC0707Node.prev = prevLC0707Node;
+            deleteLC0707Node.next = null;
         }
         size--;
     }
@@ -123,8 +123,8 @@ class MyDoublyLinkedList {
 class MySinglyLinkedList {
 
     int size;
-    Node head;
-    Node tail;
+    LC0707Node head;
+    LC0707Node tail;
 
     public MySinglyLinkedList() {
 
@@ -133,32 +133,32 @@ class MySinglyLinkedList {
     public int get(int index) {
         if (! checkIndex(index))
             return -1;
-        return getNode(index).val;
+        return getLC0707Node(index).val;
     }
 
     private boolean checkIndex(int index) {
         return index >= 0 && index < size;
     }
 
-    private Node getNode(int index) {
-        Node node = head;
+    private LC0707Node getLC0707Node(int index) {
+        LC0707Node LC0707Node = head;
         while (index > 0) {
-            node = node.next;
+            LC0707Node = LC0707Node.next;
             index--;
         }
-        return node;
+        return LC0707Node;
     }
 
     public void addAtHead(int val) {
-        head = new Node(val, head);
+        head = new LC0707Node(val, head);
         size++;
         if (size == 1)
             tail = head;
     }
 
     public void addAtTail(int val) {
-        Node oldTail = tail;
-        tail = new Node(val);
+        LC0707Node oldTail = tail;
+        tail = new LC0707Node(val);
         if (size == 0)
             head = tail;
         else
@@ -172,9 +172,9 @@ class MySinglyLinkedList {
         } else if (index == size) {
             addAtTail(val);
         } else if (checkIndex(index)) {
-            Node prev = getNode(index - 1);
-            Node node = new Node(val, prev.next);
-            prev.next = node;
+            LC0707Node prev = getLC0707Node(index - 1);
+            LC0707Node LC0707Node = new LC0707Node(val, prev.next);
+            prev.next = LC0707Node;
             size++;
         }
     }
@@ -183,12 +183,12 @@ class MySinglyLinkedList {
         if (!checkIndex(index))
             return;
         if (index == 0) {
-            Node oldHead = head;
+            LC0707Node oldHead = head;
             head = head.next;
             oldHead.next = null;
         } else {
-            Node prev = getNode(index - 1);
-            Node deleted = prev.next;
+            LC0707Node prev = getLC0707Node(index - 1);
+            LC0707Node deleted = prev.next;
             prev.next = deleted.next;
             deleted.next = null;
             if (index == size - 1)
@@ -202,21 +202,21 @@ class MySinglyLinkedList {
     }
 }
 
-class Node {
+class LC0707Node {
     int val;
-    Node next;
-    Node prev;
+    LC0707Node next;
+    LC0707Node prev;
 
-    public Node(int val) {
+    public LC0707Node(int val) {
         this.val = val;
     }
 
     // for singly list
-    public Node(int val, Node next) {
+    public LC0707Node(int val, LC0707Node next) {
         this(val, null, next);
     }
 
-    public Node(int val, Node prev, Node next) {
+    public LC0707Node(int val, LC0707Node prev, LC0707Node next) {
         this(val);
         this.prev = prev;
         this.next = next;

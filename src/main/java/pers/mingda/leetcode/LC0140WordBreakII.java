@@ -9,7 +9,7 @@ public class LC0140WordBreakII {
 
 class LC0140Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
-        Trie root = buildTrie(wordDict);
+        LC0140Trie root = buildLC0140Trie(wordDict);
         List<List<String>> result = new LinkedList<>();
         buildResult(result, new LinkedList<>(), root, s);
         List<String> sentences = new LinkedList<>();
@@ -17,21 +17,21 @@ class LC0140Solution {
         return sentences;
     }
 
-    private void buildResult(List<List<String>> result, List<String> sentence, Trie trie, String s) {
+    private void buildResult(List<List<String>> result, List<String> sentence, LC0140Trie LC0140Trie, String s) {
 
         if (s.isEmpty()) {
             List<String> copiedSentence = new LinkedList<>(sentence);
             result.add(copiedSentence);
             return;
         }
-        Trie current = trie;
+        LC0140Trie current = LC0140Trie;
         for (int i = 0; i < s.length(); i++) {
             char letter = s.charAt(i);
             if (current.next[letter] != null) {
                 current = current.next[letter];
                 if (current.isWord) {
                     sentence.add(s.substring(0, i + 1));
-                    buildResult(result, sentence, trie, s.substring(i + 1));
+                    buildResult(result, sentence, LC0140Trie, s.substring(i + 1));
                     sentence.remove(sentence.size() - 1);
                 }
             } else {
@@ -40,18 +40,18 @@ class LC0140Solution {
         }
     }
 
-    private Trie buildTrie(List<String> wordDict) {
-        Trie trie = new Trie(' ');
+    private LC0140Trie buildLC0140Trie(List<String> wordDict) {
+        LC0140Trie LC0140Trie = new LC0140Trie(' ');
         for (String word: wordDict) {
-            Trie current = trie;
+            LC0140Trie current = LC0140Trie;
             for (char letter: word.toCharArray()) {
                 if (current.next[letter] == null)
-                    current.next[letter] = new Trie(letter);
+                    current.next[letter] = new LC0140Trie(letter);
                 current = current.next[letter];
             }
             current.isWord = true;
         }
-        return trie;
+        return LC0140Trie;
     }
 
     private void buildSentences(List<List<String>> result, List<String> sentences) {
@@ -69,13 +69,13 @@ class LC0140Solution {
     }
 }
 
-class Trie {
+class LC0140Trie {
     char c;
-    Trie[] next;
+    LC0140Trie[] next;
     boolean isWord;
-    public Trie(char c) {
+    public LC0140Trie(char c) {
         this.c = c;
         this.isWord = false;
-        this.next = new Trie[128];
+        this.next = new LC0140Trie[128];
     }
 }

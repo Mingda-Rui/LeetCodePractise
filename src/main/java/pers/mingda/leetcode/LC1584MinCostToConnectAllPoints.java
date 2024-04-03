@@ -47,7 +47,7 @@ class LC1584Solution {
     }
 }
 
-class LC1584UnionFindSolution {
+class LC1584LC1584UnionFindSolution {
     public int minCostConnectPoints(int[][] points) {
         Comparator<int[][]> edgeComparator = Comparator.comparingInt(this::getLengthOfEdge);
         Queue<int[][]> queue = new PriorityQueue<>(edgeComparator);
@@ -65,7 +65,7 @@ class LC1584UnionFindSolution {
 
         int numOfEdge = 0;
         int sumOfEdge = 0;
-        UnionFind uf = new UnionFind(points.length);
+        LC1584UnionFind uf = new LC1584UnionFind(points.length);
         while (!queue.isEmpty() && numOfEdge < points.length - 1) {
             int[][] edge = queue.poll();
             int point1 = map.get(edge[0]);
@@ -86,11 +86,11 @@ class LC1584UnionFindSolution {
     }
 }
 
-class UnionFind {
+class LC1584UnionFind {
     private int[] group;
     private int[] rank;
 
-    public UnionFind(int size) {
+    public LC1584UnionFind(int size) {
         this.group = new int[size];
         this.rank = new int[size];
         for (int i = 0; i < group.length; i++)

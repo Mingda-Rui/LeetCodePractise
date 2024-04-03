@@ -28,7 +28,7 @@ class LC0408Solution {
     }
 }
 
-class RefactoredSolution {
+class LC0408RefactoredSolution {
     public boolean validWordAbbreviation(String word, String abbr) {
         int pointer = 0;
         int num = 0;

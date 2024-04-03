@@ -22,29 +22,29 @@ public class LC1597BuildBinaryExpressionTreeFromInfixExpression {
  * }
  */
 class LC1597Solution {
-    public Node expTree(String s) {
+    public LC1597Node expTree(String s) {
         return expTree(s, 0, s.length());
     }
 
-    private Node expTree(String s, int start, int end) {
-        Stack<Node> stack = new Stack<>();
+    private LC1597Node expTree(String s, int start, int end) {
+        Stack<LC1597Node> stack = new Stack<>();
         for (int i = start; i < end; i++) {
             char current = s.charAt(i);
-            Node digit = null;
+            LC1597Node digit;
             if (current == '(') {
                 int close = findClosePare(s, i);
                 digit = expTree(s, i + 1, close);
                 i = close;
             } else {
-                digit = new Node(current);
+                digit = new LC1597Node(current);
             }
             i++;
             if (i == end) {
-                Node endSign = new Node('#');
+                LC1597Node endSign = new LC1597Node('#');
                 return popStack(stack, digit, endSign);
             }
             char next = s.charAt(i);
-            Node sign = new Node(next);
+            LC1597Node sign = new LC1597Node(next);
 
             digit = popStack(stack, digit, sign);
             stack.push(digit);
@@ -67,17 +67,17 @@ class LC1597Solution {
         return start;
     }
 
-    private boolean greaterThanPrevSign(Node sign, Stack<Node> stack) {
+    private boolean greaterThanPrevSign(LC1597Node sign, Stack<LC1597Node> stack) {
         // TODO sign check
         if (stack.isEmpty())
             return true;
-        Node prevSign = stack.peek();
+        LC1597Node prevSign = stack.peek();
         int prevLevel = getSignLevel(prevSign);
         int currentLevel = getSignLevel(sign);
         return currentLevel > prevLevel;
     }
 
-    private int getSignLevel(Node sign) {
+    private int getSignLevel(LC1597Node sign) {
         return switch (sign.val) {
                 case '-', '+' -> 1;
                 case '*', '/' -> 2;
@@ -86,10 +86,10 @@ class LC1597Solution {
         };
     }
 
-    private Node popStack(Stack<Node> stack, Node digit, Node sign) {
+    private LC1597Node popStack(Stack<LC1597Node> stack, LC1597Node digit, LC1597Node sign) {
         while (!stack.isEmpty() && !greaterThanPrevSign(sign, stack)) {
-            Node prevSign = stack.pop();
-            Node prev = stack.pop();
+            LC1597Node prevSign = stack.pop();
+            LC1597Node prev = stack.pop();
             prevSign.left = prev;
             prevSign.right = digit;
             digit = prevSign;
@@ -99,13 +99,13 @@ class LC1597Solution {
 
 }
 
-class Node {
+class LC1597Node {
     char val;
-    Node left;
-    Node right;
-    Node() {this.val = ' ';}
-    Node(char val) { this.val = val; }
-    Node(char val, Node left, Node right) {
+    LC1597Node left;
+    LC1597Node right;
+    LC1597Node() {this.val = ' ';}
+    LC1597Node(char val) { this.val = val; }
+    LC1597Node(char val, LC1597Node left, LC1597Node right) {
         this.val = val;
         this.left = left;
         this.right = right;

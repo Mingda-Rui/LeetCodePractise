@@ -4,12 +4,12 @@ public class LC0208ImplementTrie {
 
 }
 
-class Trie {
+class LC0208Trie {
 
-    Trie[] record;
+    LC0208Trie[] record;
 
-    public Trie() {
-        record = new Trie[128];
+    public LC0208Trie() {
+        record = new LC0208Trie[128];
     }
 
     public void insert(String word) {
@@ -20,7 +20,7 @@ class Trie {
         if (index < word.length()) {
             char c = word.charAt(index);
             if (record[c] == null) {
-                record[c] = new Trie();
+                record[c] = new LC0208Trie();
             }
             record[c].insert(word, index + 1);
         }
@@ -45,8 +45,8 @@ class Trie {
 }
 
 /**
- * Your Trie object will be instantiated and called as such:
- * Trie obj = new Trie();
+ * Your LC0208Trie object will be instantiated and called as such:
+ * LC0208Trie obj = new LC0208Trie();
  * obj.insert(word);
  * boolean param_2 = obj.search(word);
  * boolean param_3 = obj.startsWith(prefix);

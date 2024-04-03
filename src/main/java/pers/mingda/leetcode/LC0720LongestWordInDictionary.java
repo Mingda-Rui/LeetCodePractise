@@ -6,31 +6,31 @@ import java.util.Set;
 
 public class LC0720LongestWordInDictionary {
     public String longestWord(String[] words) {
-        Trie root = new Trie();
+        LC0720Trie root = new LC0720Trie();
         root.word = "";
         for (String word: words)
-            constructTrie(root, word);
+            constructLC0720Trie(root, word);
         return getLongest(root);
     }
 
-    private Trie constructTrie(Trie root, String word) {
-        Trie trie = root;
+    private LC0720Trie constructLC0720Trie(LC0720Trie root, String word) {
+        LC0720Trie LC0720Trie = root;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            if (trie.arr[c] == null)
-                trie.arr[c] = new Trie();
-            trie = trie.arr[c];
+            if (LC0720Trie.arr[c] == null)
+                LC0720Trie.arr[c] = new LC0720Trie();
+            LC0720Trie = LC0720Trie.arr[c];
         }
-        trie.word = word;
+        LC0720Trie.word = word;
         return root;
     }
 
-    private String getLongest(Trie trie) {
-        if (trie == null || trie.word == null)
+    private String getLongest(LC0720Trie LC0720Trie) {
+        if (LC0720Trie == null || LC0720Trie.word == null)
             return "";
-        String result = trie.word;
+        String result = LC0720Trie.word;
         for (int i = 97; i <= 122; i++) {
-            String child = getLongest(trie.arr[i]);
+            String child = getLongest(LC0720Trie.arr[i]);
             if (child.length() > result.length())
                 result = child;
         }
@@ -54,12 +54,12 @@ public class LC0720LongestWordInDictionary {
     }
 }
 
-class Trie {
-    Trie[] arr;
+class LC0720Trie {
+    LC0720Trie[] arr;
     String word;
 
-    public Trie() {
-        this.arr = new Trie[256];
+    public LC0720Trie() {
+        this.arr = new LC0720Trie[256];
         this.word = null;
     }
 }

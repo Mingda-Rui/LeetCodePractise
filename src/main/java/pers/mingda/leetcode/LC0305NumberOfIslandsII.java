@@ -12,12 +12,12 @@ public class LC0305NumberOfIslandsII {
 
 class LC0305Solution {
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
-        UnionFind uf = new UnionFind(m, n);
+        LC0305UnionFind uf = new LC0305UnionFind(m, n);
         List<Integer> result = new LinkedList<>();
 
         for (int[] pos: positions) {
             List<Integer> posList = Arrays.asList(pos[0], pos[1]);
-            int islandNum = uf.unionFind(posList);
+            int islandNum = uf.LC0305UnionFind(posList);
             result.add(islandNum);
         }
 
@@ -25,7 +25,7 @@ class LC0305Solution {
     }
 }
 
-class UnionFind {
+class LC0305UnionFind {
 
     private int row;
     private int column;
@@ -34,7 +34,7 @@ class UnionFind {
     private int[][] dir;
     private Map<List<Integer>, List<Integer>> record;
 
-    public UnionFind(int row, int column) {
+    public LC0305UnionFind(int row, int column) {
         this.row = row;
         this.column = column;
         this.positions = new int[row][column];
@@ -54,7 +54,7 @@ class UnionFind {
         return pos;
     }
 
-    public int unionFind(List<Integer> pos) {
+    public int LC0305UnionFind(List<Integer> pos) {
         int x = pos.get(0);
         int y = pos.get(1);
         positions[x][y] = 1;

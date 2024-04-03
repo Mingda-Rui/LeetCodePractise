@@ -10,11 +10,11 @@ public class LC0692TopKFrequentWords {
             map.put(word, count + 1);
         }
 
-        Trie[] bucket = new Trie[words.length + 1];
+        LC0692Trie[] bucket = new LC0692Trie[words.length + 1];
         for (String word: map.keySet()) {
             int count = map.get(word);
             if (bucket[count] == null)
-                bucket[count] = new Trie('#');
+                bucket[count] = new LC0692Trie('#');
             bucket[count].add(word);
         }
 
@@ -22,16 +22,16 @@ public class LC0692TopKFrequentWords {
         for (int i = bucket.length - 1; i > 0; i--) {
             if (result.size() == k)
                 return result;
-            Trie trie = bucket[i];
-            if (trie != null)
-                addResult(result, trie, k);
+            LC0692Trie LC0692Trie = bucket[i];
+            if (LC0692Trie != null)
+                addResult(result, LC0692Trie, k);
         }
         return result;
     }
 
-    private void addResult(List<String> result, Trie trie, int k) {
+    private void addResult(List<String> result, LC0692Trie LC0692Trie, int k) {
         List<String> words = new LinkedList<>();
-        trie.extraWords(words);
+        LC0692Trie.extraWords(words);
         int index = 0;
         while (index < words.size() && result.size() < k) {
             result.add(words.get(index));
@@ -40,24 +40,24 @@ public class LC0692TopKFrequentWords {
     }
 }
 
-class Trie {
-    Trie[] children;
+class LC0692Trie {
+    LC0692Trie[] children;
     char c;
     String word;
 
-    public Trie(char c) {
-        this.children = new Trie[128];
+    public LC0692Trie(char c) {
+        this.children = new LC0692Trie[128];
         this.c = c;
         this.word = null;
     }
 
     public void add(String word) {
-        Trie pointer = this;
+        LC0692Trie pointer = this;
 
         for (int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
             if (pointer.children[letter] == null)
-                pointer.children[letter] = new Trie(letter);
+                pointer.children[letter] = new LC0692Trie(letter);
             pointer = pointer.children[letter];
             if (i == word.length() - 1)
                 pointer.word = word;
@@ -65,7 +65,7 @@ class Trie {
     }
 
     public void extraWords(List<String> list) {
-        for (Trie child: children) {
+        for (LC0692Trie child: children) {
             if (child != null) {
                 if (child.word != null)
                     list.add(child.word);

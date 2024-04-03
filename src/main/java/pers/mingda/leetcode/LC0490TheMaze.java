@@ -73,7 +73,7 @@ class LC0490Solution {
     }
 }
 
-class BfsSolution {
+class LC0490BfsSolution {
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
         Set<List<Integer>> seen = new HashSet<>();
         Queue<List<Integer>> queue = new LinkedList<>();

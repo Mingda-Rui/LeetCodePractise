@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Stack;
 
 public class LC0589NAryTreePreorderTraversal {
-    public List<Integer> preorder(Node root) {
+    public List<Integer> preorder(LC0589Node root) {
         List<Integer> result = new LinkedList<>();
         if (root == null)
             return result;
 
-        Stack<Node> stack = new Stack<>();
+        Stack<LC0589Node> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
-            Node current = stack.pop();
+            LC0589Node current = stack.pop();
             result.add(current.val);
 
-            List<Node> children = current.children;
+            List<LC0589Node> children = current.children;
             for (int i = children.size() - 1; i >= 0; i--)
                 stack.push(children.get(i));
 
@@ -24,33 +24,33 @@ public class LC0589NAryTreePreorderTraversal {
         return result;
     }
 
-    public List<Integer> preorderRecursive(Node root) {
+    public List<Integer> preorderRecursive(LC0589Node root) {
         List<Integer> result = new LinkedList<>();
         return preorderRecursive(root, result);
     }
 
-    private List<Integer> preorderRecursive(Node root, List<Integer> result) {
+    private List<Integer> preorderRecursive(LC0589Node root, List<Integer> result) {
         if (root == null)
             return result;
         result.add(root.val);
 
-        for (Node child: root.children)
+        for (LC0589Node child: root.children)
             preorderRecursive(child, result);
         return result;
     }
 }
 
-class Node {
+class LC0589Node {
     public int val;
-    public List<Node> children;
+    public List<LC0589Node> children;
 
-    public Node() {}
+    public LC0589Node() {}
 
-    public Node(int _val) {
+    public LC0589Node(int _val) {
         val = _val;
     }
 
-    public Node(int _val, List<Node> _children) {
+    public LC0589Node(int _val, List<LC0589Node> _children) {
         val = _val;
         children = _children;
     }

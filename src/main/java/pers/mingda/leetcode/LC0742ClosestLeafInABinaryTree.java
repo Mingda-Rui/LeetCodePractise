@@ -106,7 +106,7 @@ class NodeCloestLeaf {
 }
 
 
-class BfsSolution {
+class LC0742BfsSolution {
 
     public int findClosestLeaf(TreeNode root, int k) {
         Map<TreeNode, TreeNode> childToParent = new HashMap<>();

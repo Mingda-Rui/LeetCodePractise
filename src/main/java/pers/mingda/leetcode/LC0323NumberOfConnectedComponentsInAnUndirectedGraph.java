@@ -9,20 +9,20 @@ public class LC0323NumberOfConnectedComponentsInAnUndirectedGraph {
 
 }
 
-class LC0323UnionFindSolution {
+class LC0323LC0323UnionFindSolution {
     public int countComponents(int n, int[][] edges) {
-        UnionFind uf = new UnionFind(n);
+        LC0323UnionFind uf = new LC0323UnionFind(n);
         for (int[] edge: edges)
             uf.union(edge[0], edge[1]);
         return uf.getSetCount();
     }
 }
 
-class UnionFind {
+class LC0323UnionFind {
     private int[] parent;
     private int setCount;
 
-    public UnionFind(int n) {
+    public LC0323UnionFind(int n) {
         this.parent = new int[n];
         this.setCount = n;
         for (int i = 0; i < n; i ++)

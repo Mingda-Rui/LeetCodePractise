@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC0138CopyListWithRandomPointer {
-    public Node copyRandomList(Node head) {
-        Map<Node, Node> map = new HashMap<>();
-        Node dummyHead = new Node(-1);
-        Node copy = copyByNext(head, dummyHead, map);
+    public LC0138Node copyRandomList(LC0138Node head) {
+        Map<LC0138Node, LC0138Node> map = new HashMap<>();
+        LC0138Node dummyHead = new LC0138Node(-1);
+        LC0138Node copy = copyByNext(head, dummyHead, map);
 
         while (head != null) {
-            Node random = head.random;
+            LC0138Node random = head.random;
             if (random != null) {
                 copy.random = map.get(random);
             }
@@ -23,36 +23,36 @@ public class LC0138CopyListWithRandomPointer {
 
     }
 
-    private Node copyByNext(Node origin, Node copy, Map<Node, Node> map) {
+    private LC0138Node copyByNext(LC0138Node origin, LC0138Node copy, Map<LC0138Node, LC0138Node> map) {
         if (origin == null)
             return origin;
-        Node next = new Node(origin.val);
+        LC0138Node next = new LC0138Node(origin.val);
         map.put(origin, next);
         copy.next = next;
         copyByNext(origin.next, next, map);
         return next;
     }
 
-    public Node copyRandomListZeroSpaceComplexity(Node head) {
-        Node oriIte = head;
+    public LC0138Node copyRandomListZeroSpaceComplexity(LC0138Node head) {
+        LC0138Node oriIte = head;
         while (oriIte != null) {
-            Node node = new Node(oriIte.val);
-            node.next = oriIte.next;
-            oriIte.next = node;
-            oriIte = node.next;
+            LC0138Node LC0138Node = new LC0138Node(oriIte.val);
+            LC0138Node.next = oriIte.next;
+            oriIte.next = LC0138Node;
+            oriIte = LC0138Node.next;
         }
 
         oriIte = head;
         while (oriIte != null) {
-            Node oriRandom = oriIte.random;
-            Node copy = oriIte.next;
+            LC0138Node oriRandom = oriIte.random;
+            LC0138Node copy = oriIte.next;
             copy.random = oriRandom == null ? null : oriRandom.next;
             oriIte = copy.next;
         }
 
-        Node dummyOri = new Node(-1);
-        Node dummyCopy = new Node(-1);
-        Node copydummyHead = dummyCopy;
+        LC0138Node dummyOri = new LC0138Node(-1);
+        LC0138Node dummyCopy = new LC0138Node(-1);
+        LC0138Node copydummyHead = dummyCopy;
 
         oriIte = head;
         while (oriIte != null) {
@@ -69,12 +69,12 @@ public class LC0138CopyListWithRandomPointer {
     }
 }
 
-class Node {
+class LC0138Node {
     int val;
-    Node next;
-    Node random;
+    LC0138Node next;
+    LC0138Node random;
 
-    public Node(int val) {
+    public LC0138Node(int val) {
         this.val = val;
         this.next = null;
         this.random = null;

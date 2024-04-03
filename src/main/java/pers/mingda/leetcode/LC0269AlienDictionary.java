@@ -19,10 +19,10 @@ public class LC0269AlienDictionary {
 
 class LC0269Solution {
     public String alienOrder(String[] words) {
-        Trie trie = new Trie('#');
+        LC0269Trie LC0269Trie = new LC0269Trie('#');
         Set<Character> allLetters = new HashSet<>();
         for (int i = 0; i < words.length; i++) {
-            if (!buildTrie(trie, i, words[i]))
+            if (!buildLC0269Trie(LC0269Trie, i, words[i]))
                 return "";
             for (char letter: words[i].toCharArray())
                 allLetters.add(letter);
@@ -30,14 +30,14 @@ class LC0269Solution {
 
 
 
-        List<List<Trie>> rules = new LinkedList<>();
-        parseAlienRule(trie, rules);
+        List<List<LC0269Trie>> rules = new LinkedList<>();
+        parseAlienRule(LC0269Trie, rules);
 
 //        printRules(rules); // mr-test
 
         Map<Character, Set<Character>> map = new HashMap<>();
         Map<Character, Set<Character>> reversedMap = new HashMap<>();
-        for (List<Trie> rule: rules) {
+        for (List<LC0269Trie> rule: rules) {
             if (!checkRule(rule))
                 return "";
             buildRuleMap(rule, map, reversedMap);
@@ -75,13 +75,13 @@ class LC0269Solution {
         return result + restLetters;
     }
 
-    private boolean buildTrie(Trie trie, int pos, String words) {
+    private boolean buildLC0269Trie(LC0269Trie LC0269Trie, int pos, String words) {
         if (words == null || words.isEmpty())
             return true;
-        Trie current = trie;
+        LC0269Trie current = LC0269Trie;
         char c = words.charAt(0);
         if (current.children[c] == null) {
-            Trie child = new Trie(c);
+            LC0269Trie child = new LC0269Trie(c);
             current.children[c] = child;
             current.numOfChildren++;
         }
@@ -90,16 +90,16 @@ class LC0269Solution {
 
         if (words.length() == 1 && current.numOfChildren != 0)
             return false;
-        if (!buildTrie(current, pos, words.substring(1)))
+        if (!buildLC0269Trie(current, pos, words.substring(1)))
             return false;
         return true;
     }
 
-    private void parseAlienRule(Trie trie, List<List<Trie>> rules) {
-        if (trie.numOfChildren == 0)
+    private void parseAlienRule(LC0269Trie LC0269Trie, List<List<LC0269Trie>> rules) {
+        if (LC0269Trie.numOfChildren == 0)
             return;
-        Trie[] children = trie.children;
-        Queue<Trie> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.headPos));
+        LC0269Trie[] children = LC0269Trie.children;
+        Queue<LC0269Trie> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.headPos));
         for (int i = 0; i < children.length; i++) {
             if (children[i] != null) {
                 parseAlienRule(children[i], rules);
@@ -110,26 +110,26 @@ class LC0269Solution {
         if (queue.size() <= 1)
             return;
 
-        List<Trie> rule = new ArrayList<>();
+        List<LC0269Trie> rule = new ArrayList<>();
         while (!queue.isEmpty()) {
-            Trie headSort = queue.poll();
+            LC0269Trie headSort = queue.poll();
             rule.add(headSort);
         }
 
         rules.add(rule);
     }
 
-    private boolean checkRule(List<Trie> rule) {
+    private boolean checkRule(List<LC0269Trie> rule) {
         for (int i = 0; i < rule.size() - 1; i++) {
-            Trie parent = rule.get(i);
-            Trie child = rule.get(i + 1);
+            LC0269Trie parent = rule.get(i);
+            LC0269Trie child = rule.get(i + 1);
             if (parent.tailPos > child.headPos)
                 return false;
         }
         return true;
     }
 
-    private void buildRuleMap(List<Trie> rule, Map<Character, Set<Character>> map, Map<Character, Set<Character>> reversedMap) {
+    private void buildRuleMap(List<LC0269Trie> rule, Map<Character, Set<Character>> map, Map<Character, Set<Character>> reversedMap) {
         for (int i = 0; i < rule.size(); i++) {
             char parent = rule.get(i).c;
             map.putIfAbsent(parent, new HashSet<>());
@@ -151,19 +151,19 @@ class LC0269Solution {
 
 */
 
-class Trie {
+class LC0269Trie {
     int numOfChildren;
     char c;
     int headPos;
     int tailPos;
-    Trie[] children;
+    LC0269Trie[] children;
 
-    public Trie(char c) {
+    public LC0269Trie(char c) {
         this.numOfChildren = 0;
         this.c = c;
         this.headPos = Integer.MAX_VALUE;
         this.tailPos = Integer.MIN_VALUE;
-        this.children = new Trie[128];
+        this.children = new LC0269Trie[128];
     }
 
     public void addPos(int pos) {

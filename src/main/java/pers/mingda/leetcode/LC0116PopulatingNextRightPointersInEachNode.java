@@ -4,33 +4,33 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LC0116PopulatingNextRightPointersInEachNode {
-    public Node connect(Node root) {
+    public LC0116Node connect(LC0116Node root) {
         if (root == null)
             return root;
-        Queue<Node> queue = new LinkedList<>();
+        Queue<LC0116Node> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
-                Node node = queue.remove();
+                LC0116Node LC0116Node = queue.remove();
                 if (i == size - 1)
-                    node.next = null;
+                    LC0116Node.next = null;
                 else
-                    node.next = queue.element();
-                if (node.right != null) {
-                    queue.add(node.left);
-                    queue.add(node.right);
+                    LC0116Node.next = queue.element();
+                if (LC0116Node.right != null) {
+                    queue.add(LC0116Node.left);
+                    queue.add(LC0116Node.right);
                 }
             }
         }
         return root;
     }
 
-    public Node connectIterativeNoStack(Node root) {
+    public LC0116Node connectIterativeNoStack(LC0116Node root) {
         if (root == null)
             return root;
-        Node ite = root;
-        Node nextLevel = ite.left;
+        LC0116Node ite = root;
+        LC0116Node nextLevel = ite.left;
         while (ite != null) {
             if (ite.left != null) {
                 ite.left.next = ite.right;
@@ -47,7 +47,7 @@ public class LC0116PopulatingNextRightPointersInEachNode {
         return root;
     }
 
-    public Node connectRecursive(Node root) {
+    public LC0116Node connectRecursive(LC0116Node root) {
         if (root == null || root.left == null)
             return root;
         root.left.next = root.right;
@@ -59,19 +59,19 @@ public class LC0116PopulatingNextRightPointersInEachNode {
     }
 }
 
-class Node {
+class LC0116Node {
     public int val;
-    public Node left;
-    public Node right;
-    public Node next;
+    public LC0116Node left;
+    public LC0116Node right;
+    public LC0116Node next;
 
-    public Node() {}
+    public LC0116Node() {}
 
-    public Node(int _val) {
+    public LC0116Node(int _val) {
         val = _val;
     }
 
-    public Node(int _val, Node _left, Node _right, Node _next) {
+    public LC0116Node(int _val, LC0116Node _left, LC0116Node _right, LC0116Node _next) {
         val = _val;
         left = _left;
         right = _right;

@@ -14,7 +14,7 @@ class NestedIterator implements Iterator<Integer> {
 
     private Iterator<Integer> iterator;
 
-    public NestedIterator(List<NestedInteger> nestedList) {
+    public NestedIterator(List<LC0341NestedInteger> nestedList) {
         List<Integer> flattendList = parseNestedInt(nestedList, new LinkedList<>());
         this.iterator = flattendList.iterator();
     }
@@ -29,8 +29,8 @@ class NestedIterator implements Iterator<Integer> {
         return iterator.hasNext();
     }
 
-    private List<Integer> parseNestedInt(List<NestedInteger> nestedList, List<Integer> result) {
-        for (NestedInteger nestedInt: nestedList) {
+    private List<Integer> parseNestedInt(List<LC0341NestedInteger> nestedList, List<Integer> result) {
+        for (LC0341NestedInteger nestedInt: nestedList) {
             if (nestedInt.isInteger())
                 result.add(nestedInt.getInteger());
             else
@@ -42,32 +42,32 @@ class NestedIterator implements Iterator<Integer> {
 
 class NestedIteratorFlatAsYouGo implements Iterator<Integer> {
 
-    Stack<NestedInteger> stack;
+    Stack<LC0341NestedInteger> stack;
 
-    public NestedIteratorFlatAsYouGo(List<NestedInteger> nestedList) {
+    public NestedIteratorFlatAsYouGo(List<LC0341NestedInteger> nestedList) {
         this.stack = new Stack<>();
         populateStack(nestedList);
     }
 
     @Override
     public Integer next() {
-        NestedInteger next = stack.pop();
+        LC0341NestedInteger next = stack.pop();
         return next.getInteger();
     }
 
     @Override
     public boolean hasNext() {
         while (!stack.isEmpty() && !stack.peek().isInteger()) {
-            NestedInteger next = stack.pop();
+            LC0341NestedInteger next = stack.pop();
             populateStack(next.getList());
         }
         return !stack.isEmpty();
     }
 
 
-    private void populateStack(List<NestedInteger> nestedList) {
+    private void populateStack(List<LC0341NestedInteger> nestedList) {
         for (int i = nestedList.size() - 1; i >= 0; i--) {
-            NestedInteger next = nestedList.get(i);
+            LC0341NestedInteger next = nestedList.get(i);
             stack.push(next);
         }
     }
@@ -75,9 +75,9 @@ class NestedIteratorFlatAsYouGo implements Iterator<Integer> {
 
 class NestedIteratorWithIteratorStack implements Iterator<Integer> {
 
-    Stack<ListIterator<NestedInteger>> stack;
+    Stack<ListIterator<LC0341NestedInteger>> stack;
 
-    public NestedIteratorWithIteratorStack(List<NestedInteger> nestedList) {
+    public NestedIteratorWithIteratorStack(List<LC0341NestedInteger> nestedList) {
         this.stack = new Stack<>();
         populateStack(nestedList);
     }
@@ -90,9 +90,9 @@ class NestedIteratorWithIteratorStack implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         while (!stack.isEmpty()) {
-            ListIterator<NestedInteger> ite = stack.peek();
+            ListIterator<LC0341NestedInteger> ite = stack.peek();
             if (ite.hasNext()) {
-                NestedInteger next = ite.next();
+                LC0341NestedInteger next = ite.next();
                 if (next.isInteger()) {
                     ite.previous();
                     return true;
@@ -106,21 +106,21 @@ class NestedIteratorWithIteratorStack implements Iterator<Integer> {
         return false;
     }
 
-    private void populateStack(List<NestedInteger> nestedList) {
+    private void populateStack(List<LC0341NestedInteger> nestedList) {
         stack.push(nestedList.listIterator());
     }
 }
 
-interface NestedInteger {
+interface LC0341NestedInteger {
 
-    // @return true if this NestedInteger holds a single integer, rather than a nested list.
+    // @return true if this LC0341NestedInteger holds a single integer, rather than a nested list.
     public boolean isInteger();
 
-    // @return the single integer that this NestedInteger holds, if it holds a single integer
-    // Return null if this NestedInteger holds a nested list
+    // @return the single integer that this LC0341NestedInteger holds, if it holds a single integer
+    // Return null if this LC0341NestedInteger holds a nested list
     public Integer getInteger();
 
-    // @return the nested list that this NestedInteger holds, if it holds a nested list
-    // Return empty list if this NestedInteger holds a single integer
-    public List<NestedInteger> getList();
+    // @return the nested list that this LC0341NestedInteger holds, if it holds a nested list
+    // Return empty list if this LC0341NestedInteger holds a single integer
+    public List<LC0341NestedInteger> getList();
 }

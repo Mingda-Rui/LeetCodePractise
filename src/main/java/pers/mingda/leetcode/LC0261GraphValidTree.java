@@ -42,7 +42,7 @@ class LC0261UnionFindSolution {
     public boolean validTree(int n, int[][] edges) {
         if (edges.length != n - 1)
             return false;
-        UnionFind uf = new UnionFind(n);
+        LC0261UnionFind uf = new LC0261UnionFind(n);
         for (int[] edge: edges)
             if (!uf.union(edge[0], edge[1]))
                 return false;
@@ -51,11 +51,11 @@ class LC0261UnionFindSolution {
     }
 }
 
-class UnionFind {
+class LC0261UnionFind {
     private int[] parent;
     private int[] size;
 
-    public UnionFind(int n) {
+    public LC0261UnionFind(int n) {
         this.parent = new int[n];
         this.size = new int[n];
         for (int i = 0; i < n; i++) {
