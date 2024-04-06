@@ -7,6 +7,33 @@ public class TreeNodeTestHelper {
 
     private static final String NULL = "null";
 
+    public TreeNode createTreeNode(int head, int left, int right) {
+        TreeNode leftNode = new TreeNode(left);
+        TreeNode rightNode = new TreeNode(right);
+        return createTreeNode(head, leftNode, rightNode);
+    }
+
+    public TreeNode createTreeNode(int head, TreeNode left, int right) {
+        TreeNode rightNode = new TreeNode(right);
+        return createTreeNode(head, left, rightNode);
+    }
+
+    public TreeNode createTreeNode(int head, int left, TreeNode right) {
+        TreeNode leftNode = new TreeNode(left);
+        return createTreeNode(head, leftNode, right);
+    }
+
+    public TreeNode createTreeNode(int head, TreeNode left, TreeNode right) {
+        TreeNode root = new TreeNode(head);
+        root.setLeftChild(left);
+        root.setRightChild(right);
+        if (left != null)
+            left.parent = root;
+        if (right != null)
+            right.parent = root;
+        return root;
+    }
+
     public boolean compare(TreeNode node1, TreeNode node2) {
         if (node1 == null && node2 == null)
             return true;
@@ -120,32 +147,5 @@ public class TreeNodeTestHelper {
             }
         }
         return "";
-    }
-
-    public TreeNode createTreeNode(int head, int left, int right) {
-        TreeNode leftNode = new TreeNode(left);
-        TreeNode rightNode = new TreeNode(right);
-        return createTreeNode(head, leftNode, rightNode);
-    }
-
-    public TreeNode createTreeNode(int head, TreeNode left, int right) {
-        TreeNode rightNode = new TreeNode(right);
-        return createTreeNode(head, left, rightNode);
-    }
-
-    public TreeNode createTreeNode(int head, int left, TreeNode right) {
-        TreeNode leftNode = new TreeNode(left);
-        return createTreeNode(head, leftNode, right);
-    }
-
-    public TreeNode createTreeNode(int head, TreeNode left, TreeNode right) {
-        TreeNode root = new TreeNode(head);
-        root.setLeftChild(left);
-        root.setRightChild(right);
-        if (left != null)
-            left.parent = root;
-        if (right != null)
-            right.parent = root;
-        return root;
     }
 }
