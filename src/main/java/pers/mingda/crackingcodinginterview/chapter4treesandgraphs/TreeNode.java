@@ -32,7 +32,14 @@ public class TreeNode {
         return size;
     }
 
-    public TreeNode find(int d) {
+    public TreeNode find(int data) {
+        if (this.data == data) {
+            return this;
+        } else if (this.data < data && this.right != null) {
+            return right.find(data);
+        } else if (this.data > data && this.left != null) {
+            return left.find(data);
+        }
         return null;
     }
 

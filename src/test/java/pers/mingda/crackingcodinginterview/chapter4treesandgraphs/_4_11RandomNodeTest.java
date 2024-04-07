@@ -15,19 +15,25 @@ public class _4_11RandomNodeTest {
         TEST_HELPER = new TreeNodeTestHelper();
     }
 
-    /**
-     *     4
-     *    / \
-     *   2   6
-     *  /\  /\
-     * 1 3 5 7
-     */
     @Test
     public void getRandomNodeTest() {
-        TreeNode left = TEST_HELPER.createTreeNode(2, 1, 3);
-        TreeNode right = TEST_HELPER.createTreeNode(6, 5, 7);
-        TreeNode root = TEST_HELPER.createTreeNode(4, left, right);
+        TreeNode root = createTestTree();
         assertNotNull(root.getRandomNode());
+    }
+
+    @Test
+    public void deleteTest() {
+        TreeNode root = createTestTree();
+        root.delete(2);
+        assertEquals(4, root.size());
+    }
+
+    @Test
+    public void findTest() {
+        TreeNode root = createTestTree();
+        final int expectedData = 6;
+        TreeNode found = root.find(expectedData);
+        assertEquals(expectedData ,found.data);
     }
 
     /**
@@ -37,12 +43,9 @@ public class _4_11RandomNodeTest {
      *  /\  /\
      * 1 3 5 7
      */
-    @Test
-    public void deleteTest() {
+    private TreeNode createTestTree() {
         TreeNode left = TEST_HELPER.createTreeNode(2, 1, 3);
         TreeNode right = TEST_HELPER.createTreeNode(6, 5, 7);
-        TreeNode root = TEST_HELPER.createTreeNode(4, left, right);
-        root.delete(2);
-        assertEquals(4, root.size());
+        return TEST_HELPER.createTreeNode(4, left, right);
     }
 }
