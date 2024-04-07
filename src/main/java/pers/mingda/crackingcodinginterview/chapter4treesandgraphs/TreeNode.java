@@ -16,13 +16,16 @@ public class TreeNode {
     public void insertInOrder(int d) {
         size++;
         TreeNode nextNode = d > data ? right : left;
-        if (nextNode != null)
+        if (nextNode != null) {
             nextNode.insertInOrder(d);
-        else if (d > data)
+        } else if (d > data) {
             right = new TreeNode(d);
-        else
+            right.parent = this;
+        } else {
             // d <= data
             left = new TreeNode(d);
+            left.parent = this;
+        }
     }
 
     public int size() {
@@ -34,11 +37,33 @@ public class TreeNode {
     }
 
     public void setLeftChild(TreeNode left) {
+        if (left != null) {
+            size += left.size;
+        }
         this.left = left;
     }
 
     public void setRightChild(TreeNode right) {
+        if (right != null) {
+            size += right.size;
+        }
         this.right = right;
+    }
+
+    public void delete(int num) {
+        if (left != null && getLeftSize() == num + 1) {
+            reduceSize(left.size);
+            left = null;
+        } else if (left != null && getLeftSize() > num + 1) {
+            left.delete(num);
+        } else if (right != null && getLeftSize() + 1 == num) {
+            reduceSize(right.size);
+            right = null;
+        } else if (right != null && getLeftSize() + 1 < num) {
+            right.delete(num);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public TreeNode getRandomNode() {
@@ -55,6 +80,16 @@ public class TreeNode {
             return right.getNth(num - getLeftSize() - 1);
         } else {
             throw new IllegalStateException();
+        }
+    }
+
+    private void reduceSize(int size) {
+        if (this.size <= size) {
+            throw new IllegalArgumentException("The size of tree node can not be less than or equal to 0");
+        }
+        this.size -= size;
+        if (parent != null) {
+            parent.reduceSize(size);
         }
     }
 
