@@ -79,9 +79,9 @@ public class TreeNode {
     }
 
     public TreeNode getNth(int num) {
-        if ((left == null && num == 0) || (getLeftSize() == num)) {
+        if (getLeftSize() == num) {
             return this;
-        } else if (left != null && left.size > num) { // or getLeftSide() > num
+        } else if (left != null && getLeftSize() > num) { // or getLeftSide() > num
             return left.getNth(num);
         } else if (right != null && size - getRightSize() <= num ) {
             return right.getNth(num - getLeftSize() - 1);
