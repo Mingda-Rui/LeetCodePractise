@@ -8,9 +8,10 @@ public class _5_1Insertion {
 
     public int insertion(int N, int M, int i, int j) {
         int mBits = countBits(M);
-        int shiftedM = M << (j - mBits);
+        int shiftedM = M << (j - mBits + 1);
         LOGGER.info("shiftedM: %s".formatted(Integer.toBinaryString(shiftedM)));
-        int clearedBitsN = clearBits(N, j);
+        int clearedBitsN = clearBits(N, j + 1);
+        LOGGER.info("clearedBitsN: %s".formatted(Integer.toBinaryString(clearedBitsN)));
         return clearedBitsN | shiftedM;
     }
 
