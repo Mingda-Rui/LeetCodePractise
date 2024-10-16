@@ -4,10 +4,6 @@ public class _6_8TheEggDropProblem {
 
     private static final int TOTAL_FLOORS = 100;
 
-    public int findMinimumWorstCase() {
-        return findTheMinDrops(100, 0);
-    }
-
     private int findMinWorstCaseByFixedStepApproach() {
         int min = 100;
         for (int i = 1; i < 100; i++) {
