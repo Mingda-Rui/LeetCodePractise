@@ -37,4 +37,14 @@ public class _6_8TheEggDropProblem {
         }
         return worstStep;
     }
+
+    private int findMinWorstCaseMostOptimalApproach(int totalFloors) {
+        int currFloor = 0;
+        int step = 0;
+        while (currFloor < totalFloors) {
+            step++;
+            currFloor += step;
+        }
+        return step;
+    }
 }
