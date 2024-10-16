@@ -32,7 +32,7 @@ public class _6_8TheEggDropProblem {
         int worstStep = 100;
         for (int i = 2; i <= floorsRemain; i++) {
             // case 1, the egg 1 is not broken
-            int caseOne = brutalForceApproach(floorsRemain - i, steps);
+            int caseOne = findMinWorstCaseByBrutalForceApproach(floorsRemain - i, steps);
 
             // case 2, the egg 1 is broken
             int caseTwo = steps + (i - 1);
