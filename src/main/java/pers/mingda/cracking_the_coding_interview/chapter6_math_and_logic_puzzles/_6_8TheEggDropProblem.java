@@ -5,6 +5,10 @@ public class _6_8TheEggDropProblem {
     private static final int TOTAL_FLOORS = 100;
 
     public int findMinimumWorstCase() {
+        return findTheMinDrops(100, 0);
+    }
+
+    private int findMinWorstCaseByFixedStepApproach() {
         int min = 100;
         for (int i = 1; i < 100; i++) {
             int total = simulateSteps(i);
@@ -18,5 +22,23 @@ public class _6_8TheEggDropProblem {
     private int simulateSteps(int step) {
         int largeSteps = TOTAL_FLOORS / step;
         return largeSteps + (step - 2);
+    }
+
+    private int findMinWorstCaseByBrutalForceApproach(int floorsRemain, int steps) {
+        if (floorsRemain <= 1) {
+            return steps;
+        }
+        steps++;
+        int worstStep = 100;
+        for (int i = 2; i <= floorsRemain; i++) {
+            // case 1, the egg 1 is not broken
+            int caseOne = brutalForceApproach(floorsRemain - i, steps);
+
+            // case 2, the egg 1 is broken
+            int caseTwo = steps + (i - 1);
+            int worstRemainSteps = Math.max(caseOne, caseTwo);
+            worstStep = Math.min(worstStep, worstRemainSteps);
+        }
+        return worstStep;
     }
 }
