@@ -45,6 +45,9 @@ class Desk<T extends Card> {
     }
 
     public List<T> dealHand(int number) {
+        if (remainingCards() < number) {
+            throw new IllegalArgumentException("The deck doesn't have enough cards!");
+        }
         ArrayList<T> newCards = new ArrayList<>(number);
         for (int i = 0; i < number; i++) {
             T card = dealCard();
@@ -54,7 +57,7 @@ class Desk<T extends Card> {
     }
 
     public T dealCard() {
-        if (dealtIndex == cards.size() - 1) {
+        if (remainingCards() < 1) {
             throw new IllegalArgumentException("The deck is exhausted!");
         }
         T card = cards.get(dealtIndex);
