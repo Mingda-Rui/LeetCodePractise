@@ -123,5 +123,8 @@ class User {
 }
 
 class SongSelector {
-
+    public Song getCurrentSong() {
+        // ...
+        return null;
+    }
 }
