@@ -110,10 +110,10 @@ class UserManager {
 
 class Display {
     private Book activeBook;
-    private User activeUser;
+    private ReaderUser activeUser;
     private int pageNumber = 0;
 
-    public void displayUser(User user) {
+    public void displayUser(ReaderUser user) {
         activeUser = user;
         refreshUsername();
     }
@@ -187,7 +187,7 @@ class ReaderUser {
 
     public void renewMembership() {}
 
-    public User(int id, String details, int accountType) {
+    public ReaderUser(int id, String details, int accountType) {
         userId = id;
         this.details = details;
         this.accountType = accountType;
