@@ -52,7 +52,7 @@ class Board {
 
     /*
     * Attempt to place a piece of color at (row, column). Return true if we
-    * where successful.
+    * were successful.
     * */
     public boolean placeColor(int row, int column, Color color) {
         // ...
