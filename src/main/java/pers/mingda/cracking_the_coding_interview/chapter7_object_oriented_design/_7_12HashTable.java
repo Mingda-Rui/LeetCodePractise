@@ -50,12 +50,20 @@ class Hash<K, V> {
     /* Remove node for key. */
     public void remove(K key) {
         LinkedListNode<K, V> node = getNodeForKey(key);
+        if (node == null) {
+            return;
+        }
+
         if (node.prev != null) {
             node.prev.next = node.next;
         } else {
             /* Removing head - update. */
             int hashKey = getIndexForKey(key);
             arr.set(hashKey, node.next);
+        }
+
+        if (node.next != null) {
+            node.next.prev = node.prev;
         }
     }
 
