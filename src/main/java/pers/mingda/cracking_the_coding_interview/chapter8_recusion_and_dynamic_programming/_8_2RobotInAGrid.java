@@ -31,7 +31,9 @@ public class _8_2RobotInAGrid {
         boolean isAtOrigin = (row == 0) && (col == 0);
 
         /* If there's a path from start to my current location, add my location. */
-        if (isAtOrigin || getPath(maze, row, col - 1, path, failedPoints) || getPath(maze, row - 1, col, path, failedPoints)) {
+        if (isAtOrigin
+                || getPath(maze, row, col - 1, path, failedPoints)
+                || getPath(maze, row - 1, col, path, failedPoints)) {
             path.add(p);
             return true;
         }
