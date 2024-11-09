@@ -6,12 +6,12 @@ public class _8_3MagicIndex {
     }
 
     public int findMagicIndex(int[] array, int from, int to) {
-        if (from == to)
-            return -1;
-        else if (from + 1 == to) {
-            return array[from] == from ? from : -1;
-        }
         int index = (from + to) / 2;
-        return array[index] > index ? findMagicIndex(array, from, index) : findMagicIndex(array, index, to);
+        if (from + 1 == to) {
+            return array[index] == index ? index : -1;
+        }
+        return array[index] > index
+                ? findMagicIndex(array, from, index)
+                : findMagicIndex(array, index, to);
     }
 }
