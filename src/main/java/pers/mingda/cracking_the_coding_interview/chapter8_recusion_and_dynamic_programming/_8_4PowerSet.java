@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 public class _8_4PowerSet {
     ArrayList<ArrayList<Integer>> getSubsets(ArrayList<Integer> set, int index) {
-        ArrayList<ArrayList<Integer>> allsubsets;
+        ArrayList<ArrayList<Integer>> allSubsets;
         if (set.size() == index) { // Base case - add empty set
-            allsubsets = new ArrayList<>();
-            allsubsets.add(new ArrayList<>()); // Empty set
+            allSubsets = new ArrayList<>();
+            allSubsets.add(new ArrayList<>()); // Empty set
         } else {
-            allsubsets = getSubsets(set, index + 1);
+            allSubsets = getSubsets(set, index + 1);
             int item = set.get(index);
-            ArrayList<ArrayList<Integer>> moresubsets = new ArrayList<>();
-            for (ArrayList<Integer> subset: allsubsets) {
-                ArrayList<Integer> newsubset = new ArrayList<>();
-                newsubset.addAll(subset);
-                newsubset.add(item);
-                moresubsets.add(newsubset);
+            ArrayList<ArrayList<Integer>> moreSubsets = new ArrayList<>();
+            for (ArrayList<Integer> subset: allSubsets) {
+                ArrayList<Integer> newSubset = new ArrayList<>();
+                newSubset.addAll(subset);
+                newSubset.add(item);
+                moreSubsets.add(newSubset);
             }
-            allsubsets.addAll(moresubsets);
+            allSubsets.addAll(moreSubsets);
         }
-        return allsubsets;
+        return allSubsets;
     }
 }
