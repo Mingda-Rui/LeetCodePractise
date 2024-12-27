@@ -1,7 +1,6 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class _8_4PowerSet {
     ArrayList<ArrayList<Integer>> getSubsets(ArrayList<Integer> set, int index) {
@@ -23,21 +22,25 @@ public class _8_4PowerSet {
         return allSubsets;
     }
 
-    List<List<Integer>> getSubsetsCombinatorics(List<Integer> set, int index) {
-        if (set.size() == index) {
-            List<List<Integer>> allSubsets = new ArrayList<>();
-            allSubsets.add(new ArrayList<>());
-            return allSubsets;
+    ArrayList<ArrayList<Integer>> getSubsets2(ArrayList<Integer> set) {
+        ArrayList<ArrayList<Integer>> allSubsets = new ArrayList<>();
+        int max = 1 << set.size(); /* Compute 2^n */
+        for (int k = 0; k < max; k++) {
+            ArrayList<Integer> subset = convertIntToSet(k, set);
+            allSubsets.add(subset);
         }
-        List<List<Integer>> sets = getSubsetsCombinatorics(set, index + 1);
-        int item = set.get(index);
+        return allSubsets;
+    }
 
-        List<List<Integer>> moreSubsets = new ArrayList<>(sets);
-        for (List<Integer> subset: sets) {
-            List<Integer> newSet = new ArrayList<>(subset);
-            newSet.add(item);
-            moreSubsets.add(newSet);
+    ArrayList<Integer> convertIntToSet(int x, ArrayList<Integer> set) {
+        ArrayList<Integer> subset = new ArrayList<>();
+        int index = 0;
+        for (int k = x; k > 0; k >>= 1) {
+            if ((k & 1) == 1) {
+                subset.add(set.get(index));
+            }
+            index++;
         }
-        return moreSubsets;
+        return subset;
     }
 }
