@@ -14,8 +14,7 @@ public class _8_4PowerSet {
             int item = set.get(index);
             ArrayList<ArrayList<Integer>> moreSubsets = new ArrayList<>();
             for (ArrayList<Integer> subset: allSubsets) {
-                ArrayList<Integer> newSubset = new ArrayList<>();
-                newSubset.addAll(subset);
+                ArrayList<Integer> newSubset = new ArrayList<>(subset);
                 newSubset.add(item);
                 moreSubsets.add(newSubset);
             }
