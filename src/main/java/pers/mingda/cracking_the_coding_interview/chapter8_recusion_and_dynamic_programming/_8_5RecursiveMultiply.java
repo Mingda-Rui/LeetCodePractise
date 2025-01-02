@@ -1,7 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
 public class _8_5RecursiveMultiply {
-    public int recursiveMultiply(int a, int b, int[] memo) {
+    public int recursiveMultiply(int a, int b) {
         int smaller = Math.min(a, b);
         int larger = Math.max(a, b);
         if (smaller == 0) {
@@ -10,16 +10,10 @@ public class _8_5RecursiveMultiply {
             return larger;
         }
 
-        if (memo[smaller] != 0) {
-            return memo[smaller];
-        }
-
         // smaller >= 2
         int halfSmallerFloor = smaller >> 1;
-        int halfSum = recursiveMultiply(halfSmallerFloor, larger, memo);
-        int secondHalfSum = smaller % 2 == 0 ? halfSum : recursiveMultiply(halfSmallerFloor + 1, larger, memo);
-        int sum = halfSum + secondHalfSum;
-        memo[smaller] = sum;
-        return sum;
+        int halfSum = recursiveMultiply(halfSmallerFloor, larger);
+        int sum = halfSum + halfSum;
+        return smaller % 2 == 0 ? sum : sum + larger;
     }
 }
