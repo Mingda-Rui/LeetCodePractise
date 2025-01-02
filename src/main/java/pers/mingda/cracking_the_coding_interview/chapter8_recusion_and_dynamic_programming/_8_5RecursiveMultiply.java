@@ -2,11 +2,21 @@ package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_
 
 public class _8_5RecursiveMultiply {
     public int recursiveMultiply(int a, int b) {
-        if (Math.abs(b) == 0) {
+        int smaller = Math.min(a, b);
+        int larger = Math.max(a, b);
+        if (smaller == 0) {
             return 0;
-        } else if (b == 1) {
-            return a;
+        } else if (smaller == 1) {
+            return larger;
         }
-        return recursiveMultiply(a, b - 1) + a;
+
+        // smaller >= 2
+        int halfSmallerFloor = smaller >> 1;
+        int halfSum = recursiveMultiply(halfSmallerFloor, larger);
+        if (halfSmallerFloor + halfSmallerFloor == smaller) {
+            return halfSum + halfSum;
+        } else {
+            return halfSum + recursiveMultiply(halfSmallerFloor + 1, larger);
+        }
     }
 }
