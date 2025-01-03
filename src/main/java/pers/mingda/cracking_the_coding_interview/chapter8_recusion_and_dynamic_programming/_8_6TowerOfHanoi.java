@@ -40,27 +40,9 @@ class HanoiTowerGame {
         columns[0].setup(totalDisks);
     }
 
-    public int getTowerSize() {
-        return columns.length;
-    }
-
-    public HanoiTower getFirstTower() {
-        return columns[0];
-    }
-
-    public HanoiTower getLastTower() {
-        return columns[columns.length - 1];
-    }
-
     public void moveDisk(int from, int to) {
         HanoiDisk disk = columns[from].removeDisk();
         columns[to].placeDisk(disk);
-    }
-
-    public void moveAllDisks(int from, int to) {
-        while(!columns[from].isEmpty()) {
-
-        }
     }
 }
 
