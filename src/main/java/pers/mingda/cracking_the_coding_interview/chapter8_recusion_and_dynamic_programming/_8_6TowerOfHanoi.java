@@ -1,6 +1,8 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
+import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class _8_6TowerOfHanoi {
@@ -9,8 +11,24 @@ public class _8_6TowerOfHanoi {
     public void playGame(int nDisks) {
         HanoiTowerGame game = new HanoiTowerGame();
         game.initiateNewGame(TOWER_SIZE, nDisks);
+        solveGame(game, 0, 2, nDisks);
     }
 
+    public void solveGame(HanoiTowerGame game, int fromTower, int toTower, int numOfDisks) {
+        if (numOfDisks == 1) {
+            game.moveDisk(fromTower, toTower);
+        }
+        int spareTower = getSpareTower(fromTower, toTower);
+        solveGame(game, fromTower, spareTower, numOfDisks - 1);
+        game.moveDisk(fromTower, toTower);
+        solveGame(game, spareTower, toTower, numOfDisks - 1);
+    }
+
+    private int getSpareTower(int fromTower, int toTower) {
+        Set<Integer> set = IntStream.range(0, TOWER_SIZE).boxed().collect(Collectors.toSet());
+        set.removeAll(Set.of(fromTower, toTower));
+        return set.iterator().next();
+    }
 }
 
 class HanoiTowerGame {
@@ -33,6 +51,17 @@ class HanoiTowerGame {
     public HanoiTower getLastTower() {
         return columns[columns.length - 1];
     }
+
+    public void moveDisk(int from, int to) {
+        HanoiDisk disk = columns[from].removeDisk();
+        columns[to].placeDisk(disk);
+    }
+
+    public void moveAllDisks(int from, int to) {
+        while(!columns[from].isEmpty()) {
+
+        }
+    }
 }
 
 class HanoiTower {
@@ -50,13 +79,12 @@ class HanoiTower {
         IntStream.rangeClosed(1, totalDisks).forEach(size -> disks.push(new HanoiDisk(size)));
     }
 
-    public boolean placeDisk(HanoiDisk hanoiDisk) {
+    public void placeDisk(HanoiDisk hanoiDisk) {
         HanoiDisk topDisk = disks.peek();
         if (topDisk.size() >= hanoiDisk.size()) {
-            return false;
+            throw new IndexOutOfBoundsException("Can not place the disk with size %d onto a smaller disk size %d".formatted(hanoiDisk.size(), topDisk.size()));
         }
         disks.push(hanoiDisk);
-        return true;
     }
 
     public HanoiDisk removeDisk() {
@@ -64,6 +92,10 @@ class HanoiTower {
             throw new IllegalStateException("The column is empty");
         }
         return disks.pop();
+    }
+
+    public boolean isEmpty() {
+        return disks.isEmpty();
     }
 }
 
