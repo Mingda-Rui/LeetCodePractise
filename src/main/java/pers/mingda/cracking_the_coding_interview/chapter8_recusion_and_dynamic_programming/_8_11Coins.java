@@ -1,21 +1,36 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class _8_11Coins {
-    public int countRepresentations(int n, Map<Integer, Integer> memo) {
+    public int countReps(int n) {
+        List<Coin> coins = Arrays.asList(Coin.values());
+        Map<Integer, Integer> repCount = new HashMap<>();
+        return countReps(n, coins, repCount);
+    }
+
+    private int countReps(int n, List<Coin> remains, Map<Integer, Integer> memo) {
         if (memo.containsKey(n)) {
             return memo.get(n);
         }
-        if (n < 0) {
-            return 0;
-        } else if (n == 0) {
+
+        if (n == 0 && remains.isEmpty()) {
             return 1;
+        } else  if (n < 0 || remains.isEmpty()) {
+          return 0;
         }
+
+        Coin coin = remains.getLast();
+        remains.removeLast();
+
         int repCount = 0;
-        for (Coin coin: Coin.values()) {
-            repCount += countRepresentations(n - coin.getCents(), memo);
+        for (int coinCount = 0; coinCount <= n / coin.getCents(); coinCount++) {
+            repCount += countReps(n - coin.getCents() * coinCount, remains, memo);
         }
+
         memo.put(n, repCount);
         return repCount;
     }
