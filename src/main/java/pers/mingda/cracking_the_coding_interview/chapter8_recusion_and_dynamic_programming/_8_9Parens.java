@@ -31,14 +31,14 @@ public class _8_9Parens {
     }
 
     private List<String> getPossiblePrefixes(int remainOpenP, int remainCloseP) {
-        if (remainOpenP < remainCloseP) {
+        if (remainOpenP > remainCloseP) {
             throw new IllegalStateException("remainOpenP must not be less than remainCloseP");
         }
         List<String> possiblePrefixes = new ArrayList<>();
         if (remainOpenP > 0) {
             possiblePrefixes.add(OPEN_PARENS);
         }
-        if (remainOpenP > remainCloseP) {
+        if (remainOpenP < remainCloseP) {
             possiblePrefixes.add(CLOSE_PARENS);
         }
         return possiblePrefixes;
