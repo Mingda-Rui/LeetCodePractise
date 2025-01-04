@@ -1,22 +1,15 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class _8_11Coins {
     public int countReps(int n) {
         List<Coin> coins = Arrays.asList(Coin.values());
-        Map<Integer, Integer> repCount = new HashMap<>();
-        return countReps(n, coins, repCount);
+        return countReps(n, coins);
     }
 
-    private int countReps(int n, List<Coin> remains, Map<Integer, Integer> memo) {
-        if (memo.containsKey(n)) {
-            return memo.get(n);
-        }
-
+    private int countReps(int n, List<Coin> remains) {
         if (n == 0 && remains.isEmpty()) {
             return 1;
         } else  if (n < 0 || remains.isEmpty()) {
@@ -28,10 +21,8 @@ public class _8_11Coins {
 
         int repCount = 0;
         for (int coinCount = 0; coinCount <= n / coin.getCents(); coinCount++) {
-            repCount += countReps(n - coin.getCents() * coinCount, remains, memo);
+            repCount += countReps(n - coin.getCents() * coinCount, remains);
         }
-
-        memo.put(n, repCount);
         return repCount;
     }
 }
