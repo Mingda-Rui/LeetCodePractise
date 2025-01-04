@@ -5,24 +5,31 @@ import java.util.List;
 
 public class _8_11Coins {
     public int countReps(int n) {
-        List<Coin> coins = Arrays.asList(Coin.values());
-        return countReps(n, coins);
+        // penny should be at the beginning of the list
+        List<Coin> coins = Arrays.asList(Coin.values()).reversed();
+        int[][] map = new int[n + 1][coins.size()];
+        return countReps(n, coins, map);
     }
 
-    private int countReps(int amount, List<Coin> remains) {
+    private int countReps(int amount, List<Coin> remains, int[][] map) {
         if (remains.size() == 1) {
             // only one cent penny left
             return 1;
         }
 
         Coin coin = remains.getLast();
+        if (map[amount][coin.ordinal()] != 0) {
+            return map[amount][coin.ordinal()];
+        }
         remains.removeLast();
 
         int repCount = 0;
         for (int coinCount = 0; coinCount <= amount / coin.getCents(); coinCount++) {
             int remainAmount = amount - coin.getCents() * coinCount;
-            repCount += countReps(remainAmount, remains);
+            repCount += countReps(remainAmount, remains, map);
         }
+        remains.add(coin);
+        map[amount][coin.ordinal()] = repCount;
         return repCount;
     }
 }
