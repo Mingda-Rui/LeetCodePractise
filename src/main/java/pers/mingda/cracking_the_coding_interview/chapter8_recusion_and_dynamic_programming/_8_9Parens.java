@@ -34,13 +34,13 @@ public class _8_9Parens {
         if (remainOpenP < remainCloseP) {
             throw new IllegalStateException("remainOpenP must not be less than remainCloseP");
         }
-
-        if (remainOpenP == 0) {
-            return List.of(CLOSE_PARENS);
-        } else if (remainOpenP == remainCloseP) {
-            return List.of(OPEN_PARENS);
-        } else {
-            return List.of(OPEN_PARENS, CLOSE_PARENS);
+        List<String> possiblePrefixes = new ArrayList<>();
+        if (remainOpenP > 0) {
+            possiblePrefixes.add(OPEN_PARENS);
         }
+        if (remainOpenP > remainCloseP) {
+            possiblePrefixes.add(CLOSE_PARENS);
+        }
+        return possiblePrefixes;
     }
 }
