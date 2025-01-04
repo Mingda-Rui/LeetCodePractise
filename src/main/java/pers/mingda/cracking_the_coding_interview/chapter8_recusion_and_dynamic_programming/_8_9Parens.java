@@ -2,7 +2,6 @@ package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class _8_9Parens {
     private final static String OPEN_PARENS = "(";
@@ -13,34 +12,19 @@ public class _8_9Parens {
     }
 
     private List<String> generateParens(int remainOpenP, int remainCloseP) {
+        if (remainOpenP < 0 || remainOpenP < remainCloseP) {
+            // invalid case, return empty list
+            return List.of();
+        }
         if (remainCloseP == 0) {
             return List.of("");
         }
 
         List<String> allParens = new ArrayList<>();
-        // remainOpenP == closeP => open
-        // remainOpenP > closeP open / close
-        // remainOpenP < closeP xx
-        for (String prefix : getPossiblePrefixes(remainOpenP, remainCloseP)) {
-            int newRemainOpenP = Objects.equals(prefix, OPEN_PARENS) ? remainOpenP - 1 : remainOpenP;
-            int newRemainCloseP = Objects.equals(prefix, CLOSE_PARENS) ? remainCloseP - 1 : remainCloseP;
-            List<String> newParens = generateParens(newRemainOpenP, newRemainCloseP).stream().map(parens -> prefix + parens).toList();
-            allParens.addAll(newParens);
-        }
+        List<String> openPrefix = generateParens(remainOpenP - 1, remainCloseP).stream().map(parens -> OPEN_PARENS + parens).toList();
+        allParens.addAll(openPrefix);
+        List<String> closePrefix = generateParens(remainOpenP, remainCloseP - 1).stream().map(parens -> CLOSE_PARENS + parens).toList();
+        allParens.addAll(closePrefix);
         return allParens;
-    }
-
-    private List<String> getPossiblePrefixes(int remainOpenP, int remainCloseP) {
-        if (remainOpenP > remainCloseP) {
-            throw new IllegalStateException("remainOpenP must not be less than remainCloseP");
-        }
-        List<String> possiblePrefixes = new ArrayList<>();
-        if (remainOpenP > 0) {
-            possiblePrefixes.add(OPEN_PARENS);
-        }
-        if (remainOpenP < remainCloseP) {
-            possiblePrefixes.add(CLOSE_PARENS);
-        }
-        return possiblePrefixes;
     }
 }
