@@ -24,7 +24,8 @@ public class _8_14BooleanEvaluation {
                 case XOR -> leftTrue * rightFalse;
                 case OR -> total - (leftFalse * rightFalse);
             };
-            return result ? totalTrue : total - totalTrue;
+            int count = result ? totalTrue : total - totalTrue;
+            totalCount += count;
         }
         return totalCount;
     }
