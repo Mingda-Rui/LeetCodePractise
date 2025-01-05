@@ -1,26 +1,38 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class _8_13StackOfBoxes {
-    private int stackBoxes(Box currentBox, Set<Box> remainingBoxes) {
-        if (remainingBoxes.isEmpty()) {
-            return currentBox.height;
-        }
-        Iterator<Box> iterator = remainingBoxes.iterator();
+    public int stackBoxes(int numOfBoxes) {
+        List<Box> boxes = new ArrayList<>(numOfBoxes);
+        boxes.add(new Box());
+
+        boxes.sort(Comparator.comparing(Box::getHeight).reversed());
         int maxHeight = 0;
-        while(iterator.hasNext()) {
-            Box nextBox = iterator.next();
-            if (!nextBox.canStackOn(currentBox)) {
-                break;
-            }
-            remainingBoxes.remove(nextBox);
-            int height = stackBoxes(nextBox, remainingBoxes);
+        for (int i = 0; i < boxes.size(); i++) {
+            int height = stackBoxes(boxes.subList(i, boxes.size()));
             maxHeight = Math.max(maxHeight, height);
-            remainingBoxes.add(nextBox);
         }
-        return currentBox.height + maxHeight;
+        return maxHeight;
+    }
+
+    private int stackBoxes(List<Box> remainingBoxes) {
+        if (remainingBoxes.isEmpty()){
+            return 0;
+        }
+
+        int maxHeight = 0;
+        Box currentBox = remainingBoxes.getFirst();
+        for (int i = 1; i < remainingBoxes.size(); i++){
+            Box nextBox = remainingBoxes.get(i);
+            if (!nextBox.canStackOn(currentBox))
+                continue;
+            int height = currentBox.getHeight() + stackBoxes(remainingBoxes.subList(i, remainingBoxes.size()));
+            maxHeight = Math.max(maxHeight, height);
+        }
+        return maxHeight;
     }
 }
 
@@ -28,6 +40,10 @@ class Box {
     int width;
     int depth;
     int height;
+
+    public int getHeight() {
+        return height;
+    }
 
     public boolean canStackOn(Box buttomBox) {
         return buttomBox.height > height && buttomBox.width > width && buttomBox.depth > depth;
