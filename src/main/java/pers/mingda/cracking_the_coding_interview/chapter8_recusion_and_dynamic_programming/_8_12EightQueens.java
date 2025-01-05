@@ -8,8 +8,6 @@ public class _8_12EightQueens {
     private static final int GRID_SIZE = 8;
     public List<List<Integer>> solveNQueens(int n) {
         int[]rows = new int[GRID_SIZE];
-        List<List<Integer>> result = new ArrayList<>();
-
         return placeQueens(rows, 0);
     }
 
