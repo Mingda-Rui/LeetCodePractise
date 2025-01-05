@@ -38,6 +38,41 @@ public class _8_13StackOfBoxes {
         heightMap.put(currentBox, maxHeight);
         return maxHeight;
     }
+
+    private int stackBoxes2(List<Box> remainingBoxes, Map<Box, Integer> heightMap) {
+        if (remainingBoxes.isEmpty()) {
+            return 0;
+        }
+
+        Box currentBox = remainingBoxes.getFirst();
+        if (heightMap.containsKey(currentBox)) {
+            return heightMap.get(currentBox);
+        }
+        if (remainingBoxes.size() == 1) {
+            return currentBox.getHeight();
+        }
+        int maxHeight = 0;
+        int nextHeight = findNextBox(remainingBoxes)
+                .map(next -> stackBoxes2(remainingBoxes.subList(next, remainingBoxes.size()), heightMap))
+                .orElse(0);
+        maxHeight = Math.max(maxHeight, nextHeight + currentBox.getHeight());
+
+        int skipCurrentHeight = stackBoxes2(remainingBoxes.subList(1, remainingBoxes.size()), heightMap);
+        maxHeight = Math.max(maxHeight, skipCurrentHeight);
+        heightMap.put(currentBox, maxHeight);
+        return maxHeight;
+    }
+
+    private Optional<Integer> findNextBox(List<Box> remainingBoxes) {
+        Box currentBox = remainingBoxes.getFirst();
+        for (int i = 1; i < remainingBoxes.size(); i++) {
+            Box nextBox = remainingBoxes.get(i);
+            if (nextBox.canStackOn(currentBox)) {
+                return Optional.of(i);
+            }
+        }
+        return Optional.empty();
+    }
 }
 
 class Box {
