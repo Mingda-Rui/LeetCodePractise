@@ -1,8 +1,13 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
+import java.util.Map;
+
 public class _8_14BooleanEvaluation {
 
-    public int countEval(String expression, boolean result) {
+    public int countEval(String expression, boolean result, Map<String, Integer> countMap) {
+        if (countMap.containsKey(expression + result)) {
+            return countMap.get(expression);
+        }
         if (expression.length() == 1) {
             return eval(expression, result);
         }
@@ -13,10 +18,10 @@ public class _8_14BooleanEvaluation {
             String leftExp = expression.substring(0, i);
             String rightExp = expression.substring(i + 1);
 
-            int leftTrue = countEval(leftExp, true);
-            int leftFalse = countEval(leftExp, false);
-            int rightTrue = countEval(rightExp, true);
-            int rightFalse = countEval(rightExp, false);
+            int leftTrue = countEval(leftExp, true, countMap);
+            int leftFalse = countEval(leftExp, false, countMap);
+            int rightTrue = countEval(rightExp, true, countMap);
+            int rightFalse = countEval(rightExp, false, countMap);
             int total = (leftTrue + leftFalse) + (rightTrue + rightFalse);
 
             int totalTrue = switch (operator) {
@@ -27,6 +32,7 @@ public class _8_14BooleanEvaluation {
             int count = result ? totalTrue : total - totalTrue;
             totalCount += count;
         }
+        countMap.put(expression + result, totalCount);
         return totalCount;
     }
 
