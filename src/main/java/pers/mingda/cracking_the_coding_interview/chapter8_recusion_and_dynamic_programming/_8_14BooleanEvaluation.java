@@ -13,35 +13,20 @@ public class _8_14BooleanEvaluation {
             String leftExp = expression.substring(0, i);
             String rightExp = expression.substring(i + 1);
 
-            if (result) {
-                int count = switch (operator) {
-                    case AND -> countEvalTrue(leftExp) * countEvalTrue(rightExp);
-                    case XOR -> countEvalTrue(leftExp) * countEvalFalse(rightExp) + countEvalFalse(leftExp) * countEvalTrue(rightExp);
-                    case OR -> countEvalBoth(leftExp) * countEvalBoth(rightExp) - (countEvalFalse(leftExp) * countEvalFalse(rightExp));
-                };
-                totalCount += count;
-            } else {
-                int count = switch (operator) {
-                    case AND -> countEvalBoth(leftExp) * countEvalBoth(rightExp) - (countEvalTrue(leftExp) * countEvalTrue(rightExp));
-                    case XOR -> countEvalTrue(leftExp) * countEvalTrue(rightExp) + countEvalFalse(leftExp) * countEvalFalse(rightExp);
-                    case OR -> countEvalFalse(leftExp) * countEvalFalse(rightExp);
-                };
-                totalCount += count;
-            }
+            int leftTrue = countEval(leftExp, true);
+            int leftFalse = countEval(leftExp, false);
+            int rightTrue = countEval(rightExp, true);
+            int rightFalse = countEval(rightExp, false);
+            int total = (leftTrue + leftFalse) + (rightTrue + rightFalse);
+
+            int totalTrue = switch (operator) {
+                case AND -> leftTrue * rightTrue;
+                case XOR -> leftTrue * rightFalse;
+                case OR -> total - (leftFalse * rightFalse);
+            };
+            return result ? totalTrue : total - totalTrue;
         }
         return totalCount;
-    }
-
-    public int countEvalTrue(String expression) {
-        return countEval(expression, true);
-    }
-
-    public int countEvalFalse(String expression) {
-        return countEval(expression, false);
-    }
-
-    public int countEvalBoth(String expression) {
-        return countEval(expression, false) + countEval(expression, true);
     }
 
     private int eval(String expression, boolean result) {
