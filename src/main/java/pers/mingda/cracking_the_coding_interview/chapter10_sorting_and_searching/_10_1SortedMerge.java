@@ -8,16 +8,21 @@ public class _10_1SortedMerge {
      */
 
     public void merge(int[] A, int[] B) {
-        int indexA = 0, indexB = 0;
-        while (indexA < A.length || indexB < B.length) {
+        int aActualLen = A.length - B.length;
+        int indexA = aActualLen - 1;
+        int indexB = B.length - 1;
+        int backIndex = A.length - 1;
+        while (indexA >= 0 || indexB >= 0) {
             int currentA = A[indexA];
             int currentB = B[indexB];
             if (currentA > currentB) {
-                int temp = currentA;
-                A[indexA] = currentB;
-                B[indexB] = temp;
+                A[backIndex] = currentA;
+                indexA--;
+            } else {
+                A[backIndex] = currentB;
+                indexB--;
             }
-            indexA++;
+            backIndex--;
         }
     }
 }
