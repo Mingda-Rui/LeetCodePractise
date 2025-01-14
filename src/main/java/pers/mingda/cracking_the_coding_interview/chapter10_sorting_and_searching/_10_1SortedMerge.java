@@ -12,14 +12,15 @@ public class _10_1SortedMerge {
         int indexA = aActualLen - 1;
         int indexB = B.length - 1;
         int backIndex = A.length - 1;
-        while (indexA >= 0 || indexB >= 0) {
-            int currentA = A[indexA];
-            int currentB = B[indexB];
-            if (currentA > currentB) {
-                A[backIndex] = currentA;
+        // Note that you don't need to copy the contents
+        // of A after running out of elements in B.
+        // They are already in place.
+        while (indexB >= 0) {
+            if (indexA >= 0 && A[indexA] > B[indexB]) {
+                A[backIndex] = A[indexA];
                 indexA--;
             } else {
-                A[backIndex] = currentB;
+                A[backIndex] = B[indexB];
                 indexB--;
             }
             backIndex--;
