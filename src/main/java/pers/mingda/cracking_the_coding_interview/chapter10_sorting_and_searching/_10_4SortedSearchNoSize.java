@@ -17,12 +17,12 @@ public class _10_4SortedSearchNoSize {
         }
 
         int mid = (left + right) / 2;
-        if (list.elementAt(left) == target) {
-            return mid;
-        } else if (list.elementAt(mid) > target) {
+        if (list.elementAt(mid) > target || list.elementAt(mid) == - 1) {
             return binarySearch(list, target, left, mid);
-        } else {
+        } else if (list.elementAt(mid) < target) {
             return binarySearch(list, target, mid + 1, right);
+        } else {
+            return mid;
         }
     }
 }
