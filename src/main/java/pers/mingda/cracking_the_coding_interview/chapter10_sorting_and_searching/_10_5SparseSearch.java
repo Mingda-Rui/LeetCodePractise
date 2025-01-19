@@ -23,17 +23,18 @@ public class _10_5SparseSearch {
 
     private int getNextMid(String[] sortedStr, int left, int right) {
         int mid = (left + right) / 2;
-        while (mid >= left && sortedStr[mid].isEmpty()) {
-            mid--;
+        int leftIndex = mid;
+        int rightIndex = mid;
+        while (sortedStr[mid].isEmpty() && (leftIndex >= left || rightIndex < right)) {
+            leftIndex--;
+            rightIndex++;
+            if (leftIndex >= left && !sortedStr[leftIndex].isEmpty()) {
+                return leftIndex;
+            }
+            if (rightIndex < right && !sortedStr[rightIndex].isEmpty()) {
+                return rightIndex;
+            }
         }
-        if (mid >= left && !sortedStr[mid].isEmpty()) {
-            return mid;
-        }
-
-        mid = (left + right) / 2;
-        while (mid < right && sortedStr[mid].isEmpty()) {
-            mid++;
-        }
-        return mid < right && !sortedStr[mid].isEmpty() ? mid : -1;
+        return -1;
     }
 }
