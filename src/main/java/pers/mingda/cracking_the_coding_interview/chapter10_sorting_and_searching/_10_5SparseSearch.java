@@ -2,6 +2,9 @@ package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searchin
 
 public class _10_5SparseSearch {
     public int search(String[] sortedStr, String target) {
+        if (target == null || target.isEmpty()) {
+            return -1;
+        }
         return binarySearch(sortedStr, target, 0, sortedStr.length);
     }
 
