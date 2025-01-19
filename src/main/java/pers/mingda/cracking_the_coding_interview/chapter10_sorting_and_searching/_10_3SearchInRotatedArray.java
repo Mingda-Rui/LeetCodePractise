@@ -15,7 +15,7 @@ public class _10_3SearchInRotatedArray {
         // one side ordered
         //   - target in ordered side
         //   - target in rotated side
-        if (a[left] < a[mid]) { // left ordered
+        if (a[mid] > a[right]) { // right rotated (left ordered or equal)
             if (a[left] <= target && target < a[mid]) {
                 // search left
                 return search(a, left, mid - 1, target);
@@ -23,7 +23,7 @@ public class _10_3SearchInRotatedArray {
                 // search right
                 return search(a, mid + 1, right, target);
             }
-        } else if (a[mid] < a[right]) { // right ordered
+        } else if (a[left] > a[mid]) { // left rotated (right ordered or equal)
             if (a[mid] < target && target <= a[right]) {
                 // search right
                 return search(a, mid + 1, right, target);
@@ -32,17 +32,13 @@ public class _10_3SearchInRotatedArray {
                 return search(a, left, mid - 1, target);
             }
         } else {
-            if (a[left] == a[mid]) {
-                int rightResult = search(a, mid + 1, right, target);
-                return rightResult == -1 ? search(a, left, mid - 1, target) : rightResult;
-            } else {
-                // search left
-                return search(a, left, mid - 1, target);
-            }
+            // a[left] == a[mid] && a[mid] == a[right]
+            // two scenarios:
+            // 5 6 7 5 5 5 5
+            // or
+            // 5 5 5 5 6 7 5
+            int leftResult = search(a, left, mid - 1, target);
+            return leftResult == -1 ? search(a, mid + 1, right, target) : leftResult;
         }
     }
 }
-
-// 5 6 7 5 5 5 5
-
-// 5 5 5 5 6 7 5
