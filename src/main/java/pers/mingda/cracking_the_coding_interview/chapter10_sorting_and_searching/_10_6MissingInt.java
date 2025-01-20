@@ -17,7 +17,16 @@ public class _10_6MissingInt {
             * Finds the corresponding number in the bitfield by using the OR operator to
             * set the nth bit of a byte (e.g., 10 would correspond to the 2nd bit of
             * index 2 in the byte array). */
-            bitfield [n / 8] |= 1 << (n % 8);
+            bitfield [n / 8] |= (byte) (1 << (n % 8));
+
+            // 0 : 00000000
+            // 1 : 00000010
+            // 2 : 00000100
+            // 3 : 00001000
+            // 4 : 00010000
+            // 5 : 00100000
+            // 6 : 01000000
+            // 7 : 10000000
         }
 
         for (int i = 0; i < bitfield.length; i++) {
