@@ -41,4 +41,91 @@ public class _10_7MissingInt {
             }
         }
     }
+
+    public int findOpenNumber(String filename) throws FileNotFoundException {
+        int rangeSize = (1 << 20); // 2^20 bits (2^17 bytes)
+
+        /* Get count of number of values within each block. */
+        int[] blocks = getCountPerBlock(filename, rangeSize);
+
+        /* Find a block with a missing value. */
+        int blockIndex = findBlockWithMissing(blocks, rangeSize);
+        if (blockIndex < 0) return -1;
+
+        /* Create bit vector for items within this range. */
+        byte[] bitVector = getBitVectorForRange(filename, blockIndex, rangeSize);
+
+        /* Find a zero in the bit vector */
+        int offset = findZero(bitVector);
+        if (offset < 0) return -1;
+
+        /* Compute missing value */
+        return blockIndex * rangeSize + offset;
+    }
+
+    /* Get count of items within each range. */
+    private int[] getCountPerBlock(String filename, int rangeSize) throws FileNotFoundException {
+        int arraySize = Integer.MAX_VALUE / rangeSize + 1;
+        int[] blocks = new int[arraySize];
+
+        Scanner in = new Scanner(new FileReader(filename));
+        while (in.hasNextInt()) {
+            int value = in.nextInt();
+            blocks[value / rangeSize]++;
+        }
+        in.close();
+        return blocks;
+    }
+
+    /* Find a block whose count is low. */
+    private int findBlockWithMissing(int[] blocks, int rangeSize) {
+        for (int i = 0; i < blocks.length; i++) {
+            if (blocks[i] < rangeSize) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Create a bit vector for the values within a specific range. */
+    private byte[] getBitVectorForRange(String filename, int blockIndex, int rangeSize) throws FileNotFoundException {
+        int startRange = blockIndex * rangeSize;
+        int endRange = startRange + rangeSize;
+        byte[] bitVector = new byte[rangeSize];
+
+        Scanner in = new Scanner(new FileReader(filename));
+        while (in.hasNextInt()) {
+            int value = in.nextInt();
+            /* If the number is inside the block that's missing numbers, we record it */
+            if (startRange <= value && value < endRange) {
+                int offset = value - startRange;
+                int mask = (1 << (offset % Byte.SIZE));
+                bitVector[offset / Byte.SIZE] |= mask;
+            }
+        }
+        in.close();
+        return bitVector;
+    }
+
+    /* Find bit index that is 0 within byte. */
+    private int findZero(byte b) {
+        for (int i = 0; i < Byte.SIZE; i++) {
+            int mask = 1 << i;
+            if ((b & mask) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Find a zero within the bit vector and return the index. */
+    private int findZero(byte[] bitVector) {
+        for (int i = 0; i < bitVector.length; i++) {
+            if (bitVector[i] != ~0) { // If not all 1s
+                int bitIndex = findZero(bitVector[i]);
+                return i * Byte.SIZE + bitIndex;
+            }
+        }
+        return -1;
+    }
 }
