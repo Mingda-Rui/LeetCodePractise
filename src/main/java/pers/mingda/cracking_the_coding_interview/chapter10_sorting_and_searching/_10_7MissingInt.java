@@ -107,23 +107,23 @@ public class _10_7MissingInt {
         return bitVector;
     }
 
-    /* Find bit index that is 0 within byte. */
-    private int findZero(byte b) {
-        for (int i = 0; i < Byte.SIZE; i++) {
-            int mask = 1 << i;
-            if ((b & mask) == 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     /* Find a zero within the bit vector and return the index. */
     private int findZero(byte[] bitVector) {
         for (int i = 0; i < bitVector.length; i++) {
             if (bitVector[i] != ~0) { // If not all 1s
                 int bitIndex = findZero(bitVector[i]);
                 return i * Byte.SIZE + bitIndex;
+            }
+        }
+        return -1;
+    }
+
+    /* Find bit index that is 0 within byte. */
+    private int findZero(byte b) {
+        for (int i = 0; i < Byte.SIZE; i++) {
+            int mask = 1 << i;
+            if ((b & mask) == 0) {
+                return i;
             }
         }
         return -1;
