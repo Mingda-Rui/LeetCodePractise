@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class _10_6MissingInt {
+public class _10_7MissingInt {
     long numberOfInts = ((long) Integer.MAX_VALUE) + 1;
     byte[] bitfield = new byte[(int) (numberOfInts / 8)];
     String filename = "testFile.txt";
