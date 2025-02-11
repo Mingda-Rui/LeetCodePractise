@@ -5,10 +5,11 @@ public class _10_8FindDuplicates {
         MyBitSet bs = new MyBitSet(32000);
         for (int i = 0; i < array.length; i++) {
             int num = array[i];
-            if (bs.get(num)) {
+            int num0 = num - 1; // bitset starts at 0, numbers start at 1
+            if (bs.get(num0)) {
                 System.out.println(num);
             } else {
-                bs.set(num);
+                bs.set(num0);
             }
         }
     }
