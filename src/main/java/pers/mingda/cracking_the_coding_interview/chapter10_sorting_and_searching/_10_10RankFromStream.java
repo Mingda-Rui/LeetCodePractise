@@ -20,7 +20,7 @@ class RankNode {
 
     public RankNode(int value) {
         this.value = value;
-        this.count = 0;
+        this.count = 1;
     }
 
     private int getLeftCount() {
