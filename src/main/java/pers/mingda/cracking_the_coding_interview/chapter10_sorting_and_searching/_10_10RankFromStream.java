@@ -23,6 +23,18 @@ class RankNode {
         this.count = 0;
     }
 
+    private int getLeftCount() {
+        return left == null ? 0 : left.count;
+    }
+
+    private int getLeftRankNumber(int x) {
+        return left == null ? 0 : left.getLeftRankNumber(x);
+    }
+
+    private int getRightRankNumber(int x) {
+        return right == null ? 0 : right.getRightRankNumber(x);
+    }
+
     public void add(int x) {
         if (x > value) {
             if (right == null) {
@@ -42,23 +54,11 @@ class RankNode {
 
     public int getRankOfNumber(int x) {
         if (x < value) {
-            if (left == null) {
-                return 0;
-            } else {
-                return left.getRankOfNumber(x);
-            }
+            return getLeftRankNumber(x);
         } else if (x > value) {
-            if (right == null) {
-                return count;
-            } else {
-                return right.getRankOfNumber(x) + count - right.count;
-            }
+            return getRightRankNumber(x) + getLeftCount() + 1;
         } else { // x == value
-            if (left == null) {
-                return 0;
-            } else {
-                return left.count;
-            }
+            return getLeftCount();
         }
     }
 }
