@@ -9,7 +9,7 @@ public class _10_10RankFromStream {
     }
 
     public int getRankOfNumber(int x) {
-
+        return root.getRankOfNumber(x);
     }
 }
 
