@@ -1,7 +1,5 @@
 package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searching;
 
-import javax.swing.*;
-
 public class _10_9SortedMatrixSearch {
     boolean findElement(int[][] matrix, int elem) {
         int row = 0;
@@ -65,7 +63,7 @@ public class _10_9SortedMatrixSearch {
 
         Coordinate lowerLeft = findElement(matrix, lowerLeftOrigin, lowerLeftDest, x);
         if (lowerLeft == null) {
-            return findElement(matrix, upperRightOrigin, upperRightDest, x);;
+            return findElement(matrix, upperRightOrigin, upperRightDest, x);
         }
         return lowerLeft;
     }
