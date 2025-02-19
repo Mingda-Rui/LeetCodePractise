@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class _16_2WordFrequencies {
 
-    private Map<String, Integer> cache = new HashMap<>();
+    private final Map<String, Integer> cache = new HashMap<>();
 
     int getFrequency(String[] book, String word) {
         String trimmedWord = word.trim().toLowerCase();
