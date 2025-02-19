@@ -13,7 +13,7 @@ public class _16_3Intersection {
         }
 
         IntersectionPoint infiniteIntersection =  line1.getIntersection(line2);
-        return line1.contains(infiniteIntersection) && line2.contains(infiniteIntersection)
+        return line1.isBetween(infiniteIntersection) && line2.isBetween(infiniteIntersection)
                 ? Optional.of(infiniteIntersection) : Optional.empty();
     }
 }
@@ -37,10 +37,10 @@ class IntersectionLine {
         if (!isSameInfiniteLine(line)) {
             return false;
         }
-        return (contains(line.start) && contains(line.end)) || (line.contains(start) && line.contains(end));
+        return (isBetween(line.start) && isBetween(line.end)) || (line.isBetween(start) && line.isBetween(end));
     }
 
-    public boolean contains(IntersectionPoint point) {
+    public boolean isBetween(IntersectionPoint point) {
         boolean containX = Math.min(start.x, end.x) <= point.x  && point.x <= Math.max(start.x, end.x);
         boolean containY = Math.min(start.y, end.y) <= point.y  && point.y <= Math.max(start.y, end.y);
         return containX && containY;
