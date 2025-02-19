@@ -21,7 +21,7 @@ class IntersectionLine {
         return (start.y - end.y) / (start.x - end.x);
     }
 
-    public double getOffset() {
+    public double getYIntercept() {
         return start.y - getSlope() * start.x;
     }
 
@@ -30,14 +30,14 @@ class IntersectionLine {
     }
 
     public boolean isSameLine(IntersectionLine line) {
-        return isParallel(line) && getOffset() == line.getOffset();
+        return isParallel(line) && getYIntercept() == line.getYIntercept();
     }
 
     public IntersectionPoint getIntersection(IntersectionLine line) {
         double slope1 = getSlope();
         double slope2 = line.getSlope();
-        double offset1 = getOffset();
-        double offset2 = line.getOffset();
+        double offset1 = getYIntercept();
+        double offset2 = line.getYIntercept();
         double intersectionX = (offset2 - offset1) / (slope1 - slope2);
         double intersectionY = slope1 * intersectionX + offset1;
         return new IntersectionPoint(intersectionX, intersectionY);
