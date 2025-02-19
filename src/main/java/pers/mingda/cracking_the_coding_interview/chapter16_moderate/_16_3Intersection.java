@@ -1,16 +1,20 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
+import java.util.Optional;
+
 public class _16_3Intersection {
-    private IntersectionPoint intersection(IntersectionLine line1, IntersectionLine line2) {
-        if (line1.isSameLine(line2)) {
-            return line1.start;
+    private Optional<IntersectionPoint> intersection(IntersectionLine line1, IntersectionLine line2) {
+        if (line1.isParallelOverlap(line2)) {
+            return Optional.of(line1.start);
         }
 
         if (line1.isParallel(line2)) {
-            return null;
+            return Optional.empty();
         }
 
-        return line1.getIntersection(line2);
+        IntersectionPoint infiniteIntersection =  line1.getIntersection(line2);
+        return line1.contains(infiniteIntersection) && line2.contains(infiniteIntersection)
+                ? Optional.of(infiniteIntersection) : Optional.empty();
     }
 }
 
@@ -29,7 +33,20 @@ class IntersectionLine {
         return getSlope() == line.getSlope();
     }
 
-    public boolean isSameLine(IntersectionLine line) {
+    public boolean isParallelOverlap(IntersectionLine line) {
+        if (!isSameInfiniteLine(line)) {
+            return false;
+        }
+        return (contains(line.start) && contains(line.end)) || (line.contains(start) && line.contains(end));
+    }
+
+    public boolean contains(IntersectionPoint point) {
+        boolean containX = Math.min(start.x, end.x) <= point.x  && point.x <= Math.max(start.x, end.x);
+        boolean containY = Math.min(start.y, end.y) <= point.y  && point.y <= Math.max(start.y, end.y);
+        return containX && containY;
+    }
+
+    private boolean isSameInfiniteLine(IntersectionLine line) {
         return isParallel(line) && getYIntercept() == line.getYIntercept();
     }
 
