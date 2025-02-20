@@ -1,39 +1,79 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class _16_4TicTacWin {
-    TicTacWinPiece hasWon(TicTacWinPiece[][]board, int row, int column) {
+    TicTacWinPiece hasWon(TicTacWinPiece[][]board) {
+        if (board.length != board[0].length) {
+            return TicTacWinPiece.Empty;
+        }
+        int size = board.length;
+
+        ArrayList<TicTacWinPositionIterator> instructions = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
-            /* Check Rows */
-            if (hasWinner(board[i][0], board[i][1], board[i][2])) {
-                return board[i][0];
+            instructions.add(new TicTacWinPositionIterator(new TicTacWinPosition(0, i), 1, 0, size));
+            instructions.add(new TicTacWinPositionIterator(new TicTacWinPosition(i, 0), 0, 1, size));
+        }
+        instructions.add(new TicTacWinPositionIterator(new TicTacWinPosition(0, 0), 1, 1, size));
+        instructions.add(new TicTacWinPositionIterator(new TicTacWinPosition(0, size - 1), 1, -1, size));
+
+        for (TicTacWinPositionIterator iterator : instructions) {
+            TicTacWinPiece winner = hasWon(board, iterator);
+            if (winner != TicTacWinPiece.Empty) {
+                return winner;
             }
-
-            /* Check Columns */
-            if (hasWinner(board[0][i], board[1][i], board[2][i])) {
-                return board[0][i];
-            }
         }
-
-        /* Check Diagonal */
-        if (hasWinner(board[0][0], board[1][1], board[2][2])) {
-            return board[0][0];
-        }
-
-        if (hasWinner(board[0][2], board[1][1], board[2][0])) {
-            return board[0][2];
-        }
-
         return TicTacWinPiece.Empty;
     }
 
-    boolean hasWinner(TicTacWinPiece p1, TicTacWinPiece p2, TicTacWinPiece p3) {
-        if (p1 == TicTacWinPiece.Empty) {
-            return false;
+    TicTacWinPiece hasWon(TicTacWinPiece[][]board, TicTacWinPositionIterator iterator) {
+        TicTacWinPosition firstPosition = iterator.next();
+        TicTacWinPiece first = board[firstPosition.row][firstPosition.column];
+        while (iterator.hasNext()) {
+            TicTacWinPosition secondPosition = iterator.next();
+            if (board[secondPosition.row][secondPosition.column] != first) {
+                return TicTacWinPiece.Empty;
+            }
         }
-        return p1 == p2 && p2 == p3;
+        return first;
     }
 }
 
 enum TicTacWinPiece {
     Empty, Red, Blue
+}
+
+class TicTacWinPositionIterator implements Iterator<TicTacWinPosition> {
+    private final int rowIncrement;
+    private final int colIncrement;
+    private final int size;
+    private TicTacWinPosition current;
+
+    public TicTacWinPositionIterator(TicTacWinPosition p, int rowIncrement, int colIncrement, int size) {
+        this.rowIncrement = rowIncrement;
+        this.colIncrement = colIncrement;
+        this.size = size;
+        current = new TicTacWinPosition(p.row - rowIncrement, p.column - colIncrement);
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current.row + rowIncrement < size
+                && current.column + colIncrement < size;
+    }
+
+    @Override
+    public TicTacWinPosition next() {
+        current = new TicTacWinPosition(current.row + rowIncrement, current.column + colIncrement);
+        return current;
+    }
+}
+
+class TicTacWinPosition {
+    public int row, column;
+    public TicTacWinPosition(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
 }
