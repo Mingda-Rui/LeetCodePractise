@@ -2,59 +2,35 @@ package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_4TicTacWin {
     TicTacWinPiece hasWon(TicTacWinPiece[][]board, int row, int column) {
-        if (board.length != board[0].length) return TicTacWinPiece.Empty;
+        for (int i = 0; i < board.length; i++) {
+            /* Check Rows */
+            if (hasWinner(board[i][0], board[i][1], board[i][2])) {
+                return board[i][0];
+            }
 
-        TicTacWinPiece piece = board[row][column];
-
-        if (piece == TicTacWinPiece.Empty) {
-            return TicTacWinPiece.Empty;
+            /* Check Columns */
+            if (hasWinner(board[0][i], board[1][i], board[2][i])) {
+                return board[0][i];
+            }
         }
 
-        if (hasWonRow(board, row) || hasWonColumn(board, column)) {
-            return piece;
+        /* Check Diagonal */
+        if (hasWinner(board[0][0], board[1][1], board[2][2])) {
+            return board[0][0];
         }
 
-        if (row == column && hasWonDiagonal(board, 1)) {
-            return piece;
-        }
-
-        if (row == (board.length - column - 1) && hasWonDiagonal(board, -1)) {
-            return piece;
+        if (hasWinner(board[0][2], board[1][1], board[2][0])) {
+            return board[0][2];
         }
 
         return TicTacWinPiece.Empty;
     }
 
-    boolean hasWonRow(TicTacWinPiece[][] board, int row) {
-        for (int c = 1; c < board[row].length; c++) {
-            if (board[row][c] != board[row][0]) {
-                return false;
-            }
+    boolean hasWinner(TicTacWinPiece p1, TicTacWinPiece p2, TicTacWinPiece p3) {
+        if (p1 == TicTacWinPiece.Empty) {
+            return false;
         }
-        return true;
-    }
-
-    boolean hasWonColumn(TicTacWinPiece[][] board, int column) {
-        for (int r = 1; r < board.length; r++) {
-            if (board[r][column] != board[0][column]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    boolean hasWonDiagonal(TicTacWinPiece[][] board, int direction) {
-        int row = 0;
-        int column = direction == 1 ? 0 : board.length - 1;
-        TicTacWinPiece first = board[row][column];
-        for (int i = 0; i < board.length; i++) {
-            if (board[row][column] != first) {
-                return false;
-            }
-            row += 1;
-            column += direction;
-        }
-        return true;
+        return p1 == p2 && p2 == p3;
     }
 }
 
