@@ -30,17 +30,15 @@ public class _16_9Operations {
         if (a == 0 || b == 0) {
             return 0;
         }
-        boolean isNegB = b < 0;
-        int newSign = b > 0 ? -1 : 1;
-        while (b != 0) {
-            a += a;
-            b += newSign;
-        }
 
-        if (isNegB) {
-            return negate(a);
+        int sum = 0;
+        for (int i = abs(b); i > 0; i = minus(i, 1)) {
+            sum += a;
         }
-        return a;
+        if (b < 0) {
+            sum = negate(sum);
+        }
+        return sum;
     }
 
     /* Return absolute value */
