@@ -22,4 +22,16 @@ public class _16_9Operations {
     int minus(int a, int b) {
         return a + negate(b);
     }
+
+    int multiply(int a, int b) {
+        if (a == 0 || b == 0) {
+            return 0;
+        }
+        int newSign = b > 0 ? -1 : 1;
+        while (b != 0) {
+            a += a;
+            b += newSign;
+        }
+        return a;
+    }
 }
