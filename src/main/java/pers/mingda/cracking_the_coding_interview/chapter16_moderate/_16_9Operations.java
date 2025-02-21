@@ -24,14 +24,30 @@ public class _16_9Operations {
     }
 
     int multiply(int a, int b) {
+        if (abs(a) < abs(b)) {
+            return multiply(b, a); // algorithm is faster if b < a
+        }
         if (a == 0 || b == 0) {
             return 0;
         }
+        boolean isNegB = b < 0;
         int newSign = b > 0 ? -1 : 1;
         while (b != 0) {
             a += a;
             b += newSign;
         }
+
+        if (isNegB) {
+            return negate(a);
+        }
         return a;
+    }
+
+    /* Return absolute value */
+    int abs(int num) {
+        if (num < 0) {
+            return negate(num);
+        }
+        return num;
     }
 }
