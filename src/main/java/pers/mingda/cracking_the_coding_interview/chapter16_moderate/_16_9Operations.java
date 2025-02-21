@@ -48,4 +48,21 @@ public class _16_9Operations {
         }
         return num;
     }
+
+    int divide(int a, int b) {
+        int absA = abs(a);
+        int absB = abs(b);
+
+        int count = 0;
+        int sum = 0;
+        while (absA > sum) {
+            sum += absB;
+            count++;
+        }
+        if ((a < 0 && b < 0) || (a > 0 && b > 0)) {
+            return count;
+        } else {
+            return negate(count);
+        }
+    }
 }
