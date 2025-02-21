@@ -19,6 +19,8 @@ public class _16_8EnglishInt {
     static final String NEGATIVE = "Negative";
 
     String convert(int num) {
+        if (num == 0)
+            return smallNumbers[0];
         List<String> chunks = new ArrayList<>();
         boolean negative = num < 0;
         num = Math.abs(num);
@@ -49,6 +51,9 @@ public class _16_8EnglishInt {
             sb.append(smallNumbers[num / 100]).append(SPACE).append(HUNDRED);
         }
         num %= 100;
+        if (num == 0) {
+            return sb.toString();
+        }
         if (num > 19) {
             sb.append(tens[num / 10]).append(SPACE).append(smallNumbers[num % 10]);
         } else {
