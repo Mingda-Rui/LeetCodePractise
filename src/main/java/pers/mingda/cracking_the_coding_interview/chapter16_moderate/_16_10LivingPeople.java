@@ -15,6 +15,7 @@ public class _16_10LivingPeople {
         int deathIndex = 0;
 
         int currentLives = 0;
+        int maxLiveYear = 0;
         int maxLives = 0;
 
         for (int year = min; year <= max; year++) {
@@ -22,14 +23,18 @@ public class _16_10LivingPeople {
                 birthIndex++;
                 currentLives++;
             }
-            maxLives = Math.max(maxLives, currentLives);
+            if (currentLives > maxLives) {
+                maxLives = currentLives;
+                maxLiveYear = year;
+            }
+
             while(deathIndex < sortedByDeath.length && year > sortedByDeath[deathIndex].death) {
                 deathIndex++;
                 currentLives--;
             }
         }
 
-        return maxLives;
+        return maxLiveYear;
     }
 }
 
