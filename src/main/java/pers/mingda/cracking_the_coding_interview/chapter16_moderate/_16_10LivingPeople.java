@@ -5,11 +5,8 @@ import java.util.Comparator;
 
 public class _16_10LivingPeople {
     int maxAliveYear(LivingPerson[] people, int min, int max) {
-        LivingPerson[] sortedByBirth = Arrays.copyOf(people, people.length);
-        Arrays.sort(sortedByBirth, Comparator.comparingInt(a -> a.birth));
-
-        LivingPerson[] sortedByDeath = Arrays.copyOf(people, people.length);
-        Arrays.sort(sortedByDeath, Comparator.comparingInt(a -> a.death));
+        LivingPerson[] sortedByBirth = getSorted(people, Comparator.comparingInt(a -> a.birth));
+        LivingPerson[] sortedByDeath = getSorted(people, Comparator.comparingInt(a -> a.death));
 
         int birthIndex = 0;
         int deathIndex = 0;
@@ -35,6 +32,12 @@ public class _16_10LivingPeople {
         }
 
         return maxLiveYear;
+    }
+
+    LivingPerson[] getSorted(LivingPerson[] people, Comparator<LivingPerson> comparator) {
+        LivingPerson[] copiedPeople = Arrays.copyOf(people, people.length);
+        Arrays.sort(copiedPeople, comparator);
+        return copiedPeople;
     }
 }
 
