@@ -37,6 +37,36 @@ public class _16_10LivingPeople {
         Arrays.sort(copiedPeople, comparator);
         return copiedPeople;
     }
+
+    int maxAliveYearOptimized(LivingPerson[] people, int min, int max) {
+        int[] delta = getPopulationDeltas(people, min, max);
+        return getMaxLiveYear(delta) + min;
+    }
+
+    int[] getPopulationDeltas(LivingPerson[] people, int min, int max) {
+        int[] delta = new int[max - min + 2];
+        for (LivingPerson p : people) {
+            delta[p.birth - min]++;
+            delta[p.death - min + 1]--;
+        }
+        return delta;
+    }
+
+    int getMaxLiveYear(int[] delta) {
+        int maxLiveYear = 0;
+        int currentLives = 0;
+        int maxLives = 0;
+
+        for (int year = 0; year < delta.length; year++) {
+            currentLives += delta[year];
+            if (currentLives > maxLives) {
+                maxLives = currentLives;
+                maxLiveYear = year;
+            }
+        }
+
+        return maxLiveYear;
+    }
 }
 
 class LivingPerson {
