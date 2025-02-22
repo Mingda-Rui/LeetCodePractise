@@ -23,4 +23,12 @@ public class _16_11DivingBoard {
         }
         return set;
     }
+
+    Set<Integer> allLengthsOptimized(int k, int shorter, int longer) {
+        Set<Integer> lengths = new HashSet<>();
+        for (int i = 0; i <= k; i++) {
+            lengths.add(shorter * i + (k - i) * longer);
+        }
+        return lengths;
+    }
 }
