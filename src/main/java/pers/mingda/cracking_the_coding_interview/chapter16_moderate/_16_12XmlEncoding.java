@@ -13,7 +13,7 @@ public class _16_12XmlEncoding {
             encode(a, sb);
         }
         encode("0", sb);
-        if (root.value != null && root.value != "") {
+        if (root.value != null && !root.value.isEmpty()) {
             encode(root.value, sb);
         } else {
             for (XmlEncodingElement e: root.children) {
