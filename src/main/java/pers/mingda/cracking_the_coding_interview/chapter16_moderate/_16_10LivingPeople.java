@@ -15,17 +15,15 @@ public class _16_10LivingPeople {
         int maxLiveYear = 0;
         int maxLives = 0;
 
-        for (int year = min; year <= max; year++) {
-            while (birthIndex < sortedByBirth.length && year >= sortedByBirth[birthIndex].birth) {
+        while (birthIndex < sortedByBirth.length) {
+            if (sortedByBirth[birthIndex].birth <= sortedByDeath[deathIndex].death) {
                 birthIndex++;
                 currentLives++;
-            }
-            if (currentLives > maxLives) {
-                maxLives = currentLives;
-                maxLiveYear = year;
-            }
-
-            while(deathIndex < sortedByDeath.length && year > sortedByDeath[deathIndex].death) {
+                if (currentLives > maxLives) {
+                    maxLives = currentLives;
+                    maxLiveYear = sortedByBirth[birthIndex].birth;
+                }
+            } else {
                 deathIndex++;
                 currentLives--;
             }
