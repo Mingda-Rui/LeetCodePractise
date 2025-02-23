@@ -5,10 +5,18 @@ import java.util.List;
 public class _16_16SubSort {
     List<Integer> findUnsortedSequence(int[] array) {
         int leftMostSortedIndex = findLeftmostSorted(array);
+        if (leftMostSortedIndex == array.length - 1) {
+            // already sorted
+            return List.of();
+        }
         int rightMostSortedIndex = findRightmostSorted(array);
 
-        int minInRight = findMinFrom(array, leftMostSortedIndex);
-        int maxInLeft = findMaxTill(array, rightMostSortedIndex);
+        int minInRight = array[rightMostSortedIndex];
+        int maxInLeft = array[leftMostSortedIndex];
+        for (int i = leftMostSortedIndex + 1; i < rightMostSortedIndex; i++) {
+            minInRight = Math.min(minInRight, array[i]);
+            maxInLeft = Math.max(maxInLeft, array[i]);
+        }
 
         int adjustedLeftMost = adjustLeftWithMin(array, leftMostSortedIndex, minInRight);
         int adjustedRightMost = adjustRightWithMax(array, rightMostSortedIndex, maxInLeft);
@@ -32,22 +40,6 @@ public class _16_16SubSort {
             }
         }
         return 0;
-    }
-
-    int findMinFrom(int[] array, int from) {
-        int max = 0;
-        for (int i = from; i < array.length; i++) {
-            max = Math.max(max, array[i]);
-        }
-        return max;
-    }
-
-    int findMaxTill(int[] array, int till) {
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i <= till; i++) {
-            min = Math.min(min, array[i]);
-        }
-        return min;
     }
 
     int adjustLeftWithMin(int[] array, int leftEndIndex, int min) {
