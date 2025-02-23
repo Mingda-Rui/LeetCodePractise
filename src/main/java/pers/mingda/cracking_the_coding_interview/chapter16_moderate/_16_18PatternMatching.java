@@ -15,20 +15,43 @@ public class _16_18PatternMatching {
 
         for (int mainSize = 0; mainSize <= maxMainSize; mainSize++) {
             int remainingLength = size - mainSize * countOfMain;
-            String first = value.substring(0, mainSize);
             if (countOfAlt == 0 || remainingLength % countOfAlt == 0) {
                 int altIndex = firstAlt * mainSize;
                 int altSize = countOfAlt == 0 ? 0 : remainingLength / countOfAlt;
-                String second = countOfAlt == 0 ? "" :
-                        value.substring(altIndex, altSize + altIndex);
-
-                String cand = buildFromPattern(pattern, first, second);
-                if (cand.equals(value)) {
+                if (matches(pattern, value, mainSize, altSize, altIndex)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /* Iterates through pattern and value. At each character within pattern, checks if
+     * this is the main string or the alternate string. Then checks if the next set of
+     * characters in value match the original set of those characters (either the main
+     * or the alternate. */
+    boolean matches(String pattern, String value, int mainSize, int altSize, int firstAlt) {
+        int stringIndex = mainSize;
+        for (int i = 1; i < pattern.length(); i++) {
+            int size = pattern.charAt(i) == pattern.charAt(0) ? mainSize : altSize;
+            int offset = pattern.charAt(i) == pattern.charAt(0) ? 0 : firstAlt;
+            if (!isEqual(value, offset, stringIndex, size)) {
+                return false;
+            }
+            stringIndex += size;
+        }
+        return true;
+    }
+
+    /* Checks if two substrings are equal, starting at given offsets and continuing to
+     * size. */
+    boolean isEqual(String s1, int offset1, int offset2, int size) {
+        for (int i = 0; i < size; i++) {
+            if (s1.charAt(offset1 + i) != s1.charAt(offset2 + i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     int countOf(String pattern, char c) {
@@ -39,18 +62,5 @@ public class _16_18PatternMatching {
             }
         }
         return count;
-    }
-
-    String buildFromPattern(String pattern, String main, String alt) {
-        StringBuilder sb = new StringBuilder();
-        char first = pattern.charAt(0);
-        for (char c : pattern.toCharArray()) {
-            if (c == first) {
-                sb.append(main);
-            } else {
-                sb.append(alt);
-            }
-        }
-        return sb.toString();
     }
 }
