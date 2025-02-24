@@ -29,9 +29,6 @@ public class _16_25LruCache {
     private void add(LruCacheNode node) {
         map.put(node.key, node);
         addToHead(node);
-        if (size == 1) {
-            tail = node;
-        }
         if (size == maxSize) {
             removeTail();
         }
@@ -61,6 +58,9 @@ public class _16_25LruCache {
         node.next = head;
         if (head != null) {
             head.prev = node;
+        }
+        if(tail == null) {
+            tail = node;
         }
         head = node;
         size++;
