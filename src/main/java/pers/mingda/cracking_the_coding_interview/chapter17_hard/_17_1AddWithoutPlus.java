@@ -7,4 +7,14 @@ public class _17_1AddWithoutPlus {
         int carry = (a & b) << 1; // carry, but don't add
         return add(sum, carry);
     }
+
+    int addIteration(int a, int b) {
+        while (b != 0) {
+            int sum = a ^ b; // add without carrying
+            int carry = (a & b) << 1; // carry, but don't add
+            a = sum;
+            b = carry;
+        }
+        return a;
+    }
 }
