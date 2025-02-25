@@ -21,4 +21,13 @@ public class _17_2Shuffle {
         /* Return shuffled array */
         return cards;
     }
+
+    void shuffleArrayIteratively(int[] cards) {
+        for (int i = 0; i < cards.length; i++) {
+            int k = rand(0, i);
+            int temp = cards[k];
+            cards[k] = cards[i];
+            cards[i] = temp;
+        }
+    }
 }
