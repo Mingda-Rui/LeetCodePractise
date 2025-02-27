@@ -7,6 +7,7 @@ import java.util.Map;
 public class _17_5LettersAndNumbers {
     char[] findLongestSubarray(char[] array) {
         Map<Integer, Integer> deltasMap = new HashMap<>();
+        deltasMap.put(0, -1);
         int delta = 0;
         int maxStart = 0;
         int maxEnd = 0;
@@ -17,10 +18,7 @@ public class _17_5LettersAndNumbers {
             } else {
                 delta--;
             }
-            if (delta == 0) {
-                maxStart = 0;
-                maxEnd = i;
-            } else if (deltasMap.containsKey(delta)) {
+            if (deltasMap.containsKey(delta)) {
                 int newStart = deltasMap.get(delta) + 1;
                 if (i - newStart > maxEnd - maxStart) {
                     maxStart = newStart;
