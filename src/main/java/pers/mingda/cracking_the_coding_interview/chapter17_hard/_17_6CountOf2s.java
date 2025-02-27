@@ -1,31 +1,30 @@
 package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class _17_6CountOf2s {
-    int numberOf2sInRange(int n) {
-        int count = 0;
-        Map<Integer, Integer> countOfTwoMap = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            count += numberOf2s(i, countOfTwoMap);
+    int count2sInRangeAtDigit(int number, int d) {
+        int powerOf10 = (int) Math.pow(10, d);
+        int nextPowerOf10 = powerOf10 * 10;
+        int right = number % powerOf10;
+
+        int roundDown = number - number % nextPowerOf10;
+        int roundUp = roundDown + nextPowerOf10;
+
+        int digit = (number / powerOf10) % 10;
+        if (digit < 2) { // if the digit in spot digit is
+            return roundDown / 10;
+        } else if (digit == 2) {
+            return roundDown / 10 + right + 1;
+        } else {
+            return roundUp / 10;
         }
-        return count;
     }
 
-    int numberOf2s(int n, Map<Integer, Integer> countOfTwoMap) {
+    int count2sInRange(int number) {
         int count = 0;
-        while (n > 0) {
-            if (countOfTwoMap.containsKey(n)) {
-                count += countOfTwoMap.get(n);
-            }
-            int leastSignificantDigit = n % 10;
-            if (leastSignificantDigit == 2) {
-                count++;
-            }
-            n /= 10;
+        int len = String.valueOf(number).length();
+        for (int digit = 0; digit < len; digit++) {
+            count += count2sInRangeAtDigit(number, digit);
         }
-        countOfTwoMap.put(n, count);
         return count;
     }
 }
