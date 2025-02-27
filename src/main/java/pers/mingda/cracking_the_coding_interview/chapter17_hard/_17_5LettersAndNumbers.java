@@ -21,8 +21,11 @@ public class _17_5LettersAndNumbers {
                 maxStart = 0;
                 maxEnd = i;
             } else if (deltasMap.containsKey(delta)) {
-                maxStart = deltasMap.get(delta) + 1;
-                maxEnd = i;
+                int newStart = deltasMap.get(delta) + 1;
+                if (i - newStart > maxEnd - maxStart) {
+                    maxStart = newStart;
+                    maxEnd = i;
+                }
             }
             deltasMap.putIfAbsent(delta, i);
         }
