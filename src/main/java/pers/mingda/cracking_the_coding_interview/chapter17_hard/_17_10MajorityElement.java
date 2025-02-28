@@ -3,18 +3,16 @@ package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 public class _17_10MajorityElement {
     int findMajorityElement(int[] array) {
         int delta = 0;
-        int index = 0;
         int current = 0;
-        while (index < array.length) {
+        for (int num: array) {
             if (delta == 0) {
-                current = array[index];
-                delta++;
-            } else if (array[index] == current) {
+                current = num;
+            }
+            if (num == current) {
                 delta++;
             } else {
                 delta--;
             }
-            index++;
         }
         if (delta == 0 || !validMajorityElement(array, current)) {
             return 0;
