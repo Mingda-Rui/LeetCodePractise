@@ -16,15 +16,21 @@ public class _17_9KthMultiple {
             int nextThree = nums.get(factorOfThrees) * 3;
             int nextFive = nums.get(factorOfFives) * 5;
             int nextSeven = nums.get(factorOfSevens) * 7;
-            if (nextThree < nextFive && nextThree < nextSeven) {
+            if (nextThree <= nextFive && nextThree <= nextSeven) {
                 factorOfThrees++;
-                nums.add(nextThree);
-            } else if (nextFive < nextSeven && nextFive < nextThree) {
+                if (nums.getLast() != nextThree) {
+                    nums.add(nextThree);
+                }
+            } else if (nextFive <= nextSeven && nextFive <= nextThree) {
                 factorOfFives++;
-                nums.add(nextFive);
+                if (nums.getLast() != nextFive) {
+                    nums.add(nextFive);
+                }
             } else {
                 factorOfSevens++;
-                nums.add(nextSeven);
+                if (nums.getLast() != nextSeven) {
+                    nums.add(nextSeven);
+                }
             }
         }
         return nums.get(k - 1);
