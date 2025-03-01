@@ -19,6 +19,6 @@ public class _17_14SmallestK {
                 queue.poll();
             }
         }
-        return queue.stream().mapToInt(Integer::intValue).toArray();
+        return queue.stream().sorted().mapToInt(Integer::intValue).toArray();
     }
 }
