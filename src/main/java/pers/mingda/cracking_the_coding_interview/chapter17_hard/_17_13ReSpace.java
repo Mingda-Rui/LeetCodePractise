@@ -5,13 +5,17 @@ import java.util.Set;
 public class _17_13ReSpace {
 
     String bestSplit(Set<String> dictionary, String sentence) {
-        ReSpacePairResult result = bestSplit(dictionary, sentence, 0);
+        ReSpacePairResult[] memo = new ReSpacePairResult[sentence.length()];
+        ReSpacePairResult result = bestSplit(dictionary, sentence, 0, memo);
         return result.sentence;
     }
 
-    ReSpacePairResult bestSplit(Set<String> dictionary, String sentence, int start) {
+    ReSpacePairResult bestSplit(Set<String> dictionary, String sentence, int start, ReSpacePairResult[] memo) {
         if (start == sentence.length()) {
             return new ReSpacePairResult("", 0);
+        }
+        if (memo[start] != null) {
+            return memo[start];
         }
         String current = "";
         ReSpacePairResult smallest = new ReSpacePairResult("", Integer.MAX_VALUE);
@@ -22,7 +26,7 @@ public class _17_13ReSpace {
                 // short circuit
                 continue;
             }
-            ReSpacePairResult subSentence = bestSplit(dictionary, sentence, i + 1);
+            ReSpacePairResult subSentence = bestSplit(dictionary, sentence, i + 1, memo);
             if (subSentence.unrecognizedLetters + currentUnrecognized < smallest.unrecognizedLetters) {
                 int newUnrecognized = currentUnrecognized + smallest.unrecognizedLetters;
                 String newSentence = current + " " + smallest.sentence;
@@ -33,6 +37,7 @@ public class _17_13ReSpace {
                 break;
             }
         }
+        memo[start] = smallest;
         return smallest;
     }
 }
