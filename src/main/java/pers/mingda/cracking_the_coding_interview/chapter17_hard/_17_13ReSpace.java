@@ -4,35 +4,32 @@ import java.util.Set;
 
 public class _17_13ReSpace {
 
-    int bestSplit(Set<String> dictionary, String sentence) {
-        return bestSplit(dictionary, sentence, 0, 0);
+    String bestSplit(Set<String> dictionary, String sentence) {
+        ReSpacePairResult result = bestSplit(dictionary, sentence, 0);
+        return result.sentence;
     }
 
-    int bestSplit(Set<String> dictionary, String sentence, int start, int unRecognized) {
-        if (start == sentence.length()) {
-            return unRecognized;
-        }
-        String word = findNextWord(dictionary, sentence, start);
-        int smallestUnRecognized;
-        if (word.isEmpty()) {
-            smallestUnRecognized = unRecognized + (sentence.length() - start);
-        } else {
-            smallestUnRecognized = bestSplit(dictionary, sentence, start + word.length(), unRecognized);
-        }
-        int newUnRecognized = bestSplit(dictionary, sentence, start + 1, unRecognized + 1);
-        smallestUnRecognized = Math.min(smallestUnRecognized, newUnRecognized);
-        return smallestUnRecognized;
-    }
-
-    String findNextWord(Set<String> dictionary, String sentence, int start) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = start; i < sentence.length(); i++) {
-            sb.append(sentence.charAt(i));
-            String current = sb.toString();
-            if (dictionary.contains(current)) {
-                return current;
+    ReSpacePairResult bestSplit(Set<String> dictionary, String sentence, int start) {
+        String current = "";
+        ReSpacePairResult smallest = new ReSpacePairResult();
+        smallest.unrecognizedLetters = Integer.MAX_VALUE;
+        for (int i = 0; i < start; i++) {
+            current += sentence.charAt(i);
+            if (!dictionary.contains(current) && current.length() >= smallest.unrecognizedLetters) {
+                // short circuit
+                continue;
+            }
+            ReSpacePairResult subSentence = bestSplit(dictionary, sentence, i + 1);
+            int currentUnrecognized = dictionary.contains(current) ? 0 : current.length();
+            if (subSentence.unrecognizedLetters + currentUnrecognized < smallest.unrecognizedLetters) {
+                smallest = subSentence;
             }
         }
-        return "";
+        return smallest;
     }
+}
+
+class ReSpacePairResult {
+    String sentence;
+    int unrecognizedLetters;
 }
