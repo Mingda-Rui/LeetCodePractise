@@ -31,6 +31,10 @@ public class _17_13ReSpace {
             if (subSentence.unrecognizedLetters + currentUnrecognized < smallest.unrecognizedLetters) {
                 smallest = new ReSpacePairResult(newSentence, newUnrecognized);
             }
+            if (smallest.unrecognizedLetters == 0) {
+                // short circuit
+                break;
+            }
         }
         return smallest;
     }
