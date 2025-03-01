@@ -13,16 +13,14 @@ public class _17_13ReSpace {
             return unRecognized;
         }
         String word = findNextWord(dictionary, sentence, start);
-        int smallestUnRecognized = Integer.MAX_VALUE;
+        int smallestUnRecognized;
         if (word.isEmpty()) {
-            int newUnRecognized = unRecognized + (sentence.length() - start);
-            smallestUnRecognized = Math.min(smallestUnRecognized, newUnRecognized);
+            smallestUnRecognized = unRecognized + (sentence.length() - start);
         } else {
-            int newUnRecognized2 = bestSplit(dictionary, sentence, start + word.length(), unRecognized);
-            smallestUnRecognized = Math.min(smallestUnRecognized, newUnRecognized2);
+            smallestUnRecognized = bestSplit(dictionary, sentence, start + word.length(), unRecognized);
         }
-        int newUnRecognized3 = bestSplit(dictionary, sentence, start + 1, unRecognized + 1);
-        smallestUnRecognized = Math.min(smallestUnRecognized, newUnRecognized3);
+        int newUnRecognized = bestSplit(dictionary, sentence, start + 1, unRecognized + 1);
+        smallestUnRecognized = Math.min(smallestUnRecognized, newUnRecognized);
         return smallestUnRecognized;
     }
 
