@@ -17,18 +17,15 @@ public class _17_13ReSpace {
         ReSpacePairResult smallest = new ReSpacePairResult("", Integer.MAX_VALUE);
         for (int i = 0; i < start; i++) {
             current += sentence.charAt(i);
-            if (!dictionary.contains(current) && current.length() >= smallest.unrecognizedLetters) {
+            int currentUnrecognized = dictionary.contains(current) ? 0 : current.length();
+            if (currentUnrecognized >= smallest.unrecognizedLetters) {
                 // short circuit
                 continue;
             }
             ReSpacePairResult subSentence = bestSplit(dictionary, sentence, i + 1);
-            int currentUnrecognized = dictionary.contains(current) ? 0 : current.length();
-            String delimiter = dictionary.contains(current) ? "" : " ";
-
-            int newUnrecognized = currentUnrecognized + smallest.unrecognizedLetters;
-            String newSentence = current + delimiter + smallest.sentence;
-
             if (subSentence.unrecognizedLetters + currentUnrecognized < smallest.unrecognizedLetters) {
+                int newUnrecognized = currentUnrecognized + smallest.unrecognizedLetters;
+                String newSentence = current + " " + smallest.sentence;
                 smallest = new ReSpacePairResult(newSentence, newUnrecognized);
             }
             if (smallest.unrecognizedLetters == 0) {
