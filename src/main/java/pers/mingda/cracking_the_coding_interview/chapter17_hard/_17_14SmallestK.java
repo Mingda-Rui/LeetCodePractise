@@ -29,11 +29,15 @@ public class _17_14SmallestK {
     int[] selectionSort(int[] array, int targetIndex, int start, int boundary) {
         int pivotIndex = start;
         for (int i = start + 1; i < boundary; i++) {
-            if (array[i] < array[pivotIndex]) {
+            if (array[i] <= array[pivotIndex]) {
                 swap(array, i, pivotIndex);
                 pivotIndex = i;
             }
         }
+        if (pivotIndex != boundary - 1 && array[boundary - 1] <= array[pivotIndex]) {
+            pivotIndex = boundary - 1;
+        }
+
         if (pivotIndex < targetIndex) {
             return selectionSort(array, targetIndex - pivotIndex, pivotIndex + 1, boundary);
         } else if (pivotIndex > targetIndex) {
