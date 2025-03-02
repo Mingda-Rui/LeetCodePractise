@@ -23,10 +23,10 @@ public class _17_14SmallestK {
     }
 
     int[] smallestKSelectionRank(int[] array, int k) {
-        return selectionSort(array, k, 0, array.length);
+        return selectionSort(array, k - 1, 0, array.length);
     }
 
-    int[] selectionSort(int[] array, int target, int start, int boundary) {
+    int[] selectionSort(int[] array, int targetIndex, int start, int boundary) {
         int pivotIndex = start;
         for (int i = start + 1; i < boundary; i++) {
             if (array[i] < array[pivotIndex]) {
@@ -34,10 +34,10 @@ public class _17_14SmallestK {
                 pivotIndex = i;
             }
         }
-        if (pivotIndex < target - 1) {
-            return selectionSort(array, target - 1 - pivotIndex, pivotIndex + 1, boundary);
-        } else if (pivotIndex > target - 1) {
-            return selectionSort(array, target, start, pivotIndex);
+        if (pivotIndex < targetIndex) {
+            return selectionSort(array, targetIndex - pivotIndex, pivotIndex + 1, boundary);
+        } else if (pivotIndex > targetIndex) {
+            return selectionSort(array, targetIndex, start, pivotIndex);
         } else {
             return Arrays.copyOf(array, pivotIndex);
         }
