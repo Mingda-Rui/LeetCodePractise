@@ -23,10 +23,11 @@ public class _17_14SmallestK {
     }
 
     int[] smallestKSelectionRank(int[] array, int k) {
-        return selectionSort(array, k, 0, array.length);
+        int threshold = selectionSort(array, k, 0, array.length);
+        return generateResult(array, k, threshold);
     }
 
-    int[] selectionSort(int[] array, int targetSize, int start, int boundary) {
+    int selectionSort(int[] array, int targetSize, int start, int boundary) {
         SmallestKPartitionResult result = partition(array, array[start], start, boundary);
         int totalLeft = result.leftSize;
         int totalMiddle = result.leftSize + result.middleSize;
@@ -38,21 +39,19 @@ public class _17_14SmallestK {
                     start + totalMiddle,
                     boundary);
         }
-        return generateResult(array, targetSize, start + totalMiddle);
+        return array[start + totalMiddle];
     }
 
-    int[] generateResult(int[] array, int targetSize, int middleIndex) {
-        int threshold = array[middleIndex];
-        int lesserThreshold = threshold - 1;
+    int[] generateResult(int[] array, int targetSize, int threshold) {
         int[] result = new int[targetSize];
         int resultIndex = 0;
-        for (int i = 0; i < middleIndex; i++) {
-            if (array[i] == lesserThreshold) {
-                result[resultIndex] = array[i];
+        for (int val: array) {
+            if (val < threshold) {
+                result[resultIndex] = val;
                 resultIndex++;
             }
         }
-        for (int i = resultIndex; i <result.length; i++) {
+        for (int i = resultIndex; i < result.length; i++) {
             result[resultIndex] = threshold;
         }
 
