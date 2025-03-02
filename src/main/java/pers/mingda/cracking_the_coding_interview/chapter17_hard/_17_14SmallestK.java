@@ -23,33 +23,81 @@ public class _17_14SmallestK {
     }
 
     int[] smallestKSelectionRank(int[] array, int k) {
-        return selectionSort(array, k - 1, 0, array.length);
+        return selectionSort(array, k, 0, array.length);
     }
 
-    int[] selectionSort(int[] array, int targetIndex, int start, int boundary) {
-        int pivotIndex = start;
-        for (int i = start + 1; i < boundary; i++) {
-            if (array[i] <= array[pivotIndex]) {
-                swap(array, i, pivotIndex);
-                pivotIndex = i;
+    int[] selectionSort(int[] array, int targetSize, int start, int boundary) {
+        SmallestKPartitionResult result = partition(array, array[start], start, boundary);
+        int totalLeft = result.leftSize;
+        int totalMiddle = result.leftSize + result.middleSize;
+
+        if (totalLeft > targetSize) {
+            return selectionSort(array, targetSize, start, start + totalLeft);
+        } else if (totalMiddle < targetSize) {
+            return selectionSort(array, targetSize - totalMiddle,
+                    start + totalMiddle,
+                    boundary);
+        }
+        return generateResult(array, targetSize, start + totalMiddle);
+    }
+
+    int[] generateResult(int[] array, int targetSize, int middleIndex) {
+        int threshold = array[middleIndex];
+        int lesserThreshold = threshold - 1;
+        int[] result = new int[targetSize];
+        int resultIndex = 0;
+        for (int i = 0; i < middleIndex; i++) {
+            if (array[i] == lesserThreshold) {
+                result[resultIndex] = array[i];
+                resultIndex++;
             }
         }
-        if (pivotIndex != boundary - 1 && array[boundary - 1] <= array[pivotIndex]) {
-            pivotIndex = boundary - 1;
+        for (int i = resultIndex; i <result.length; i++) {
+            result[resultIndex] = threshold;
         }
 
-        if (pivotIndex < targetIndex) {
-            return selectionSort(array, targetIndex - pivotIndex, pivotIndex + 1, boundary);
-        } else if (pivotIndex > targetIndex) {
-            return selectionSort(array, targetIndex, start, pivotIndex);
-        } else {
-            return Arrays.copyOf(array, pivotIndex);
+        return result;
+    }
+
+    /* Partition result into < pivot, equal to pivot -> bigger than pivot. */
+    SmallestKPartitionResult partition(int[] array, int pivot, int start, int end) {
+        int left = start; /* Stays at (right) edge of left side. */
+        int right = end; /* Stays at (left) edge of right side. */
+        int middle = start; /* Stays at (right) edge of middle. */
+        while (middle <= right) {
+            if (array[middle] < pivot) {
+                /* Middle is smaller than the pivot. Left is either smaller or equal to
+                 * the pivot. Either way, swap them. Then middle and left should move by
+                 * one. */
+                swap(array, middle, left);
+                middle++;
+                left++;
+            } else if (array[middle] > pivot) {
+                /* Middle is bigger than the pivot. Right could have any value. Swap them,
+                 * then we know that the new right is bigger than the pivot. Move right by
+                 * one. */
+                swap(array, middle, right);
+                right--;
+            } else if (array[middle] == pivot) {
+                /* Middle is equal to the pivot. Move by one. */
+                middle++;
+            }
         }
+        /* Return sizes of left and middle. */
+        return new SmallestKPartitionResult(left - start, right - left + 1);
     }
 
     void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+}
+
+class SmallestKPartitionResult {
+    int leftSize, middleSize;
+    public SmallestKPartitionResult(int left, int middle) {
+        this.leftSize = left;
+        this.middleSize = middle;
     }
 }
