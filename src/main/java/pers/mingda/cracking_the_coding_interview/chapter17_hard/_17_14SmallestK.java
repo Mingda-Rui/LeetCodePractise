@@ -35,9 +35,9 @@ public class _17_14SmallestK {
             }
         }
         if (pivotIndex < target - 1) {
-            return selectionSort(array, target, pivotIndex + 1, boundary);
+            return selectionSort(array, target - 1 - pivotIndex, pivotIndex + 1, boundary);
         } else if (pivotIndex > target - 1) {
-            return selectionSort(array, target - pivotIndex, start, pivotIndex);
+            return selectionSort(array, target, start, pivotIndex);
         } else {
             return Arrays.copyOf(array, pivotIndex);
         }
