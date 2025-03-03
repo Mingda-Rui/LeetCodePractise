@@ -8,14 +8,25 @@ public class _17_20ContinuousMedian {
     PriorityQueue<Integer> smaller = new PriorityQueue<>(Comparator.reverseOrder());
 
     void addNumber(int number) {
-        larger.add(number);
-        if (larger.size() - smaller.size() > 1) {
-            int num = larger.poll();
-            smaller.add(num);
+        if (larger.isEmpty() || larger.peek() <= number) {
+            larger.add(number);
+            if (larger.size() - smaller.size() > 1) {
+                smaller.add(larger.poll());
+            }
+        } else {
+            if (larger.size() == smaller.size()) {
+                smaller.add(number);
+                larger.add(smaller.poll());
+            } else {
+                smaller.add(number);
+            }
         }
     }
 
     int getMedian() {
+        if (larger.isEmpty()) {
+            return -1;
+        }
         if (larger.size() == smaller.size()) {
             return (larger.peek() + smaller.peek()) / 2;
         }
