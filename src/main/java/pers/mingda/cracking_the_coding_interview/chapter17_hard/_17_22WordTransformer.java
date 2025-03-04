@@ -7,7 +7,7 @@ public class _17_22WordTransformer {
         Map<String, WordTransformer> graph = buildGraph(words);
         WordTransformer startNode = graph.get(start);
         WordTransformer stopNode = graph.get(stop);
-        return findStop(graph, startNode, stopNode, new ArrayList<>(), new HashSet<>());
+        return findStop(startNode, stopNode, new HashSet<>());
     }
 
     Map<String, WordTransformer> buildGraph(String[] words) {
@@ -39,23 +39,25 @@ public class _17_22WordTransformer {
 
 
 
-    List<String> findStop(Map<String, WordTransformer> graph, WordTransformer current, WordTransformer stop, List<String> path, Set<String> seen) {
+    List<String> findStop(WordTransformer current, WordTransformer stop, Set<String> seen) {
         if (seen.contains(current.val())) {
             return List.of();
         }
-        path.add(current.val());
-        seen.add(current.val());
+
         if (current.val().equals(stop.val())) {
+            List<String> path = new ArrayList<>();
+            path.add(current.val());
             return path;
         }
-
+        seen.add(current.val());
         for (WordTransformer node: current.siblings()) {
-            List<String> result = findStop(graph, node, stop, path, seen);
+            List<String> result = findStop(node, stop, seen);
             if (!result.isEmpty()) {
+                result.addFirst(current.val());
                 return result;
             }
         }
-        path.removeLast();
+
         return List.of();
     }
 }
