@@ -12,16 +12,78 @@ import java.util.Set;
 public class _17_22WordTransformer {
     List<String> transform(String start, String stop, String[] words) {
         Map<String, WordTransformerGraphNode> graph = buildGraph(words);
-        WordTransformerGraphNode startNode = graph.get(start);
-        WordTransformerGraphNode stopNode = graph.get(stop);
-        Queue<WordTransformerGraphNode> queue = new LinkedList<>();
-        Set<String> seen = new HashSet<>();
-        Map<String, List<String>> paths = new HashMap<>();
-        queue.add(startNode);
-        seen.add(start);
-        paths.put(start, List.of(start));
-        return findStop(stopNode, seen, queue, paths);
+        Map<String, WordTransformerPathNode> paths = new HashMap<>();
+        Set<String> startVisited = new HashSet<>();
+        Set<String> stopVisited = new HashSet<>();
+        Queue<WordTransformerGraphNode> startQueue = new LinkedList<>();
+        Queue<WordTransformerGraphNode> stopQueue = new LinkedList<>();
+
+        startQueue.add(graph.get(start));
+        startVisited.add(start);
+        stopQueue.add(graph.get(stop));
+        stopVisited.add(stop);
+        paths.put(start, new WordTransformerPathNode(start, null));
+        paths.put(stop, new WordTransformerPathNode(stop, null));
+
+        List<String> result = new ArrayList<>();
+
+        while (!startQueue.isEmpty() || !stopQueue.isEmpty()) {
+            List<String> startPaths = searchLevel(startQueue, startVisited, stopVisited, paths);
+            if (!startPaths.isEmpty()) {
+                result.addAll(startPaths);
+                break;
+            }
+            List<String> stopPaths = searchLevel(stopQueue, stopVisited, startVisited, paths);
+            if (!stopPaths.isEmpty()) {
+                result.addAll(stopPaths);
+                break;
+            }
+        }
+
+        if (!result.isEmpty() && result.getFirst().equals(stop)) {
+            return result.reversed();
+        }
+        return result;
     }
+
+    List<String> searchLevel(Queue<WordTransformerGraphNode> queue,
+                       Set<String> visited,
+                       Set<String> oppositeVisited,
+                       Map<String, WordTransformerPathNode> paths) {
+        if (queue.isEmpty()) {
+            return List.of();
+        }
+        WordTransformerGraphNode currentStart = queue.poll();
+        if (!visited.contains(currentStart.val())) {
+            for (WordTransformerGraphNode startS : currentStart.siblings()) {
+                if (oppositeVisited.contains(startS.val())) {
+                    WordTransformerPathNode path1 = paths.get(currentStart.val());
+                    WordTransformerPathNode path2 = paths.get(startS.val());
+                    return merge(path1, path2);
+                }
+                queue.add(startS);
+                visited.add(startS.val());
+                WordTransformerPathNode prev = paths.get(currentStart.val());
+                paths.put(startS.val(), prev);
+            }
+        }
+        return List.of();
+    }
+
+    List<String> merge(WordTransformerPathNode start, WordTransformerPathNode stop) {
+        List<String> result = new LinkedList<>();
+        while (start != null) {
+            result.addFirst(start.val());
+            start = start.prev();
+        }
+
+        while(stop != null) {
+            result.add(stop.val());
+            stop = stop.prev();
+        }
+
+        return result;
+    };
 
     Map<String, WordTransformerGraphNode> buildGraph(String[] words) {
         Map<String, WordTransformerGraphNode> graph = new HashMap<>();
@@ -49,29 +111,8 @@ public class _17_22WordTransformer {
         }
         return count == 1;
     }
-
-    List<String> findStop(WordTransformerGraphNode stop, Set<String> seen, Queue<WordTransformerGraphNode> queue, Map<String, List<String>> paths) {
-        if (queue.isEmpty()) {
-            return List.of();
-        }
-        WordTransformerGraphNode current = queue.poll();
-        List<String> path = paths.get(current.val());
-        if (current.val().equals(stop.val())) {
-            return path;
-        }
-
-        for (WordTransformerGraphNode s: current.siblings()) {
-            if (!seen.contains(s.val())) {
-                seen.add(s.val());
-                queue.offer(s);
-                List<String> nextPath = new ArrayList<>(path);
-                nextPath.add(s.val());
-                paths.put(s.val(), nextPath);
-            }
-        }
-
-        return findStop(stop, seen, queue, paths);
-    }
 }
 
 record WordTransformerGraphNode(String val, Set<WordTransformerGraphNode> siblings) {}
+
+record WordTransformerPathNode(String val, WordTransformerPathNode prev) {}
