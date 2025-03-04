@@ -7,7 +7,13 @@ public class _17_22WordTransformer {
         Map<String, WordTransformer> graph = buildGraph(words);
         WordTransformer startNode = graph.get(start);
         WordTransformer stopNode = graph.get(stop);
-        return findStop(startNode, stopNode, new HashSet<>());
+        Queue<WordTransformer> queue = new LinkedList<>();
+        Set<String> seen = new HashSet<>();
+        Map<String, List<String>> paths = new HashMap<>();
+        queue.add(startNode);
+        seen.add(start);
+        paths.put(start, List.of(start));
+        return findStop(stopNode, seen, queue, paths);
     }
 
     Map<String, WordTransformer> buildGraph(String[] words) {
@@ -37,28 +43,27 @@ public class _17_22WordTransformer {
         return count == 1;
     }
 
-
-
-    List<String> findStop(WordTransformer current, WordTransformer stop, Set<String> seen) {
-        if (seen.contains(current.val())) {
+    List<String> findStop(WordTransformer stop, Set<String> seen, Queue<WordTransformer> queue, Map<String, List<String>> paths) {
+        if (queue.isEmpty()) {
             return List.of();
         }
-
+        WordTransformer current = queue.poll();
+        List<String> path = paths.get(current.val());
         if (current.val().equals(stop.val())) {
-            List<String> path = new ArrayList<>();
-            path.add(current.val());
             return path;
         }
-        seen.add(current.val());
-        for (WordTransformer node: current.siblings()) {
-            List<String> result = findStop(node, stop, seen);
-            if (!result.isEmpty()) {
-                result.addFirst(current.val());
-                return result;
+
+        for (WordTransformer s: current.siblings()) {
+            if (!seen.contains(s.val())) {
+                seen.add(s.val());
+                queue.offer(s);
+                List<String> nextPath = new ArrayList<>(path);
+                nextPath.add(s.val());
+                paths.put(s.val(), nextPath);
             }
         }
 
-        return List.of();
+        return findStop(stop, seen, queue, paths);
     }
 }
 
