@@ -37,6 +37,10 @@ public class _17_21VolumeOfHistogram {
     int calculateHistogramVolume(int[] histogram, int a, int b) {
         int height = Math.min(histogram[a], histogram[b]);
         int width = Math.abs(a - b - 1);
-        return height * width;
+        int offset = 0;
+        for (int i = a + 1; i < b; i++) {
+            offset -= histogram[i];
+        }
+        return height * width - offset;
     }
 }
