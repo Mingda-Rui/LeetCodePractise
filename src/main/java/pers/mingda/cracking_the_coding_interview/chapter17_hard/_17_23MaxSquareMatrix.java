@@ -4,19 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static pers.mingda.cracking_the_coding_interview.chapter17_hard._17_23MaxSquareMatrix.BLACK;
-
 public class _17_23MaxSquareMatrix {
     public static final int BLACK = 0;
     public static final int WHITE = 1;
     MaxSquareMatrixSquare findSquare(int[][] matrix) {
+        MaxSquareMatrixSquareCell[][] preComputed = preComputeMatrix(matrix);
         for (int n = matrix.length - 1; n >= 0; n--) {
-            Optional<MaxSquareMatrixSquare> square = findSquares(matrix, n).stream().filter(s -> s.isBlackBordered(matrix)).findFirst();
+            Optional<MaxSquareMatrixSquare> square = findSquares(matrix, n)
+                    .stream()
+                    .filter(s -> s.isBlackBordered(preComputed))
+                    .findFirst();
             if (square.isPresent()) {
                 return square.get();
             }
         }
         return null;
+    }
+
+    MaxSquareMatrixSquareCell[][] preComputeMatrix(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        MaxSquareMatrixSquareCell[][] result = new MaxSquareMatrixSquareCell[row][col];
+        for (int i = row - 1; i >= 0; i--) {
+            for (int j = col - 1; j >= 0; j--) {
+                if (matrix[i][j] == WHITE) {
+                    result[i][j] = new MaxSquareMatrixSquareCell(0, 0);
+                } else {
+                    int x = j + 1 < col ? result[i][j + 1].blacksRight() + 1 : 0;
+                    int y = i + 1 < row ? result[i + 1][j].blacksBelow() + 1 : 0;
+                    result[i][j] = new MaxSquareMatrixSquareCell(x, y);
+                }
+            }
+        }
+        return result;
     }
 
     List<MaxSquareMatrixSquare> findSquares(int[][] matrix, int len) {
@@ -30,6 +50,8 @@ public class _17_23MaxSquareMatrix {
     }
 }
 
+record MaxSquareMatrixSquareCell(int blacksRight, int blacksBelow) {}
+
 record MaxSquareMatrixSquare(int x, int y , int n) {
     public boolean isValid(int[][] matrix) {
         return x >= 0
@@ -38,18 +60,8 @@ record MaxSquareMatrixSquare(int x, int y , int n) {
                 && y + n - 1 < matrix[0].length;
     }
 
-    public boolean isBlackBordered(int[][] matrix) {
-        for (int i = x; i < x + n; i++) {
-            if (matrix[i][y] != BLACK || matrix[i][y + n - 1] != BLACK) {
-                return false;
-            }
-        }
-
-        for (int j = y; j < y + n; j++) {
-            if (matrix[x][j] != BLACK || matrix[x + n - 1][y] != BLACK) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isBlackBordered(MaxSquareMatrixSquareCell[][] preComputed) {
+        MaxSquareMatrixSquareCell squareCell = preComputed[x][y];
+        return squareCell.blacksBelow() >= n && squareCell.blacksRight() >= n;
     }
 }
