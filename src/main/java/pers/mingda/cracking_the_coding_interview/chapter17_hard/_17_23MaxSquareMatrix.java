@@ -30,8 +30,8 @@ public class _17_23MaxSquareMatrix {
                 if (matrix[i][j] == WHITE) {
                     result[i][j] = new MaxSquareMatrixSquareCell(0, 0);
                 } else {
-                    int x = j + 1 < col ? result[i][j + 1].blacksRight() + 1 : 0;
-                    int y = i + 1 < row ? result[i + 1][j].blacksBelow() + 1 : 0;
+                    int x = j + 1 < col ? result[i][j + 1].blacksRight() + 1 : 1;
+                    int y = i + 1 < row ? result[i + 1][j].blacksBelow() + 1 : 1;
                     result[i][j] = new MaxSquareMatrixSquareCell(x, y);
                 }
             }
@@ -61,7 +61,21 @@ record MaxSquareMatrixSquare(int x, int y , int n) {
     }
 
     public boolean isBlackBordered(MaxSquareMatrixSquareCell[][] preComputed) {
-        MaxSquareMatrixSquareCell squareCell = preComputed[x][y];
-        return squareCell.blacksBelow() >= n && squareCell.blacksRight() >= n;
+        MaxSquareMatrixSquareCell topLeft = preComputed[x][y];
+        if (topLeft.blacksBelow() < n && topLeft.blacksRight() < n) {
+            return false;
+        }
+
+        MaxSquareMatrixSquareCell topRight = preComputed[x][y + n - 1];
+        if (topRight.blacksBelow() < n) {
+            return false;
+        }
+
+        MaxSquareMatrixSquareCell bottomLeft = preComputed[x + n - 1][y];
+        if (bottomLeft.blacksRight() < n) {
+            return false;
+        }
+
+        return true;
     }
 }
