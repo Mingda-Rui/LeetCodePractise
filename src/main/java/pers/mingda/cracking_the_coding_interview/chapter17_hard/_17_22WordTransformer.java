@@ -23,7 +23,7 @@ public class _17_22WordTransformer {
             }
             String collision2 = search(stopData, startData, graph);
             if (collision2 != null) {
-                return merge(startData, stopData, collision1);
+                return merge(startData, stopData, collision2);
             }
         }
 
