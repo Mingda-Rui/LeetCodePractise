@@ -54,13 +54,19 @@ public class _17_24MaxSubMatrix {
     }
 
     int maxSubArray(int[] array) {
+        int maxStart = 0;
+        int maxEnd = 0;
         int sum = 0;
         int max = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
-            max = Math.max(max, sum);
+            if (sum > max) {
+                maxEnd = i;
+                max = sum;
+            }
             if (sum <= 0) {
                 sum = 0;
+                maxStart = i + 1;
             }
         }
 
