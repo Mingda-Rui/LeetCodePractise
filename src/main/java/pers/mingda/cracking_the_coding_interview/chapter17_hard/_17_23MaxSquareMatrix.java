@@ -10,7 +10,7 @@ public class _17_23MaxSquareMatrix {
     public static final int BLACK = 0;
     public static final int WHITE = 1;
     MaxSquareMatrixSquare findSquare(int[][] matrix) {
-        for (int n = 0; n < matrix.length; n++) {
+        for (int n = matrix.length - 1; n >= 0; n--) {
             Optional<MaxSquareMatrixSquare> square = findSquares(matrix, n).stream().filter(s -> s.isBlackBordered(matrix)).findFirst();
             if (square.isPresent()) {
                 return square.get();
