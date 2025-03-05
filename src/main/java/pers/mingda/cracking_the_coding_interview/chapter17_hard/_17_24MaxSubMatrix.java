@@ -37,4 +37,33 @@ public class _17_24MaxSubMatrix {
         int topLeftSum = col - 1 < 0 || row - 1 < 0 ? 0 : preComputedSum[row - 1][col - 1];
         return leftSum + topSum - topLeftSum + matrix[row][col];
     }
+
+    int getMaxMatrixOptimal(int[][] matrix) {
+        int max = 0;
+        for (int top = 0; top < matrix.length; top++) {
+            int[] colSums = new int[matrix[0].length];
+            for (int bottom = top; bottom < matrix.length; bottom++) {
+                for (int c = 0; c < colSums.length; c++) {
+                    colSums[c] += matrix[bottom][c];
+                }
+                int currentMax = maxSubArray(colSums);
+                max = Math.max(max, currentMax);
+            }
+        }
+        return max;
+    }
+
+    int maxSubArray(int[] array) {
+        int sum = 0;
+        int max = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+            max = Math.max(max, sum);
+            if (sum <= 0) {
+                sum = 0;
+            }
+        }
+
+        return max;
+    }
 }
