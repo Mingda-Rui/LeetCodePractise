@@ -1,6 +1,5 @@
 package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -8,80 +7,57 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class _17_22WordTransformer {
     List<String> transform(String start, String stop, String[] words) {
         Map<String, WordTransformerGraphNode> graph = buildGraph(words);
-        Map<String, WordTransformerPathNode> paths = new HashMap<>();
-        Set<String> startVisited = new HashSet<>();
-        Set<String> stopVisited = new HashSet<>();
-        Queue<WordTransformerGraphNode> startQueue = new LinkedList<>();
-        Queue<WordTransformerGraphNode> stopQueue = new LinkedList<>();
 
-        startQueue.add(graph.get(start));
-        startVisited.add(start);
-        stopQueue.add(graph.get(stop));
-        stopVisited.add(stop);
-        paths.put(start, new WordTransformerPathNode(start, null));
-        paths.put(stop, new WordTransformerPathNode(stop, null));
+        WordTransFormerBfsData startData = new WordTransFormerBfsData(start);
+        WordTransFormerBfsData stopData = new WordTransFormerBfsData(stop);
 
-        List<String> result = new ArrayList<>();
-
-        while (!startQueue.isEmpty() || !stopQueue.isEmpty()) {
-            List<String> startPaths = searchLevel(startQueue, startVisited, stopVisited, paths);
-            if (!startPaths.isEmpty()) {
-                result.addAll(startPaths);
-                break;
+        while (!startData.toVisit.isEmpty() || !stopData.toVisit.isEmpty()) {
+            String collision1 = search(startData, stopData, graph);
+            if (collision1 != null) {
+                return merge(startData, stopData, collision1);
             }
-            List<String> stopPaths = searchLevel(stopQueue, stopVisited, startVisited, paths);
-            if (!stopPaths.isEmpty()) {
-                result.addAll(stopPaths);
-                break;
+            String collision2 = search(stopData, startData, graph);
+            if (collision2 != null) {
+                return merge(startData, stopData, collision1);
             }
         }
 
-        if (!result.isEmpty() && result.getFirst().equals(stop)) {
-            return result.reversed();
-        }
-        return result;
+        return null;
     }
 
-    List<String> searchLevel(Queue<WordTransformerGraphNode> queue,
-                       Set<String> visited,
-                       Set<String> oppositeVisited,
-                       Map<String, WordTransformerPathNode> paths) {
-        if (queue.isEmpty()) {
-            return List.of();
+    String search(WordTransFormerBfsData primary,
+                  WordTransFormerBfsData secondary,
+                  Map<String, WordTransformerGraphNode> graph) {
+        if (primary.isFinished()) {
+            return null;
         }
-        WordTransformerGraphNode currentStart = queue.poll();
-        if (!visited.contains(currentStart.val())) {
-            for (WordTransformerGraphNode startS : currentStart.siblings()) {
-                if (oppositeVisited.contains(startS.val())) {
-                    WordTransformerPathNode path1 = paths.get(currentStart.val());
-                    WordTransformerPathNode path2 = paths.get(startS.val());
-                    return merge(path1, path2);
-                }
-                queue.add(startS);
-                visited.add(startS.val());
-                WordTransformerPathNode prev = paths.get(currentStart.val());
-                paths.put(startS.val(), prev);
+        WordTransformerPathNode current = primary.toVisit.poll();
+        if (secondary.visited.containsKey(current.val())) {
+            return current.val();
+        }
+        for (WordTransformerGraphNode next : graph.get(current.val()).siblings()) {
+            if (!primary.visited.containsKey(next.val())) {
+                WordTransformerPathNode pathNode = new WordTransformerPathNode(next.val(), current);
+                primary.toVisit.add(pathNode);
+                primary.visited.put(pathNode.val(), pathNode);
             }
         }
-        return List.of();
+
+        return null;
     }
 
-    List<String> merge(WordTransformerPathNode start, WordTransformerPathNode stop) {
+    List<String> merge(WordTransFormerBfsData startData, WordTransFormerBfsData stopData, String collision) {
         List<String> result = new LinkedList<>();
-        while (start != null) {
-            result.addFirst(start.val());
-            start = start.prev();
-        }
-
-        while(stop != null) {
-            result.add(stop.val());
-            stop = stop.prev();
-        }
-
+        List<String> startList = startData.visited.get(collision).collapseFromStart();
+        List<String> stopList = stopData.visited.get(collision).collapseFromStart();
+        stopList.removeFirst();
+        result.addAll(startList);
+        result.addAll(stopList);
         return result;
     };
 
@@ -115,4 +91,38 @@ public class _17_22WordTransformer {
 
 record WordTransformerGraphNode(String val, Set<WordTransformerGraphNode> siblings) {}
 
-record WordTransformerPathNode(String val, WordTransformerPathNode prev) {}
+record WordTransformerPathNode(String val, WordTransformerPathNode prev) {
+    /* Traverse path and return linked list of nodes. */
+    public List<String> collapseFromStart() {
+        return collapse(List::addFirst);
+    }
+
+    public List<String> collapseFromEnd() {
+        return collapse(List::addLast);
+    }
+
+    private List<String> collapse(BiConsumer<List<String>, String> biConsumer) {
+        List<String> path = new LinkedList<>();
+        WordTransformerPathNode node = this;
+        while (node != null) {
+            biConsumer.accept(path, node.val);
+            node = node.prev();
+        }
+        return path;
+    }
+}
+
+class WordTransFormerBfsData {
+    public Queue<WordTransformerPathNode> toVisit = new LinkedList<>();
+    public Map<String, WordTransformerPathNode> visited = new HashMap<>();
+
+    public WordTransFormerBfsData(String root) {
+        WordTransformerPathNode sourcePath = new WordTransformerPathNode(root, null);
+        toVisit.add(sourcePath);
+        visited.put(root, sourcePath);
+    }
+
+    public boolean isFinished() {
+        return toVisit.isEmpty();
+    }
+}
