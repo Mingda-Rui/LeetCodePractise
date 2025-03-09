@@ -48,15 +48,12 @@ public class L0416PartitionEqualSubsetSum {
 
     private boolean calcMemo(int[] nums, int target) {
         int col = target + 1;
-        boolean[][] memo = new boolean[nums.length + 1][col];
-        memo[0][0] = true;
-        for (int i = 1; i < memo.length; i++) {
-            int curr = nums[i - 1];
-            for (int sum = 0; sum < col; sum++) {
-                int prevCol = i - 1;
-                int prevSum = sum - curr;
-                memo[i][sum] = memo[prevCol][sum] || (prevSum >= 0 && memo[prevCol][prevSum]);
-                if (sum == target && memo[i][sum]) {
+        boolean[] memo = new boolean[col];
+        memo[0] = true;
+        for (int curr: nums) {
+            for (int remain = target; remain >= curr; remain--) {
+                memo[remain] |= memo[remain - curr];
+                if (remain == target && memo[remain]) {
                     return true;
                 }
             }
