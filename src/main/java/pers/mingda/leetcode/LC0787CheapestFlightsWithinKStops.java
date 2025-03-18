@@ -11,7 +11,6 @@ import java.util.Set;
 public class LC0787CheapestFlightsWithinKStops {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         Map<Integer, Set<List<Integer>>> fromCityFlights = buildFlightMap(flights);
-        Map<List<Integer>, Integer> flightPrice = buildPriceMap(flights);
         Map<Integer, Integer> bestPriceToCity = new HashMap<>();
         bestPriceToCity.put(src, 0);
         Queue<Integer> queue = new LinkedList<>();
@@ -20,6 +19,9 @@ public class LC0787CheapestFlightsWithinKStops {
             int size = queue.size();
             Map<Integer, Integer> tempMap = new HashMap<>();
             for (int j = 0; j < size; j++) {
+                if (queue.isEmpty()) {
+                    return bestPriceToCity.getOrDefault(dst, -1);
+                }
                 int from = queue.poll();
                 int fromPrice = bestPriceToCity.get(from);
                 if (!fromCityFlights.containsKey(from)) {
@@ -43,17 +45,6 @@ public class LC0787CheapestFlightsWithinKStops {
         }
 
         return bestPriceToCity.getOrDefault(dst, -1);
-    }
-
-    private Map<List<Integer>, Integer> buildPriceMap(int[][] flights) {
-        Map<List<Integer>, Integer> priceMap = new HashMap<>();
-        for (int[] flight: flights) {
-            int from = flight[0];
-            int to = flight[1];
-            int price = flight[2];
-            priceMap.put(List.of(from, to), price);
-        }
-        return priceMap;
     }
 
     private Map<Integer, Set<List<Integer>>> buildFlightMap(int[][] flights) {
