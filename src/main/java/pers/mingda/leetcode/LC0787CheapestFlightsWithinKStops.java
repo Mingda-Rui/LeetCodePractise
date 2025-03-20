@@ -57,4 +57,33 @@ public class LC0787CheapestFlightsWithinKStops {
         }
         return flightMap;
     }
+
+
+    public int findCheapestPriceBellmanFord(int n, int[][] flights, int src, int dst, int k) {
+        Map<Integer, Integer> cheapestPrice = new HashMap<>();
+        cheapestPrice.put(src, 0);
+        boolean updated = false;
+        while (k >= 0) {
+            updated = false;
+            Map<Integer, Integer> newCheapest = new HashMap<>(cheapestPrice);
+            for (int[] flight: flights) {
+                int city = flight[0];
+                if (!cheapestPrice.containsKey(city)) {
+                    continue;
+                }
+                int next = flight[1];
+                int nextPrice = cheapestPrice.get(city) + flight[2];
+                if (!newCheapest.containsKey(next) || newCheapest.get(next) > nextPrice) {
+                    updated = true;
+                    newCheapest.put(next, nextPrice);
+                }
+            }
+            cheapestPrice = newCheapest;
+            if (!updated) {
+                return cheapestPrice.getOrDefault(dst, -1);
+            }
+            k--;
+        }
+        return cheapestPrice.getOrDefault(dst, -1);
+    }
 }
