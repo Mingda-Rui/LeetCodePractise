@@ -24,4 +24,17 @@ public class LC0309BestTimeToBuyAndSellStockWithCooldown {
         }
         return calcProfit(prices, profitRecord, date + 1);
     }
+
+    public int maxProfitStateMachine(int[] prices) {
+        int hold = Integer.MIN_VALUE;
+        int sold = Integer.MIN_VALUE;;
+        int idel = 0;
+        for (int price : prices) {
+            int prevSold = sold;
+            sold = hold + price;
+            hold = Math.max(hold, idel - price);
+            idel = Math.max(idel, prevSold);
+        }
+        return Math.max(sold, idel);
+    }
 }
