@@ -39,10 +39,10 @@ public class LC0518CoinChangeII {
             for (int a = 1; a <= amount; a++) {
                 int coin = coins[i - 1];
                 int amountLessCoin = a - coin;
-                // same coin case
+                // from same coin
                 int sameCoinCount = amountLessCoin >= 0 ? changeRecord[i][amountLessCoin] : 0;
 
-                //int prevCoinsPlus = amountLessCoin > 0 ? changeRecord[i - 1][amountLessCoin] : 0;
+                // from previous coins
                 int prevCoinsWithout = changeRecord[i - 1][a];
                 changeRecord[i][a] = sameCoinCount + prevCoinsWithout;
             }
