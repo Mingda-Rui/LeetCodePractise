@@ -1,7 +1,5 @@
 package pers.mingda.leetcode;
 
-import java.util.Arrays;
-
 public class LC0097InterleavingString {
     public boolean isInterleave(String s1, String s2, String s3) {
         boolean[][] invalidMemo = new boolean[s1.length() + 1][s2.length() + 1];
@@ -37,7 +35,7 @@ public class LC0097InterleavingString {
             return false;
         }
         boolean[] dp = new boolean[s2.length() + 1];
-        Arrays.fill(dp, true);
+        dp[0] = true;
         for (int i = 0; i <= s1.length(); i++) {
             int index1 = i - 1;
             for (int j = 0; j<= s2.length(); j++) {
@@ -46,17 +44,8 @@ public class LC0097InterleavingString {
                 if (index3 < 0) {
                     continue;
                 }
-                boolean charMatched = false;
-
-                if (index1 >= 0 && s1.charAt(index1) == s3.charAt(index3) && dp[j]) {
-                    dp[j] = true;
-                } else {
-                    dp[j] = false;
-                }
-
-                if (index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1]) {
-                    dp[j] = true;
-                }
+                dp[j] = index1 >= 0 && s1.charAt(index1) == s3.charAt(index3) && dp[j];
+                dp[j] |= index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1];
             }
         }
         return dp[s2.length()];
