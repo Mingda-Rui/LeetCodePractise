@@ -29,24 +29,16 @@ public class LC0518CoinChangeII {
         return count;
     }
 
-
     public int changeIterative(int amount, int[] coins) {
-        int[][] changeRecord = new int[coins.length + 1][amount + 1];
-        for (int i = 0; i <= coins.length; i++) {
-            changeRecord[i][0] = 1;
-        }
+        int[] changeRecord = new int[amount + 1];
+        changeRecord[0] = 1;
         for (int i = 1; i <= coins.length; i++) {
             for (int a = 1; a <= amount; a++) {
-                int coin = coins[i - 1];
-                int amountLessCoin = a - coin;
-                // from same coin
-                int sameCoinCount = amountLessCoin >= 0 ? changeRecord[i][amountLessCoin] : 0;
-
-                // from previous coins
-                int prevCoinsWithout = changeRecord[i - 1][a];
-                changeRecord[i][a] = sameCoinCount + prevCoinsWithout;
+                int amountLessCoin = a - coins[i - 1];
+                int sameCoinCount = amountLessCoin >= 0 ? changeRecord[amountLessCoin] : 0;
+                changeRecord[a] += sameCoinCount;
             }
         }
-        return changeRecord[coins.length][amount];
+        return changeRecord[amount];
     }
 }
