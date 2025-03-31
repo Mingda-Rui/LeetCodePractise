@@ -65,6 +65,25 @@ public class LC0312BurstBalloons {
         int rightMost = right + 1 < nums.length ? nums[right + 1] : 1;
         return leftMost * nums[index] * rightMost;
     }
+
+    public int maxCoinsTabulation(int[] nums) {
+        int len = nums.length;
+        int[][] memo = new int[len][len];
+        for (int left = len - 1; left >= 0; left--) {
+            for (int right = left; right < len; right++) {
+                int max = 0;
+                for (int i = left; i <= right; i++) {
+                    int leftMax = (left > i - 1) ? 0 : memo[left][i - 1];
+                    int rightMax = (i + 1 > right) ? 0 : memo[i + 1][right];
+
+                    int leftEdge = left - 1 >= 0 ? nums[left - 1] : 1;
+                    int rightEdge = right + 1 < len ? nums[right + 1] : 1;
+                    int currentPoints = leftEdge * nums[i] * rightEdge;
+                    max = Math.max(max, leftMax + rightMax + currentPoints);
+                }
+                memo[left][right] = max;
+            }
+        }
+        return memo[0][len - 1];
+    }
 }
-
-
