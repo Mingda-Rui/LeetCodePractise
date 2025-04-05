@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,5 +32,38 @@ public class LC0846HandOfStraights {
             }
         }
         return map.isEmpty();
+    }
+
+    public boolean isNStraightHandOptimalSolution(int[] hand, int groupSize) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num: hand) {
+            int count = map.getOrDefault(num, 0);
+            map.put(num, count + 1);
+        }
+
+        for (int num : hand) {
+            int startNum = num;
+            while (map.containsKey(startNum - 1)) {
+                startNum--;
+            }
+
+            for (int currentNum = startNum; currentNum <= num; currentNum++) {
+                if (!map.containsKey(currentNum)) {
+                    continue;
+                }
+                int count = map.get(currentNum);
+                for (int i = currentNum; i < currentNum + groupSize; i++) {
+                    int oldCount = map.getOrDefault(i, 0);
+                    if (oldCount < count) {
+                        return false;
+                    } else if (oldCount == count) {
+                        map.remove(i);
+                    } else {
+                        map.put(i, oldCount - count);
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
