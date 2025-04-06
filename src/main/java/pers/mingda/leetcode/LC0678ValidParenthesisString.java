@@ -31,4 +31,25 @@ public class LC0678ValidParenthesisString {
         memo[index][openParenthesis] = result ? 1 : -1;
         return result;
     }
+
+    public boolean checkValidStringTabulationSolution(String s) {
+        int len = s.length();
+        boolean[][] memo = new boolean[len + 1][len + 1];
+        memo[len][0] = true;
+        for (int i = len - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            for (int j = 0; j <= len / 2; j++) {
+                boolean leftP = memo[i + 1][j + 1];
+                boolean rightP = j == 0 ? false : memo[i + 1][j - 1];
+                if (c == '(') {
+                    memo[i][j] = leftP;
+                } else if (c == ')') {
+                    memo[i][j] = rightP;
+                } else {
+                    memo[i][j] = memo[i + 1][j] || leftP || rightP;
+                }
+            }
+        }
+        return memo[0][0];
+    }
 }
