@@ -73,21 +73,12 @@ public class LC0678ValidParenthesisString {
             }
         }
 
-        while (!openP.isEmpty()) {
-            int currentOpen = openP.pop();
-            boolean isMatched = false;
-            while (!asterisk.isEmpty()) {
-                int currentAsterisk = asterisk.pop();
-                if (currentAsterisk > currentOpen) {
-                    isMatched = true;
-                    break;
-                }
-            }
-
-            if (!isMatched) {
+        while (!openP.isEmpty() && !asterisk.isEmpty()) {
+            if (openP.pop() > asterisk.pop()) {
                 return false;
             }
         }
-        return true;
+
+        return openP.isEmpty();
     }
 }
