@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC0678ValidParenthesisString {
     public boolean checkValidString(String s) {
         int[][] memo = new int[s.length()][s.length()];
@@ -51,5 +53,41 @@ public class LC0678ValidParenthesisString {
             }
         }
         return memo[0][0];
+    }
+
+    public boolean checkValidStringTwoStackSolution(String s) {
+        Stack<Integer> openP = new Stack<>();
+        Stack<Integer> asterisk = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                openP.push(i);
+            } else if (c == '*') {
+                asterisk.push(i);
+            } else if (!openP.isEmpty()) {
+                openP.pop();
+            } else if (!asterisk.isEmpty()) {
+                asterisk.pop();
+            } else {
+                return false;
+            }
+        }
+
+        while (!openP.isEmpty()) {
+            int currentOpen = openP.pop();
+            boolean isMatched = false;
+            while (!asterisk.isEmpty()) {
+                int currentAsterisk = asterisk.pop();
+                if (currentAsterisk > currentOpen) {
+                    isMatched = true;
+                    break;
+                }
+            }
+
+            if (!isMatched) {
+                return false;
+            }
+        }
+        return true;
     }
 }
