@@ -1,8 +1,15 @@
 package pers.mingda.leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
 public class LC0933NumberOfRecentCalls {
 }
 
@@ -47,8 +54,21 @@ class RecentCounter {
     }
 }
 
-/**
- * Your RecentCounter object will be instantiated and called as such:
- * RecentCounter obj = new RecentCounter();
- * int param_1 = obj.ping(t);
- */
+class RecentCounterSlideWindow {
+    private static final int DURATION_MILLI = 3000;
+    private final Queue<Integer> queue;
+
+    public RecentCounterSlideWindow() {
+        this.queue = new LinkedList<>();
+    }
+
+    public int ping(int t) {
+        queue.offer(t);
+
+        int startT = t - DURATION_MILLI;
+        while (!queue.isEmpty() && queue.peek() < startT) {
+            queue.poll();
+        }
+        return queue.size();
+    }
+}
