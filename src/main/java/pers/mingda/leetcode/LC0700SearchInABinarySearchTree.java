@@ -20,7 +20,7 @@ public class LC0700SearchInABinarySearchTree {
         if (root == null || root.val == val) {
             return root;
         }
-        TreeNode left = searchBST(root.left, val);
-        return left == null ? searchBST(root.right, val) : left;
+
+        return root.val > val ? searchBST(root.left, val) : searchBST(root.right, val);
     }
 }
