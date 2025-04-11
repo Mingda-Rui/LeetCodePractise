@@ -1,23 +1,27 @@
 package pers.mingda.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LC2843CountSymmetricIntegers {
     public int countSymmetricIntegers(int low, int high) {
         int count = 0;
+        Map<Integer, Integer> sumRecord = new HashMap<>();
         for (int num = low; num <= high; num++) {
-            if (checkSymmetric(num)) {
+            if (checkSymmetric(num, sumRecord)) {
                 count++;
             }
         }
         return count;
     }
 
-    private boolean checkSymmetric(int num) {
+    private boolean checkSymmetric(int num, Map<Integer, Integer> sumRecord) {
         int digits = countDigits(num);
         if (digits % 2 != 0) {
             return false;
         }
         int divider = getDivider(digits / 2);
-        return getDigitSum(num % divider) == getDigitSum(num / divider);
+        return getDigitSum(num % divider, sumRecord) == getDigitSum(num / divider, sumRecord);
     }
 
     private int countDigits(int num) {
@@ -29,12 +33,16 @@ public class LC2843CountSymmetricIntegers {
         return count;
     }
 
-    private int getDigitSum(int num) {
+    private int getDigitSum(int num, Map<Integer, Integer> sumRecord) {
+        if (sumRecord.containsKey(num)) {
+            return sumRecord.get(num);
+        }
         int sum = 0;
         while (num != 0) {
             sum += num % 10;
             num /= 10;
         }
+        sumRecord.put(num, sum);
         return sum;
     }
 
