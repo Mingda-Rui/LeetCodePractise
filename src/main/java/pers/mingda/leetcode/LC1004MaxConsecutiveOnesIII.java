@@ -2,28 +2,20 @@ package pers.mingda.leetcode;
 
 public class LC1004MaxConsecutiveOnesIII {
     public int longestOnes(int[] nums, int k) {
-        int maxLen = 0;
-        int zeroCount = 0;
-        int head = 0;
+        int head;
         int tail = 0;
-        while (head < nums.length) {
-            while (head < nums.length && zeroCount <= k) {
-                if (zeroCount == k && nums[head] == 0) {
-                    break;
-                }
-                if (nums[head] == 0) {
-                    zeroCount++;
-                }
-                head++;
+        for (head = 0; head < nums.length; head++) {
+            if (nums[head] == 0) {
+                k--;
             }
-            maxLen = Math.max(maxLen, head - tail);
-            boolean passZero = false;
-            while (!passZero && tail < nums.length && tail <= head) {
-                passZero = nums[tail] == 0;
+
+            if (k < 0) {
+                int offset = nums[tail] == 0 ? 1 : 0;
+                k += offset;
                 tail++;
             }
-            zeroCount--;
         }
-        return maxLen;
+
+        return head - tail;
     }
 }
