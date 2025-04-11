@@ -53,4 +53,25 @@ public class LC2843CountSymmetricIntegers {
         }
         return divider;
     }
+
+    public int countSymmetricIntegersNoBrainer(int low, int high) {
+        int count = 0;
+        int divider = 100;
+        for (int num = low; num <= high; num++) {
+            if ((num >= 10 && num <= 99 && num % 11 == 0)) {
+                count++;
+            } else if (num >= 1000 && equalByDigitSum(num / divider, num % divider)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean equalByDigitSum(int num1, int num2) {
+        return sumByDigit(num1) == sumByDigit(num2);
+    }
+
+    private int sumByDigit(int num) {
+        return num / 10 + num % 10;
+    }
 }
