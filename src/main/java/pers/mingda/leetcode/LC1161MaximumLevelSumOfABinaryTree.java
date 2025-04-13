@@ -23,9 +23,10 @@ public class LC1161MaximumLevelSumOfABinaryTree {
         Queue<TreeNode> queue = new LinkedList<>();
         int maxSum = Integer.MIN_VALUE;
         int maxLevel = 0;
-        int currentLevel = 1;
+        int currentLevel = 0;
         queue.add(root);
         while (!queue.isEmpty()) {
+            currentLevel++;
             int levelSize = queue.size();
             int currentSum = 0;
             for (int i = 0; i < levelSize; i++) {
@@ -37,7 +38,6 @@ public class LC1161MaximumLevelSumOfABinaryTree {
                 maxLevel = currentLevel;
                 maxSum = currentSum;
             }
-            currentLevel++;
         }
         return maxLevel;
     }
