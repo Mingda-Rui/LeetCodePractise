@@ -17,10 +17,6 @@ package pers.mingda.leetcode;
  */
 public class LC0450DeleteNodeInABST {
     public TreeNode deleteNode(TreeNode root, int key) {
-        return deleteNodeHelper(root, key);
-    }
-
-    private TreeNode deleteNodeHelper(TreeNode root, int key) {
         if (root == null) {
             return null;
         }
@@ -29,9 +25,9 @@ public class LC0450DeleteNodeInABST {
             return merge(root.left, root.right);
         }
         if (key > root.val) {
-            root.right = deleteNodeHelper(root.right, key);
+            root.right = deleteNode(root.right, key);
         } else {
-            root.left = deleteNodeHelper(root.left, key);
+            root.left = deleteNode(root.left, key);
         }
         return root;
     }
