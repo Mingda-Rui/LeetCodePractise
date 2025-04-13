@@ -28,16 +28,10 @@ public class LC0450DeleteNodeInABST {
         if (root.val == key) {
             return merge(root.left, root.right);
         }
-
-        TreeNode leftNode = deleteNodeHelper(root.left, key);
-        if (leftNode != root.left) {
-            root.left = leftNode;
-            return root;
-        }
-
-        TreeNode rightNode = deleteNodeHelper(root.right, key);
-        if (rightNode != root.right) {
-            root.right = rightNode;
+        if (key > root.val) {
+            root.right = deleteNodeHelper(root.right, key);
+        } else {
+            root.left = deleteNodeHelper(root.left, key);
         }
         return root;
     }
