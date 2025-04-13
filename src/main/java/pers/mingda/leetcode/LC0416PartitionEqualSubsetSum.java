@@ -2,7 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Arrays;
 
-public class L0416PartitionEqualSubsetSum {
+public class LC0416PartitionEqualSubsetSum {
     public boolean canPartition(int[] nums) {
         int totalSum = sum(nums);
         if (totalSum % 2 != 0) {
