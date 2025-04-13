@@ -17,20 +17,20 @@ package pers.mingda.leetcode;
  */
 public class LC0437PathSumIII {
     public int pathSum(TreeNode root, int targetSum) {
-        return (int)pathSum(root, (long) targetSum, (long) targetSum);
+        return (int) originalSum(root, targetSum);
     }
 
-    private long pathSum(TreeNode root, long originalTarget, long remainingTarget) {
+    private long originalSum(TreeNode root, long originalTarget) {
         if (root == null) {
             return 0;
         }
-        long remains = remainingTarget - ((long) root.val);
+        long remains = originalTarget - ((long) root.val);
 
-        long result = root.val == remainingTarget ? 1 : 0;
+        long result = root.val == originalTarget ? 1 : 0;
         long leftSum = remainingSumPath(root.left, remains);
-        long leftSumWithout = pathSum(root.left, originalTarget, originalTarget);
+        long leftSumWithout = originalSum(root.left, originalTarget);
         long rightSum = remainingSumPath(root.right, remains);
-        long rightSumWithout = pathSum(root.right, originalTarget, originalTarget);
+        long rightSumWithout = originalSum(root.right, originalTarget);
         return result + leftSum + leftSumWithout + rightSum + rightSumWithout;
     }
 
