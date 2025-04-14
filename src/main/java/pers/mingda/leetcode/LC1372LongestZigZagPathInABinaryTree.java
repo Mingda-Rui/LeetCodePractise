@@ -22,11 +22,8 @@ public class LC1372LongestZigZagPathInABinaryTree {
         if (root == null) {
             return 0;
         }
-        int leftZigZag = longestZigZag(root.left, true);
-        int rightZigZag = longestZigZag(root.right, false);
-        int currentMax = Math.max(leftZigZag, rightZigZag);
-        max = Math.max(currentMax, max);
-        return max;
+        int zigZag = longestZigZag(root, true) - 1;
+        return Math.max(max, zigZag);
     }
 
     private int longestZigZag(TreeNode root, boolean fromLeft) {
