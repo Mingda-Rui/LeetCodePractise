@@ -1,5 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -17,31 +20,29 @@ package pers.mingda.leetcode;
  */
 public class LC0437PathSumIII {
     public int pathSum(TreeNode root, int targetSum) {
-        return (int) originalSum(root, targetSum);
+        Map<Long, Integer> record = new HashMap<>();
+        return pathSum(root, targetSum, 0, record);
     }
 
-    private long originalSum(TreeNode root, long originalTarget) {
+    private int pathSum(TreeNode root, long targetSum, long currentSum, Map<Long, Integer> record) {
         if (root == null) {
             return 0;
         }
-        long remains = originalTarget - ((long) root.val);
-
-        long result = root.val == originalTarget ? 1 : 0;
-        long leftSum = remainingSumPath(root.left, remains);
-        long leftSumWithout = originalSum(root.left, originalTarget);
-        long rightSum = remainingSumPath(root.right, remains);
-        long rightSumWithout = originalSum(root.right, originalTarget);
-        return result + leftSum + leftSumWithout + rightSum + rightSumWithout;
-    }
-
-    private long remainingSumPath(TreeNode root, long targetSum) {
-        if (root == null) {
-            return 0;
+        int count = 0;
+        currentSum += root.val;
+        if (currentSum == targetSum) {
+            count++;
         }
-        long remains = targetSum - (long) root.val;
-        long result = root.val == targetSum ? 1 : 0;
-        long leftSum = remainingSumPath(root.left, remains);
-        long rightSum = remainingSumPath(root.right, remains);
-        return result + leftSum + rightSum;
+        long offset = currentSum - targetSum;
+        count += record.getOrDefault(offset, 0);
+
+        int seenTimes = record.getOrDefault(currentSum, 0);
+        record.put(currentSum, seenTimes + 1);
+
+        count += pathSum(root.left, targetSum, currentSum, record);
+        count += pathSum(root.right, targetSum, currentSum, record);
+
+        record.put(currentSum, seenTimes);
+        return count;
     }
 }
