@@ -29,15 +29,15 @@ public class LC1372LongestZigZagPathInABinaryTree {
         return max;
     }
 
-    private int longestZigZag(TreeNode root, boolean isLeft) {
+    private int longestZigZag(TreeNode root, boolean fromLeft) {
         if (root == null) {
             return 0;
         }
 
-        TreeNode continueNode = isLeft ? root.right : root.left;
-        int continueZigZag = longestZigZag(continueNode, !isLeft) + 1;
-        TreeNode newHead = isLeft ? root.left : root.right;
-        int newZigZag = longestZigZag(newHead, isLeft);
+        TreeNode continueNode = fromLeft ? root.right : root.left;
+        int continueZigZag = longestZigZag(continueNode, !fromLeft) + 1;
+        TreeNode newHead = fromLeft ? root.left : root.right;
+        int newZigZag = longestZigZag(newHead, fromLeft);
         max = Math.max(max, newZigZag);
         return continueZigZag;
     }
