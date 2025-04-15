@@ -2,7 +2,9 @@ package pers.mingda.leetcode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class LC0841KeysAndRooms {
@@ -31,5 +33,24 @@ public class LC0841KeysAndRooms {
             }
         }
         visitRoom(rooms, visitedRooms, keys);
+    }
+
+    public boolean canVisitAllRoomsIterative(List<List<Integer>> rooms) {
+        Set<Integer> visitedRooms = new HashSet<>();
+        Queue<Integer> keys = new LinkedList<>();
+
+        visitedRooms.add(0);
+        keys.addAll(rooms.getFirst());
+
+        while(!keys.isEmpty()) {
+            int nextRoom = keys.poll();
+            visitedRooms.add(nextRoom);
+            for (int key: rooms.get(nextRoom)) {
+                if (!visitedRooms.contains(key)) {
+                    keys.add(key);
+                }
+            }
+        }
+        return visitedRooms.size() == rooms.size();
     }
 }
