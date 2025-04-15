@@ -15,17 +15,16 @@ public class LC2095DeleteTheMiddleNodeOfALinkedList {
         if (head.next == null) {
             return null;
         }
-        ListNode slower = head;
         ListNode slow = head;
-        ListNode fast = head;
+        ListNode fast = head.next.next;
         while (fast != null && fast.next != null) {
-            slower = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        slower.next = slow.next;
-        slow.next = null;
+        ListNode toDelete = slow.next;
+        slow.next = toDelete.next;
+        toDelete.next = null;
 
         return head;
     }
