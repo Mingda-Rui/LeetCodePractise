@@ -14,13 +14,19 @@ public class LC0452MinimumNumberOfArrowsToBurstBalloons {
         });
         queue.addAll(Arrays.asList(points));
 
-        int count = 0;
+        if (queue.isEmpty()) {
+            return 0;
+        }
+
+        int count = 1;
+        int prevEnd = queue.peek()[1];
         while (!queue.isEmpty()) {
             int[] currentP = queue.remove();
-            while (!queue.isEmpty() && currentP[1] >= queue.peek()[0]) {
-                int[] p = queue.remove();
+            int currentStart = currentP[0];
+            if (prevEnd < currentStart) {
+                count++;
+                prevEnd = currentP[1];
             }
-            count++;
         }
         return count;
     }
