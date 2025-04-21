@@ -2,6 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class LC0901OnlineStockSpan {
 }
@@ -13,22 +14,22 @@ public class LC0901OnlineStockSpan {
  */
 class StockSpanner {
 
-    List<Integer> prices;
+    Stack<Integer> stack;
+    List<Integer> counter;
 
     public StockSpanner() {
-        this.prices = new ArrayList<>();
+        stack = new Stack<>();
+        counter = new ArrayList<>();
     }
 
     public int next(int price) {
-        prices.add(price);
-        int count = 0;
-        for (int i = prices.size() - 1; i >= 0; i--) {
-            if (prices.get(i) <= price) {
-                count++;
-            } else {
-                return count;
-            }
+        int count = 1;
+        while (!stack.isEmpty() && stack.peek() <= price) {
+            stack.pop();
+            count += counter.removeLast();
         }
+        stack.push(price);
+        counter.add(count);
         return count;
     }
 }
