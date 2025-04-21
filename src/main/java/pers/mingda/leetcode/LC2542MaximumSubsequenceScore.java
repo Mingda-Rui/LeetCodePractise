@@ -11,7 +11,7 @@ public class LC2542MaximumSubsequenceScore {
         for (int i = 0; i < nums1.length; i++) {
             minNums2.add(new Pair<>(nums1[i], nums2[i]));
         }
-        Queue<Integer> maxNum1 = new PriorityQueue<>(k);
+        Queue<Integer> maxNum1 = new PriorityQueue<>(k, Comparator.reverseOrder());
         long currentSum = 0;
         long max = 0;
         for (int i = 0; i < nums2.length; i++) {
