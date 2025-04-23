@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class LC0219ContainsDuplicateII {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        int len = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
