@@ -4,13 +4,13 @@ public class LC0718MaximumLengthOfRepeatedSubarray {
     public int findLength(int[] nums1, int[] nums2) {
         int maxLen = 0;
         for (int i = 0; i < nums1.length; i++) {
-            int maxInDiagnal = diagnalTraverse(nums1, nums2, i, 0);
-            maxLen = Math.max(maxLen, maxInDiagnal);
+            int maxInDiagonal = diagnalTraverse(nums1, nums2, i, 0);
+            maxLen = Math.max(maxLen, maxInDiagonal);
         }
 
         for (int j = 1; j < nums2.length; j++) {
-            int maxInDiagnal = diagnalTraverse(nums1, nums2, 0, j);
-            maxLen = Math.max(maxLen, maxInDiagnal);
+            int maxInDiagonal = diagnalTraverse(nums1, nums2, 0, j);
+            maxLen = Math.max(maxLen, maxInDiagonal);
         }
 
         return maxLen;
