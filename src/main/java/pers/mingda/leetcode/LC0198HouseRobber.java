@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC0198HouseRobber {
     public int rob(int[] nums) {
-        if (nums.length == 1)
-            return nums[0];
+        if (nums.length == 1) return nums[0];
         int[] sum = new int[nums.length];
         sum[0] = nums[0];
         sum[1] = nums[1];
@@ -15,8 +14,7 @@ public class LC0198HouseRobber {
     }
 
     public int robNoArray(int[] nums) {
-        if (nums.length == 1)
-            return nums[0];
+        if (nums.length == 1) return nums[0];
         int prev1 = nums[0];
         int prev2 = nums[1];
         for (int i = 2; i < nums.length; i++) {

@@ -20,8 +20,7 @@ public class LC0907SumOfSubarrayMinimums {
             currentTotal += current;
             result += currentTotal;
         }
-        if (result < Integer.MAX_VALUE)
-            return (int) result;
+        if (result < Integer.MAX_VALUE) return (int) result;
         return (int) (result % 1000000007);
     }
 }

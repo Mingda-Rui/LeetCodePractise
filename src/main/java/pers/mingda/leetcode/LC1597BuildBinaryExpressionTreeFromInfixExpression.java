@@ -2,9 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Stack;
 
-public class LC1597BuildBinaryExpressionTreeFromInfixExpression {
-
-}
+public class LC1597BuildBinaryExpressionTreeFromInfixExpression {}
 
 /**
  * Definition for a binary tree node.
@@ -57,10 +55,8 @@ class LC1597Solution {
         int numOfOpenPare = -1;
         while (s.charAt(start) != ')' || numOfOpenPare != 0) {
             char pare = s.charAt(start);
-            if (pare == ')')
-                numOfOpenPare--;
-            else if (pare == '(')
-                numOfOpenPare++;
+            if (pare == ')') numOfOpenPare--;
+            else if (pare == '(') numOfOpenPare++;
             start++;
         }
 
@@ -69,8 +65,7 @@ class LC1597Solution {
 
     private boolean greaterThanPrevSign(LC1597Node sign, Stack<LC1597Node> stack) {
         // TODO sign check
-        if (stack.isEmpty())
-            return true;
+        if (stack.isEmpty()) return true;
         LC1597Node prevSign = stack.peek();
         int prevLevel = getSignLevel(prevSign);
         int currentLevel = getSignLevel(sign);
@@ -79,10 +74,10 @@ class LC1597Solution {
 
     private int getSignLevel(LC1597Node sign) {
         return switch (sign.val) {
-                case '-', '+' -> 1;
-                case '*', '/' -> 2;
-                case '(', ')' -> 3;
-                default -> 0;
+            case '-', '+' -> 1;
+            case '*', '/' -> 2;
+            case '(', ')' -> 3;
+            default -> 0;
         };
     }
 
@@ -96,15 +91,21 @@ class LC1597Solution {
         }
         return digit;
     }
-
 }
 
 class LC1597Node {
     char val;
     LC1597Node left;
     LC1597Node right;
-    LC1597Node() {this.val = ' ';}
-    LC1597Node(char val) { this.val = val; }
+
+    LC1597Node() {
+        this.val = ' ';
+    }
+
+    LC1597Node(char val) {
+        this.val = val;
+    }
+
     LC1597Node(char val, LC1597Node left, LC1597Node right) {
         this.val = val;
         this.left = left;

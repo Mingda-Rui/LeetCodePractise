@@ -81,7 +81,7 @@ public class LC0056MergeIntervals {
             if (rights[i] != 0) {
                 offset -= rights[i];
                 if (offset != 0) rights[i] = 0;
-                else merged.add(new int[]{previousLegitStart, i});
+                else merged.add(new int[] {previousLegitStart, i});
             }
         }
         return merged.toArray(new int[merged.size()][]);
@@ -91,16 +91,13 @@ public class LC0056MergeIntervals {
         List<int[]> result = new LinkedList<>();
         Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
         Queue<int[]> pQueue = new PriorityQueue<>(comparator);
-        for (int[] interval: intervals)
-            pQueue.add(interval);
+        for (int[] interval : intervals) pQueue.add(interval);
 
         while (!pQueue.isEmpty()) {
             int[] current = pQueue.remove();
             int[] last = result.isEmpty() ? null : result.get(result.size() - 1);
-            if (last == null || last[1] < current[0])
-                result.add(current);
-            else
-                last[1] = Math.max(last[1], current[1]);
+            if (last == null || last[1] < current[0]) result.add(current);
+            else last[1] = Math.max(last[1], current[1]);
         }
         return result.toArray(int[][]::new);
     }
@@ -109,7 +106,7 @@ public class LC0056MergeIntervals {
         List<int[]> result = new LinkedList<>();
         Queue<Integer> startQueue = new PriorityQueue<>();
         Queue<Integer> endQueue = new PriorityQueue<>();
-        for (int[] interval: intervals) {
+        for (int[] interval : intervals) {
             startQueue.add(interval[0]);
             endQueue.add(interval[1]);
         }
@@ -121,21 +118,20 @@ public class LC0056MergeIntervals {
                 startQueue.remove();
                 currentEnd = endQueue.remove();
             }
-            result.add(new int[]{currentStart, currentEnd});
+            result.add(new int[] {currentStart, currentEnd});
         }
         return result.toArray(int[][]::new);
     }
 
     public int[][] mergeArray(int[][] intervals) {
         int max = Integer.MIN_VALUE;
-        for (int[] interval: intervals)
-            max = Math.max(max, interval[1]);
+        for (int[] interval : intervals) max = Math.max(max, interval[1]);
         max++;
 
         List<int[]> result = new LinkedList<>();
         int[] lefts = new int[max];
         int[] rights = new int[max];
-        for (int[] interval: intervals) {
+        for (int[] interval : intervals) {
             lefts[interval[0]]++;
             rights[interval[1]]++;
         }
@@ -143,12 +139,11 @@ public class LC0056MergeIntervals {
         int offset = 0;
         int currentLeft = -1;
         for (int i = 0; i < max; i++) {
-            if (lefts[i] != 0 && currentLeft == -1)
-                currentLeft = i;
+            if (lefts[i] != 0 && currentLeft == -1) currentLeft = i;
             offset += lefts[i];
             offset -= rights[i];
             if (offset == 0 && rights[i] != 0) {
-                result.add(new int[]{currentLeft, i});
+                result.add(new int[] {currentLeft, i});
                 currentLeft = -1;
             }
         }

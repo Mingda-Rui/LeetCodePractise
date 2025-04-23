@@ -4,9 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class LC0295FindMedianFromDataStream {
-
-}
+public class LC0295FindMedianFromDataStream {}
 
 class MedianFinder {
     private Queue<Integer> smallQueue;

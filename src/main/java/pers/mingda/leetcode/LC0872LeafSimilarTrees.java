@@ -20,7 +20,6 @@ public class LC0872LeafSimilarTrees {
      *     }
      * }
      */
-
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
         return Objects.equals(getLeafList(root1), getLeafList(root2));
     }

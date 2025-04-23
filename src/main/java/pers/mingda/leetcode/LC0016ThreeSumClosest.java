@@ -11,18 +11,13 @@ public class LC0016ThreeSumClosest {
             int end = nums.length - 1;
             while (start < end) {
                 int val = nums[i] + nums[start] + nums[end];
-                if (Math.abs(val - target) < Math.abs(closest - target))
-                    closest = val;
-                if (val < target)
-                    start++;
-                else if (val > target)
-                    end--;
-                else
-                    return val;
+                if (Math.abs(val - target) < Math.abs(closest - target)) closest = val;
+                if (val < target) start++;
+                else if (val > target) end--;
+                else return val;
             }
         }
 
         return closest;
     }
 }
-

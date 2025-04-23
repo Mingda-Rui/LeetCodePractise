@@ -7,7 +7,7 @@ import java.util.Queue;
 public class LC0452MinimumNumberOfArrowsToBurstBalloons {
     public int findMinArrowShots(int[][] points) {
         Queue<int[]> queue = new PriorityQueue<>((p1, p2) -> {
-            if(p1[1] == p2[1]) {
+            if (p1[1] == p2[1]) {
                 return 0;
             }
             return p1[1] > p2[1] ? 1 : -1;

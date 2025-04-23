@@ -6,16 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class LC0305NumberOfIslandsII {
-
-}
+public class LC0305NumberOfIslandsII {}
 
 class LC0305Solution {
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         LC0305UnionFind uf = new LC0305UnionFind(m, n);
         List<Integer> result = new LinkedList<>();
 
-        for (int[] pos: positions) {
+        for (int[] pos : positions) {
             List<Integer> posList = Arrays.asList(pos[0], pos[1]);
             int islandNum = uf.LC0305UnionFind(posList);
             result.add(islandNum);
@@ -47,8 +45,7 @@ class LC0305UnionFind {
     private List<Integer> find(List<Integer> pos) {
         while (record.containsKey(pos)) {
             List<Integer> parent = record.get(pos);
-            if (isSame(parent, pos))
-                return parent;
+            if (isSame(parent, pos)) return parent;
             pos = parent;
         }
         return pos;
@@ -58,16 +55,13 @@ class LC0305UnionFind {
         int x = pos.get(0);
         int y = pos.get(1);
         positions[x][y] = 1;
-        if (record.containsKey(pos))
-            return numOfIslands;
+        if (record.containsKey(pos)) return numOfIslands;
         numOfIslands++;
         record.put(pos, pos);
-        for (int[] offset: dir) {
+        for (int[] offset : dir) {
             List<Integer> neigh = Arrays.asList(x + offset[0], y + offset[1]);
-            if (!boundaryCheck(neigh) || !isIsland(neigh))
-                continue;
-            if (union(neigh, pos))
-                numOfIslands--;
+            if (!boundaryCheck(neigh) || !isIsland(neigh)) continue;
+            if (union(neigh, pos)) numOfIslands--;
         }
         return numOfIslands;
     }
@@ -76,8 +70,7 @@ class LC0305UnionFind {
         List<Integer> neighRoot = find(neigh);
         List<Integer> posRoot = find(pos);
 
-        if (isSame(neighRoot, posRoot))
-            return false;
+        if (isSame(neighRoot, posRoot)) return false;
         record.put(posRoot, neighRoot);
         return true;
     }

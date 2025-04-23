@@ -10,7 +10,7 @@ public class LC0076MinimumWindowSubstring {
         int start = 0;
         int[] record = new int[128];
         Map<Character, Integer> map = new HashMap<>();
-        for (char c: t.toCharArray()) {
+        for (char c : t.toCharArray()) {
             record[c]++;
             map.put(c, record[c]);
         }
@@ -21,9 +21,8 @@ public class LC0076MinimumWindowSubstring {
             current[c]++;
             Object val = map.computeIfPresent(c, (k, v) -> v - 1);
 
-            if (val != null && ((int) val) == 0)
-                map.remove(c);
-            while(map.isEmpty()) {
+            if (val != null && ((int) val) == 0) map.remove(c);
+            while (map.isEmpty()) {
                 if (i - start < resultEnd - resultStart) {
                     resultStart = start;
                     resultEnd = i;
@@ -33,19 +32,17 @@ public class LC0076MinimumWindowSubstring {
                 current[charAtStart]--;
                 start++;
                 int offset = record[charAtStart] - current[charAtStart];
-                if (offset > 0)
-                    map.put(charAtStart, offset);
+                if (offset > 0) map.put(charAtStart, offset);
             }
         }
-        return resultEnd == s.length() ? "" : s.substring(resultStart, resultEnd + 1) ;
+        return resultEnd == s.length() ? "" : s.substring(resultStart, resultEnd + 1);
     }
 
     public String minWindowArraySolution(String s, String t) {
         int minLeft = 0;
         int minRight = Integer.MAX_VALUE;
         int[] record = new int[128];
-        for (char c: t.toCharArray())
-            record[c]++;
+        for (char c : t.toCharArray()) record[c]++;
 
         int numOfIncludedChar = 0;
         for (int left = 0, right = 0; right < s.length(); right++) {

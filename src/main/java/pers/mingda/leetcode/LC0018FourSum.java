@@ -13,16 +13,14 @@ public class LC0018FourSum {
     }
 
     private List<List<Integer>> kSum(int[] nums, int start, long target, int k) {
-        if (k == 2)
-            return twoSum(nums, start, target);
+        if (k == 2) return twoSum(nums, start, target);
 
         List<List<Integer>> result = new LinkedList<>();
         for (int i = start; i < nums.length; i++) {
             int val = nums[i];
-            if (i != start && nums[i] == nums[i - 1])
-                continue;
+            if (i != start && nums[i] == nums[i - 1]) continue;
             List<List<Integer>> sums = kSum(nums, i + 1, target - val, k - 1);
-            for (List<Integer> sum: sums) {
+            for (List<Integer> sum : sums) {
                 sum.add(val);
                 result.add(sum);
             }
@@ -43,10 +41,8 @@ public class LC0018FourSum {
                 result.add(list);
                 set.addAll(list);
             }
-            if (val <= target)
-                start++;
-            else
-                end--;
+            if (val <= target) start++;
+            else end--;
         }
         return result;
     }

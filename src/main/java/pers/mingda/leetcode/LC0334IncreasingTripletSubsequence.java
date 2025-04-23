@@ -4,7 +4,7 @@ public class LC0334IncreasingTripletSubsequence {
     public boolean increasingTriplet(int[] nums) {
         int first = Integer.MAX_VALUE;
         int second = Integer.MAX_VALUE;
-        for (int num: nums) {
+        for (int num : nums) {
             if (num <= first) {
                 first = num;
             } else if (num <= second) {

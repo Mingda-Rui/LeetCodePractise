@@ -6,7 +6,7 @@ public class LC0322CoinChange {
         record[0] = 0;
         for (int i = 1; i < amount + 1; i++) {
             record[i] = -1;
-            for (int coin: coins) {
+            for (int coin : coins) {
                 if (i - coin >= 0 && record[i - coin] >= 0) {
                     int fewest = record[i] > 0 ? record[i] : Integer.MAX_VALUE;
                     record[i] = Math.min(fewest, record[i - coin] + 1);

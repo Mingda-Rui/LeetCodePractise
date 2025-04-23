@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC0867TransposeMatrix {
     public int[][] transpose(int[][] matrix) {
-        if (matrix.length == matrix[0].length)
-            return inPlaceTranspose(matrix);
+        if (matrix.length == matrix[0].length) return inPlaceTranspose(matrix);
         int[][] result = new int[matrix[0].length][matrix.length];
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[0].length; j++) {

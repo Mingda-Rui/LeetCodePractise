@@ -1,13 +1,10 @@
 package pers.mingda.leetcode;
 
-public class LC0441ArrangingCoins {
-
-}
+public class LC0441ArrangingCoins {}
 
 class LC0441Solution {
     public int arrangeCoins(int n) {
-        if (n == 1)
-            return 1;
+        if (n == 1) return 1;
         long start = 1;
         long end = n;
 

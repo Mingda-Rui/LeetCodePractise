@@ -10,8 +10,7 @@ public class LC0191NumberOf1Bits {
         int counter = 0;
         int mask = 1;
         for (int i = 0; i < 32; i++) {
-            if ((n & mask) != 0)
-                counter++;
+            if ((n & mask) != 0) counter++;
             mask <<= 1;
         }
         return counter;

@@ -9,12 +9,12 @@ import java.util.TreeMap;
 public class LC0846HandOfStraights {
     public boolean isNStraightHand(int[] hand, int groupSize) {
         Map<Integer, Integer> map = new TreeMap<>();
-        for (int num: hand) {
+        for (int num : hand) {
             int val = map.getOrDefault(num, 0) + 1;
             map.put(num, val);
         }
         List<Integer> list = new ArrayList<>(map.keySet());
-        for (int key: list) {
+        for (int key : list) {
             int count = map.getOrDefault(key, 0);
             if (count == 0) {
                 continue;
@@ -36,7 +36,7 @@ public class LC0846HandOfStraights {
 
     public boolean isNStraightHandOptimalSolution(int[] hand, int groupSize) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int num: hand) {
+        for (int num : hand) {
             int count = map.getOrDefault(num, 0);
             map.put(num, count + 1);
         }

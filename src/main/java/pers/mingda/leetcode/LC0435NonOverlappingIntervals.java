@@ -14,11 +14,8 @@ public class LC0435NonOverlappingIntervals {
             int[] head = intervals[headIndex];
             int[] next = intervals[i];
 
-            if (next[0] < head[1])
-                counter++;
-            if (head[1] <= next[0] || next[1] <= head[1])
-                headIndex = i;
-
+            if (next[0] < head[1]) counter++;
+            if (head[1] <= next[0] || next[1] <= head[1]) headIndex = i;
         }
         return counter;
     }
@@ -31,10 +28,8 @@ public class LC0435NonOverlappingIntervals {
         int prevEnd = intervals[0][1];
         for (int i = 1; i < intervals.length; i++) {
             int[] current = intervals[i];
-            if (current[0] < prevEnd)
-                counter++;
-            else
-                prevEnd = current[1];
+            if (current[0] < prevEnd) counter++;
+            else prevEnd = current[1];
         }
 
         return counter;

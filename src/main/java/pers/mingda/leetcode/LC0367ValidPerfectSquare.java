@@ -14,12 +14,9 @@ public class LC0367ValidPerfectSquare {
             int mid = start + (end - start) / 2;
             int square = mid * mid;
 
-            if (square == num)
-                return true;
-            else if (square > num || mid > limit)
-                end = mid;
-            else
-                start = mid + 1;
+            if (square == num) return true;
+            else if (square > num || mid > limit) end = mid;
+            else start = mid + 1;
         }
         return false;
     }

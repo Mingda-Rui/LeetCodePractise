@@ -17,7 +17,7 @@ public class LC0309BestTimeToBuyAndSellStockWithCooldown {
             int prevProfit = sell >= 2 ? profitRecord[sell - 2] : 0;
             sellProfit = Math.max(sellProfit, currentProfit + prevProfit);
         }
-        int max =  Math.max(holdProfit, sellProfit);
+        int max = Math.max(holdProfit, sellProfit);
         profitRecord[date] = max;
         if (date == prices.length - 1) {
             return max;
@@ -27,7 +27,8 @@ public class LC0309BestTimeToBuyAndSellStockWithCooldown {
 
     public int maxProfitStateMachine(int[] prices) {
         int hold = Integer.MIN_VALUE;
-        int sold = Integer.MIN_VALUE;;
+        int sold = Integer.MIN_VALUE;
+        ;
         int idel = 0;
         for (int price : prices) {
             int prevSold = sold;

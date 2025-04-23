@@ -9,12 +9,10 @@ public class LC1008ConstructBinarySearchTreeFromPreorderTraversal {
         stack.push(root);
         for (int i = 1; i < preorder.length; i++) {
             TreeNode node = new TreeNode(preorder[i]);
-            if (node.val < stack.peek().val)
-                stack.peek().left = node;
+            if (node.val < stack.peek().val) stack.peek().left = node;
             else {
                 TreeNode parent = stack.pop();
-                while (!stack.isEmpty() && node.val > stack.peek().val)
-                    parent = stack.pop();
+                while (!stack.isEmpty() && node.val > stack.peek().val) parent = stack.pop();
                 parent.right = node;
             }
             stack.push(node);
@@ -24,8 +22,7 @@ public class LC1008ConstructBinarySearchTreeFromPreorderTraversal {
 
     public TreeNode bstFromPreorderRecursive(int[] preorder, int[] indexHolder, int max) {
         int index = indexHolder[0] + 1;
-        if (index >= preorder.length || preorder[index] > max)
-            return null;
+        if (index >= preorder.length || preorder[index] > max) return null;
         int val = preorder[index];
         TreeNode node = new TreeNode(preorder[index]);
         indexHolder[0]++;

@@ -9,11 +9,9 @@ public class LC0844BackspaceStringCompare {
         pushStack(sStack, s);
         pushStack(tStack, t);
 
-        if (sStack.size() != tStack.size())
-            return false;
+        if (sStack.size() != tStack.size()) return false;
         while (!sStack.isEmpty()) {
-            if (sStack.pop() != tStack.pop())
-                return false;
+            if (sStack.pop() != tStack.pop()) return false;
         }
         return true;
     }
@@ -21,10 +19,8 @@ public class LC0844BackspaceStringCompare {
     private void pushStack(Stack<Character> stack, String types) {
         for (int i = 0; i < types.length(); i++) {
             char c = types.charAt(i);
-            if (Character.isLetter(c))
-                stack.push(c);
-            else if (!stack.isEmpty())
-                stack.pop();
+            if (Character.isLetter(c)) stack.push(c);
+            else if (!stack.isEmpty()) stack.pop();
         }
     }
 
@@ -35,25 +31,20 @@ public class LC0844BackspaceStringCompare {
         int tBackspaceCount = 0;
         while (sPointer >= 0 || tPointer >= 0) {
             while (sPointer >= 0 && (s.charAt(sPointer) == '#' || sBackspaceCount != 0)) {
-                if (s.charAt(sPointer) == '#')
-                    sBackspaceCount++;
-                else
-                    sBackspaceCount--;
+                if (s.charAt(sPointer) == '#') sBackspaceCount++;
+                else sBackspaceCount--;
                 sPointer--;
             }
             int sCurrent = sPointer >= 0 ? s.charAt(sPointer) : '#';
 
             while (tPointer >= 0 && (t.charAt(tPointer) == '#' || tBackspaceCount != 0)) {
-                if (t.charAt(tPointer) == '#')
-                    tBackspaceCount++;
-                else
-                    tBackspaceCount--;
+                if (t.charAt(tPointer) == '#') tBackspaceCount++;
+                else tBackspaceCount--;
                 tPointer--;
             }
             int tCurrent = tPointer >= 0 ? t.charAt(tPointer) : '#';
 
-            if (sCurrent != tCurrent)
-                return false;
+            if (sCurrent != tCurrent) return false;
             sPointer--;
             tPointer--;
         }

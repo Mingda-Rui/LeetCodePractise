@@ -4,22 +4,18 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
-public class LC0556NextGreaterElementIII {
-
-}
+public class LC0556NextGreaterElementIII {}
 
 class LC0556Solution {
     public int nextGreaterElement(int n) {
         String s = String.valueOf(n);
         Stack<Character> stack = new Stack<>();
         int index = s.length() - 1;
-        while (index >= 0
-               && (stack.isEmpty() || s.charAt(index) >= stack.peek()) ) {
+        while (index >= 0 && (stack.isEmpty() || s.charAt(index) >= stack.peek())) {
             stack.push(s.charAt(index));
             index--;
         }
-        if (index < 0)
-            return -1;
+        if (index < 0) return -1;
         String originalPart = s.substring(0, index);
         int nextGreater = index;
         while (!stack.isEmpty() && s.charAt(index) < stack.peek()) {
@@ -48,16 +44,13 @@ class ArraySolution {
         int len = chars.length;
 
         int swapIndex = len - 2;
-        while (swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1])
-            swapIndex--;
+        while (swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1]) swapIndex--;
 
-        if (swapIndex < 0)
-            return -1;
+        if (swapIndex < 0) return -1;
 
         int nextGreaterIndex = swapIndex;
         char toBeSwapped = chars[swapIndex];
-        while (nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped)
-            nextGreaterIndex++;
+        while (nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped) nextGreaterIndex++;
 
         swap(chars, swapIndex, nextGreaterIndex);
         reverse(chars, swapIndex + 1, len);

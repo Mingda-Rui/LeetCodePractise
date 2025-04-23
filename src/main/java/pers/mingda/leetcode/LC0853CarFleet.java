@@ -9,8 +9,7 @@ public class LC0853CarFleet {
         int counter = 0;
         Comparator<Integer> comparator = Comparator.comparingInt(n -> position[n]);
         Queue<Integer> queue = new PriorityQueue<>(comparator.reversed());
-        for (int i = 0; i < position.length; i++)
-            queue.add(i);
+        for (int i = 0; i < position.length; i++) queue.add(i);
 
         float maxTime = Integer.MIN_VALUE;
         while (!queue.isEmpty()) {

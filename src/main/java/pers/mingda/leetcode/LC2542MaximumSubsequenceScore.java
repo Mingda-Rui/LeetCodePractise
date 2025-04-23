@@ -7,7 +7,8 @@ import org.apache.commons.math3.util.Pair;
 
 public class LC2542MaximumSubsequenceScore {
     public long maxScore(int[] nums1, int[] nums2, int k) {
-        Queue<Pair<Integer, Integer>> minNums2 = new PriorityQueue<>(Comparator.<Pair<Integer, Integer>>comparingInt(Pair::getSecond).reversed());
+        Queue<Pair<Integer, Integer>> minNums2 = new PriorityQueue<>(
+                Comparator.<Pair<Integer, Integer>>comparingInt(Pair::getSecond).reversed());
         for (int i = 0; i < nums1.length; i++) {
             minNums2.add(new Pair<>(nums1[i], nums2[i]));
         }

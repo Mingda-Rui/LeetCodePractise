@@ -7,8 +7,7 @@ public class LC0781RabbitsInForest {
         for (int i = 0; i < answers.length; i++) {
             int num = answers[i] + 1;
             int curVal = record[num];
-            if (curVal % num == 0)
-                total += num;
+            if (curVal % num == 0) total += num;
             record[num]++;
         }
         return total;

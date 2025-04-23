@@ -12,10 +12,8 @@ public class LC0662MaximumWidthOfBinaryTree {
     }
 
     private int widthOfBinaryTree(TreeNode root, int num, int level, List<Integer> min) {
-        if (root == null)
-            return 0;
-        if (level == min.size())
-            min.add(num);
+        if (root == null) return 0;
+        if (level == min.size()) min.add(num);
 
         int leftWidth = widthOfBinaryTree(root.left, num * 2, level + 1, min);
         int rightWidth = widthOfBinaryTree(root.right, num * 2 + 1, level + 1, min);
@@ -36,8 +34,7 @@ public class LC0662MaximumWidthOfBinaryTree {
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.remove();
                 int n = num.remove();
-                if (i == 0)
-                    start = n;
+                if (i == 0) start = n;
                 maxWidth = Math.max(maxWidth, node.val - start + 1);
                 if (node.left != null) {
                     queue.add(node.left);

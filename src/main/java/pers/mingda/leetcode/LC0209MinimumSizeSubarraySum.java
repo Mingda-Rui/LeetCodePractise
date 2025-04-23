@@ -20,19 +20,15 @@ public class LC0209MinimumSizeSubarraySum {
     }
 
     private int binarySearch(int val, int[] nums, int boundary) {
-        if (val == 0)
-            return -1;
+        if (val == 0) return -1;
         int start = 0;
         int end = boundary;
         while (start < end) {
             int mid = start + (end - start) / 2;
             int midVal = nums[mid];
-            if (midVal == val)
-                return mid;
-            else if (midVal < val)
-                start = mid + 1;
-            else
-                end = mid;
+            if (midVal == val) return mid;
+            else if (midVal < val) start = mid + 1;
+            else end = mid;
         }
 
         return start - 1;
@@ -48,8 +44,7 @@ public class LC0209MinimumSizeSubarraySum {
                 currentVal += nums[fast];
                 fast++;
             } else {
-                if (currentVal >= target)
-                    minimal = Math.min(minimal, fast - slow);
+                if (currentVal >= target) minimal = Math.min(minimal, fast - slow);
                 currentVal -= nums[slow];
                 slow++;
             }

@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC0203RemoveLinkedListElements {
     public ListNode removeElements(ListNode head, int val) {
-        if (head == null)
-            return head;
+        if (head == null) return head;
         ListNode newHead = head;
         while (head != null && head.next != null) {
             if (head.val == val) {
@@ -23,12 +22,9 @@ public class LC0203RemoveLinkedListElements {
     }
 
     public ListNode removeElementsRecursive(ListNode head, int val) {
-        if (head == null)
-            return null;
-        if (head.val == val)
-            head = removeElementsRecursive(head.next, val);
-        else
-            head.next = removeElementsRecursive(head.next, val);
+        if (head == null) return null;
+        if (head.val == val) head = removeElementsRecursive(head.next, val);
+        else head.next = removeElementsRecursive(head.next, val);
         return head;
     }
 }

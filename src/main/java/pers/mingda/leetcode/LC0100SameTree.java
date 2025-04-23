@@ -5,10 +5,8 @@ import java.util.Queue;
 
 public class LC0100SameTree {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p == null && q == null)
-            return true;
-        if (p == null || q == null)
-            return false;
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
 
         boolean isSame = p.val == q.val;
         isSame = isSame && isSameTree(p.left, q.left);
@@ -25,8 +23,7 @@ public class LC0100SameTree {
             p = pQueue.poll();
             q = qQueue.poll();
             if (p != null && q != null) {
-                if (p.val != q.val)
-                    return false;
+                if (p.val != q.val) return false;
                 pQueue.add(p.left);
                 qQueue.add(q.left);
                 pQueue.add(p.right);

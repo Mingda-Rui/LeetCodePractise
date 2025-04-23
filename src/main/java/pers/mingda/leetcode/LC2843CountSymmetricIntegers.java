@@ -60,7 +60,7 @@ public class LC2843CountSymmetricIntegers {
         for (int num = low; num <= high; num++) {
             if ((num >= 10 && num <= 99 && num % 11 == 0)) {
                 count++;
-            } else if (num >= 1000 && equalByDigitSum(num / divider, num % divider)){
+            } else if (num >= 1000 && equalByDigitSum(num / divider, num % divider)) {
                 count++;
             }
         }

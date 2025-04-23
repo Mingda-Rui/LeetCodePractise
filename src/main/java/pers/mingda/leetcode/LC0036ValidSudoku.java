@@ -9,11 +9,9 @@ public class LC0036ValidSudoku {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 int subBoxNum = calcSubBoxNum(i, j);
-                if (board[i][j] == '.')
-                    continue;
+                if (board[i][j] == '.') continue;
                 int val = board[i][j] - '1';
-                if (row[i][val] || column[j][val] || subBox[subBoxNum][val])
-                    return false;
+                if (row[i][val] || column[j][val] || subBox[subBoxNum][val]) return false;
 
                 row[i][val] = true;
                 column[j][val] = true;

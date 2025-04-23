@@ -38,10 +38,8 @@ public class LC1124LongestWellPerformingInterval {
         int max = 0;
         for (int i = 0; i < hours.length; i++) {
             int hour = hours[i];
-            if (hour > 8)
-                current++;
-            else
-                current--;
+            if (hour > 8) current++;
+            else current--;
 
             record[i] = current;
             if (current < 1) {
@@ -54,7 +52,6 @@ public class LC1124LongestWellPerformingInterval {
             } else {
                 max = Math.max(max, i + 1);
             }
-
         }
         return max;
     }
@@ -66,14 +63,12 @@ public class LC1124LongestWellPerformingInterval {
         for (int i = 0; i < hours.length; i++) {
             int hour = hours[i];
             score += hour > 8 ? 1 : -1;
-            if (score > 0)
-                result = i + 1;
+            if (score > 0) result = i + 1;
             else {
                 map.putIfAbsent(score, i);
                 int start = map.getOrDefault(score - 1, i);
                 result = Math.max(result, i - start);
             }
-
         }
         return result;
     }
@@ -91,10 +86,8 @@ public class LC1124LongestWellPerformingInterval {
             if (sum < 0) {
                 result = i + 1;
             } else {
-                if (nt.size() > sum + 1)
-                    result = Math.max(result, i - nt.get(sum + 1));
-                if (nt.size() < sum + 1)
-                    nt.add(i);
+                if (nt.size() > sum + 1) result = Math.max(result, i - nt.get(sum + 1));
+                if (nt.size() < sum + 1) nt.add(i);
             }
         }
         return result;
@@ -117,10 +110,8 @@ public class LC1124LongestWellPerformingInterval {
                     numOfRelaxDay = netRelaxDay;
                     record[numOfRelaxDay] = i;
                 }
-                if (netRelaxDay + 1 <= numOfRelaxDay)
-                    result = Math.max(result, i - record[netRelaxDay + 1]);
+                if (netRelaxDay + 1 <= numOfRelaxDay) result = Math.max(result, i - record[netRelaxDay + 1]);
             }
-
         }
 
         return result;

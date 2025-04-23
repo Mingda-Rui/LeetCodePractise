@@ -2,14 +2,11 @@ package pers.mingda.leetcode;
 
 public class LC0029DivideTwoIntegers {
     public int divide(int dividend, int divisor) {
-        if (dividend == 0)
-            return 0;
-        else if (divisor == 1)
-            return dividend;
-        else if (divisor == -1)
-            return dividend == Integer.MIN_VALUE ? Integer.MAX_VALUE : -dividend;
-        long dividendL =  Math.abs((long)dividend);
-        long divisorL = Math.abs((long)divisor);
+        if (dividend == 0) return 0;
+        else if (divisor == 1) return dividend;
+        else if (divisor == -1) return dividend == Integer.MIN_VALUE ? Integer.MAX_VALUE : -dividend;
+        long dividendL = Math.abs((long) dividend);
+        long divisorL = Math.abs((long) divisor);
         int positiveResult = (int) binarySearch(dividendL, divisorL);
         boolean isSameSign = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
         return isSameSign ? positiveResult : -positiveResult;
@@ -29,12 +26,9 @@ public class LC0029DivideTwoIntegers {
                 sum += mid;
             }
 
-            if (counter == divisor && sum == dividend)
-                return mid;
-            else if (counter < divisor)
-                end = mid;
-            else
-                start = mid + 1;
+            if (counter == divisor && sum == dividend) return mid;
+            else if (counter < divisor) end = mid;
+            else start = mid + 1;
         }
         return mid;
     }

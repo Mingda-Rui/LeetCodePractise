@@ -45,8 +45,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
 
     private TreeNode deserializeRecursive(Queue<TreeNode> curr, String[] vals, int index) {
         TreeNode node = curr.poll();
-        if (index >= vals.length)
-            return node;
+        if (index >= vals.length) return node;
         if (node != null) {
             node.left = getNode(vals, index);
             index++;
@@ -60,11 +59,9 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     }
 
     private TreeNode getNode(String[] vals, int index) {
-        if (index >= vals.length)
-            return null;
+        if (index >= vals.length) return null;
         String val = vals[index];
-        if (val.equals("null"))
-            return null;
+        if (val.equals("null")) return null;
         int intVal = Integer.parseInt(val);
         return new TreeNode(intVal);
     }
@@ -76,8 +73,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     }
 
     private void serializePreorder(TreeNode root, StringBuilder sb) {
-        if (root == null)
-            sb.append("#,");
+        if (root == null) sb.append("#,");
         else {
             sb.append(root.val).append(",");
             serializePreorder(root.left, sb);
@@ -95,8 +91,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
         int index = indexHolder[0];
         indexHolder[0]++;
         String val = arr[index];
-        if (val.equals("#"))
-            return null;
+        if (val.equals("#")) return null;
         int num = Integer.parseInt(val);
         TreeNode root = new TreeNode(num);
         root.left = deserializePreorder(arr, indexHolder);
@@ -129,17 +124,14 @@ public class LC0297SerializeAndDeserializeBinaryTree {
             root.left = createNode(arr[i]);
             i++;
             root.right = createNode(arr[i]);
-            if (root.left != null)
-                queue.offer(root.left);
-            if (root.right != null)
-                queue.offer(root.right);
+            if (root.left != null) queue.offer(root.left);
+            if (root.right != null) queue.offer(root.right);
         }
         return result;
     }
 
     private TreeNode createNode(String val) {
-        if (val.equals("#") || val.isEmpty())
-            return null;
+        if (val.equals("#") || val.isEmpty()) return null;
         int intVal = Integer.parseInt(val);
         return new TreeNode(intVal);
     }
@@ -171,8 +163,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
             if (stack.peek() == null) {
                 stack.pop();
                 stack.pop().right = node;
-            } else
-                stack.peek().left = node;
+            } else stack.peek().left = node;
             stack.push(node);
         }
         return result;

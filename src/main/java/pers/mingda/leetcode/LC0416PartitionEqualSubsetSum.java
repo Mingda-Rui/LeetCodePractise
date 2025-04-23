@@ -50,7 +50,7 @@ public class LC0416PartitionEqualSubsetSum {
         int col = target + 1;
         boolean[] memo = new boolean[col];
         memo[0] = true;
-        for (int curr: nums) {
+        for (int curr : nums) {
             for (int remain = target; remain >= curr; remain--) {
                 memo[remain] |= memo[remain - curr];
                 if (remain == target && memo[remain]) {

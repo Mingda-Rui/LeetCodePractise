@@ -9,12 +9,9 @@ public class LC0704BinarySearch {
         while (start < end) {
             mid = start + (end - start) / 2;
             int val = nums[mid];
-            if (val == target)
-                return mid;
-            else if (val < target)
-                start = mid + 1;
-            else if (val > target)
-                end = mid;
+            if (val == target) return mid;
+            else if (val < target) start = mid + 1;
+            else if (val > target) end = mid;
         }
         return -1;
     }

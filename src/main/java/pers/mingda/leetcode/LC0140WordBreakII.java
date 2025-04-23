@@ -3,9 +3,7 @@ package pers.mingda.leetcode;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC0140WordBreakII {
-
-}
+public class LC0140WordBreakII {}
 
 class LC0140Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
@@ -42,11 +40,10 @@ class LC0140Solution {
 
     private LC0140Trie buildLC0140Trie(List<String> wordDict) {
         LC0140Trie LC0140Trie = new LC0140Trie(' ');
-        for (String word: wordDict) {
+        for (String word : wordDict) {
             LC0140Trie current = LC0140Trie;
-            for (char letter: word.toCharArray()) {
-                if (current.next[letter] == null)
-                    current.next[letter] = new LC0140Trie(letter);
+            for (char letter : word.toCharArray()) {
+                if (current.next[letter] == null) current.next[letter] = new LC0140Trie(letter);
                 current = current.next[letter];
             }
             current.isWord = true;
@@ -55,11 +52,10 @@ class LC0140Solution {
     }
 
     private void buildSentences(List<List<String>> result, List<String> sentences) {
-        for (List<String> words: result) {
+        for (List<String> words : result) {
             StringBuilder sb = new StringBuilder();
-            for (String word: words) {
-                if (!sb.isEmpty())
-                    sb.append(" ");
+            for (String word : words) {
+                if (!sb.isEmpty()) sb.append(" ");
                 sb.append(word);
             }
 
@@ -73,6 +69,7 @@ class LC0140Trie {
     char c;
     LC0140Trie[] next;
     boolean isWord;
+
     public LC0140Trie(char c) {
         this.c = c;
         this.isWord = false;

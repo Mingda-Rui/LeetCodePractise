@@ -7,10 +7,8 @@ public class LC0082RemoveDuplicatesFromSortedListII {
         ListNode pointer = head;
         while (pointer != null) {
             if (pointer.next == null || pointer.val != pointer.next.val) {
-                if (prev.next != pointer)
-                    prev.next = pointer.next;
-                else
-                    prev = prev.next;
+                if (prev.next != pointer) prev.next = pointer.next;
+                else prev = prev.next;
             }
             pointer = pointer.next;
         }
@@ -18,13 +16,10 @@ public class LC0082RemoveDuplicatesFromSortedListII {
     }
 
     public ListNode deleteDuplicatesRecursive(ListNode head) {
-        if (head == null || head.next == null)
-            return head;
+        if (head == null || head.next == null) return head;
         if (head.val == head.next.val) {
-            if (head.next.next != null && head.next.next.val == head.val)
-                head = deleteDuplicates(head.next);
-            else
-                head = deleteDuplicates(head.next.next);
+            if (head.next.next != null && head.next.next.val == head.val) head = deleteDuplicates(head.next);
+            else head = deleteDuplicates(head.next.next);
         } else {
             head.next = deleteDuplicates(head.next);
         }

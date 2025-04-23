@@ -31,7 +31,7 @@ public class LC0443StringCompression {
         }
         List<Character> duplicates = new ArrayList<>();
         while (sameCharCount != 0) {
-            char c = (char)((sameCharCount % 10) + '0');
+            char c = (char) ((sameCharCount % 10) + '0');
             duplicates.addFirst(c);
             sameCharCount /= 10;
         }

@@ -3,9 +3,7 @@ package pers.mingda.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC0146LruCache {
-
-}
+public class LC0146LruCache {}
 
 class LRUCache {
     private DoubleLinkedNode head;
@@ -33,14 +31,12 @@ class LRUCache {
             refreshKey(key, value);
         } else {
             DoubleLinkedNode node = new DoubleLinkedNode(key, value);
-            if (map.isEmpty())
-                head = node;
+            if (map.isEmpty()) head = node;
             map.put(key, node);
             addToTail(node);
         }
 
-        if (map.size() > capacity)
-            removeHead();
+        if (map.size() > capacity) removeHead();
     }
 
     private void refreshKey(int key, int value) {
@@ -63,19 +59,14 @@ class LRUCache {
     private void removeNode(DoubleLinkedNode node) {
         DoubleLinkedNode prev = node.prev;
         DoubleLinkedNode next = node.next;
-        if (prev != null)
-            prev.next = next;
-        if (next != null)
-            next.prev = prev;
-        if (head == node && next != null)
-            head = next;
-        if (tail == node && prev != null)
-            tail = prev;
+        if (prev != null) prev.next = next;
+        if (next != null) next.prev = prev;
+        if (head == node && next != null) head = next;
+        if (tail == node && prev != null) tail = prev;
     }
 
     private void addToTail(DoubleLinkedNode node) {
-        if (tail != null)
-            tail.next = node;
+        if (tail != null) tail.next = node;
         node.prev = tail;
         node.next = null;
         tail = node;

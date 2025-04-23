@@ -8,14 +8,13 @@ public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
     public TreeNode buildTreeRecursive(int[] inorder, int[] postorder) {
         int[] postIndexHolder = {postorder.length - 1};
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++)
-            map.put(inorder[i], i);
+        for (int i = 0; i < inorder.length; i++) map.put(inorder[i], i);
         return buildTree(inorder, 0, inorder.length, postorder, postIndexHolder, map);
     }
 
-    private TreeNode buildTree(int[] inorder, int start, int end, int[] postorder, int[] postIndexHolder, Map<Integer, Integer> map) {
-        if (start + 1 > end)
-            return null;
+    private TreeNode buildTree(
+            int[] inorder, int start, int end, int[] postorder, int[] postIndexHolder, Map<Integer, Integer> map) {
+        if (start + 1 > end) return null;
         else if (start + 1 == end) {
             int val = inorder[start];
             postIndexHolder[0]--;
@@ -34,20 +33,17 @@ public class LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal {
 
     public TreeNode buildTreeIterative(int[] inorder, int[] postorder) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++)
-            map.put(inorder[i], i);
+        for (int i = 0; i < inorder.length; i++) map.put(inorder[i], i);
         Stack<TreeNode> stack = new Stack<>();
         TreeNode rootPointer = null;
         for (int i = postorder.length - 1; i >= 0; i--) {
             int rootVal = postorder[i];
             TreeNode root = new TreeNode(rootVal);
-            if (i == postorder.length - 1)
-                rootPointer = root;
+            if (i == postorder.length - 1) rootPointer = root;
             int inorderIndex = map.get(rootVal);
             if (!stack.isEmpty()) {
                 TreeNode parent = stack.peek();
-                if (map.get(parent.val) < inorderIndex)
-                    parent.right = root;
+                if (map.get(parent.val) < inorderIndex) parent.right = root;
                 else {
                     do parent = stack.pop();
                     while (!stack.isEmpty() && map.get(stack.peek().val) > inorderIndex);

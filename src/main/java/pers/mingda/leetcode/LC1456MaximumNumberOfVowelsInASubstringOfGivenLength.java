@@ -22,7 +22,6 @@ public class LC1456MaximumNumberOfVowelsInASubstringOfGivenLength {
                 tail++;
             }
             maxCount = Math.max(maxCount, currentCount);
-
         }
         return maxCount;
     }

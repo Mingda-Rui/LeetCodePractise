@@ -8,8 +8,7 @@ public class LC0463IslandPerimeter {
         int perimeter = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == 1)
-                    perimeter += countWaterSides(grid, i, j);
+                if (grid[i][j] == 1) perimeter += countWaterSides(grid, i, j);
             }
         }
         return perimeter;
@@ -17,11 +16,10 @@ public class LC0463IslandPerimeter {
 
     private int countWaterSides(int[][] grid, int x, int y) {
         int count = 4;
-        for (int[] dir: dirs) {
+        for (int[] dir : dirs) {
             int neighX = x + dir[0];
             int neighY = y + dir[1];
-            if (boardCheck(grid, neighX, neighY) && grid[neighX][neighY] == 1)
-                count -= 2;
+            if (boardCheck(grid, neighX, neighY) && grid[neighX][neighY] == 1) count -= 2;
         }
         return count;
     }

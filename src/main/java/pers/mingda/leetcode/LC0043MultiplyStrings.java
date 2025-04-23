@@ -17,7 +17,7 @@ public class LC0043MultiplyStrings {
                 int digitJ = toInt(num2.charAt(j));
                 int posResult = posI + posJ;
                 int result = digitI * digitJ + carry + toInt(sb.charAt(posResult));
-                //System.out.println(result + ":" + toChar(result % 10));
+                // System.out.println(result + ":" + toChar(result % 10));
                 sb.setCharAt(posResult, toChar(result % 10));
                 carry = result / 10;
             }

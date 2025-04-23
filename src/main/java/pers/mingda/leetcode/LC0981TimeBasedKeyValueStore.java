@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LC0981TimeBasedKeyValueStore {
-
-}
+public class LC0981TimeBasedKeyValueStore {}
 
 class TimeMap {
 
@@ -25,8 +23,7 @@ class TimeMap {
     }
 
     public String get(String key, int timestamp) {
-        if (!map.containsKey(key))
-            return "";
+        if (!map.containsKey(key)) return "";
         Map.Entry<Integer, String> tsVal = map.get(key).floorEntry(timestamp);
         return tsVal == null ? "" : tsVal.getValue();
     }
@@ -47,8 +44,7 @@ class TimeMapBinarySearchSolution {
     }
 
     public String get(String key, int timestamp) {
-        if (!map.containsKey(key))
-            return "";
+        if (!map.containsKey(key)) return "";
         List<TimestampedValue> timestamps = map.get(key);
         TimestampedValue tsVal = findFloor(timestamps, timestamp);
         return tsVal == null ? "" : tsVal.value;
@@ -65,10 +61,8 @@ class TimeMapBinarySearchSolution {
         }
         int mid = start + (end - start) / 2;
         TimestampedValue tsVal = timestamps.get(mid);
-        if (tsVal.timestamp < timestamp)
-            return findFloor(timestamps, mid, end, timestamp);
-        else if (tsVal.timestamp > timestamp)
-            return findFloor(timestamps, start, mid, timestamp);
+        if (tsVal.timestamp < timestamp) return findFloor(timestamps, mid, end, timestamp);
+        else if (tsVal.timestamp > timestamp) return findFloor(timestamps, start, mid, timestamp);
         return tsVal;
     }
 }

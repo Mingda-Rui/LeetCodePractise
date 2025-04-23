@@ -3,16 +3,14 @@ package pers.mingda.leetcode;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC0271EncodeAndDecodeStrings {
-
-}
+public class LC0271EncodeAndDecodeStrings {}
 
 class LC0271Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
         StringBuilder sb = new StringBuilder();
-        for (String str: strs) {
+        for (String str : strs) {
             String encodedStr = str.replace("#", "##");
             sb.append(encodedStr).append("@#@");
         }
@@ -26,7 +24,7 @@ class LC0271Codec {
         List<String> result = new LinkedList<>();
         String[] strs = s.split("@#@", -1);
 
-        for (String str: strs) {
+        for (String str : strs) {
             String decodedStr = str.replace("##", "#");
             result.add(decodedStr);
         }

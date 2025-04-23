@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC0478GenerateRandomPointInACircle {
-
-}
+public class LC0478GenerateRandomPointInACircle {}
 
 class LC0478Solution {
 
@@ -41,7 +39,6 @@ class LC0478Solution {
  * Solution obj = new Solution(radius, x_center, y_center);
  * double[] param_1 = obj.randPoint();
  */
-
 class LC0478RadianSolution {
 
     private double radius;
@@ -57,7 +54,7 @@ class LC0478RadianSolution {
     public double[] randPoint() {
         double radian = generateRandom(0, 2 * Math.PI);
 
-        double random = generateRandom(0, 1) ;
+        double random = generateRandom(0, 1);
         double hypotenuse = Math.sqrt(random) * radius;
         double x = Math.cos(radian) * hypotenuse;
         double y = Math.sin(radian) * hypotenuse;

@@ -15,8 +15,7 @@ public class LC0067AddBinary {
             int digit = sum % 2;
             sb.append(digit);
         }
-        if (carry > 0)
-            sb.append(carry);
+        if (carry > 0) sb.append(carry);
         return sb.reverse().toString();
     }
 }

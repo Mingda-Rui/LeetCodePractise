@@ -8,14 +8,13 @@ import java.util.Stack;
 
 public class LC0124BinaryTreeMaximumPathSum {
     public int maxPathSum(TreeNode root) {
-        int[] maxHolder = new int[]{Integer.MIN_VALUE};
+        int[] maxHolder = new int[] {Integer.MIN_VALUE};
         maxPathSumRecursive(root, maxHolder);
         return maxHolder[0];
     }
 
     private int maxPathSumRecursive(TreeNode root, int[] maxHolder) {
-        if (root == null)
-            return 0;
+        if (root == null) return 0;
         int left = maxPathSumRecursive(root.left, maxHolder);
         left = Math.max(left, 0);
         int right = maxPathSumRecursive(root.right, maxHolder);

@@ -4,9 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class LC0004MedianOfTwoSortedArrays {
-
-}
+public class LC0004MedianOfTwoSortedArrays {}
 
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -18,11 +16,10 @@ class Solution {
             return ((double) lowerQueue.poll() + (double) higherQueue.poll()) / 2;
         }
         return (double) lowerQueue.poll();
-
     }
 
     private void enqueue(int[] nums, Queue<Integer> lowerQueue, Queue<Integer> higherQueue) {
-        for (int num: nums) {
+        for (int num : nums) {
             if (lowerQueue.size() == higherQueue.size()) {
                 higherQueue.offer(num);
                 int tmp = higherQueue.poll();

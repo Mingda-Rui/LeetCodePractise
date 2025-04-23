@@ -16,10 +16,10 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
         Map<String, Integer> ingredMap = new HashMap<>();
         Map<String, Set<String>> cookableMap = new HashMap<>();
 
-        for (int i = 0; i <  recipes.length; i++) {
+        for (int i = 0; i < recipes.length; i++) {
             String recipe = recipes[i];
             List<String> ingreds = ingredients.get(i);
-            for (String ingredient: ingreds) {
+            for (String ingredient : ingreds) {
                 cookableMap.putIfAbsent(ingredient, new HashSet<>());
                 cookableMap.get(ingredient).add(recipe);
             }
@@ -27,13 +27,12 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
         }
 
         Queue<String> supplyQueue = new LinkedList<>();
-        for (String supply: supplies)
-            supplyQueue.add(supply);
+        for (String supply : supplies) supplyQueue.add(supply);
         while (!supplyQueue.isEmpty()) {
             String supply = supplyQueue.remove();
 
             Set<String> cookables = cookableMap.getOrDefault(supply, Collections.emptySet());
-            for (String cookable: cookables) {
+            for (String cookable : cookables) {
                 ingredMap.computeIfPresent(cookable, (k, v) -> v - 1);
                 if (ingredMap.getOrDefault(cookable, -1) == 0) {
                     supplyQueue.add(cookable);
@@ -56,22 +55,18 @@ public class LC2115FindAllPossibleRecipesFromGivenSupplies {
         }
         Set<String> visited = new HashSet<>();
 
-        for (String recipe: recipes)
-            if (findRecipe(recipe, ingredMap, supplySet, visited))
-                result.add(recipe);
+        for (String recipe : recipes) if (findRecipe(recipe, ingredMap, supplySet, visited)) result.add(recipe);
 
         return result;
     }
 
-    private boolean findRecipe(String recipe, Map<String, Set<String>> ingredMap, Set<String> supplySet, Set<String> visited) {
-        if (supplySet.contains(recipe))
-            return true;
-        if (visited.contains(recipe) || !ingredMap.containsKey(recipe))
-            return false;
+    private boolean findRecipe(
+            String recipe, Map<String, Set<String>> ingredMap, Set<String> supplySet, Set<String> visited) {
+        if (supplySet.contains(recipe)) return true;
+        if (visited.contains(recipe) || !ingredMap.containsKey(recipe)) return false;
         visited.add(recipe);
-        for (String ingred: ingredMap.get(recipe))
-            if (!supplySet.contains(ingred) && !findRecipe(ingred, ingredMap, supplySet, visited))
-                return false;
+        for (String ingred : ingredMap.get(recipe))
+            if (!supplySet.contains(ingred) && !findRecipe(ingred, ingredMap, supplySet, visited)) return false;
 
         supplySet.add(recipe);
         visited.remove(recipe);

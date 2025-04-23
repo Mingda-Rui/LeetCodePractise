@@ -7,8 +7,7 @@ import java.util.Stack;
 public class LC0589NAryTreePreorderTraversal {
     public List<Integer> preorder(LC0589Node root) {
         List<Integer> result = new LinkedList<>();
-        if (root == null)
-            return result;
+        if (root == null) return result;
 
         Stack<LC0589Node> stack = new Stack<>();
         stack.push(root);
@@ -17,9 +16,7 @@ public class LC0589NAryTreePreorderTraversal {
             result.add(current.val);
 
             List<LC0589Node> children = current.children;
-            for (int i = children.size() - 1; i >= 0; i--)
-                stack.push(children.get(i));
-
+            for (int i = children.size() - 1; i >= 0; i--) stack.push(children.get(i));
         }
         return result;
     }
@@ -30,12 +27,10 @@ public class LC0589NAryTreePreorderTraversal {
     }
 
     private List<Integer> preorderRecursive(LC0589Node root, List<Integer> result) {
-        if (root == null)
-            return result;
+        if (root == null) return result;
         result.add(root.val);
 
-        for (LC0589Node child: root.children)
-            preorderRecursive(child, result);
+        for (LC0589Node child : root.children) preorderRecursive(child, result);
         return result;
     }
 }

@@ -10,10 +10,8 @@ public class LC0092ReverseLinkedListII {
         int counter = 1;
 
         while (head != null && counter <= right) {
-            if (counter == left)
-                leftNode = head;
-            if (counter >= left)
-                stack.push(head.val);
+            if (counter == left) leftNode = head;
+            if (counter >= left) stack.push(head.val);
             head = head.next;
             counter++;
         }
@@ -32,8 +30,7 @@ public class LC0092ReverseLinkedListII {
     }
 
     private ListNode reverse(ListNode head, int left, int right, int counter, ListNode[] tailHolder) {
-        if (head == null)
-            return head;
+        if (head == null) return head;
         if (counter < left || counter >= right) {
             head.next = reverse(head.next, left, right, counter + 1, tailHolder);
             tailHolder[0] = head;

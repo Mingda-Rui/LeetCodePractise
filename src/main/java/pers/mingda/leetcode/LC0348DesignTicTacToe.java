@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC0348DesignTicTacToe {
-
-}
+public class LC0348DesignTicTacToe {}
 
 class TicTacToe {
 
@@ -24,20 +22,18 @@ class TicTacToe {
         int playerCode = getPlayCode(player);
         rowRecord[row] += playerCode;
         columnRecord[col] += playerCode;
-        if (row == col)
-            diagRecord += playerCode;
-        if (row + col == n - 1)
-            antiDiagRecord += playerCode;
-        if (Math.abs(rowRecord[row]) == n || Math.abs(columnRecord[col]) == n || Math.abs(diagRecord) == n || Math.abs(antiDiagRecord) == n)
-            return player;
+        if (row == col) diagRecord += playerCode;
+        if (row + col == n - 1) antiDiagRecord += playerCode;
+        if (Math.abs(rowRecord[row]) == n
+                || Math.abs(columnRecord[col]) == n
+                || Math.abs(diagRecord) == n
+                || Math.abs(antiDiagRecord) == n) return player;
         return 0;
     }
 
     private int getPlayCode(int play) {
-        if (play == 1)
-            return 1;
-        else
-            return -1;
+        if (play == 1) return 1;
+        else return -1;
     }
 }
 

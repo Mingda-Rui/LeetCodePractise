@@ -27,7 +27,7 @@ public class LC0841KeysAndRooms {
         keys.removeFirst();
 
         visitedRooms.add(nextRoom);
-        for (int key: rooms.get(nextRoom)) {
+        for (int key : rooms.get(nextRoom)) {
             if (!visitedRooms.contains(key)) {
                 keys.add(key);
             }
@@ -42,10 +42,10 @@ public class LC0841KeysAndRooms {
         visitedRooms.add(0);
         keys.addAll(rooms.getFirst());
 
-        while(!keys.isEmpty()) {
+        while (!keys.isEmpty()) {
             int nextRoom = keys.poll();
             visitedRooms.add(nextRoom);
-            for (int key: rooms.get(nextRoom)) {
+            for (int key : rooms.get(nextRoom)) {
                 if (!visitedRooms.contains(key)) {
                     keys.add(key);
                 }

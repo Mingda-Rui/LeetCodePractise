@@ -3,9 +3,7 @@ package pers.mingda.leetcode;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class LC0346MovingAverageFromDataStream {
-
-}
+public class LC0346MovingAverageFromDataStream {}
 
 class MovingAverage {
     Queue<Integer> queue;

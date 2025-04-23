@@ -28,7 +28,9 @@ public class LC0678ValidParenthesisString {
         } else if (c == ')') {
             result |= checkValidString(s, index + 1, openParenthesis - 1, memo);
         } else {
-            result |= (checkValidString(s, index + 1, openParenthesis, memo) || checkValidString(s, index + 1, openParenthesis + 1, memo) || checkValidString(s, index + 1, openParenthesis - 1, memo));
+            result |= (checkValidString(s, index + 1, openParenthesis, memo)
+                    || checkValidString(s, index + 1, openParenthesis + 1, memo)
+                    || checkValidString(s, index + 1, openParenthesis - 1, memo));
         }
         memo[index][openParenthesis] = result ? 1 : -1;
         return result;

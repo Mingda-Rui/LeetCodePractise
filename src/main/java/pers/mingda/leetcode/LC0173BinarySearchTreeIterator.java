@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class LC0173BinarySearchTreeIterator {
-
-}
+public class LC0173BinarySearchTreeIterator {}
 
 class BSTIterator {
     List<TreeNode> list;
     int pointer;
+
     public BSTIterator(TreeNode root) {
         list = new ArrayList<>();
         pointer = -1;
@@ -37,6 +36,7 @@ class BSTIterator {
 
 class BSTIteratorSmallInit {
     private Stack<TreeNode> stack;
+
     public BSTIteratorSmallInit(TreeNode root) {
         this.stack = new Stack<>();
         pushAllLeft(root);

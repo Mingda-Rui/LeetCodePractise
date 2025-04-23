@@ -9,12 +9,9 @@ public class LC0162FindPeakElement {
             int val = nums[mid];
             boolean greaterThanLeft = mid == 0 || nums[mid - 1] < val;
             boolean greaterThanRight = mid == nums.length - 1 || nums[mid + 1] < val;
-            if (greaterThanLeft && greaterThanRight)
-                return mid;
-            else if (!greaterThanRight)
-                start = mid + 1;
-            else
-                end = mid;
+            if (greaterThanLeft && greaterThanRight) return mid;
+            else if (!greaterThanRight) start = mid + 1;
+            else end = mid;
         }
 
         return -1;
@@ -25,8 +22,7 @@ public class LC0162FindPeakElement {
             int val = nums[i];
             boolean greaterThanLeft = i == 0 || nums[i - 1] < val;
             boolean greaterThanRight = i == nums.length - 1 || nums[i + 1] < val;
-            if (greaterThanLeft && greaterThanRight)
-                return i;
+            if (greaterThanLeft && greaterThanRight) return i;
         }
         return -1;
     }

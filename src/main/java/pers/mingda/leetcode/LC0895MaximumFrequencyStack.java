@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class LC0895MaximumFrequencyStack {
-
-}
+public class LC0895MaximumFrequencyStack {}
 
 class FreqStack {
 
@@ -31,13 +29,11 @@ class FreqStack {
     }
 
     public int pop() {
-        if (maxFreq == 0)
-            return -1;
+        if (maxFreq == 0) return -1;
         Stack<Integer> stack = freqStackMap.get(maxFreq);
         int result = stack.pop();
         itemFreqMap.put(result, maxFreq - 1);
-        if (stack.isEmpty())
-            maxFreq--;
+        if (stack.isEmpty()) maxFreq--;
         return result;
     }
 }

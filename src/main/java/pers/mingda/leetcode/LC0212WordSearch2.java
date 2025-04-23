@@ -8,28 +8,25 @@ import java.util.Set;
 public class LC0212WordSearch2 {
     public List<String> findWords(char[][] board, String[] words) {
         List<String> result = new LinkedList<>();
-        for (String word: words) {
+        for (String word : words) {
             int currSize = result.size();
             for (int i = 0; i < board.length && currSize == result.size(); i++) {
                 for (int j = 0; j < board[0].length && currSize == result.size(); j++)
-                    if (findWordReverse(board, i, j, word, word.length() - 1, new boolean[board.length][board[0].length]))
+                    if (findWordReverse(
+                            board, i, j, word, word.length() - 1, new boolean[board.length][board[0].length]))
                         result.add(word);
             }
-
         }
         return result;
     }
 
     private boolean findWordReverse(char[][] board, int x, int y, String word, int index, boolean[][] visited) {
-        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length)
-            return false;
-        char c =  word.charAt(index);
-        if (visited[x][y] || board[x][y] != c)
-            return false;
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) return false;
+        char c = word.charAt(index);
+        if (visited[x][y] || board[x][y] != c) return false;
         visited[x][y] = true;
         boolean found = false;
-        if (index == 0)
-            return true;
+        if (index == 0) return true;
         index--;
         found = found || findWordReverse(board, x + 1, y, word, index, visited);
         found = found || findWordReverse(board, x - 1, y, word, index, visited);
@@ -54,17 +51,15 @@ public class LC0212WordSearch2 {
 
     private TrieNode buildTrie(String[] words) {
         TrieNode root = new TrieNode('.');
-        for (String word: words)
-            root.add(word);
+        for (String word : words) root.add(word);
         return root;
     }
 
-    private boolean findWordsFromTrie(char[][] board, int x, int y, TrieNode trie, Set<String> result, boolean[][] visited) {
-        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length || visited[x][y])
-            return false;
+    private boolean findWordsFromTrie(
+            char[][] board, int x, int y, TrieNode trie, Set<String> result, boolean[][] visited) {
+        if (x < 0 || x >= board.length || y < 0 || y >= board[0].length || visited[x][y]) return false;
         char c = board[x][y];
-        if (trie.record[c] == null)
-            return false;
+        if (trie.record[c] == null) return false;
         visited[x][y] = true;
         TrieNode subTrie = trie.record[c];
         if (subTrie.word != null) {
@@ -113,10 +108,8 @@ class TrieNode {
             this.size++;
         }
 
-        if (index == word.length() - 1)
-            this.record[c].word = word;
-        else
-            record[c].addRecursive(word, index + 1);
+        if (index == word.length() - 1) this.record[c].word = word;
+        else record[c].addRecursive(word, index + 1);
     }
 
     public void remove(char c) {
@@ -124,7 +117,6 @@ class TrieNode {
             this.record[c] = null;
             size--;
         }
-        if (parent != null)
-            parent.remove(this.c);
+        if (parent != null) parent.remove(this.c);
     }
 }

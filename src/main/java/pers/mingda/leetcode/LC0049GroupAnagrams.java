@@ -36,15 +36,12 @@ public class LC0049GroupAnagrams {
     }
 
     private boolean isAnagram(String s, String t) {
-        if (s.length() != t.length())
-            return false;
+        if (s.length() != t.length()) return false;
         int[] record = new int[128]; // could use int[26] and use char - 'a' as index
-        for (char charInS: s.toCharArray())
-            record[charInS]++;
-        for (char charInT: t.toCharArray()) {
+        for (char charInS : s.toCharArray()) record[charInS]++;
+        for (char charInT : t.toCharArray()) {
             record[charInT]--;
-            if (record[charInT] < 0)
-                return false;
+            if (record[charInT] < 0) return false;
         }
         return true;
     }
@@ -54,7 +51,7 @@ public class LC0049GroupAnagrams {
         for (int i = 0; i < strs.length; i++) {
             String current = strs[i];
             boolean foundAnagrams = false;
-            for (List<String> anagrams: result) {
+            for (List<String> anagrams : result) {
                 if (!foundAnagrams && isAnagram(anagrams.get(0), current)) {
                     anagrams.add(current);
                     foundAnagrams = true;
@@ -71,7 +68,7 @@ public class LC0049GroupAnagrams {
 
     public List<List<String>> groupAnagramsJavaSort(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
-        for (String str: strs) {
+        for (String str : strs) {
             char[] chars = str.toCharArray();
             Arrays.sort(chars);
             String sorted = new String(chars);
@@ -84,7 +81,7 @@ public class LC0049GroupAnagrams {
 
     public List<List<String>> groupAnagramsNativeSort(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
-        for (String str: strs) {
+        for (String str : strs) {
             String sorted = sort(str);
             map.putIfAbsent(sorted, new LinkedList<>());
             map.get(sorted).add(str);
@@ -95,8 +92,7 @@ public class LC0049GroupAnagrams {
 
     private String sort(String str) {
         int[] record = new int[128];
-        for (char c: str.toCharArray())
-            record[c]++;
+        for (char c : str.toCharArray()) record[c]++;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < record.length; i++) {
             int num = record[i];

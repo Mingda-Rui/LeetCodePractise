@@ -53,8 +53,12 @@ public class LC0224BasicCalculator {
                 int prevResult = stack.pop();
                 prevOp = opStack.pop();
                 switch (prevOp) {
-                    case '+' -> {result = prevResult + result;}
-                    case '-' -> {result = prevResult - result;}
+                    case '+' -> {
+                        result = prevResult + result;
+                    }
+                    case '-' -> {
+                        result = prevResult - result;
+                    }
                 }
             } else if (Character.isDigit(c)) {
                 currentVal = currentVal * 10 + (s.charAt(i) - '0');
@@ -63,8 +67,12 @@ public class LC0224BasicCalculator {
                     currentVal = currentVal * 10 + (s.charAt(i) - '0');
                 }
                 switch (prevOp) {
-                    case '+' -> {result += currentVal;}
-                    case '-' -> {result -= currentVal;}
+                    case '+' -> {
+                        result += currentVal;
+                    }
+                    case '-' -> {
+                        result -= currentVal;
+                    }
                 }
                 currentVal = 0;
             } else if (c != ' ') {

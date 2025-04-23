@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC0118PascalsTriangle {
-
-}
+public class LC0118PascalsTriangle {}
 
 class LC0118Solution {
     public List<List<Integer>> generate(int numRows) {

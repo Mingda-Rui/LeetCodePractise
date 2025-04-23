@@ -10,8 +10,7 @@ public class LC1448CountGoodNodesInBinaryTree {
     }
 
     private int goodNodes(TreeNode root, int max) {
-        if (root == null)
-            return 0;
+        if (root == null) return 0;
         int val = root.val;
         int result = val >= max ? 1 : 0;
         max = Math.max(max, val);
@@ -30,8 +29,7 @@ public class LC1448CountGoodNodesInBinaryTree {
             TreeNode node = stack.pop();
             int val = node.val;
             int parentMax = maxMap.get(node);
-            if (val >= parentMax)
-                result++;
+            if (val >= parentMax) result++;
             if (node.left != null) {
                 TreeNode left = node.left;
                 stack.push(left);

@@ -5,7 +5,7 @@ import java.util.Stack;
 public class LC0682BaseballGame {
     public int calPoints(String[] ops) {
         Stack<Integer> stack = new Stack<>();
-        for (String op: ops) {
+        for (String op : ops) {
             switch (op) {
                 case "C":
                     stack.pop();
@@ -26,8 +26,7 @@ public class LC0682BaseballGame {
             }
         }
         int result = 0;
-        while (!stack.isEmpty())
-            result += stack.pop();
+        while (!stack.isEmpty()) result += stack.pop();
         return result;
     }
 
@@ -35,7 +34,7 @@ public class LC0682BaseballGame {
         int[] record = new int[ops.length];
         int pointer = -1;
         int sum = 0;
-        for (String op: ops) {
+        for (String op : ops) {
             switch (op) {
                 case "C" -> {
                     sum -= record[pointer];

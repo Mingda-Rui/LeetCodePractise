@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class LC0901OnlineStockSpan {
-}
+public class LC0901OnlineStockSpan {}
 
 /**
  * Your StockSpanner object will be instantiated and called as such:

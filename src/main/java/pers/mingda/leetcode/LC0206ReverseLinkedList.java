@@ -80,7 +80,7 @@ public class LC0206ReverseLinkedList {
         return newHead;
     }
 
-    public static void main(String ... args) {
+    public static void main(String... args) {
         LC0206ReverseLinkedList test = new LC0206ReverseLinkedList();
         ListNode five = new ListNode(5);
         ListNode four = new ListNode(4, five);
@@ -100,8 +100,7 @@ public class LC0206ReverseLinkedList {
     }
 
     private ListNode reverseListRecursive(ListNode head, ListNode pseudoHead) {
-        if (head == null)
-            return pseudoHead;
+        if (head == null) return pseudoHead;
 
         ListNode parent = reverseListRecursive(head.next, pseudoHead);
         parent.next = head;
@@ -109,8 +108,7 @@ public class LC0206ReverseLinkedList {
     }
 
     public ListNode reverseListIterative(ListNode head) {
-        if (head == null || head.next == null)
-            return head;
+        if (head == null || head.next == null) return head;
         ListNode oldHead = head;
         ListNode tail = head;
         while (tail != null) {
@@ -124,8 +122,7 @@ public class LC0206ReverseLinkedList {
     }
 
     public ListNode reverseListRecursiveNoPseudoHead(ListNode head) {
-        if (head == null || head.next == null)
-            return head;
+        if (head == null || head.next == null) return head;
         ListNode newHead = reverseListRecursiveNoPseudoHead(head.next);
         ListNode next = head.next;
         next.next = head;
@@ -138,8 +135,7 @@ public class LC0206ReverseLinkedList {
     }
 
     private ListNode reverseListInPlaceRecursive(ListNode head, ListNode tail) {
-        if (head == null || tail.next == null)
-            return head;
+        if (head == null || tail.next == null) return head;
         ListNode next = tail.next;
         tail.next = next.next;
         next.next = head;
@@ -152,11 +148,9 @@ public class LC0206ReverseLinkedList {
     }
 
     private ListNode reverseListInPlaceRecursive2(ListNode current, ListNode newHead) {
-        if (current == null)
-            return newHead;
+        if (current == null) return newHead;
         ListNode next = current.next;
         current.next = newHead;
         return reverseListInPlaceRecursive2(next, current);
     }
 }
-

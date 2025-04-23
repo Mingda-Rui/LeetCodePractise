@@ -32,7 +32,7 @@ public class LC0787CheapestFlightsWithinKStops {
                     continue;
                 }
 
-                for (List<Integer> flight: fromCityFlights.get(from)) {
+                for (List<Integer> flight : fromCityFlights.get(from)) {
                     int to = flight.get(1);
                     int toPrice = fromPrice + flight.get(2);
                     if (!bestPriceToCity.containsKey(to) || bestPriceToCity.get(to) > toPrice) {
@@ -42,7 +42,7 @@ public class LC0787CheapestFlightsWithinKStops {
                     }
                 }
             }
-            for (int city: tempMap.keySet()) {
+            for (int city : tempMap.keySet()) {
                 int newPrice = tempMap.get(city);
                 bestPriceToCity.put(city, newPrice);
             }
@@ -53,13 +53,14 @@ public class LC0787CheapestFlightsWithinKStops {
 
     private Map<Integer, Set<List<Integer>>> buildFlightMap(int[][] flights) {
         Map<Integer, Set<List<Integer>>> flightMap = new HashMap<>();
-        for (int[] flight: flights) {
+        for (int[] flight : flights) {
             int from = flight[0];
-            flightMap.computeIfAbsent(from, k -> new HashSet<>()).add(Arrays.stream(flight).boxed().collect(Collectors.toList()));
+            flightMap
+                    .computeIfAbsent(from, k -> new HashSet<>())
+                    .add(Arrays.stream(flight).boxed().collect(Collectors.toList()));
         }
         return flightMap;
     }
-
 
     public int findCheapestPriceBellmanFord(int n, int[][] flights, int src, int dst, int k) {
         Map<Integer, Integer> cheapestPrice = new HashMap<>();
@@ -68,7 +69,7 @@ public class LC0787CheapestFlightsWithinKStops {
         while (k >= 0) {
             updated = false;
             Map<Integer, Integer> newCheapest = new HashMap<>(cheapestPrice);
-            for (int[] flight: flights) {
+            for (int[] flight : flights) {
                 int city = flight[0];
                 if (!cheapestPrice.containsKey(city)) {
                     continue;
@@ -96,7 +97,7 @@ public class LC0787CheapestFlightsWithinKStops {
         minHeap.add(List.of(src, 0, -1));
         Map<Integer, Integer> stopCounter = new HashMap<>();
 
-        while(!minHeap.isEmpty()) {
+        while (!minHeap.isEmpty()) {
             List<Integer> current = minHeap.poll();
             int node = current.getFirst();
             int totalDistance = current.get(1);
@@ -117,7 +118,7 @@ public class LC0787CheapestFlightsWithinKStops {
                 continue;
             }
 
-            for (List<Integer> flight: flightMap.get(node)) {
+            for (List<Integer> flight : flightMap.get(node)) {
                 int next = flight.get(1);
                 int distance = flight.getLast();
                 minHeap.add(List.of(next, totalDistance + distance, stop + 1));

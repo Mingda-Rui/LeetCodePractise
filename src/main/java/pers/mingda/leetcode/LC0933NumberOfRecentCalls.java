@@ -10,8 +10,7 @@ import java.util.Queue;
  * RecentCounter obj = new RecentCounter();
  * int param_1 = obj.ping(t);
  */
-public class LC0933NumberOfRecentCalls {
-}
+public class LC0933NumberOfRecentCalls {}
 
 class RecentCounter {
 
@@ -39,7 +38,7 @@ class RecentCounter {
 
     private int find(int t, int start, int end) {
         if (start + 1 == end) {
-            return pingHistory.get(start) == t || (start == 0 && pingHistory.get(start) > t)? start : end;
+            return pingHistory.get(start) == t || (start == 0 && pingHistory.get(start) > t) ? start : end;
         }
 
         int mid = (start + end) / 2;
@@ -47,7 +46,7 @@ class RecentCounter {
         if (val < t) {
             return find(t, mid, end);
         } else if (val > t) {
-            return find (t, start, mid);
+            return find(t, start, mid);
         }
         // val == t
         return mid;

@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class LC0496NextGreaterElementI {
-
-}
+public class LC0496NextGreaterElementI {}
 
 class LC0496Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -35,7 +33,7 @@ class StackSolution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
-        for (int num: nums2) {
+        for (int num : nums2) {
 
             while (!stack.isEmpty() && stack.peek() < num) {
                 int smaller = stack.pop();

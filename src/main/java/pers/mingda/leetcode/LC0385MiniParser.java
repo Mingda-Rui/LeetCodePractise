@@ -13,8 +13,7 @@ public class LC0385MiniParser {
 
         if (Character.isDigit(c) || c == '-') {
             int val = 0;
-            if (c == '-')
-                indexHolder[0]++;
+            if (c == '-') indexHolder[0]++;
             while (indexHolder[0] < arr.length && Character.isDigit(arr[indexHolder[0]])) {
                 val = val * 10 + (arr[indexHolder[0]] - '0');
                 indexHolder[0]++;
@@ -49,12 +48,10 @@ public class LC0385MiniParser {
             char c = s.charAt(i);
             if (c == '[') {
                 LC0385NestedInteger next = new LC0385NestedInteger();
-                if (!stack.isEmpty())
-                    stack.peek().add(next);
+                if (!stack.isEmpty()) stack.peek().add(next);
                 stack.push(next);
             } else if (Character.isDigit(c) || c == '-') {
-                if (c == '-')
-                    i++;
+                if (c == '-') i++;
                 int val = s.charAt(i) - '0';
                 while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
                     i++;
@@ -70,7 +67,6 @@ public class LC0385MiniParser {
         return result;
     }
 }
-
 
 class LC0385NestedInteger {
     // Constructor initializes an empty nested list.
@@ -90,14 +86,10 @@ class LC0385NestedInteger {
     }
 
     // Set this LC0385NestedInteger to hold a single integer.
-    public void setInteger(int value) {
-
-    }
+    public void setInteger(int value) {}
 
     // Set this LC0385NestedInteger to hold a nested list and adds a nested integer to it.
-    public void add(LC0385NestedInteger ni) {
-
-    }
+    public void add(LC0385NestedInteger ni) {}
 
     // @return the nested list that this LC0385NestedInteger holds, if it holds a nested list
     // Return empty list if this LC0385NestedInteger holds a single integer
@@ -105,4 +97,3 @@ class LC0385NestedInteger {
         return null;
     }
 }
-

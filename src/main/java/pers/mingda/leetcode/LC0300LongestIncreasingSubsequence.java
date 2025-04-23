@@ -8,9 +8,7 @@ public class LC0300LongestIncreasingSubsequence {
         int globalMax = 0;
         for (int i = 0; i < nums.length; i++) {
             int max = 0;
-            for (int j = 0; j < i; j++)
-                if (nums[j] < nums[i])
-                    max = Math.max(max, record[j]);
+            for (int j = 0; j < i; j++) if (nums[j] < nums[i]) max = Math.max(max, record[j]);
             record[i] = max + 1;
             globalMax = Math.max(globalMax, record[i]);
         }
@@ -33,6 +31,6 @@ public class LC0300LongestIncreasingSubsequence {
 
     private int findReplaceIndex(int[] record, int start, int finish, int val) {
         int index = Arrays.binarySearch(record, start, finish, val);
-        return index >= 0 ? index : - index - 1;
+        return index >= 0 ? index : -index - 1;
     }
 }

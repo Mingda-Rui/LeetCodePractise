@@ -10,9 +10,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-public class LC0355DesignTwitter {
-
-}
+public class LC0355DesignTwitter {}
 
 class LC0355Twitter {
 
@@ -30,7 +28,7 @@ class LC0355Twitter {
     public void postTweet(int userId, int tweetId) {
         Tweet tweetHistory = tweets.get(userId);
         Tweet tweet = new Tweet(timer(), tweetId, tweetHistory);
-        //tweet.next = tweetHistory;
+        // tweet.next = tweetHistory;
         tweets.put(userId, tweet);
 
         followeeMap.putIfAbsent(userId, new HashSet<>());
@@ -39,21 +37,18 @@ class LC0355Twitter {
 
     public List<Integer> getNewsFeed(int userId) {
         List<Integer> result = new LinkedList<>();
-        if (!followeeMap.containsKey(userId))
-            return result;
+        if (!followeeMap.containsKey(userId)) return result;
 
         Comparator<Tweet> comparator = Comparator.comparingInt(tweet -> tweet.ts);
         Queue<Tweet> queue = new PriorityQueue<>(comparator.reversed());
-        for (int followee: followeeMap.get(userId)) {
+        for (int followee : followeeMap.get(userId)) {
             Tweet userTweet = tweets.get(followee);
-            if (userTweet != null)
-                queue.add(userTweet);
+            if (userTweet != null) queue.add(userTweet);
         }
 
         while (result.size() < FEED_LIMIT && !queue.isEmpty()) {
             Tweet mostRecent = queue.poll();
-            if (mostRecent.next != null)
-                queue.add(mostRecent.next);
+            if (mostRecent.next != null) queue.add(mostRecent.next);
             result.add(mostRecent.tId);
         }
         return result;
@@ -68,10 +63,8 @@ class LC0355Twitter {
     }
 
     public void unfollow(int followerId, int followeeId) {
-        if (followerId == followeeId)
-            return;
-        if (followeeMap.containsKey(followerId))
-            followeeMap.get(followerId).remove(followeeId);
+        if (followerId == followeeId) return;
+        if (followeeMap.containsKey(followerId)) followeeMap.get(followerId).remove(followeeId);
     }
 
     private int timer() {

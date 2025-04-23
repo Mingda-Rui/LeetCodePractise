@@ -6,8 +6,7 @@ public class LC0066PlusOne {
         for (int i = len - 1; i >= 0; i--) {
             int val = digits[i];
             digits[i] = (val + 1) % 10;
-            if (digits[i] != 0)
-                return digits;
+            if (digits[i] != 0) return digits;
         }
 
         int[] result = new int[len + 1];

@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class LC0380InsertDeleteGetRandomO1 {
-
-}
+public class LC0380InsertDeleteGetRandomO1 {}
 
 class RandomizedSet {
 
@@ -23,16 +21,14 @@ class RandomizedSet {
     }
 
     public boolean insert(int val) {
-        if (map.containsKey(val))
-            return false;
+        if (map.containsKey(val)) return false;
         list.add(val);
         map.put(val, list.size() - 1);
         return true;
     }
 
     public boolean remove(int val) {
-        if (!map.containsKey(val))
-            return false;
+        if (!map.containsKey(val)) return false;
         int index = map.get(val);
         swapWithTail(index);
         int tailIndex = list.size() - 1;

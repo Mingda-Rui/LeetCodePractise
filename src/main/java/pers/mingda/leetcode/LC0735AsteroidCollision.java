@@ -11,7 +11,7 @@ public class LC0735AsteroidCollision {
             if (stack.isEmpty() || !willCollide(stack.peek(), asteroid)) {
                 stack.push(asteroid);
                 asteroidIndex++;
-            } else if (compareSize(stack.peek(), asteroid) > 0){
+            } else if (compareSize(stack.peek(), asteroid) > 0) {
                 asteroidIndex++;
             } else if (compareSize(stack.peek(), asteroid) < 0) {
                 stack.pop();

@@ -22,8 +22,7 @@ public class LC0430FlattenAMultilevelDoublyLinkedList {
                 head.child.prev = head;
                 head.child = null;
             }
-            if (head.next == null)
-                return head;
+            if (head.next == null) return head;
             head = head.next;
         }
         return head;
@@ -34,8 +33,7 @@ public class LC0430FlattenAMultilevelDoublyLinkedList {
         LC0430Node ite = head;
         while (ite != null) {
             if (ite.child != null) {
-                if (ite.next != null)
-                    nextLC0430Node.push(ite.next);
+                if (ite.next != null) nextLC0430Node.push(ite.next);
                 LC0430Node child = ite.child;
                 ite.next = child;
                 ite.child = null;

@@ -30,8 +30,6 @@ public class LC0321CreateMaximumNumber {
                 max = nums2[pointer2];
                 pointer2++;
             }
-
-
         }
         return result;
     }

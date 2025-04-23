@@ -11,8 +11,7 @@ public class LC0424LongestRepeatingCharacterReplacement {
         int numsOfOps = k;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) != s.charAt(start)) {
-                if (numsOfOps == k)
-                    last = i - 1;
+                if (numsOfOps == k) last = i - 1;
                 if (numsOfOps > 0) {
                     numsOfOps--;
                 } else if (numsOfOps == 0) {
@@ -70,8 +69,7 @@ public class LC0424LongestRepeatingCharacterReplacement {
                 char charAtStart = s.charAt(start);
                 counter[charAtStart]--;
                 start++;
-            } else
-                maxLength = Math.max(maxLength, currentLength);
+            } else maxLength = Math.max(maxLength, currentLength);
         }
 
         return maxLength;

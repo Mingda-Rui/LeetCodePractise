@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class LC0115DistinctSubsequences {
     public int numDistinct(String s, String t) {
         int[][] memo = new int[s.length()][t.length()];
-        for (int[] row: memo) {
+        for (int[] row : memo) {
             Arrays.fill(row, -1);
         }
         return findNumDistinct(s, 0, t, 0, memo);
@@ -35,7 +35,7 @@ public class LC0115DistinctSubsequences {
         dp[t.length()] = 1;
         for (int i = s.length() - 1; i >= 0; i--) {
             int prev = dp[t.length()];
-            for (int j = t.length() - 1; j >=0; j--) {
+            for (int j = t.length() - 1; j >= 0; j--) {
                 int oldVal = dp[j];
                 if (s.charAt(i) == t.charAt(j)) {
                     dp[j] += prev;

@@ -11,8 +11,7 @@ public class LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal {
     }
 
     private TreeNode buildTree(int[] preorder, int index, int inL, int inR, int[] inorderMap) {
-        if (inL == inR)
-            return null;
+        if (inL == inR) return null;
 
         int parentVal = preorder[index];
         TreeNode parent = new TreeNode(parentVal);
@@ -25,12 +24,11 @@ public class LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal {
     }
 
     public TreeNode buildTreeNoMap(int[] preorder, int[] inorder) {
-        return buildTreeNoMap(Integer.MAX_VALUE, preorder, new int[]{0}, inorder, new int[]{0});
+        return buildTreeNoMap(Integer.MAX_VALUE, preorder, new int[] {0}, inorder, new int[] {0});
     }
 
-    public TreeNode buildTreeNoMap(int boundary, int[] preorder, int[] preIdxHolder, int[] inorder, int[] inIdxHolder){
-        if (preIdxHolder[0] >= preorder.length || boundary == inorder[inIdxHolder[0]])
-            return null;
+    public TreeNode buildTreeNoMap(int boundary, int[] preorder, int[] preIdxHolder, int[] inorder, int[] inIdxHolder) {
+        if (preIdxHolder[0] >= preorder.length || boundary == inorder[inIdxHolder[0]]) return null;
 
         int val = preorder[preIdxHolder[0]];
         preIdxHolder[0]++;

@@ -4,8 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LC2013DetectSquares {
-}
+public class LC2013DetectSquares {}
 
 /**
  * Your DetectSquares object will be instantiated and called as such:
@@ -36,7 +35,7 @@ class DetectSquares {
         int x = point[0];
         int y = point[1];
         int ans = 0;
-        for (List<Integer> p3: points) {
+        for (List<Integer> p3 : points) {
             if (!isDiagonal(x, y, p3)) {
                 continue;
             }

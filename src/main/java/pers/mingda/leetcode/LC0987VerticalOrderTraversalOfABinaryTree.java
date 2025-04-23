@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class LC0987VerticalOrderTraversalOfABinaryTree {
-
-}
+public class LC0987VerticalOrderTraversalOfABinaryTree {}
 
 /**
  * Definition for a binary tree node.
@@ -38,7 +36,7 @@ class LC0987Solution {
 
         int prevColumnVal = 1;
         List<Integer> currentColumn = null;
-        for (Coord coord: list) {
+        for (Coord coord : list) {
             if (coord.y != prevColumnVal) {
                 currentColumn = new LinkedList<>();
                 result.add(currentColumn);
@@ -52,22 +50,17 @@ class LC0987Solution {
 
     private Comparator<Coord> createCoordComparator() {
         return (node1, node2) -> {
-            if (node1.y != node2.y)
-                return node1.y - node2.y;
-            else if (node1.x != node2.x)
-                return node1.x - node2.x;
-            else
-                return node1.val - node2.val;
+            if (node1.y != node2.y) return node1.y - node2.y;
+            else if (node1.x != node2.x) return node1.x - node2.x;
+            else return node1.val - node2.val;
         };
     }
 
     private void generateCoord(TreeNode root, int x, int y, List<Coord> list) {
         Coord coord = new Coord(x, y, root.val);
         list.add(coord);
-        if (root.left != null)
-            generateCoord(root.left, x + 1, y - 1, list);
-        if (root.right != null)
-            generateCoord(root.right, x + 1, y + 1, list);
+        if (root.left != null) generateCoord(root.left, x + 1, y - 1, list);
+        if (root.right != null) generateCoord(root.right, x + 1, y + 1, list);
     }
 }
 
@@ -113,7 +106,7 @@ class IterateByLaySolution {
 
                 leftMostColumn = Math.min(leftMostColumn, y);
             }
-            for (int y: layerMap.keySet()) {
+            for (int y : layerMap.keySet()) {
                 List<Integer> list = layerMap.get(y);
                 Collections.sort(list);
                 map.putIfAbsent(y, new LinkedList<>());
@@ -136,6 +129,7 @@ class CoordNode {
     int x;
     int y;
     TreeNode node;
+
     public CoordNode(int x, int y, TreeNode node) {
         this.x = x;
         this.y = y;

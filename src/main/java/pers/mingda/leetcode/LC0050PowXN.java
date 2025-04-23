@@ -8,7 +8,7 @@ public class LC0050PowXN {
     private double binaryExp(double x, double n) {
         if (n < 0) {
             n = -n;
-            x = 1/x;
+            x = 1 / x;
         }
 
         double result = 1;
@@ -17,7 +17,7 @@ public class LC0050PowXN {
                 n /= 2;
                 x *= x;
             } else {
-                n -=1;
+                n -= 1;
                 result *= x;
             }
         }

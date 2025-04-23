@@ -4,17 +4,15 @@ import java.util.Stack;
 
 public class LC0230KthSmallestElementInABst {
     public int kthSmallest(TreeNode root, int k) {
-        int[] resultHolder = new int[]{-1};
+        int[] resultHolder = new int[] {-1};
         kthSmallestRecursive(root, k, resultHolder);
         return resultHolder[0];
     }
 
     private int kthSmallestRecursive(TreeNode root, int k, int[] resultHolder) {
-        if (root == null || k == 0)
-            return k;
+        if (root == null || k == 0) return k;
         k = kthSmallestRecursive(root.left, k, resultHolder);
-        if (k == 1)
-            resultHolder[0] = root.val;
+        if (k == 1) resultHolder[0] = root.val;
         return kthSmallestRecursive(root.right, k - 1, resultHolder);
     }
 
@@ -27,8 +25,7 @@ public class LC0230KthSmallestElementInABst {
             } else {
                 root = stack.pop();
                 k--;
-                if (k == 0)
-                    return root.val;
+                if (k == 0) return root.val;
                 root = root.right;
             }
         }

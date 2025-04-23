@@ -7,8 +7,7 @@ public class LC0019RemoveNthNodeFromEndOfList {
         ListNode fast = head;
         ListNode slow = OneBeforeHead;
 
-        for (int i = 0; i < n; i++)
-            fast = fast.next;
+        for (int i = 0; i < n; i++) fast = fast.next;
         while (fast != null) {
             fast = fast.next;
             slow = slow.next;
@@ -21,11 +20,9 @@ public class LC0019RemoveNthNodeFromEndOfList {
         ListNode fast = head;
         ListNode slow = head;
 
-        for (int i = 0; i < n; i++)
-            fast = fast.next;
+        for (int i = 0; i < n; i++) fast = fast.next;
         // when fast is null, meaning we need to remove the first node
-        if (fast == null)
-            return head.next;
+        if (fast == null) return head.next;
         while (fast.next != null) {
             fast = fast.next;
             slow = slow.next;
@@ -41,11 +38,9 @@ public class LC0019RemoveNthNodeFromEndOfList {
     }
 
     private int removeNthFromEndHelper(ListNode head, int n) {
-        if (head == null)
-            return 0;
+        if (head == null) return 0;
         int count = removeNthFromEndHelper(head.next, n);
-        if (count == n)
-            head.next = head.next.next;
+        if (count == n) head.next = head.next.next;
         return count + 1;
     }
 }

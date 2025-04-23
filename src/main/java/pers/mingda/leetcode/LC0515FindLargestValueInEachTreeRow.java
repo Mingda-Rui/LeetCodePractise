@@ -8,8 +8,7 @@ import java.util.Queue;
 public class LC0515FindLargestValueInEachTreeRow {
     public List<Integer> largestValues(TreeNode root) {
         List<Integer> result = new LinkedList<>();
-        if (root == null)
-            return result;
+        if (root == null) return result;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
@@ -18,10 +17,8 @@ public class LC0515FindLargestValueInEachTreeRow {
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.remove();
                 max = Math.max(max, node.val);
-                if (node.left != null)
-                    queue.add(node.left);
-                if (node.right != null)
-                    queue.add(node.right);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
             }
             result.add(max);
         }
@@ -33,8 +30,7 @@ public class LC0515FindLargestValueInEachTreeRow {
     }
 
     public List<Integer> largestValuesRecursive(TreeNode root, int level, List<Integer> result) {
-        if (root == null)
-            return result;
+        if (root == null) return result;
         if (level == result.size()) {
             result.add(root.val);
         } else {

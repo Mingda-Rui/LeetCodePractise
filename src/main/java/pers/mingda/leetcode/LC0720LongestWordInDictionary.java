@@ -8,8 +8,7 @@ public class LC0720LongestWordInDictionary {
     public String longestWord(String[] words) {
         LC0720Trie root = new LC0720Trie();
         root.word = "";
-        for (String word: words)
-            constructLC0720Trie(root, word);
+        for (String word : words) constructLC0720Trie(root, word);
         return getLongest(root);
     }
 
@@ -17,8 +16,7 @@ public class LC0720LongestWordInDictionary {
         LC0720Trie LC0720Trie = root;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            if (LC0720Trie.arr[c] == null)
-                LC0720Trie.arr[c] = new LC0720Trie();
+            if (LC0720Trie.arr[c] == null) LC0720Trie.arr[c] = new LC0720Trie();
             LC0720Trie = LC0720Trie.arr[c];
         }
         LC0720Trie.word = word;
@@ -26,13 +24,11 @@ public class LC0720LongestWordInDictionary {
     }
 
     private String getLongest(LC0720Trie LC0720Trie) {
-        if (LC0720Trie == null || LC0720Trie.word == null)
-            return "";
+        if (LC0720Trie == null || LC0720Trie.word == null) return "";
         String result = LC0720Trie.word;
         for (int i = 97; i <= 122; i++) {
             String child = getLongest(LC0720Trie.arr[i]);
-            if (child.length() > result.length())
-                result = child;
+            if (child.length() > result.length()) result = child;
         }
         return result;
     }

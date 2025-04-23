@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC0707DesignLinkedList {
-
-}
+public class LC0707DesignLinkedList {}
 
 class MyDoublyLinkedList {
     int size;
@@ -22,10 +20,8 @@ class MyDoublyLinkedList {
         LC0707Node oldHead = head;
         head = new LC0707Node(val);
         head.next = oldHead;
-        if (oldHead != null)
-            oldHead.prev = head;
-        if (size == 0)
-            tail = head;
+        if (oldHead != null) oldHead.prev = head;
+        if (size == 0) tail = head;
         size++;
     }
 
@@ -33,20 +29,15 @@ class MyDoublyLinkedList {
         LC0707Node oldTail = tail;
         tail = new LC0707Node(val);
         tail.prev = oldTail;
-        if (oldTail != null)
-            oldTail.next = tail;
-        if (size == 0)
-            head = tail;
+        if (oldTail != null) oldTail.next = tail;
+        if (size == 0) head = tail;
         size++;
     }
 
     private LC0707Node getLC0707Node(int index) {
-        if (index < 0 || index >= size)
-            return null;
-        if (index < size / 2)
-            return getFromHead(index);
-        else
-            return getFromTail(index);
+        if (index < 0 || index >= size) return null;
+        if (index < size / 2) return getFromHead(index);
+        else return getFromTail(index);
     }
 
     private LC0707Node getFromHead(int index) {
@@ -66,14 +57,11 @@ class MyDoublyLinkedList {
             counterFromTail--;
         }
         return LC0707Node;
-
     }
 
     public void addAtIndex(int index, int val) {
-        if (index == 0)
-            addAtHead(val);
-        else if (index == size)
-            addAtTail(val);
+        if (index == 0) addAtHead(val);
+        else if (index == size) addAtTail(val);
         else {
             LC0707Node prevLC0707Node = getLC0707Node(index - 1);
             if (prevLC0707Node != null) {
@@ -84,7 +72,6 @@ class MyDoublyLinkedList {
                 size++;
             }
         }
-
     }
 
     public void deleteAtIndex(int index) {
@@ -92,22 +79,17 @@ class MyDoublyLinkedList {
             LC0707Node oldHead = head;
             head = head.next;
             oldHead.next = null;
-            if (head != null)
-                head.prev = null;
-            if (size == 1)
-                tail = null;
+            if (head != null) head.prev = null;
+            if (size == 1) tail = null;
         } else if (index == size - 1) {
             LC0707Node oldTail = tail;
             tail = tail.prev;
             oldTail.prev = null;
-            if (tail != null)
-                tail.next = null;
-            if (size == 1)
-                head = null;
+            if (tail != null) tail.next = null;
+            if (size == 1) head = null;
         } else {
             LC0707Node prevLC0707Node = getLC0707Node(index - 1);
-            if (prevLC0707Node == null || prevLC0707Node.next == null)
-                return;
+            if (prevLC0707Node == null || prevLC0707Node.next == null) return;
             LC0707Node deleteLC0707Node = prevLC0707Node.next;
             LC0707Node nextLC0707Node = deleteLC0707Node.next;
 
@@ -126,13 +108,10 @@ class MySinglyLinkedList {
     LC0707Node head;
     LC0707Node tail;
 
-    public MySinglyLinkedList() {
-
-    }
+    public MySinglyLinkedList() {}
 
     public int get(int index) {
-        if (! checkIndex(index))
-            return -1;
+        if (!checkIndex(index)) return -1;
         return getLC0707Node(index).val;
     }
 
@@ -152,17 +131,14 @@ class MySinglyLinkedList {
     public void addAtHead(int val) {
         head = new LC0707Node(val, head);
         size++;
-        if (size == 1)
-            tail = head;
+        if (size == 1) tail = head;
     }
 
     public void addAtTail(int val) {
         LC0707Node oldTail = tail;
         tail = new LC0707Node(val);
-        if (size == 0)
-            head = tail;
-        else
-            oldTail.next = tail;
+        if (size == 0) head = tail;
+        else oldTail.next = tail;
         size++;
     }
 
@@ -180,8 +156,7 @@ class MySinglyLinkedList {
     }
 
     public void deleteAtIndex(int index) {
-        if (!checkIndex(index))
-            return;
+        if (!checkIndex(index)) return;
         if (index == 0) {
             LC0707Node oldHead = head;
             head = head.next;
@@ -191,8 +166,7 @@ class MySinglyLinkedList {
             LC0707Node deleted = prev.next;
             prev.next = deleted.next;
             deleted.next = null;
-            if (index == size - 1)
-                tail = prev;
+            if (index == size - 1) tail = prev;
         }
         size--;
         if (size == 0) {

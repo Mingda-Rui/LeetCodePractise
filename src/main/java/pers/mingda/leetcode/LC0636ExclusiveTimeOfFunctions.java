@@ -8,7 +8,7 @@ public class LC0636ExclusiveTimeOfFunctions {
         Stack<Integer> funcIdStack = new Stack<>();
         int prevTs = 0;
         int[] result = new int[n];
-        for (String log: logs) {
+        for (String log : logs) {
             String[] parsedLog = log.split(":");
             int funcId = Integer.valueOf(parsedLog[0]);
             String op = parsedLog[1];

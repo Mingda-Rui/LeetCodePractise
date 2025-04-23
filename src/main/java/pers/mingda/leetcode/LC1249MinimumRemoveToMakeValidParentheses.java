@@ -19,10 +19,8 @@ public class LC1249MinimumRemoveToMakeValidParentheses {
         StringBuilder sb = new StringBuilder();
         int toBeRemoved = s.length();
         for (int i = s.length() - 1; i >= 0; i++) {
-            if (toBeRemoved > i && !stack.isEmpty())
-                toBeRemoved = stack.pop();
-            if (i != toBeRemoved)
-                sb.append(s.charAt(i));
+            if (toBeRemoved > i && !stack.isEmpty()) toBeRemoved = stack.pop();
+            if (i != toBeRemoved) sb.append(s.charAt(i));
         }
         return sb.reverse().toString();
     }
@@ -35,10 +33,8 @@ public class LC1249MinimumRemoveToMakeValidParentheses {
             if (c == '(') {
                 balance++;
             } else if (c == ')') {
-                if (balance > 0)
-                    balance--;
-                else
-                    chars[i] = '*';
+                if (balance > 0) balance--;
+                else chars[i] = '*';
             }
         }
 
@@ -50,7 +46,7 @@ public class LC1249MinimumRemoveToMakeValidParentheses {
         }
 
         int index = 0;
-        for (char c: chars) {
+        for (char c : chars) {
             if (c != '*') {
                 chars[index] = c;
                 index++;

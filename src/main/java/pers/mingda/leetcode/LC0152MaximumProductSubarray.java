@@ -6,7 +6,7 @@ public class LC0152MaximumProductSubarray {
         int max = Integer.MIN_VALUE;
         int product = 1;
         int maxNegative = 1;
-        for (int num: nums) {
+        for (int num : nums) {
             if (num == 0) {
                 product = 1;
                 maxNegative = 1;
@@ -28,7 +28,7 @@ public class LC0152MaximumProductSubarray {
         int minNegative = 1;
         int result = nums[0];
 
-        for (int num: nums) {
+        for (int num : nums) {
             int currentPositive = Math.max(maxPositive, minNegative);
             int currentNegative = Math.min(maxPositive, minNegative);
             int nextPositive = (num > 0 ? currentPositive : currentNegative) * num;

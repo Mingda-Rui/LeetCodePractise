@@ -7,9 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-public class LC0743NetworkDelayTime {
-
-}
+public class LC0743NetworkDelayTime {}
 
 class LC0743Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
@@ -25,7 +23,7 @@ class LC0743Solution {
             LC0743Node current = queue.poll();
             seen.add(current.label);
             total = current.time;
-            for (int neighLabel: current.map.keySet()) {
+            for (int neighLabel : current.map.keySet()) {
                 LC0743Node neighLC0743Node = network.get(neighLabel);
                 int newTime = current.time + current.map.get(neighLabel);
                 if (newTime < neighLC0743Node.time) {
@@ -39,7 +37,7 @@ class LC0743Solution {
 
     private Map<Integer, LC0743Node> buildNetwork(int[][] times) {
         Map<Integer, LC0743Node> network = new HashMap<>();
-        for (int[] time: times) {
+        for (int[] time : times) {
             int from = time[0];
             int to = time[1];
             int distance = time[2];
@@ -56,6 +54,7 @@ class LC0743Node {
     int label;
     int time;
     Map<Integer, Integer> map;
+
     public LC0743Node(int label) {
         this.label = label;
         map = new HashMap<>();

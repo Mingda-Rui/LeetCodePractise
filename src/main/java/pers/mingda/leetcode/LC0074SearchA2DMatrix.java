@@ -12,12 +12,9 @@ public class LC0074SearchA2DMatrix {
             int calcRow = mid / column;
             int calcColumn = mid % column;
             int val = matrix[calcRow][calcColumn];
-            if (val == target)
-                return true;
-            else if (val > target)
-                end = mid;
-            else
-                start = mid + 1;
+            if (val == target) return true;
+            else if (val > target) end = mid;
+            else start = mid + 1;
         }
         return false;
     }
@@ -30,12 +27,9 @@ public class LC0074SearchA2DMatrix {
         while (start < end) {
             int mid = start + (end - start) / 2;
             int val = matrix[mid][0];
-            if (val == target)
-                return true;
-            else if (val < target)
-                start = mid + 1;
-            else
-                end = mid;
+            if (val == target) return true;
+            else if (val < target) start = mid + 1;
+            else end = mid;
         }
         int rowNum = Math.max(start - 1, 0);
         start = 0;
@@ -43,12 +37,9 @@ public class LC0074SearchA2DMatrix {
         while (start < end) {
             int mid = start + (end - start) / 2;
             int val = matrix[rowNum][mid];
-            if (val == target)
-                return true;
-            else if (val < target)
-                start = mid + 1;
-            else
-                end = mid;
+            if (val == target) return true;
+            else if (val < target) start = mid + 1;
+            else end = mid;
         }
         return false;
     }

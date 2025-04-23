@@ -2,20 +2,15 @@ package pers.mingda.leetcode;
 
 public class LC0572SubtreeOfAnotherTree {
     public boolean isSubtreeDfs(TreeNode root, TreeNode subRoot) {
-        if (isSameTree(root, subRoot))
-            return true;
-        if (root == null || subRoot == null)
-            return false;
+        if (isSameTree(root, subRoot)) return true;
+        if (root == null || subRoot == null) return false;
 
         return isSubtreeDfs(root.left, subRoot) || isSubtreeDfs(root.right, subRoot);
     }
 
     private boolean isSameTree(TreeNode root, TreeNode subRoot) {
-        if (root == null || subRoot == null)
-            return root == subRoot;
-        return root.val == subRoot.val
-                && isSameTree(root.left, subRoot.left)
-                && isSameTree(root.right, subRoot.right);
+        if (root == null || subRoot == null) return root == subRoot;
+        return root.val == subRoot.val && isSameTree(root.left, subRoot.left) && isSameTree(root.right, subRoot.right);
     }
 
     public boolean isSubtreePreorder(TreeNode root, TreeNode subRoot) {
@@ -27,8 +22,7 @@ public class LC0572SubtreeOfAnotherTree {
     }
 
     private void getStringPreOrder(TreeNode root, StringBuilder sb) {
-        if (root == null)
-            sb.append("#,");
+        if (root == null) sb.append("#,");
         else {
             sb.append(root.val).append(",");
             getStringPreOrder(root.left, sb);
@@ -45,8 +39,7 @@ public class LC0572SubtreeOfAnotherTree {
     }
 
     private void getStringPostorder(TreeNode root, StringBuilder sb) {
-        if (root == null)
-            sb.append("#,");
+        if (root == null) sb.append("#,");
         else {
             getStringPostorder(root.left, sb);
             getStringPostorder(root.right, sb);

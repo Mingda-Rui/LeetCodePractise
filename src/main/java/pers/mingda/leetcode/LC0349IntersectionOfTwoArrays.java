@@ -8,13 +8,9 @@ public class LC0349IntersectionOfTwoArrays {
     public int[] intersectionSetSolution(int[] nums1, int[] nums2) {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
-        for (int num: nums1)
-            set1.add(num);
-        for (int num: nums2)
-            set2.add(num);
-        for (int num: nums1)
-            if (!set2.contains(num))
-                set1.remove(num);
+        for (int num : nums1) set1.add(num);
+        for (int num : nums2) set2.add(num);
+        for (int num : nums1) if (!set2.contains(num)) set1.remove(num);
         return set1.stream().mapToInt(n -> n).toArray();
     }
 
@@ -22,13 +18,10 @@ public class LC0349IntersectionOfTwoArrays {
         Arrays.sort(nums1);
         Set<Integer> set = new HashSet<>();
         Set<Integer> bin = new HashSet<>();
-        for (int num: nums2) {
-            if (set.contains(num) || bin.contains(num))
-                continue;
-            if (binarySearch(nums1, num))
-                set.add(num);
-            else
-                bin.add(num);
+        for (int num : nums2) {
+            if (set.contains(num) || bin.contains(num)) continue;
+            if (binarySearch(nums1, num)) set.add(num);
+            else bin.add(num);
         }
         return set.stream().mapToInt(n -> n).toArray();
     }
@@ -40,12 +33,9 @@ public class LC0349IntersectionOfTwoArrays {
         while (start < end) {
             mid = start + (end - start) / 2;
             int current = nums1[mid];
-            if (current == target)
-                return true;
-            else if (current < target)
-                start = mid + 1;
-            else
-                end = mid;
+            if (current == target) return true;
+            else if (current < target) start = mid + 1;
+            else end = mid;
         }
         return false;
     }

@@ -9,7 +9,7 @@ public class LC0150EvaluateReversePolishNotation {
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
         Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
-        for (String token: tokens) {
+        for (String token : tokens) {
             if (!operators.contains(token)) {
                 int intToken = Integer.parseInt(token);
                 stack.push(intToken);
@@ -45,10 +45,18 @@ public class LC0150EvaluateReversePolishNotation {
             int first = evalRPNRecursive(tokens, indexHolder, operators);
             int result = 0;
             switch (token) {
-                case "+": result = first + second; break;
-                case "-": result = first - second; break;
-                case "*": result = first * second; break;
-                case "/": result = first / second; break;
+                case "+":
+                    result = first + second;
+                    break;
+                case "-":
+                    result = first - second;
+                    break;
+                case "*":
+                    result = first * second;
+                    break;
+                case "/":
+                    result = first / second;
+                    break;
                 default:
             }
             return result;

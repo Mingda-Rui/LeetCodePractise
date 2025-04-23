@@ -3,7 +3,7 @@ package pers.mingda.leetcode;
 public class LC1899MergeTripletsToFormTargetTriplet {
     public boolean mergeTriplets(int[][] triplets, int[] target) {
         boolean[] result = new boolean[3];
-        for (int[] triplet: triplets) {
+        for (int[] triplet : triplets) {
             boolean[] localResult = new boolean[3];
             boolean isValid = true;
             for (int i = 0; i < triplet.length; i++) {
@@ -26,7 +26,7 @@ public class LC1899MergeTripletsToFormTargetTriplet {
     }
 
     private boolean isFindResult(boolean[] result) {
-        for (boolean item: result) {
+        for (boolean item : result) {
             if (!item) {
                 return false;
             }

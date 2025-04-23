@@ -10,15 +10,14 @@ public class LC0690EmployeeImportance {
     public int getImportance(List<Employee> employees, int id) {
         Map<Integer, Employee> map = new HashMap<>();
         Queue<Employee> queue = new LinkedList<>();
-        for (Employee employee: employees)
-            map.put(employee.id, employee);
+        for (Employee employee : employees) map.put(employee.id, employee);
         int totalImportance = 0;
         Employee theBoss = map.get(id);
         queue.add(theBoss);
         while (!queue.isEmpty()) {
             Employee employee = queue.remove();
             totalImportance += employee.importance;
-            for (int subId: employee.subordinates) {
+            for (int subId : employee.subordinates) {
                 Employee sub = map.get(subId);
                 queue.add(sub);
             }
@@ -28,16 +27,14 @@ public class LC0690EmployeeImportance {
 
     public int getImportanceDfs(List<Employee> employees, int id) {
         Map<Integer, Employee> map = new HashMap<>();
-        for (Employee employee: employees)
-            map.put(employee.id, employee);
+        for (Employee employee : employees) map.put(employee.id, employee);
         return getImportanceDfsHelper(map, id);
     }
 
     private int getImportanceDfsHelper(Map<Integer, Employee> map, int id) {
         Employee employee = map.get(id);
         int totalImportance = employee.importance;
-        for (int subId: employee.subordinates)
-            totalImportance += getImportanceDfsHelper(map, subId);
+        for (int subId : employee.subordinates) totalImportance += getImportanceDfsHelper(map, subId);
         return totalImportance;
     }
 }

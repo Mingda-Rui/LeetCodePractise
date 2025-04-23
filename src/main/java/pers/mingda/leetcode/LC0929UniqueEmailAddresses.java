@@ -6,7 +6,7 @@ import java.util.Set;
 public class LC0929UniqueEmailAddresses {
     public int numUniqueEmails(String[] emails) {
         Set<String> set = new HashSet<>();
-        for (String email: emails) {
+        for (String email : emails) {
             String parsedEmail = parseLocalName(email);
             set.add(parsedEmail);
         }
@@ -21,10 +21,8 @@ public class LC0929UniqueEmailAddresses {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < local.length(); i++) {
             char c = local.charAt(i);
-            if (c == '+')
-                break;
-            else if (c != '.')
-                sb.append(c);
+            if (c == '+') break;
+            else if (c != '.') sb.append(c);
         }
         sb.append("@").append(domain);
         return sb.toString();

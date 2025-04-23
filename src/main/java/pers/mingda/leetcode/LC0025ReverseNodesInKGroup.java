@@ -33,8 +33,7 @@ public class LC0025ReverseNodesInKGroup {
             counter++;
         }
 
-        if (counter < k || t1 == null)
-            return h1;
+        if (counter < k || t1 == null) return h1;
 
         ListNode h2 = t1.next;
         t1.next = null;
@@ -52,8 +51,7 @@ public class LC0025ReverseNodesInKGroup {
             oldHead.next = newHead;
             newHead = oldHead;
         }
-        if (parent != null)
-            parent.next = newHead;
+        if (parent != null) parent.next = newHead;
         return newHead;
     }
 

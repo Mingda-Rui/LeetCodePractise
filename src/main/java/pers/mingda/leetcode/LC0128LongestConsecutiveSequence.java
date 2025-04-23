@@ -18,14 +18,13 @@ public class LC0128LongestConsecutiveSequence {
         for (int i = 0; i < nums.length; i++) {
             int current = nums[i];
             while (map.containsKey(current) && record[map.get(current)] == 0) {
-                //int curIndex = map.get(current);
-                //counter += visited[curIndex] == 0 ? 1 : visited[curIndex];
+                // int curIndex = map.get(current);
+                // counter += visited[curIndex] == 0 ? 1 : visited[curIndex];
                 record[map.get(current)] = 1;
                 counter++;
                 current--;
             }
-            if (map.containsKey(current))
-                counter += record[map.get(current)];
+            if (map.containsKey(current)) counter += record[map.get(current)];
             record[i] = counter;
             maxCount = Math.max(maxCount, counter);
             counter = 0;
@@ -36,11 +35,10 @@ public class LC0128LongestConsecutiveSequence {
     public int longestConsecutiveSet(int[] nums) {
         int maxCount = 0;
         Set<Integer> set = new HashSet<>();
-        for (int num: nums)
-            set.add(num);
+        for (int num : nums) set.add(num);
 
         int counter = 0;
-        for (int num: nums) {
+        for (int num : nums) {
             if (set.remove(num)) {
                 counter++;
                 counter += consecutives(set, num + 1, 1);

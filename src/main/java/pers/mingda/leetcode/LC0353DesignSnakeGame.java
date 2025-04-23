@@ -6,9 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class LC0353DesignSnakeGame {
-
-}
+public class LC0353DesignSnakeGame {}
 
 class SnakeGame {
 
@@ -47,7 +45,6 @@ class SnakeGame {
         snakeBody.add(0, newHead);
         bodySet.add(newHead);
         return score;
-
     }
 
     private List<Integer> getNextPos(String direction) {
@@ -64,11 +61,9 @@ class SnakeGame {
     }
 
     private boolean tryEatNextFood(List<Integer> head) {
-        if (foodEaten == food.length)
-            return false;
+        if (foodEaten == food.length) return false;
         int[] nextFood = food[foodEaten];
-        if (nextFood[0] != head.get(0) || nextFood[1] != head.get(1))
-            return false;
+        if (nextFood[0] != head.get(0) || nextFood[1] != head.get(1)) return false;
         foodEaten++;
         score++;
         return true;

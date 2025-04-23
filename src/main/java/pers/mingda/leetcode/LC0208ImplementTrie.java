@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC0208ImplementTrie {
-
-}
+public class LC0208ImplementTrie {}
 
 class LC0208Trie {
 
@@ -31,11 +29,9 @@ class LC0208Trie {
     }
 
     private boolean search(String prefix, int index) {
-        if (index == prefix.length())
-            return true;
+        if (index == prefix.length()) return true;
         char c = prefix.charAt(index);
-        if (record[c] == null)
-            return false;
+        if (record[c] == null) return false;
         return record[c].search(prefix, index + 1);
     }
 

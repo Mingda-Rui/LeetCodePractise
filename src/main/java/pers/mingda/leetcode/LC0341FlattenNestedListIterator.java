@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
-public class LC0341FlattenNestedListIterator {
-
-}
+public class LC0341FlattenNestedListIterator {}
 
 class NestedIterator implements Iterator<Integer> {
 
@@ -30,11 +28,9 @@ class NestedIterator implements Iterator<Integer> {
     }
 
     private List<Integer> parseNestedInt(List<LC0341NestedInteger> nestedList, List<Integer> result) {
-        for (LC0341NestedInteger nestedInt: nestedList) {
-            if (nestedInt.isInteger())
-                result.add(nestedInt.getInteger());
-            else
-                parseNestedInt(nestedInt.getList(), result);
+        for (LC0341NestedInteger nestedInt : nestedList) {
+            if (nestedInt.isInteger()) result.add(nestedInt.getInteger());
+            else parseNestedInt(nestedInt.getList(), result);
         }
         return result;
     }
@@ -63,7 +59,6 @@ class NestedIteratorFlatAsYouGo implements Iterator<Integer> {
         }
         return !stack.isEmpty();
     }
-
 
     private void populateStack(List<LC0341NestedInteger> nestedList) {
         for (int i = nestedList.size() - 1; i >= 0; i--) {

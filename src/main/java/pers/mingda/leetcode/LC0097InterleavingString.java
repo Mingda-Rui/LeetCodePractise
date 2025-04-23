@@ -38,7 +38,7 @@ public class LC0097InterleavingString {
         dp[0] = true;
         for (int i = 0; i <= s1.length(); i++) {
             int index1 = i - 1;
-            for (int j = 0; j<= s2.length(); j++) {
+            for (int j = 0; j <= s2.length(); j++) {
                 int index2 = j - 1;
                 int index3 = index1 + index2 + 1;
                 if (index3 < 0) {

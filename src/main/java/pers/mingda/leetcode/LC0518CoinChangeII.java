@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class LC0518CoinChangeII {
     public int change(int amount, int[] coins) {
         int[][] changeRecord = new int[coins.length][amount + 1];
-        for (int[] col: changeRecord) {
+        for (int[] col : changeRecord) {
             Arrays.fill(col, -1);
         }
         return findChange(amount, coins, 0, changeRecord);

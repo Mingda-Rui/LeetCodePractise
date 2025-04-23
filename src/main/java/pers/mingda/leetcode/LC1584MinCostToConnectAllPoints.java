@@ -6,16 +6,13 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class LC1584MinCostToConnectAllPoints {
-
-}
+public class LC1584MinCostToConnectAllPoints {}
 
 class LC1584Solution {
     public int minCostConnectPoints(int[][] points) {
         int[] minDist = new int[points.length];
 
-        for (int i = 0; i < points.length; i++)
-            minDist[i] = Integer.MAX_VALUE;
+        for (int i = 0; i < points.length; i++) minDist[i] = Integer.MAX_VALUE;
         minDist[0] = 0;
 
         boolean[] seen = new boolean[points.length];
@@ -35,8 +32,7 @@ class LC1584Solution {
             sumOfEdge += minLen;
             numOfNode++;
             for (int i = 0; i < points.length; i++) {
-                if (!seen[i])
-                    minDist[i] = Math.min(minDist[i], getLengthOfEdge(points[nearestNode], points[i]));
+                if (!seen[i]) minDist[i] = Math.min(minDist[i], getLengthOfEdge(points[nearestNode], points[i]));
             }
         }
         return sumOfEdge;
@@ -73,7 +69,7 @@ class LC1584LC1584UnionFindSolution {
 
             if (uf.union(point1, point2)) {
                 sumOfEdge += getLengthOfEdge(edge);
-                numOfEdge ++;
+                numOfEdge++;
             }
         }
         return sumOfEdge;
@@ -93,15 +89,13 @@ class LC1584UnionFind {
     public LC1584UnionFind(int size) {
         this.group = new int[size];
         this.rank = new int[size];
-        for (int i = 0; i < group.length; i++)
-            group[i] = i;
+        for (int i = 0; i < group.length; i++) group[i] = i;
     }
 
     public boolean union(int node1, int node2) {
         int root1 = find(node1);
         int root2 = find(node2);
-        if (root1 == root2)
-            return false;
+        if (root1 == root2) return false;
         if (rank[root1] < rank[root2]) {
             group[root1] = root2;
             rank[root2]++;
@@ -113,8 +107,7 @@ class LC1584UnionFind {
     }
 
     public int find(int node) {
-        while (group[node] != node)
-            node = group[node];
+        while (group[node] != node) node = group[node];
         return node;
     }
 }

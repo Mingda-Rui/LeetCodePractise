@@ -11,7 +11,7 @@ public class LC0057InsertInterval {
             int[] next = newInterval;
             newInterval = null;
             int[] current = index < intervals.length ? intervals[index] : null;
-            if (next == null || (index < intervals.length && current[0] < next[0]) ) {
+            if (next == null || (index < intervals.length && current[0] < next[0])) {
                 newInterval = next;
                 next = current;
                 index++;
@@ -24,19 +24,16 @@ public class LC0057InsertInterval {
 
     private void addInterval(List<int[]> result, int[] interval) {
         int[] last = result.isEmpty() ? null : result.get(result.size() - 1);
-        if (!result.isEmpty() && last[1] >= interval[0])
-            last[1] = Math.max(last[1], interval[1]);
-        else
-            result.add(interval);
+        if (!result.isEmpty() && last[1] >= interval[0]) last[1] = Math.max(last[1], interval[1]);
+        else result.add(interval);
     }
 
     public int[][] insertRefactored(int[][] intervals, int[] newInterval) {
         List<int[]> result = new LinkedList<>();
 
         int[] next = newInterval;
-        for (int[] interval: intervals) {
-            if (interval[1] < next[0])
-                result.add(interval);
+        for (int[] interval : intervals) {
+            if (interval[1] < next[0]) result.add(interval);
             else if (next[1] < interval[0]) {
                 result.add(next);
                 next = interval;

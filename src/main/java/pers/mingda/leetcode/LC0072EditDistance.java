@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class LC0072EditDistance {
     public int minDistance(String word1, String word2) {
         int[][] memo = new int[word1.length()][word2.length()];
-        for (int[] row: memo) {
+        for (int[] row : memo) {
             Arrays.fill(row, -1);
         }
         return findMinDistance(word1, 0, word2, 0, memo);

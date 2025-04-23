@@ -40,11 +40,10 @@ public class LC0726NumberOfAtoms {
 
     private String generateCountOfAtoms(Map<String, Integer> map) {
         StringBuilder sb = new StringBuilder();
-        for (String e: map.keySet()) {
+        for (String e : map.keySet()) {
             int val = map.get(e);
             sb.append(e);
-            if (val > 1)
-                sb.append(val);
+            if (val > 1) sb.append(val);
         }
         return sb.toString();
     }
@@ -70,7 +69,7 @@ public class LC0726NumberOfAtoms {
                     magnitude = magnitude * 10 + (formula[indexHolder[0]] - '0');
                 }
                 magnitude = Math.max(1, magnitude);
-                for (String element: innerMap.keySet()) {
+                for (String element : innerMap.keySet()) {
                     int val = innerMap.get(element) * magnitude;
                     int currentVal = map.getOrDefault(element, 0);
                     map.put(element, val + currentVal);
@@ -85,7 +84,10 @@ public class LC0726NumberOfAtoms {
             }
 
             boolean atTail = index + 1 == formula.length;
-            boolean foundElement = atTail || !currentElement.isEmpty() && !Character.isDigit(formula[index + 1]) && !Character.isLowerCase(formula[index + 1]);
+            boolean foundElement = atTail
+                    || !currentElement.isEmpty()
+                            && !Character.isDigit(formula[index + 1])
+                            && !Character.isLowerCase(formula[index + 1]);
             if (foundElement) {
                 int prevVal = map.getOrDefault(currentElement, 0);
                 map.put(currentElement, prevVal + Math.max(1, magnitude));

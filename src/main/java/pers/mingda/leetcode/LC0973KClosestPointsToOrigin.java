@@ -16,13 +16,12 @@ public class LC0973KClosestPointsToOrigin {
         };
 
         Queue<List<Integer>> queue = new PriorityQueue<>(k + 1, comparator);
-        for (int[] point: points) {
+        for (int[] point : points) {
             List<Integer> node = new ArrayList<>(2);
             node.add(point[0]);
             node.add(point[1]);
             queue.add(node);
-            if (queue.size() > k)
-                queue.remove();
+            if (queue.size() > k) queue.remove();
         }
 
         int[][] result = new int[queue.size()][2];

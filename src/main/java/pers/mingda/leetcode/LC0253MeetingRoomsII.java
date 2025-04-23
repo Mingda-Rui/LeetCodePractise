@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LC0253MeetingRoomsII {
-
-}
+public class LC0253MeetingRoomsII {}
 
 class LC0253Solution {
     public int minMeetingRooms(int[][] intervals) {
@@ -22,10 +20,8 @@ class LC0253Solution {
         int endIndex = 0;
         int maxRooms = 0;
         for (int startIndex = 0; startIndex < startTime.length; startIndex++) {
-            if (startTime[startIndex] < endTime[endIndex])
-                maxRooms++;
-            else
-                endIndex++;
+            if (startTime[startIndex] < endTime[endIndex]) maxRooms++;
+            else endIndex++;
         }
 
         return maxRooms;
@@ -35,7 +31,7 @@ class LC0253Solution {
 class TreeMapSolution {
     public int minMeetingRooms(int[][] intervals) {
         Map<Integer, Integer> map = new TreeMap<>();
-        for (int[] interval: intervals) {
+        for (int[] interval : intervals) {
             int start = interval[0];
             int end = interval[1];
             map.put(start, map.getOrDefault(start, 0) + 1);
@@ -44,7 +40,7 @@ class TreeMapSolution {
 
         int maxRooms = 0;
         int rooms = 0;
-        for (int count: map.values()) {
+        for (int count : map.values()) {
             rooms += count;
             maxRooms = Math.max(maxRooms, rooms);
         }

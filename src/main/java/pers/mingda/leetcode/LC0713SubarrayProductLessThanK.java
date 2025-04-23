@@ -12,8 +12,7 @@ public class LC0713SubarrayProductLessThanK {
             if (nextProduct < k || slow == fast) {
                 product = nextProduct;
                 fast++;
-                if (product < k)
-                    counter += fast - slow;
+                if (product < k) counter += fast - slow;
             } else {
                 product /= nums[slow];
                 slow++;

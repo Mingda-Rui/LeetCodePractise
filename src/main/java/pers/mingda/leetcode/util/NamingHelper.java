@@ -22,7 +22,7 @@ public class NamingHelper {
 
     private static Map<Integer, Character> initIntToChar() {
         Map<Integer, Character> intToChar = new HashMap<>();
-        for (int i = 0; i < 26; i ++) {
+        for (int i = 0; i < 26; i++) {
             intToChar.put(i, (char) ('A' + i));
         }
         return Collections.unmodifiableMap(intToChar);
@@ -30,7 +30,7 @@ public class NamingHelper {
 
     private static Map<Character, Integer> initCharToInt() {
         Map<Character, Integer> charToInt = new HashMap<>();
-        for (int i = 0; i < 26; i ++) {
+        for (int i = 0; i < 26; i++) {
             charToInt.put((char) ('A' + i), i);
         }
         return Collections.unmodifiableMap(charToInt);
@@ -43,15 +43,14 @@ public class NamingHelper {
         // AAZ => 0025
         // ABA => 0026
         if (num < 1 || num > 17575) {
-            throw new IllegalArgumentException(
-                    "Class number should be in the field of 1 to 17576 (AAA to ZZZ)");
+            throw new IllegalArgumentException("Class number should be in the field of 1 to 17576 (AAA to ZZZ)");
         }
         StringBuilder sb = new StringBuilder();
-        while(num != 0) {
+        while (num != 0) {
             int result = num / 26;
             int remainder = num % 26;
             num = result;
-            sb.append( intToChar.get(remainder) );
+            sb.append(intToChar.get(remainder));
         }
 
         if (sb.length() > 3) {
@@ -68,7 +67,7 @@ public class NamingHelper {
 
     public static int getClassNumByPrefix(String prefix) {
         int num = 0;
-        for (Character ch: normalizePrefix(prefix).toCharArray()) {
+        for (Character ch : normalizePrefix(prefix).toCharArray()) {
             int temp = charToInt.get(ch);
             num = num * 26 + temp;
         }
@@ -77,11 +76,10 @@ public class NamingHelper {
 
     private static String normalizePrefix(String prefix) {
         String normalizedPrefix = prefix;
-        if (prefix == null || ! prefix.matches("[a-zA-Z]{1,3}")) {
-            throw new IllegalArgumentException(
-                    "Illegal prefix format. The prefix should consist of 3 letters");
+        if (prefix == null || !prefix.matches("[a-zA-Z]{1,3}")) {
+            throw new IllegalArgumentException("Illegal prefix format. The prefix should consist of 3 letters");
         } else if (prefix.length() < 3) {
-            normalizedPrefix = "A".repeat( 3-(prefix.length()) ) + prefix;
+            normalizedPrefix = "A".repeat(3 - (prefix.length())) + prefix;
         }
         return normalizedPrefix;
     }
@@ -89,17 +87,17 @@ public class NamingHelper {
     public static void main(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException(
-                    "In order to use NamingHelper util, 1 or more args in the following format need to be provided.\n " +
-                            "1. Prefix no less than 3 letters, which will be converted to number\n " +
-                            "2. Or, number of leetcode problems, which will be converted to prefix");
+                    "In order to use NamingHelper util, 1 or more args in the following format need to be provided.\n "
+                            + "1. Prefix no less than 3 letters, which will be converted to number\n "
+                            + "2. Or, number of leetcode problems, which will be converted to prefix");
         }
 
         for (String arg : args) {
             try {
                 parseArg(arg);
             } catch (Exception ex) {
-                System.out.println("Arg: " + arg + " can not be processed. Cause by error: " + ex.getCause() + "\n" +
-                        "Error message: " + ex.getMessage());
+                System.out.println("Arg: " + arg + " can not be processed. Cause by error: " + ex.getCause() + "\n"
+                        + "Error message: " + ex.getMessage());
             }
         }
     }

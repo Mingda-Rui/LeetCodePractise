@@ -5,18 +5,15 @@ import java.util.Queue;
 
 public class LC0116PopulatingNextRightPointersInEachNode {
     public LC0116Node connect(LC0116Node root) {
-        if (root == null)
-            return root;
+        if (root == null) return root;
         Queue<LC0116Node> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 LC0116Node LC0116Node = queue.remove();
-                if (i == size - 1)
-                    LC0116Node.next = null;
-                else
-                    LC0116Node.next = queue.element();
+                if (i == size - 1) LC0116Node.next = null;
+                else LC0116Node.next = queue.element();
                 if (LC0116Node.right != null) {
                     queue.add(LC0116Node.left);
                     queue.add(LC0116Node.right);
@@ -27,15 +24,13 @@ public class LC0116PopulatingNextRightPointersInEachNode {
     }
 
     public LC0116Node connectIterativeNoStack(LC0116Node root) {
-        if (root == null)
-            return root;
+        if (root == null) return root;
         LC0116Node ite = root;
         LC0116Node nextLevel = ite.left;
         while (ite != null) {
             if (ite.left != null) {
                 ite.left.next = ite.right;
-                if (ite.next != null)
-                    ite.right.next = ite.next.left;
+                if (ite.next != null) ite.right.next = ite.next.left;
             }
 
             ite = ite.next;
@@ -48,11 +43,9 @@ public class LC0116PopulatingNextRightPointersInEachNode {
     }
 
     public LC0116Node connectRecursive(LC0116Node root) {
-        if (root == null || root.left == null)
-            return root;
+        if (root == null || root.left == null) return root;
         root.left.next = root.right;
-        if (root.next != null)
-            root.right.next = root.next.left;
+        if (root.next != null) root.right.next = root.next.left;
         connectRecursive(root.left);
         connectRecursive(root.right);
         return root;

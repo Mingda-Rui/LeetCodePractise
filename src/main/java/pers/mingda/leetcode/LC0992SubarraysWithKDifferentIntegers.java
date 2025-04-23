@@ -24,8 +24,7 @@ public class LC0992SubarraysWithKDifferentIntegers {
                 int countOfVal = map.get(val);
                 map.put(val, countOfVal - 1);
             }
-            if (count == k)
-                result++;
+            if (count == k) result++;
         }
         return result;
     }

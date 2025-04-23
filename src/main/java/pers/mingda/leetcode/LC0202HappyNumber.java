@@ -12,8 +12,7 @@ public class LC0202HappyNumber {
         while (!seen.contains(n)) {
             seen.add(n);
             n = calcHappyNumber(n, map);
-            if (n == 1)
-                return true;
+            if (n == 1) return true;
         }
         return false;
     }
@@ -23,8 +22,7 @@ public class LC0202HappyNumber {
         while (n != 0) {
             int val = n % 10;
             n /= 10;
-            if (!map.containsKey(val))
-                map.put(val, val * val);
+            if (!map.containsKey(val)) map.put(val, val * val);
             int square = map.get(val);
             sum += square;
         }

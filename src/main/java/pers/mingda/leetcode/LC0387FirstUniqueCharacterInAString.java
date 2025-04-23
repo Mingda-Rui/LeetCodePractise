@@ -6,12 +6,10 @@ import java.util.Map;
 public class LC0387FirstUniqueCharacterInAString {
     public int firstUniqChar(String s) {
         int[] record = new int[128];
-        for (char c: s.toCharArray())
-            record[c]++;
+        for (char c : s.toCharArray()) record[c]++;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (record[c] == 1)
-                return i;
+            if (record[c] == 1) return i;
         }
         return -1;
     }
@@ -38,8 +36,7 @@ public class LC0387FirstUniqueCharacterInAString {
         record[s.charAt(slow)]++;
         while (slow < fast) {
             if (fast < s.length()) {
-                if (s.charAt(slow) == s.charAt(fast))
-                    slow++;
+                if (s.charAt(slow) == s.charAt(fast)) slow++;
                 record[s.charAt(fast)]++;
                 fast++;
             } else if (record[s.charAt(slow)] > 1) {
@@ -55,8 +52,7 @@ public class LC0387FirstUniqueCharacterInAString {
         int result = Integer.MAX_VALUE;
         for (char c = 'a'; c <= 'z'; c++) {
             int index = s.indexOf(c);
-            if (index != -1 && index == s.lastIndexOf(c))
-                result = Math.min(result, index);
+            if (index != -1 && index == s.lastIndexOf(c)) result = Math.min(result, index);
         }
         return result == Integer.MAX_VALUE ? -1 : result;
     }

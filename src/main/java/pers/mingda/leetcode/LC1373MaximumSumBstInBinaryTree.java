@@ -1,8 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC1373MaximumSumBstInBinaryTree {
-
-}
+public class LC1373MaximumSumBstInBinaryTree {}
 
 /**
  * Definition for a binary tree node.
@@ -29,16 +27,13 @@ class LC1373Solution {
     }
 
     public Result maxSumBSTHelper(TreeNode root) {
-        if (root == null)
-            return new Result(Integer.MAX_VALUE, Integer.MIN_VALUE, 0);
+        if (root == null) return new Result(Integer.MAX_VALUE, Integer.MIN_VALUE, 0);
 
         Result lResult = maxSumBSTHelper(root.left);
         Result rResult = maxSumBSTHelper(root.right);
 
-        if (lResult == null || lResult.large >= root.val)
-            return null;
-        if (rResult == null || rResult.small <= root.val)
-            return null;
+        if (lResult == null || lResult.large >= root.val) return null;
+        if (rResult == null || rResult.small <= root.val) return null;
 
         int small = Math.min(root.val, lResult.small);
         int larget = Math.max(root.val, rResult.large);

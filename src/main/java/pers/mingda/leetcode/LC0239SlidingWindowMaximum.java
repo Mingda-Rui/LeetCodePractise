@@ -11,11 +11,9 @@ public class LC0239SlidingWindowMaximum {
         for (int i = 0; i < nums.length; i++) {
             int val = nums[i];
             int removeIndex = i - t;
-            if (removeIndex >= 0 && deque.peekFirst() == nums[removeIndex])
-                deque.pollFirst();
+            if (removeIndex >= 0 && deque.peekFirst() == nums[removeIndex]) deque.pollFirst();
 
-            while (!deque.isEmpty() && deque.peekLast() < val)
-                deque.pollLast();
+            while (!deque.isEmpty() && deque.peekLast() < val) deque.pollLast();
             deque.offerLast(val);
             int index = Math.max(0, i - (t - 1));
             result[index] = deque.peekFirst();
@@ -32,8 +30,7 @@ public class LC0239SlidingWindowMaximum {
         int currentMax = Integer.MIN_VALUE;
         for (int i = 0; i < nums.length; i++) {
             int val = nums[i];
-            if (i % t == 0)
-                currentMax = Integer.MIN_VALUE;
+            if (i % t == 0) currentMax = Integer.MIN_VALUE;
             currentMax = Math.max(val, currentMax);
             leftMax[i] = currentMax;
         }
@@ -41,8 +38,7 @@ public class LC0239SlidingWindowMaximum {
         currentMax = Integer.MIN_VALUE;
         for (int i = nums.length - 1; i >= 0; i--) {
             int val = nums[i];
-            if (i % t == t - 1)
-                currentMax = Integer.MIN_VALUE;
+            if (i % t == t - 1) currentMax = Integer.MIN_VALUE;
             currentMax = Math.max(val, currentMax);
             rightMax[i] = currentMax;
         }

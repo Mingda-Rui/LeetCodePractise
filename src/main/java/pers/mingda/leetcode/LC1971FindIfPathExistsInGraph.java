@@ -13,7 +13,7 @@ public class LC1971FindIfPathExistsInGraph {
         for (int i = 0; i < unionTable.length; i++) {
             unionTable[i] = i;
         }
-        for (int[] edge: edges) {
+        for (int[] edge : edges) {
             union(unionTable, edge[0], edge[1]);
         }
     }
@@ -27,10 +27,8 @@ public class LC1971FindIfPathExistsInGraph {
     }
 
     private int find(int[] unionTable, int node) {
-        if (unionTable[node] == node)
-            return node;
-        else
-            return find(unionTable, unionTable[node]);
+        if (unionTable[node] == node) return node;
+        else return find(unionTable, unionTable[node]);
     }
 
     // BFS
@@ -41,9 +39,8 @@ public class LC1971FindIfPathExistsInGraph {
 
         while (newVisit) {
             newVisit = false;
-            for (int[] edge: edges) {
-                if (visited[destination])
-                    return true;
+            for (int[] edge : edges) {
+                if (visited[destination]) return true;
                 int vertex1 = edge[0];
                 int vertex2 = edge[1];
                 if (visited[vertex1] && !visited[vertex2]) {

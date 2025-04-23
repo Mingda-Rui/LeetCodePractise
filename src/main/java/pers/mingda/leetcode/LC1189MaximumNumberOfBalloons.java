@@ -13,10 +13,9 @@ public class LC1189MaximumNumberOfBalloons {
         List<Character> letterList = Arrays.asList('b', 'a', 'l', 'o', 'n');
         Set<Character> set = new HashSet<>(letterList);
 
-        for (char c: set)
-            map.put(c, 0);
+        for (char c : set) map.put(c, 0);
 
-        for (char c: text.toCharArray()) {
+        for (char c : text.toCharArray()) {
             if (set.contains(c)) {
                 int count = map.get(c);
                 map.put(c, count + 1);
@@ -24,10 +23,9 @@ public class LC1189MaximumNumberOfBalloons {
         }
 
         int min = Integer.MAX_VALUE;
-        for (char c: map.keySet()) {
+        for (char c : map.keySet()) {
             int count = map.get(c);
-            if (c == 'l' || c == 'o')
-                count /= 2;
+            if (c == 'l' || c == 'o') count /= 2;
             min = Math.min(min, count);
         }
         return min;

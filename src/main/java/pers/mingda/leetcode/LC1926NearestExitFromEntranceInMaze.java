@@ -34,7 +34,7 @@ public class LC1926NearestExitFromEntranceInMaze {
         int row = spot.getFirst();
         int col = spot.getLast();
 
-        for (List<Integer> offset: offsets) {
+        for (List<Integer> offset : offsets) {
             int i = row + offset.getFirst();
             int j = col + offset.getLast();
             if (!checkRange(maze, i, j) || isWall(maze, i, j) || visited[i][j]) {
@@ -45,7 +45,6 @@ public class LC1926NearestExitFromEntranceInMaze {
             }
             visited[i][j] = true;
             toVisit.add(List.of(i, j));
-
         }
         return false;
     }
@@ -59,7 +58,7 @@ public class LC1926NearestExitFromEntranceInMaze {
     }
 
     private boolean isExit(char[][] maze, int row, int col) {
-        //boolean isEmptyCell = maze[row][col] == '.';
+        // boolean isEmptyCell = maze[row][col] == '.';
         return row == 0 || col == 0 || row == maze.length - 1 || col == maze[0].length - 1;
     }
 }
