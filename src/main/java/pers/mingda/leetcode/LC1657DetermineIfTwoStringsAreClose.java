@@ -11,13 +11,8 @@ public class LC1657DetermineIfTwoStringsAreClose {
         }
         Map<Character, Integer> word1Count = countLetters(word1);
         Map<Character, Integer> word2Count = countLetters(word2);
-        if (word1Count.size() != word2Count.size()) {
+        if (!word1Count.keySet().equals(word2Count.keySet())) {
             return false;
-        }
-        for (char letter : word1Count.keySet()) {
-            if (!word2Count.containsKey(letter)) {
-                return false;
-            }
         }
 
         Map<Integer, Integer> convertCount1 = convertCounts(word1Count);
