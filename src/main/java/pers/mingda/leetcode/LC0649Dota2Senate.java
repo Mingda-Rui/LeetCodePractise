@@ -23,15 +23,15 @@ public class LC0649Dota2Senate {
             char nextSenate = queue.poll();
             if (nextSenate == 'R' && pendingRBan == 0) {
                 pendingDBan++;
-                dCount--;
                 queue.offer(nextSenate);
             } else if (nextSenate == 'D' && pendingDBan == 0) {
                 pendingRBan++;
-                rCount--;
                 queue.offer(nextSenate);
             } else if (nextSenate == 'R') {
+                rCount--;
                 pendingRBan--;
             } else if (nextSenate == 'D') {
+                dCount--;
                 pendingDBan--;
             }
         }
