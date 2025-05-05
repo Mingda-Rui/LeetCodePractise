@@ -1,61 +1,40 @@
 package pers.mingda.leetcode;
 
 import java.util.LinkedList;
-import java.util.Optional;
 import java.util.Queue;
 
 public class LC0649Dota2Senate {
     public String predictPartyVictory(String senate) {
-        Optional<String> winner = findWinner(senate);
-        while(winner.isEmpty()) {
-            senate = vote(senate);
-            winner = findWinner(senate);
-        }
-        return winner.orElseThrow();
-    }
-
-    private Optional<String> findWinner(String senate) {
-        char party = senate.charAt(0);
-        for (char c : senate.toCharArray()) {
-            if (c != party) {
-                return Optional.empty();
-            }
-        }
-        String winner = party == 'R' ? "Radiant" : "Dire";
-        return Optional.of(winner);
-    }
-
-    private String vote(String senate) {
-        int bannedRadiant = 0;
-        int bannedDire = 0;
         Queue<Character> queue = new LinkedList<>();
-        for (char c: senate.toCharArray()) {
-            boolean isRadiant = c == 'R';
-            boolean isDire = !isRadiant;
-            if (isRadiant && bannedRadiant != 0) {
-                bannedRadiant--;
-            } else if (isDire && bannedDire != 0) {
-                bannedDire--;
+        int rCount = 0;
+        int dCount = 0;
+        for (char individualSenate: senate.toCharArray()) {
+            queue.offer(individualSenate);
+            if (individualSenate == 'R') {
+                rCount++;
             } else {
-                queue.offer(c);
-                if (isRadiant) {
-                    bannedDire++;
-                } else {
-                    bannedRadiant++;
-                }
+                dCount++;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        while (!queue.isEmpty()) {
-            char c = queue.poll();
-            if (c == 'R' && bannedRadiant != 0) {
-                bannedRadiant--;
-            } else if (c == 'D' && bannedDire != 0) {
-                bannedDire--;
-            } else {
-                sb.append(c);
+
+        int pendingRBan = 0;
+        int pendingDBan = 0;
+        while (rCount != 0 && dCount != 0 && !queue.isEmpty()) {
+            char nextSenate = queue.poll();
+            if (nextSenate == 'R' && pendingRBan == 0) {
+                pendingDBan++;
+                dCount--;
+                queue.offer(nextSenate);
+            } else if (nextSenate == 'D' && pendingDBan == 0) {
+                pendingRBan++;
+                rCount--;
+                queue.offer(nextSenate);
+            } else if (nextSenate == 'R') {
+                pendingRBan--;
+            } else if (nextSenate == 'D') {
+                pendingDBan--;
             }
         }
-        return sb.toString();
+        return rCount == 0 ? "Dire" : "Radiant";
     }
 }
