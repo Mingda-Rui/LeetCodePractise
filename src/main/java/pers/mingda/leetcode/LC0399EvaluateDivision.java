@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.commons.math3.util.Pair;
 
@@ -97,7 +98,7 @@ class LC0399UnionFind {
 
     public EqnPair find(String param) {
         EqnPair gPair = eqnMap.computeIfAbsent(param, (p) -> new EqnPair(p, 1));
-        if (gPair.commonDivisor() == param) {
+        if (Objects.equals(gPair.commonDivisor(), param)) {
             return gPair;
         }
         EqnPair parentGPair = find(gPair.commonDivisor());
@@ -111,7 +112,7 @@ class LC0399UnionFind {
         String divisor = eqn.getLast();
         EqnPair dividendPair = find(dividend);
         EqnPair divisorPair = find(divisor);
-        if (dividendPair.commonDivisor() == divisorPair.commonDivisor()) {
+        if (Objects.equals(dividendPair.commonDivisor(), divisorPair.commonDivisor())) {
             return;
         }
 
