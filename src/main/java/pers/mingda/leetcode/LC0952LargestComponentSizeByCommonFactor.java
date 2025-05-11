@@ -9,7 +9,7 @@ import java.util.Map;
 public class LC0952LargestComponentSizeByCommonFactor {
     public int largestComponentSize(int[] nums) {
         int max = findMax(nums);
-        UnionFind uf = new UnionFind(max);
+        LC0592UnionFind uf = new LC0592UnionFind(max);
         Map<Integer, Integer> numToFactor = new HashMap<>();
         for (int num : nums) {
             List<Integer> primeFactors = findAllPrimeFactors(num);
@@ -61,11 +61,11 @@ public class LC0952LargestComponentSizeByCommonFactor {
     }
 }
 
-class UnionFind {
+class LC0592UnionFind {
     private final int[] elements;
     private final int[] sizes;
 
-    public UnionFind(int size) {
+    public LC0592UnionFind(int size) {
         this.elements = new int[size + 1];
         this.sizes = new int[size + 1];
         Arrays.fill(sizes, 1);
