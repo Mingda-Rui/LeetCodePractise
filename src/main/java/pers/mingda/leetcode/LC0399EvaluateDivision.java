@@ -59,4 +59,68 @@ public class LC0399EvaluateDivision {
         equationMap.computeIfAbsent(current, (k) -> new ArrayList<>()).add(new Pair<>(target,result));
         equationMap.computeIfAbsent(target, (k) -> new ArrayList<>()).add(new Pair<>(current, 1 / result));
     }
+
+    public double[] calcEquationUnionFind(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        LC0399UnionFind uf = new LC0399UnionFind();
+        for (int i = 0; i < equations.size(); i++) {
+            uf.union(equations.get(i), values[i]);
+        }
+        double[] result = new double[queries.size()];
+        for (int i = 0; i < queries.size(); i++) {
+            List<String> query = queries.get(i);
+            String dividend = query.getFirst();
+            String divisor = query.getLast();
+
+            if (!uf.contains(dividend) || !uf.contains(divisor)) {
+                result[i] = -1;
+                continue;
+            }
+            EqnPair dividendPair = uf.find(dividend);
+            EqnPair divisorPair = uf.find(divisor);
+            if (!dividendPair.commonDivisor().equals(divisorPair.commonDivisor())) {
+                result[i] = -1;
+            } else {
+                result[i] = dividendPair.quotient() / divisorPair.quotient();
+            }
+        }
+        return result;
+    }
 }
+
+class LC0399UnionFind {
+
+    Map<String, EqnPair> eqnMap;
+
+    public LC0399UnionFind() {
+        this.eqnMap = new HashMap<>();
+    }
+
+    public EqnPair find(String param) {
+        EqnPair gPair = eqnMap.computeIfAbsent(param, (p) -> new EqnPair(p, 1));
+        if (gPair.commonDivisor() == param) {
+            return gPair;
+        }
+        EqnPair parentGPair = find(gPair.commonDivisor());
+        EqnPair updatedGPair = new EqnPair(parentGPair.commonDivisor(), parentGPair.quotient() * gPair.quotient());
+        eqnMap.put(param, updatedGPair);
+        return updatedGPair;
+    }
+
+    public void union(List<String> eqn, double quotient) {
+        String dividend = eqn.getFirst();
+        String divisor = eqn.getLast();
+        EqnPair dividendPair = find(dividend);
+        EqnPair divisorPair = find(divisor);
+        if (dividendPair.commonDivisor() == divisorPair.commonDivisor()) {
+            return;
+        }
+
+        eqnMap.put(dividendPair.commonDivisor(), new EqnPair(divisorPair.commonDivisor(), quotient * divisorPair.quotient() / dividendPair.quotient()));
+    }
+
+    public boolean contains(String param) {
+        return eqnMap.containsKey(param);
+    }
+}
+
+record EqnPair(String commonDivisor, double quotient) {}
