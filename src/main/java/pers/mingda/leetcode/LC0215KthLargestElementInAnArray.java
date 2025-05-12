@@ -96,3 +96,27 @@ class LC0215SolutionOptimized {
         nums[index2] = temp;
     }
 }
+
+class LC0215SolutionCountSort {
+    public int findKthLargest(int[] nums, int k) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int num : nums) {
+            min = Math.min(num, min);
+            max = Math.max(num, max);
+        }
+
+        int range = max - min + 1;
+        int[] countSort = new int[range];
+        for (int num : nums) {
+            countSort[num - min]++;
+        }
+        for (int i = countSort.length - 1; i >=0; i--) {
+            k -= countSort[i];
+            if (k <= 0) {
+                return i + min;
+            }
+        }
+        return -1;
+    }
+}
