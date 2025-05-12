@@ -39,7 +39,7 @@ class LC0215Solution {
         nums[index] = tmp;
     }
 
-    private void shuffle(int a[]) {
+    private void shuffle(int[] a) {
         final Random random = new Random();
         for (int ind = 1; ind < a.length; ind++) {
             final int r = random.nextInt(ind + 1);
