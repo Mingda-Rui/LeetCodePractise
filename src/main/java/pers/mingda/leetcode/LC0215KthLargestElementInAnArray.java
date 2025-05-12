@@ -47,3 +47,52 @@ class LC0215Solution {
         }
     }
 }
+
+class LC0215SolutionOptimized {
+    public int findKthLargest(int[] nums, int k) {
+        return quickSelection(nums, k, 0, nums.length);
+    }
+
+    private int quickSelection(int[] nums, int k, int start, int end) {
+        if (end - start == 1) {
+            return nums[start];
+        }
+        int pivot = (start + end) / 2;
+        int pivotVal = nums[pivot];
+        int mid = start;
+        int right = end;
+        int index = start;
+        while (index < right) {
+            int num = nums[index];
+            if (num > pivotVal) {
+                right--;
+                swap(nums, index, right);
+            } else if (num < pivotVal) {
+                if (index != mid) {
+                    swap(nums, mid, index);
+                }
+                index++;
+                mid++;
+            } else if (num == pivotVal) {
+                index++;
+            }
+        }
+
+        int greaterCount = end - right;
+        int equalCount = right - mid;
+//        int smallerCount = mid - start;
+        if (greaterCount >= k) {
+            return quickSelection(nums, k, right, end);
+        } else if (equalCount + greaterCount >= k) {
+            return nums[mid];
+        } else {
+            return quickSelection(nums, k - (end - mid), start, mid);
+        }
+    }
+
+    private void swap(int[] nums, int index1, int index2) {
+        int temp = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = temp;
+    }
+}
