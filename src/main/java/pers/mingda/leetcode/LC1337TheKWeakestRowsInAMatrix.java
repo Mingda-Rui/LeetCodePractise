@@ -1,5 +1,6 @@
 package pers.mingda.leetcode;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -9,13 +10,16 @@ public class LC1337TheKWeakestRowsInAMatrix {
 
 class LC1337Solution {
     public int[] kWeakestRows(int[][] mat, int k) {
-        Queue<LC1337Weakness> queue = new PriorityQueue<>();
+        Queue<LC1337Weakness> queue = new PriorityQueue<>(Comparator.reverseOrder());
         for (int i = 0; i < mat.length; i++) {
             queue.add(getWeakness(mat[i], i));
+            if (queue.size() > k) {
+                queue.remove();
+            }
         }
 
         int[] result = new int[k];
-        for (int j = 0; j < k; j++) {
+        for (int j = k - 1; j >= 0 ; j--) {
             result[j] = queue.remove().row();
         }
 
