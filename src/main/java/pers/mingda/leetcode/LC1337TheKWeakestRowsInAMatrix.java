@@ -54,3 +54,33 @@ record LC1337Weakness(int soldiers, int row) implements Comparable<LC1337Weaknes
         return this.row < weakness.row ? -1 : 1;
     }
 }
+
+class LC1337SolutionVerticalIteration {
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int resultIndex = 0;
+        int[] result = new int[k];
+        for (int j = 0; j < mat[0].length; j++) {
+            for (int i = 0; i < mat.length; i++) {
+                if (mat[i][j] == 0 && (j == 0 || mat[i][j - 1] == 1)) {
+                    result[resultIndex] = i;
+                    resultIndex++;
+                    if (resultIndex == k) {
+                        return result;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < mat.length; i++) {
+            if (mat[i][mat[0].length - 1] == 1) {
+                result[resultIndex] = i;
+                resultIndex++;
+                if (resultIndex == k) {
+                    return result;
+                }
+            }
+        }
+
+        return result;
+    }
+}
