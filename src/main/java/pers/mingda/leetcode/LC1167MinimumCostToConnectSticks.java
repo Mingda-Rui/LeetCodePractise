@@ -14,11 +14,8 @@ class LC1167Solution {
         }
 
         int cost = 0;
-        while (!queue.isEmpty()) {
+        while (queue.size() > 1) {
             int firstStick = queue.remove();
-            if (queue.isEmpty()) {
-                return cost;
-            }
             int secondStick = queue.remove();
             cost += (firstStick + secondStick);
             queue.add(firstStick + secondStick);
