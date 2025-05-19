@@ -59,10 +59,10 @@ class LC2300SlidingWindowSolution {
         int[] result = new int[spells.length];
         int potionIndex = potions.length - 1;
         for (int[] sortedSpell : sortedSpells) {
-            long spell = (long) sortedSpell[0];
+            long spell = sortedSpell[0];
             int resultIndex = sortedSpell[1];
 
-            while (potionIndex >= 0 && (long) spell * potions[potionIndex] >= success) {
+            while (potionIndex >= 0 && spell * potions[potionIndex] >= success) {
                 potionIndex--;
             }
             result[resultIndex] = potions.length - potionIndex - 1;
