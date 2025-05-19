@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class LC2300SuccessfulPairsOfSpellsAndPotions {
 }
@@ -42,5 +43,30 @@ class LC2300Solution {
         }
 
         return potions.length - head;
+    }
+}
+
+class LC2300SlidingWindowSolution {
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+        int[][] sortedSpells = new int[spells.length][2];
+        for (int i = 0; i < spells.length; i++) {
+            sortedSpells[i][0] = spells[i];
+            sortedSpells[i][1] = i;
+        }
+        Arrays.sort(sortedSpells, Comparator.comparingInt(a -> a[0]));
+        Arrays.sort(potions);
+
+        int[] result = new int[spells.length];
+        int potionIndex = potions.length - 1;
+        for (int[] sortedSpell : sortedSpells) {
+            long spell = (long) sortedSpell[0];
+            int resultIndex = sortedSpell[1];
+
+            while (potionIndex >= 0 && (long) spell * potions[potionIndex] >= success) {
+                potionIndex--;
+            }
+            result[resultIndex] = potions.length - potionIndex - 1;
+        }
+        return result;
     }
 }
