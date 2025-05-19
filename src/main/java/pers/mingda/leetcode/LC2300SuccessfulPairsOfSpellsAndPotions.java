@@ -8,10 +8,10 @@ public class LC2300SuccessfulPairsOfSpellsAndPotions {
 class LC2300Solution {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
-        reverse(potions);
+
         int[] result = new int[spells.length];
         for (int i = 0; i < spells.length; i++) {
-            result[i] = findSuccess(spells[i], potions, success);
+            result[i] = findSuccess(potions, (long) Math.ceil(1.0 * success / spells[i]));
         }
         return result;
     }
@@ -26,18 +26,21 @@ class LC2300Solution {
         }
     }
 
-    private int findSuccess(double spell, int[] potions, long success) {
+    private int findSuccess(int[] potions, long success) {
+        if (potions[potions.length - 1] < success) {
+            return 0;
+        }
         int head = 0;
-        int tail = potions.length;
-        while (head + 1 < tail) {
+        int tail = potions.length - 1;
+        while (head < tail) {
             int mid = (head + tail) / 2;
-            if ((long) potions[mid] * spell < success) {
-                tail = mid;
+            if (potions[mid] < success) {
+                head = mid + 1;
             } else {
-                head = mid;
+                tail = mid;
             }
         }
 
-        return (long) potions[head] * spell >= success ? head + 1 : head;
+        return potions.length - head;
     }
 }
