@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
+
   public int minReorder(int n, int[][] connections) {
     Map<Integer, Set<List<Integer>>> map = new HashMap<>();
     for (int[] connection : connections) {
@@ -17,7 +18,11 @@ public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
     return countFlip(0, -1, map);
   }
 
-  private int countFlip(int city, int parentCity, Map<Integer, Set<List<Integer>>> map) {
+  private int countFlip(
+    int city,
+    int parentCity,
+    Map<Integer, Set<List<Integer>>> map
+  ) {
     int count = 0;
     for (List<Integer> dest : map.get(city)) {
       int destCity = dest.getFirst();
@@ -33,7 +38,10 @@ public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
     return count;
   }
 
-  private void mapConnection(int[] connection, Map<Integer, Set<List<Integer>>> map) {
+  private void mapConnection(
+    int[] connection,
+    Map<Integer, Set<List<Integer>>> map
+  ) {
     int origin = connection[0];
     int dest = connection[1];
     map.computeIfAbsent(origin, computeEmptySet()).add(List.of(dest, 1));
@@ -41,6 +49,6 @@ public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
   }
 
   private Function<Integer, Set<List<Integer>>> computeEmptySet() {
-    return (key) -> new HashSet<>();
+    return key -> new HashSet<>();
   }
 }

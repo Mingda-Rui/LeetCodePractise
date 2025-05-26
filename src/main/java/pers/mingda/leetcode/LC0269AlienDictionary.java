@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class LC0269AlienDictionary {}
 
 class LC0269Solution {
+
   public String alienOrder(String[] words) {
     LC0269Trie LC0269Trie = new LC0269Trie('#');
     Set<Character> allLetters = new HashSet<>();
@@ -46,7 +47,10 @@ class LC0269Solution {
     while (!queue.isEmpty()) {
       char c = queue.poll();
       sb.append(c);
-      for (char parent : reversedMap.getOrDefault(c, Collections.<Character>emptySet())) {
+      for (char parent : reversedMap.getOrDefault(
+        c,
+        Collections.<Character>emptySet()
+      )) {
         Set<Character> children = map.get(parent);
         children.remove(c);
         if (children.isEmpty()) queue.offer(parent);
@@ -56,11 +60,18 @@ class LC0269Solution {
     if (sb.length() != map.size()) return "";
     String result = sb.reverse().toString();
     for (char letter : result.toCharArray()) allLetters.remove(letter);
-    String restLetters = allLetters.stream().map(String::valueOf).collect(Collectors.joining());
+    String restLetters = allLetters
+      .stream()
+      .map(String::valueOf)
+      .collect(Collectors.joining());
     return result + restLetters;
   }
 
-  private boolean buildLC0269Trie(LC0269Trie LC0269Trie, int pos, String words) {
+  private boolean buildLC0269Trie(
+    LC0269Trie LC0269Trie,
+    int pos,
+    String words
+  ) {
     if (words == null || words.isEmpty()) return true;
     LC0269Trie current = LC0269Trie;
     char c = words.charAt(0);
@@ -77,10 +88,15 @@ class LC0269Solution {
     return true;
   }
 
-  private void parseAlienRule(LC0269Trie LC0269Trie, List<List<LC0269Trie>> rules) {
+  private void parseAlienRule(
+    LC0269Trie LC0269Trie,
+    List<List<LC0269Trie>> rules
+  ) {
     if (LC0269Trie.numOfChildren == 0) return;
     LC0269Trie[] children = LC0269Trie.children;
-    Queue<LC0269Trie> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.headPos));
+    Queue<LC0269Trie> queue = new PriorityQueue<>(
+      Comparator.comparingInt(t -> t.headPos)
+    );
     for (int i = 0; i < children.length; i++) {
       if (children[i] != null) {
         parseAlienRule(children[i], rules);
@@ -109,9 +125,10 @@ class LC0269Solution {
   }
 
   private void buildRuleMap(
-      List<LC0269Trie> rule,
-      Map<Character, Set<Character>> map,
-      Map<Character, Set<Character>> reversedMap) {
+    List<LC0269Trie> rule,
+    Map<Character, Set<Character>> map,
+    Map<Character, Set<Character>> reversedMap
+  ) {
     for (int i = 0; i < rule.size(); i++) {
       char parent = rule.get(i).c;
       map.putIfAbsent(parent, new HashSet<>());
@@ -134,6 +151,7 @@ class LC0269Solution {
 */
 
 class LC0269Trie {
+
   int numOfChildren;
   char c;
   int headPos;
@@ -153,7 +171,6 @@ class LC0269Trie {
     tailPos = Math.max(tailPos, pos);
   }
 }
-
 /*
 1 2   4   9
   2 3   5 9

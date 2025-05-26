@@ -5,6 +5,7 @@ import java.util.Random;
 public class LC0215KthLargestElementInAnArray {}
 
 class LC0215Solution {
+
   public int findKthLargest(int[] nums, int k) {
     shuffle(nums);
     return quickSelect(nums, 0, nums.length - 1, k);
@@ -49,6 +50,7 @@ class LC0215Solution {
 }
 
 class LC0215SolutionOptimized {
+
   public int findKthLargest(int[] nums, int k) {
     return quickSelection(nums, k, 0, nums.length);
   }
@@ -98,6 +100,7 @@ class LC0215SolutionOptimized {
 }
 
 class LC0215SolutionCountSort {
+
   public int findKthLargest(int[] nums, int k) {
     int min = Integer.MAX_VALUE;
     int max = Integer.MIN_VALUE;

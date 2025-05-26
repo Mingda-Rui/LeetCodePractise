@@ -5,6 +5,7 @@ package pers.mingda.cracking_the_coding_interview.chapter4_trees_and_graphs;
  * node in a binary search tree. You may assume that each node has a link to its parent.
  */
 public class _4_6Successor {
+
   public static TreeNode inorderSucc(TreeNode n) {
     if (n == null) return null;
     if (n.right == null) {

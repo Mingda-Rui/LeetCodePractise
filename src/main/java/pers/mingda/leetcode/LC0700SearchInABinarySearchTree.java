@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0700SearchInABinarySearchTree {
+
   /**
    * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
    * right; TreeNode() {} TreeNode(int val) { this.val = val; } TreeNode(int val, TreeNode left,
@@ -11,6 +12,8 @@ public class LC0700SearchInABinarySearchTree {
       return root;
     }
 
-    return root.val > val ? searchBST(root.left, val) : searchBST(root.right, val);
+    return root.val > val
+      ? searchBST(root.left, val)
+      : searchBST(root.right, val);
   }
 }

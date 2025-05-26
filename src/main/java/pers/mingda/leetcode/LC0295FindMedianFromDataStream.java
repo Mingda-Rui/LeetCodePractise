@@ -7,6 +7,7 @@ import java.util.Queue;
 public class LC0295FindMedianFromDataStream {}
 
 class MedianFinder {
+
   private Queue<Integer> smallQueue;
   private Queue<Integer> bigQueue;
 
@@ -20,7 +21,8 @@ class MedianFinder {
     Queue<Integer> from = isEven ? bigQueue : smallQueue;
     Queue<Integer> to = isEven ? smallQueue : bigQueue;
 
-    boolean needRebalance = !from.isEmpty() && (isEven ? num > from.peek() : num < from.peek());
+    boolean needRebalance =
+      !from.isEmpty() && (isEven ? num > from.peek() : num < from.peek());
     if (needRebalance) {
       from.offer(num);
       num = from.poll();

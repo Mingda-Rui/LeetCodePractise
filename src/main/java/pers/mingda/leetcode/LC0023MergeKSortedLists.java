@@ -8,12 +8,15 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC0023MergeKSortedLists {
+
   public ListNode mergeKListsBruteForce(ListNode[] lists) {
     int smallest = 0;
     for (int i = 0; i < lists.length; i++) {
       ListNode curr = lists[i];
-      if (curr != null && (lists[smallest] == null || curr.val <= lists[smallest].val))
-        smallest = i;
+      if (
+        curr != null &&
+        (lists[smallest] == null || curr.val <= lists[smallest].val)
+      ) smallest = i;
     }
 
     if (lists.length == 0 || lists[smallest] == null) return null;
@@ -80,7 +83,11 @@ public class LC0023MergeKSortedLists {
     return mergeKListsDivideAndConquer(lists, 0, lists.length);
   }
 
-  private ListNode mergeKListsDivideAndConquer(ListNode[] lists, int start, int end) {
+  private ListNode mergeKListsDivideAndConquer(
+    ListNode[] lists,
+    int start,
+    int end
+  ) {
     if (start + 1 == end) return lists[start];
     int mid = (start + end) / 2;
     ListNode left = mergeKListsDivideAndConquer(lists, start, mid);

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0151ReverseWordsInAString {
+
   public String reverseWords(String s) {
     StringBuilder sb = new StringBuilder();
     readWords(s.trim(), sb);

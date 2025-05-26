@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LC0128LongestConsecutiveSequence {
+
   public int longestConsecutive(int[] nums) {
     Map<Integer, Integer> map = new HashMap<>();
     for (int i = 0; i < nums.length; i++) {

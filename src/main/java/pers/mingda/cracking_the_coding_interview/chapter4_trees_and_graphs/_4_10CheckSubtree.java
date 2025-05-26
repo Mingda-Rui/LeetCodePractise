@@ -8,10 +8,12 @@ package pers.mingda.cracking_the_coding_interview.chapter4_trees_and_graphs;
  * identical to T2. That is, if you cut off the tree at node n, the two trees would be identical.
  */
 public class _4_10CheckSubtree {
+
   public static boolean containsTree(TreeNode t1, TreeNode t2) {
     boolean containsSubtree = matchTree(t1, t2);
-    if (!containsSubtree && t1 != null)
-      return containsTree(t1.left, t2) || containsTree(t1.right, t2);
+    if (!containsSubtree && t1 != null) return (
+      containsTree(t1.left, t2) || containsTree(t1.right, t2)
+    );
 
     return containsSubtree;
   }
@@ -20,7 +22,9 @@ public class _4_10CheckSubtree {
     if (t1 == null && t2 == null) return true;
     if (t1 == null || t2 == null) return false;
 
-    if (t1.data == t2.data) return matchTree(t1.left, t2.left) && matchTree(t1.right, t2.right);
+    if (t1.data == t2.data) return (
+      matchTree(t1.left, t2.left) && matchTree(t1.right, t2.right)
+    );
 
     return false;
   }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC0138CopyListWithRandomPointer {
+
   public LC0138Node copyRandomList(LC0138Node head) {
     Map<LC0138Node, LC0138Node> map = new HashMap<>();
     LC0138Node dummyHead = new LC0138Node(-1);
@@ -23,7 +24,10 @@ public class LC0138CopyListWithRandomPointer {
   }
 
   private LC0138Node copyByNext(
-      LC0138Node origin, LC0138Node copy, Map<LC0138Node, LC0138Node> map) {
+    LC0138Node origin,
+    LC0138Node copy,
+    Map<LC0138Node, LC0138Node> map
+  ) {
     if (origin == null) return origin;
     LC0138Node next = new LC0138Node(origin.val);
     map.put(origin, next);
@@ -69,6 +73,7 @@ public class LC0138CopyListWithRandomPointer {
 }
 
 class LC0138Node {
+
   int val;
   LC0138Node next;
   LC0138Node random;

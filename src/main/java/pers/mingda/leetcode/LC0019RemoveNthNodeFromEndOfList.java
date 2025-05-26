@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0019RemoveNthNodeFromEndOfList {
+
   public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode OneBeforeHead = new ListNode();
     OneBeforeHead.next = head;

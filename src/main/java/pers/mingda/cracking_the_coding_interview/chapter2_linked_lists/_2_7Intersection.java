@@ -7,7 +7,11 @@ package pers.mingda.cracking_the_coding_interview.chapter2_linked_lists;
  * node of the second linked list, then they are intersecting.
  */
 public class _2_7Intersection {
-  public static LinkedListNode findIntersection(LinkedListNode list1, LinkedListNode list2) {
+
+  public static LinkedListNode findIntersection(
+    LinkedListNode list1,
+    LinkedListNode list2
+  ) {
     LinkedListNode pointer1 = list1;
     LinkedListNode pointer2 = list2;
     boolean pointer1Flipped = false;
@@ -30,7 +34,10 @@ public class _2_7Intersection {
     return null;
   }
 
-  public static LinkedListNode findIntersectionChopOff(LinkedListNode list1, LinkedListNode list2) {
+  public static LinkedListNode findIntersectionChopOff(
+    LinkedListNode list1,
+    LinkedListNode list2
+  ) {
     int l1Size = getSize(list1);
     int l2Size = getSize(list2);
 

@@ -6,15 +6,16 @@ enum Direction {
   left,
   right,
   up,
-  down
+  down,
 }
 
 enum Color {
   White,
-  Black
+  Black,
 }
 
 class Game {
+
   private Player[] players;
   private static Game instance;
   private Board board;
@@ -41,6 +42,7 @@ class Game {
 }
 
 class Board {
+
   private int blackCount = 0;
   private int whiteCount = 0;
   private Piece[][] board;
@@ -86,6 +88,7 @@ class Board {
 }
 
 class OthelloPiece {
+
   private Color color;
 
   public OthelloPiece(Color c) {
@@ -106,6 +109,7 @@ class OthelloPiece {
 }
 
 class Player {
+
   private Color color;
 
   public Player(Color c) {

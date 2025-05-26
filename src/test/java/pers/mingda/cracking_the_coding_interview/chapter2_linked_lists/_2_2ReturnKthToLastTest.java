@@ -29,15 +29,16 @@ public class _2_2ReturnKthToLastTest {
     kthNode = _2_2ReturnKthToLast.kthToLast(node, 6);
     assertEquals(1, kthNode.data);
 
-    Exception thrown =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              _2_2ReturnKthToLast.kthToLast(node, 10);
-            });
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> {
+      _2_2ReturnKthToLast.kthToLast(node, 10);
+    });
     assertEquals(
-        "The size of the list is " + nodeValues.size() + ", which is less than " + 10,
-        thrown.getMessage());
+      "The size of the list is " +
+      nodeValues.size() +
+      ", which is less than " +
+      10,
+      thrown.getMessage()
+    );
   }
 
   @Test
@@ -53,14 +54,15 @@ public class _2_2ReturnKthToLastTest {
     kthNode = _2_2ReturnKthToLast.kthToLastRecursive(node, 6);
     assertEquals(1, kthNode.data);
 
-    Exception thrown =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              _2_2ReturnKthToLast.kthToLastRecursive(node, 10);
-            });
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> {
+      _2_2ReturnKthToLast.kthToLastRecursive(node, 10);
+    });
     assertEquals(
-        "The size of the list is " + nodeValues.size() + ", which is less than " + 10,
-        thrown.getMessage());
+      "The size of the list is " +
+      nodeValues.size() +
+      ", which is less than " +
+      10,
+      thrown.getMessage()
+    );
   }
 }

@@ -1,9 +1,10 @@
 package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 
 public class _17_19MissingTwo {
+
   int missingOne(int[] array) {
     int expectedNum = array.length + 1;
-    int expectedSum = (1 + expectedNum) * (expectedNum) / 2;
+    int expectedSum = ((1 + expectedNum) * (expectedNum)) / 2;
     for (int num : array) {
       expectedSum -= num;
     }
@@ -13,7 +14,7 @@ public class _17_19MissingTwo {
   int[] missingTwo(int[] array) {
     int max_value = array.length + 2;
     int rem_square = squareSumToN(max_value, 2);
-    int rem_one = max_value * (max_value + 1) / 2;
+    int rem_one = (max_value * (max_value + 1)) / 2;
 
     for (int i = 0; i < array.length; i++) {
       rem_square -= array[i] * array[i];
@@ -27,7 +28,6 @@ public class _17_19MissingTwo {
     int sum = 0;
     for (int i = 1; i <= n; i++) {
       sum += (int) Math.pow(i, power);
-      ;
     }
     return sum;
   }
@@ -46,9 +46,7 @@ public class _17_19MissingTwo {
     double part3 = 2 * a;
 
     int solutionX = (int) ((part1 + part2) / part3);
-    ;
     int solutionY = r1 - solutionX;
-
-    return new int[] {solutionX, solutionY};
+    return new int[] { solutionX, solutionY };
   }
 }

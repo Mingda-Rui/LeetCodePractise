@@ -6,6 +6,7 @@ package pers.mingda.leetcode;
  * this.next = next; } }
  */
 public class LC2095DeleteTheMiddleNodeOfALinkedList {
+
   public ListNode deleteMiddle(ListNode head) {
     if (head.next == null) {
       return null;

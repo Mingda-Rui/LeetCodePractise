@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0084LargestRectangleInHistogram {
+
   public int largestRectangleArea(int[] heights) {
     Stack<Integer> stack = new Stack<>();
     int result = 0;
@@ -28,8 +29,9 @@ public class LC0084LargestRectangleInHistogram {
     for (int i = 0; i < heights.length; i++) {
       int currentH = heights[i];
       int leftBoundray = i - 1;
-      while (leftBoundray >= 0 && heights[leftBoundray] >= currentH)
-        leftBoundray = leftBoundrayRecord[leftBoundray];
+      while (
+        leftBoundray >= 0 && heights[leftBoundray] >= currentH
+      ) leftBoundray = leftBoundrayRecord[leftBoundray];
       leftBoundrayRecord[i] = leftBoundray;
     }
 
@@ -37,8 +39,9 @@ public class LC0084LargestRectangleInHistogram {
     for (int i = heights.length - 1; i >= 0; i--) {
       int currentH = heights[i];
       int rightBoundray = i + 1;
-      while (rightBoundray < heights.length && heights[rightBoundray] >= currentH)
-        rightBoundray = rightBoundrayRecord[rightBoundray];
+      while (
+        rightBoundray < heights.length && heights[rightBoundray] >= currentH
+      ) rightBoundray = rightBoundrayRecord[rightBoundray];
       rightBoundrayRecord[i] = rightBoundray;
     }
 

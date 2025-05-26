@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0123BestTimeToBuyAndSellStockIII {}
 
 class LC0123Solution {
+
   public int maxProfit(int[] prices) {
     int[] leftMaxProfit = new int[prices.length];
     int[] rightMaxProfit = new int[prices.length];
@@ -37,6 +38,7 @@ class LC0123Solution {
 }
 
 class SpaceComplexityO1Solution {
+
   public int maxProfit(int[] prices) {
     int minPrice1 = Integer.MAX_VALUE;
     int maxProfit1 = 0;

@@ -6,6 +6,7 @@ import java.util.Queue;
 public class LC1642FurthestBuildingYouCanReach {}
 
 class LC1642Solution {
+
   public int furthestBuilding(int[] heights, int bricks, int ladders) {
     Queue<Integer> ladderUsed = new PriorityQueue<>();
     for (int i = 0; i < heights.length - 1; i++) {
@@ -22,7 +23,7 @@ class LC1642Solution {
       }
 
       boolean shouldUseLadder =
-          ladders != 0 && !ladderUsed.isEmpty() && ladderUsed.peek() < heightDiff;
+        ladders != 0 && !ladderUsed.isEmpty() && ladderUsed.peek() < heightDiff;
       if (shouldUseLadder) {
         ladderUsed.add(heightDiff);
       }

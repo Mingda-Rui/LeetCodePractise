@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0242ValidAnagram {
+
   public boolean isAnagramArraySolution(String s, String t) {
     if (s.length() != t.length()) return false;
     int[] record = new int[128];

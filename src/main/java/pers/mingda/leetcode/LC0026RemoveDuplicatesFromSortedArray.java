@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0026RemoveDuplicatesFromSortedArray {
+
   public int removeDuplicates(int[] nums) {
     int index = 0;
     for (int num : nums) {

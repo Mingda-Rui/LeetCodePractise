@@ -8,6 +8,7 @@ import java.util.Queue;
 public class LC0252MeetingRooms {}
 
 class LC0252Solution {
+
   public boolean canAttendMeetings(int[][] intervals) {
     int size = 0;
     for (int[] interval : intervals) size = Math.max(size, interval[1]);
@@ -33,6 +34,7 @@ class LC0252Solution {
 }
 
 class PriorityQueueSolution {
+
   public boolean canAttendMeetings(int[][] intervals) {
     Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
     Queue<int[]> queue = new PriorityQueue<>(comparator);
@@ -48,6 +50,7 @@ class PriorityQueueSolution {
 }
 
 class SortingSolution {
+
   public boolean canAttendMeetings(int[][] intervals) {
     Comparator<int[]> comparator = Comparator.comparingInt(arr -> arr[0]);
     Arrays.sort(intervals, comparator);

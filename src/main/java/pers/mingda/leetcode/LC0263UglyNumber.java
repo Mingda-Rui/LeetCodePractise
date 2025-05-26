@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0263UglyNumber {
+
   public boolean isUgly(int n) {
     if (n <= 0) return false;
     n = deepDivideBy(n, 2);

@@ -11,7 +11,9 @@ public class _16_2WordFrequencies {
   int getFrequency(String[] book, String word) {
     String trimmedWord = word.trim().toLowerCase();
     if (!cache.containsKey(trimmedWord)) {
-      long count = Arrays.stream(book).filter(s -> s.toLowerCase().contains(trimmedWord)).count();
+      long count = Arrays.stream(book)
+        .filter(s -> s.toLowerCase().contains(trimmedWord))
+        .count();
       cache.put(trimmedWord, Math.toIntExact(count));
     }
     return cache.get(trimmedWord);

@@ -20,7 +20,6 @@ class LC0271Codec {
 
   // Decodes a single string to a list of strings.
   public List<String> decode(String s) {
-
     List<String> result = new LinkedList<>();
     String[] strs = s.split("@#@", -1);
 
@@ -33,7 +32,6 @@ class LC0271Codec {
     return result;
   }
 }
-
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();
 // codec.decode(codec.encode(strs));

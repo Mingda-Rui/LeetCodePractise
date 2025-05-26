@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0209MinimumSizeSubarraySum {
+
   public int minSubArrayLenBinarySearch(int target, int[] nums) {
     int[] sumRecord = new int[nums.length];
     int sum = 0;

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0082RemoveDuplicatesFromSortedListII {
+
   public ListNode deleteDuplicates(ListNode head) {
     ListNode dummyHead = new ListNode(-1, head);
     ListNode prev = dummyHead;
@@ -18,8 +19,8 @@ public class LC0082RemoveDuplicatesFromSortedListII {
   public ListNode deleteDuplicatesRecursive(ListNode head) {
     if (head == null || head.next == null) return head;
     if (head.val == head.next.val) {
-      if (head.next.next != null && head.next.next.val == head.val)
-        head = deleteDuplicates(head.next);
+      if (head.next.next != null && head.next.next.val == head.val) head =
+        deleteDuplicates(head.next);
       else head = deleteDuplicates(head.next.next);
     } else {
       head.next = deleteDuplicates(head.next);

@@ -6,6 +6,7 @@ package pers.mingda.leetcode;
  * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 public class LC1372LongestZigZagPathInABinaryTree {
+
   int max = 0;
 
   public int longestZigZag(TreeNode root) {

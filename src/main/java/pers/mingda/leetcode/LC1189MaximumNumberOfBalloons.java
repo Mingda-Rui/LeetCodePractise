@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LC1189MaximumNumberOfBalloons {
+
   public int maxNumberOfBalloons(String text) {
     Map<Character, Integer> map = new HashMap<>();
     List<Character> letterList = Arrays.asList('b', 'a', 'l', 'o', 'n');

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.Stack;
 
 public class LC0150EvaluateReversePolishNotation {
+
   public int evalRPN(String[] tokens) {
     Stack<Integer> stack = new Stack<>();
     Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
@@ -31,12 +32,16 @@ public class LC0150EvaluateReversePolishNotation {
   }
 
   public int evalRPNRecursive(String[] tokens) {
-    int[] indexHolder = {tokens.length - 1};
+    int[] indexHolder = { tokens.length - 1 };
     Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
     return evalRPNRecursive(tokens, indexHolder, operators);
   }
 
-  public int evalRPNRecursive(String[] tokens, int[] indexHolder, Set<String> operators) {
+  public int evalRPNRecursive(
+    String[] tokens,
+    int[] indexHolder,
+    Set<String> operators
+  ) {
     int index = indexHolder[0];
     String token = tokens[index];
     indexHolder[0]--;

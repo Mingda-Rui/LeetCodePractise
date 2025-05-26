@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LC0952LargestComponentSizeByCommonFactor {
+
   public int largestComponentSize(int[] nums) {
     int max = findMax(nums);
     LC0592UnionFind uf = new LC0592UnionFind(max);
@@ -62,6 +63,7 @@ public class LC0952LargestComponentSizeByCommonFactor {
 }
 
 class LC0592UnionFind {
+
   private final int[] elements;
   private final int[] sizes;
 

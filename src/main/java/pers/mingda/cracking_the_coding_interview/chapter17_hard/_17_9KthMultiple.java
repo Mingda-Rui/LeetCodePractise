@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class _17_9KthMultiple {
+
   int getKthMagicNumber(int k) {
     List<Integer> nums = new ArrayList<>();
     int factorOfThrees = 0;

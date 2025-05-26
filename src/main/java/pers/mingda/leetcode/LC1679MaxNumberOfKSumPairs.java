@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC1679MaxNumberOfKSumPairs {
+
   public int maxOperations(int[] nums, int k) {
     Map<Integer, Integer> countMap = new HashMap<>();
     int result = 0;

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LC0202HappyNumber {
+
   public boolean isHappy(int n) {
     Map<Integer, Integer> map = new HashMap<>();
     Set<Integer> seen = new HashSet<>();

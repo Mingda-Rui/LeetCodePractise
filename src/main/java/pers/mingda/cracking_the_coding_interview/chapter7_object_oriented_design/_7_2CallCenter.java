@@ -5,6 +5,7 @@ import java.util.List;
 public class _7_2CallCenter {}
 
 class CallHandler {
+
   /* 3 levels of employees: respondents, managers, directors */
   private final int LEVEL = 3;
 
@@ -67,6 +68,7 @@ class CallHandler {
 class Caller {}
 
 class Call {
+
   /* Minimal rank of employee who can handle this call. */
   private Rank rank;
 
@@ -112,15 +114,15 @@ enum Rank {
   Respondent,
   Manager,
   Director,
-  Responder
+  Responder,
 }
 
 abstract class Employee {
+
   private Call currentCall = null;
   protected Rank rank;
 
   public Employee() {}
-  ;
 
   public Employee(CallHandler handler) {
     // ...
@@ -160,18 +162,21 @@ abstract class Employee {
 }
 
 class Director extends Employee {
+
   public Director() {
     rank = Rank.Director;
   }
 }
 
 class Manager extends Employee {
+
   public Manager() {
     rank = Rank.Manager;
   }
 }
 
 class Respondent extends Employee {
+
   public Respondent() {
     rank = Rank.Respondent;
   }

@@ -3,9 +3,12 @@ package pers.mingda.cracking_the_coding_interview.chapter2_linked_lists;
 import java.util.List;
 
 public class LinkedListTestHelper {
+
   public LinkedListNode buildNodeList(List<Integer> nodeValues) {
     if (nodeValues.isEmpty()) {
-      throw new IllegalArgumentException("Failed to crate linked list, no valid data provided");
+      throw new IllegalArgumentException(
+        "Failed to crate linked list, no valid data provided"
+      );
     }
     LinkedListNode node = new LinkedListNode(null, nodeValues.get(0));
     LinkedListNode headNode = node;

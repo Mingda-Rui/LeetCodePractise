@@ -6,12 +6,18 @@ import java.util.List;
 import java.util.Queue;
 
 public class LC0662MaximumWidthOfBinaryTree {
+
   public int widthOfBinaryTree(TreeNode root) {
     List<Integer> min = new ArrayList<>();
     return widthOfBinaryTree(root, 1, 0, min);
   }
 
-  private int widthOfBinaryTree(TreeNode root, int num, int level, List<Integer> min) {
+  private int widthOfBinaryTree(
+    TreeNode root,
+    int num,
+    int level,
+    List<Integer> min
+  ) {
     if (root == null) return 0;
     if (level == min.size()) min.add(num);
 

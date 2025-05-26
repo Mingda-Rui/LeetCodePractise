@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class _17_15LongestWord {
+
   String printLongestWord(String[] arr) {
     Map<String, Boolean> map = new HashMap<>();
     for (String str : arr) {
@@ -20,14 +21,22 @@ public class _17_15LongestWord {
     return "";
   }
 
-  boolean canBuildWord(String str, boolean isOriginalWord, Map<String, Boolean> map) {
+  boolean canBuildWord(
+    String str,
+    boolean isOriginalWord,
+    Map<String, Boolean> map
+  ) {
     if (map.containsKey(str) && !isOriginalWord) {
       return map.get(str);
     }
     for (int i = 1; i < str.length(); i++) {
       String left = str.substring(0, i);
       String right = str.substring(i);
-      if (map.containsKey(left) && map.get(left) && canBuildWord(right, false, map)) {
+      if (
+        map.containsKey(left) &&
+        map.get(left) &&
+        canBuildWord(right, false, map)
+      ) {
         return true;
       }
     }

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0036ValidSudoku {
+
   public boolean isValidSudoku(char[][] board) {
     boolean[][] row = new boolean[9][9];
     boolean[][] column = new boolean[9][9];
@@ -11,7 +12,9 @@ public class LC0036ValidSudoku {
         int subBoxNum = calcSubBoxNum(i, j);
         if (board[i][j] == '.') continue;
         int val = board[i][j] - '1';
-        if (row[i][val] || column[j][val] || subBox[subBoxNum][val]) return false;
+        if (
+          row[i][val] || column[j][val] || subBox[subBoxNum][val]
+        ) return false;
 
         row[i][val] = true;
         column[j][val] = true;

@@ -6,6 +6,7 @@ import java.util.Set;
 public class LC0136SingleNumber {}
 
 class LC0136Solution {
+
   public int singleNumber(int[] nums) {
     Set<Integer> set = new HashSet<>();
     for (int num : nums) {
@@ -17,6 +18,7 @@ class LC0136Solution {
 }
 
 class XorSolution {
+
   public int singleNumber(int[] nums) {
     int result = 0;
     for (int num : nums) result ^= num;

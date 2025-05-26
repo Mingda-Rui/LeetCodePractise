@@ -5,7 +5,6 @@ import java.util.Queue;
 import java.util.Random;
 
 public class _7_10Minesweeper {
-
   // Class: Board
   // Field: Cell[][]
 
@@ -37,6 +36,7 @@ public class _7_10Minesweeper {
 }
 
 class Cell {
+
   private int row;
   private int column;
   private boolean isBomb;
@@ -81,6 +81,7 @@ class Cell {
 }
 
 class MinesweeperBoard {
+
   private int nRows;
   private int nColumns;
   private int nBombs = 0;
@@ -88,7 +89,14 @@ class MinesweeperBoard {
   private Cell[] bombs;
   private int numUnexposedRemaining;
   private int[][] deltas = { // Offsets of 8 surrounding cells
-    {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}
+    { -1, -1 },
+    { -1, 0 },
+    { -1, 1 },
+    { 0, -1 },
+    { 0, 1 },
+    { 1, -1 },
+    { 1, 0 },
+    { 1, 1 },
   };
 
   public MinesweeperBoard(int r, int c, int b) {
@@ -182,6 +190,7 @@ class MinesweeperBoard {
 }
 
 class UserPlay {
+
   private int row;
   private int column;
   private boolean isGuess;
@@ -189,16 +198,18 @@ class UserPlay {
 }
 
 class UserPlayResult {
+
   private boolean successful;
   private MinesweeperGame.GameState resultingState;
   /* constructor, getter, setters. */
 }
 
 class MinesweeperGame {
+
   public enum GameState {
     WON,
     LOST,
-    RUNNING
+    RUNNING,
   }
 
   private MinesweeperBoard board;

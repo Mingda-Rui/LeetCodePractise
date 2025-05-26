@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class LC1448CountGoodNodesInBinaryTree {
+
   public int goodNodes(TreeNode root) {
     return goodNodes(root, root.val);
   }

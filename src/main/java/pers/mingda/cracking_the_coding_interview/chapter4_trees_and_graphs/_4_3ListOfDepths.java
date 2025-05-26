@@ -28,14 +28,19 @@ public class _4_3ListOfDepths {
     return result;
   }
 
-  public static List<List<TreeNode>> createLevelLinkedListRecursive(TreeNode root) {
+  public static List<List<TreeNode>> createLevelLinkedListRecursive(
+    TreeNode root
+  ) {
     List<List<TreeNode>> lists = new ArrayList<>();
     createLevelLinkedListRecursive(root, lists, 0);
     return lists;
   }
 
   public static void createLevelLinkedListRecursive(
-      TreeNode node, List<List<TreeNode>> lists, int currentLevel) {
+    TreeNode node,
+    List<List<TreeNode>> lists,
+    int currentLevel
+  ) {
     if (node == null) return;
     if (lists.size() == currentLevel) {
       lists.add(new LinkedList<>());

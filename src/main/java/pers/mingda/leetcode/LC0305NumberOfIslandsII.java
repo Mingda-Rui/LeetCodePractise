@@ -9,6 +9,7 @@ import java.util.Map;
 public class LC0305NumberOfIslandsII {}
 
 class LC0305Solution {
+
   public List<Integer> numIslands2(int m, int n, int[][] positions) {
     LC0305UnionFind uf = new LC0305UnionFind(m, n);
     List<Integer> result = new LinkedList<>();
@@ -37,7 +38,7 @@ class LC0305UnionFind {
     this.column = column;
     this.positions = new int[row][column];
     this.numOfIslands = 0;
-    int[][] d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    int[][] d = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
     this.dir = d;
     this.record = new HashMap<>();
   }

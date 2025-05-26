@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class _8_6TowerOfHanoi {
+
   private static final int TOWER_SIZE = 3;
 
   public void playGame(int nDisks) {
@@ -14,7 +15,12 @@ public class _8_6TowerOfHanoi {
     solveGame(game, 0, 2, nDisks);
   }
 
-  public void solveGame(HanoiTowerGame game, int fromTower, int toTower, int numOfDisks) {
+  public void solveGame(
+    HanoiTowerGame game,
+    int fromTower,
+    int toTower,
+    int numOfDisks
+  ) {
     if (numOfDisks == 1) {
       game.moveDisk(fromTower, toTower);
     }
@@ -25,18 +31,22 @@ public class _8_6TowerOfHanoi {
   }
 
   private int getSpareTower(int fromTower, int toTower) {
-    Set<Integer> set = IntStream.range(0, TOWER_SIZE).boxed().collect(Collectors.toSet());
+    Set<Integer> set = IntStream.range(0, TOWER_SIZE)
+      .boxed()
+      .collect(Collectors.toSet());
     set.removeAll(Set.of(fromTower, toTower));
     return set.iterator().next();
   }
 }
 
 class HanoiTowerGame {
+
   private HanoiTower[] columns;
 
   public void initiateNewGame(int totalTowers, int totalDisks) {
     this.columns = new HanoiTower[totalTowers];
-    IntStream.range(0, totalTowers).forEach(i -> columns[i] = new HanoiTower(0));
+    IntStream.range(0, totalTowers).forEach(i -> columns[i] = new HanoiTower(0)
+    );
     columns[0].setup(totalDisks);
   }
 
@@ -47,6 +57,7 @@ class HanoiTowerGame {
 }
 
 class HanoiTower {
+
   private final Stack<HanoiDisk> disks;
 
   public HanoiTower(int numOfDisks) {
@@ -58,15 +69,20 @@ class HanoiTower {
     if (!disks.empty()) {
       disks.clear();
     }
-    IntStream.rangeClosed(1, totalDisks).forEach(size -> disks.push(new HanoiDisk(size)));
+    IntStream.rangeClosed(1, totalDisks).forEach(size ->
+      disks.push(new HanoiDisk(size))
+    );
   }
 
   public void placeDisk(HanoiDisk hanoiDisk) {
     HanoiDisk topDisk = disks.peek();
     if (topDisk.size() >= hanoiDisk.size()) {
       throw new IndexOutOfBoundsException(
-          "Can not place the disk with size %d onto a smaller disk size %d"
-              .formatted(hanoiDisk.size(), topDisk.size()));
+        "Can not place the disk with size %d onto a smaller disk size %d".formatted(
+            hanoiDisk.size(),
+            topDisk.size()
+          )
+      );
     }
     disks.push(hanoiDisk);
   }

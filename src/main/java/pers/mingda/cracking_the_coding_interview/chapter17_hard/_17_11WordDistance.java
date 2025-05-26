@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class _17_11WordDistance {
+
   int findClosest(String[] words, String word1, String word2) {
     int prevWord1Index = -1;
     int prevWord2Index = -1;
@@ -18,7 +19,10 @@ public class _17_11WordDistance {
         prevWord2Index = i;
       }
       if (prevWord1Index != -1 && prevWord2Index != -1) {
-        smallestDistance = Math.min(smallestDistance, Math.abs(prevWord1Index - prevWord2Index));
+        smallestDistance = Math.min(
+          smallestDistance,
+          Math.abs(prevWord1Index - prevWord2Index)
+        );
       }
     }
     return smallestDistance == Integer.MAX_VALUE ? -1 : smallestDistance;
@@ -33,13 +37,19 @@ public class _17_11WordDistance {
     Map<String, List<Integer>> map = new HashMap<>();
     for (int i = 0; i < words.length; i++) {
       String word = words[i];
-      List<Integer> wordHistory = map.computeIfAbsent(word, w -> new ArrayList<>());
+      List<Integer> wordHistory = map.computeIfAbsent(word, w ->
+        new ArrayList<>()
+      );
       wordHistory.add(i);
     }
     return map;
   }
 
-  int findClosest(Map<String, List<Integer>> wordLocMap, String word1, String word2) {
+  int findClosest(
+    Map<String, List<Integer>> wordLocMap,
+    String word1,
+    String word2
+  ) {
     if (!wordLocMap.containsKey(word1) || !wordLocMap.containsKey(word2)) {
       return -1;
     }
@@ -52,7 +62,10 @@ public class _17_11WordDistance {
     while (index1 < wordLocs1.size() && index2 < wordLocs2.size()) {
       int wordLoc1 = wordLocs1.get(index1);
       int wordLoc2 = wordLocs2.get(index2);
-      smallestDistance = Math.min(smallestDistance, Math.abs(wordLoc1 - wordLoc2));
+      smallestDistance = Math.min(
+        smallestDistance,
+        Math.abs(wordLoc1 - wordLoc2)
+      );
       if (wordLoc1 < wordLoc2) {
         index1++;
       } else {

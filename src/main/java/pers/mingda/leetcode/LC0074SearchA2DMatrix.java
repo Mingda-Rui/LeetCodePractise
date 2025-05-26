@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0074SearchA2DMatrix {
+
   public boolean searchMatrix(int[][] matrix, int target) {
     int row = matrix.length;
     int column = matrix[0].length;

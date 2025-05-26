@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searching;
 
 public class _10_4SortedSearchNoSize {
+
   private Listy list;
 
   public int findElement(int target) {

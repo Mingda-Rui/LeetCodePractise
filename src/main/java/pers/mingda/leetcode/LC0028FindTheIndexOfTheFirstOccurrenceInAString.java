@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0028FindTheIndexOfTheFirstOccurrenceInAString {}
 
 class LC0028Solution {
+
   public int strStr(String haystack, String needle) {
     // 0 1 2 3 4
     //       0 1

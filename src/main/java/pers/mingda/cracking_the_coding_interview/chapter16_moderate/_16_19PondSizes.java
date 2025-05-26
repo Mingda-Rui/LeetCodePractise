@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class _16_19PondSizes {
+
   private static final int WATER = 0;
 
   List<Integer> computePondSizes(int[][] land) {
@@ -23,7 +24,11 @@ public class _16_19PondSizes {
     return pondSizes;
   }
 
-  int measurePond(int[][] land, Set<List<Integer>> visited, List<Integer> location) {
+  int measurePond(
+    int[][] land,
+    Set<List<Integer>> visited,
+    List<Integer> location
+  ) {
     if (visited.contains(location) || !checkBoundary(land, location)) {
       return 0;
     }
@@ -31,18 +36,23 @@ public class _16_19PondSizes {
       return 0;
     }
     visited.add(location);
-    return getSurroundingLoc(location).stream()
-            .map(loc -> measurePond(land, visited, loc))
-            .mapToInt(Integer::intValue)
-            .sum()
-        + 1;
+    return (
+      getSurroundingLoc(location)
+        .stream()
+        .map(loc -> measurePond(land, visited, loc))
+        .mapToInt(Integer::intValue)
+        .sum() +
+      1
+    );
   }
 
   boolean checkBoundary(int[][] land, List<Integer> location) {
-    return location.getFirst() >= 0
-        && location.getFirst() < land.length
-        && location.getLast() >= 0
-        && location.getLast() < land[0].length;
+    return (
+      location.getFirst() >= 0 &&
+      location.getFirst() < land.length &&
+      location.getLast() >= 0 &&
+      location.getLast() < land[0].length
+    );
   }
 
   List<List<Integer>> getSurroundingLoc(List<Integer> location) {

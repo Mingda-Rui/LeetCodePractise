@@ -9,6 +9,7 @@ import java.util.Stack;
 public class _3_2StackMin {}
 
 class StackWithMin extends Stack<NodeWithMin> {
+
   public int min() {
     if (this.isEmpty()) {
       return Integer.MAX_VALUE;
@@ -24,6 +25,7 @@ class StackWithMin extends Stack<NodeWithMin> {
 }
 
 class NodeWithMin {
+
   int val;
   int min;
 

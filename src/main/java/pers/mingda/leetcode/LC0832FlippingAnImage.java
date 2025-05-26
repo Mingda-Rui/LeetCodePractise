@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0832FlippingAnImage {
+
   public int[][] flipAndInvertImage(int[][] image) {
     int column = image[0].length;
     for (int i = 0; i < image.length; i++) {

@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Arrays;
 
 public class LC0312BurstBalloons {
+
   public int maxCoins(int[] nums) {
     int len = nums.length;
     int[][] memo = new int[len][len];

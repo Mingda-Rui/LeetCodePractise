@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_9Operations {
+
   /* Flip a positive sign to negative or negative sign to pos. */
   int negate(int a) {
     int neg = 0;

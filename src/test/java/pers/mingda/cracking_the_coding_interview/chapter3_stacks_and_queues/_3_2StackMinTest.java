@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class _3_2StackMinTest {
+
   @Test
   public void testStackWithMin() {
     StackWithMin swm = new StackWithMin();

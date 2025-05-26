@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0606ConstructStringFromBinaryTree {
+
   public String tree2str(TreeNode root) {
     if (root == null) return "";
     String left = tree2str(root.left);

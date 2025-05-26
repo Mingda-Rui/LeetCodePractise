@@ -3,8 +3,9 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0114FlattenBinaryTreeToLinkedList {
+
   public TreeNode flattenRecursive(TreeNode root) {
-    if (root == null || root.left == null && root.right == null) return root;
+    if (root == null || (root.left == null && root.right == null)) return root;
 
     TreeNode leftTail = flattenRecursive(root.left);
     TreeNode rightTail = flattenRecursive(root.right);

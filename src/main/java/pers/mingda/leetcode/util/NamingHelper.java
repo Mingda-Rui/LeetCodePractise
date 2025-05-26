@@ -44,7 +44,8 @@ public class NamingHelper {
     // ABA => 0026
     if (num < 1 || num > 17575) {
       throw new IllegalArgumentException(
-          "Class number should be in the field of 1 to 17576 (AAA to ZZZ)");
+        "Class number should be in the field of 1 to 17576 (AAA to ZZZ)"
+      );
     }
     StringBuilder sb = new StringBuilder();
     while (num != 0) {
@@ -56,7 +57,9 @@ public class NamingHelper {
 
     if (sb.length() > 3) {
       throw new IllegalStateException(
-          "The length of prefix should be no longer than 3, now it is " + sb.length());
+        "The length of prefix should be no longer than 3, now it is " +
+        sb.length()
+      );
     }
 
     while (sb.length() != 3) {
@@ -79,7 +82,8 @@ public class NamingHelper {
     String normalizedPrefix = prefix;
     if (prefix == null || !prefix.matches("[a-zA-Z]{1,3}")) {
       throw new IllegalArgumentException(
-          "Illegal prefix format. The prefix should consist of 3 letters");
+        "Illegal prefix format. The prefix should consist of 3 letters"
+      );
     } else if (prefix.length() < 3) {
       normalizedPrefix = "A".repeat(3 - (prefix.length())) + prefix;
     }
@@ -89,10 +93,11 @@ public class NamingHelper {
   public static void main(String[] args) {
     if (args.length == 0) {
       throw new IllegalArgumentException(
-          """
-                      In order to use NamingHelper util, 1 or more args in the following format need to be provided.\
-                      1. Prefix no less than 3 letters, which will be converted to number\
-                      2. Or, number of LeetCode problems, which will be converted to prefix""");
+        """
+        In order to use NamingHelper util, 1 or more args in the following format need to be provided.\
+        1. Prefix no less than 3 letters, which will be converted to number\
+        2. Or, number of LeetCode problems, which will be converted to prefix"""
+      );
     }
 
     for (String arg : args) {
@@ -100,13 +105,14 @@ public class NamingHelper {
         parseArg(arg);
       } catch (Exception ex) {
         System.out.println(
-            "Arg: "
-                + arg
-                + " can not be processed. Cause by error: "
-                + ex.getCause()
-                + "\n"
-                + "Error message: "
-                + ex.getMessage());
+          "Arg: " +
+          arg +
+          " can not be processed. Cause by error: " +
+          ex.getCause() +
+          "\n" +
+          "Error message: " +
+          ex.getMessage()
+        );
       }
     }
   }
@@ -115,13 +121,16 @@ public class NamingHelper {
     if (digitsOnly.matcher(arg).matches()) {
       int num = Integer.parseInt(arg);
       String parsedPrefix = getClassPrefixByNum(num);
-      System.out.println("Converted from num: " + num + " to prefix: " + parsedPrefix);
+      System.out.println(
+        "Converted from num: " + num + " to prefix: " + parsedPrefix
+      );
     } else {
       int parsedNum = getClassNumByPrefix(arg);
-      System.out.println("Converted from prefix: " + arg + " to num: " + parsedNum);
+      System.out.println(
+        "Converted from prefix: " + arg + " to num: " + parsedNum
+      );
     }
   }
 }
-
 // 30 20
 // 1 4 20 => A

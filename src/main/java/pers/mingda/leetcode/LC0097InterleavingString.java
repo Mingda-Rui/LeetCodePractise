@@ -1,13 +1,21 @@
 package pers.mingda.leetcode;
 
 public class LC0097InterleavingString {
+
   public boolean isInterleave(String s1, String s2, String s3) {
     boolean[][] invalidMemo = new boolean[s1.length() + 1][s2.length() + 1];
     return interleave(s1, 0, s2, 0, s3, 0, invalidMemo);
   }
 
   private boolean interleave(
-      String s1, int i1, String s2, int i2, String s3, int i3, boolean[][] invalidMemo) {
+    String s1,
+    int i1,
+    String s2,
+    int i2,
+    String s3,
+    int i3,
+    boolean[][] invalidMemo
+  ) {
     if (invalidMemo[i1][i2]) {
       return false;
     }
@@ -46,7 +54,8 @@ public class LC0097InterleavingString {
           continue;
         }
         dp[j] = index1 >= 0 && s1.charAt(index1) == s3.charAt(index3) && dp[j];
-        dp[j] |= index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1];
+        dp[j] |=
+          index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1];
       }
     }
     return dp[s2.length()];

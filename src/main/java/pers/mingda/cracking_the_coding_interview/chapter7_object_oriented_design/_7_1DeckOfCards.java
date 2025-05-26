@@ -27,11 +27,14 @@ enum Suit {
         return suit;
       }
     }
-    throw new IllegalArgumentException("Can not determine suit of value " + value);
+    throw new IllegalArgumentException(
+      "Can not determine suit of value " + value
+    );
   }
 }
 
 class Desk<T extends Card> {
+
   private ArrayList<T> cards = new ArrayList<>(); // all cards, dealt or not
   private int dealtIndex = 0; // marks first un-dealt card
 
@@ -66,6 +69,7 @@ class Desk<T extends Card> {
 }
 
 abstract class Card {
+
   private boolean available = true;
 
   /*
@@ -101,6 +105,7 @@ abstract class Card {
 }
 
 class Hand<T extends Card> {
+
   protected ArrayList<T> cards = new ArrayList<>();
 
   public int score() {
@@ -117,6 +122,7 @@ class Hand<T extends Card> {
 }
 
 class BlackJackHand extends Hand<BlackJackCard> {
+
   /*
    * There are multiple possible scores for a blackjack hand, since aces have
    * multiple values. Return the highest possible score that's under 21, or the

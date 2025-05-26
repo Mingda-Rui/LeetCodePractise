@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LC0018FourSum {
+
   public List<List<Integer>> fourSum(int[] nums, int target) {
     Arrays.sort(nums);
     return kSum(nums, 0, target, 4);

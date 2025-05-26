@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0203RemoveLinkedListElements {
+
   public ListNode removeElements(ListNode head, int val) {
     if (head == null) return head;
     ListNode newHead = head;

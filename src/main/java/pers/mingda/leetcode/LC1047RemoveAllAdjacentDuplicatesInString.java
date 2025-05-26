@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1047RemoveAllAdjacentDuplicatesInString {
+
   public String removeDuplicates(String s) {
     StringBuilder sb = new StringBuilder();
     for (char c : s.toCharArray()) {

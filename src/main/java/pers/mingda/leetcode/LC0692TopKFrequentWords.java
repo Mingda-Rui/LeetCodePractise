@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.*;
 
 public class LC0692TopKFrequentWords {
+
   public List<String> topKFrequent(String[] words, int k) {
     Map<String, Integer> map = new HashMap<>();
     for (String word : words) {
@@ -38,6 +39,7 @@ public class LC0692TopKFrequentWords {
 }
 
 class LC0692Trie {
+
   LC0692Trie[] children;
   char c;
   String word;
@@ -53,7 +55,8 @@ class LC0692Trie {
 
     for (int i = 0; i < word.length(); i++) {
       char letter = word.charAt(i);
-      if (pointer.children[letter] == null) pointer.children[letter] = new LC0692Trie(letter);
+      if (pointer.children[letter] == null) pointer.children[letter] =
+        new LC0692Trie(letter);
       pointer = pointer.children[letter];
       if (i == word.length() - 1) pointer.word = word;
     }

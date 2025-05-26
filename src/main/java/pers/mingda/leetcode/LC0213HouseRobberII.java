@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0213HouseRobberII {
+
   public int rob(int[] nums) {
     if (nums.length < 2) return nums[0];
     int max1 = rob(nums, 0, nums.length - 1);

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 public class _10_7MissingInt {
+
   long numberOfInts = ((long) Integer.MAX_VALUE) + 1;
   byte[] bitfield = new byte[(int) (numberOfInts / 8)];
   String filename = "testFile.txt";
@@ -18,7 +19,6 @@ public class _10_7MissingInt {
        * set the nth bit of a byte (e.g., 10 would correspond to the 2nd bit of
        * index 2 in the byte array). */
       bitfield[n / 8] |= (byte) (1 << (n % 8));
-
       // 0 : 00000000
       // 1 : 00000010
       // 2 : 00000100
@@ -64,7 +64,8 @@ public class _10_7MissingInt {
   }
 
   /* Get count of items within each range. */
-  private int[] getCountPerBlock(String filename, int rangeSize) throws FileNotFoundException {
+  private int[] getCountPerBlock(String filename, int rangeSize)
+    throws FileNotFoundException {
     int arraySize = Integer.MAX_VALUE / rangeSize + 1;
     int[] blocks = new int[arraySize];
 
@@ -88,8 +89,11 @@ public class _10_7MissingInt {
   }
 
   /* Create a bit vector for the values within a specific range. */
-  private byte[] getBitVectorForRange(String filename, int blockIndex, int rangeSize)
-      throws FileNotFoundException {
+  private byte[] getBitVectorForRange(
+    String filename,
+    int blockIndex,
+    int rangeSize
+  ) throws FileNotFoundException {
     int startRange = blockIndex * rangeSize;
     int endRange = startRange + rangeSize;
     byte[] bitVector = new byte[rangeSize];

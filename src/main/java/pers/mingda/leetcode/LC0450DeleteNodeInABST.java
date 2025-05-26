@@ -6,6 +6,7 @@ package pers.mingda.leetcode;
  * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 public class LC0450DeleteNodeInABST {
+
   public TreeNode deleteNode(TreeNode root, int key) {
     if (root == null) {
       return null;

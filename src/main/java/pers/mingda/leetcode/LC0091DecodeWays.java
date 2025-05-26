@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0091DecodeWays {
+
   public int numDecodings(String s) {
     int[] record = new int[s.length()];
     if (!checkOneDigi(s, 0)) return 0;
@@ -28,6 +29,7 @@ public class LC0091DecodeWays {
 }
 
 class SolutionOne {
+
   public int numDecodings(String s) {
     // if (s.charAt(0) == '0') return 0;
     String keNengFenGe = "";
@@ -55,16 +57,18 @@ class SolutionOne {
     if (s.charAt(length - 1) == '0') {
       length -= 2;
     } else if (length >= 2 && s.charAt(length - 2) == '2') {
-      if (s.charAt(length - 1) == '7'
-          || s.charAt(length - 1) == '8'
-          || s.charAt(length - 1) == '9') {
+      if (
+        s.charAt(length - 1) == '7' ||
+        s.charAt(length - 1) == '8' ||
+        s.charAt(length - 1) == '9'
+      ) {
         length -= 1;
       }
     }
     int sum = length;
     for (int i = 2; i <= length / 2; i++) {
       int current = length - i;
-      sum += (current) * (current - 1) / i / (i - 1);
+      sum += ((current) * (current - 1)) / i / (i - 1);
     }
 
     if (sum <= 0) sum = 1;
@@ -73,6 +77,7 @@ class SolutionOne {
 }
 
 class SolutionTwo {
+
   public int numDecodings(String s) {
     if (null == s || s.length() == 0) return 0;
     int[] dp = new int[s.length() + 1];

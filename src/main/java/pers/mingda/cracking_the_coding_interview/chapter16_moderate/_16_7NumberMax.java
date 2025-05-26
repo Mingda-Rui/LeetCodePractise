@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_7NumberMax {
+
   /* Flips a 1 to a 0 and a 0 to a 1 */
   int flip(int bit) {
     return 1 ^ bit;

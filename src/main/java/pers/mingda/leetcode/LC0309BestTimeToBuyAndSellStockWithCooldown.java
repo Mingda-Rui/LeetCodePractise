@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0309BestTimeToBuyAndSellStockWithCooldown {
+
   public int maxProfit(int[] prices) {
     int[] profitRecord = new int[prices.length];
     return calcProfit(prices, profitRecord, 0);
@@ -28,7 +29,6 @@ public class LC0309BestTimeToBuyAndSellStockWithCooldown {
   public int maxProfitStateMachine(int[] prices) {
     int hold = Integer.MIN_VALUE;
     int sold = Integer.MIN_VALUE;
-    ;
     int idel = 0;
     for (int price : prices) {
       int prevSold = sold;

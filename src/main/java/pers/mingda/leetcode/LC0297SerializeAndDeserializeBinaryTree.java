@@ -5,6 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class LC0297SerializeAndDeserializeBinaryTree {
+
   // Encodes a tree to a single string.
   public String serialize(TreeNode root) {
     StringBuilder sb = new StringBuilder("[");
@@ -17,7 +18,11 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     return sb.toString();
   }
 
-  private int serializeRecursive(Queue<TreeNode> queue, StringBuilder sb, int numOfTailingNull) {
+  private int serializeRecursive(
+    Queue<TreeNode> queue,
+    StringBuilder sb,
+    int numOfTailingNull
+  ) {
     TreeNode node = queue.poll();
     if (node == null) {
       sb.append("null,");
@@ -43,7 +48,11 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     return deserializeRecursive(curr, vals, 1);
   }
 
-  private TreeNode deserializeRecursive(Queue<TreeNode> curr, String[] vals, int index) {
+  private TreeNode deserializeRecursive(
+    Queue<TreeNode> curr,
+    String[] vals,
+    int index
+  ) {
     TreeNode node = curr.poll();
     if (index >= vals.length) return node;
     if (node != null) {
@@ -169,12 +178,10 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     return result;
   }
 }
-
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
 // Codec deser = new Codec();
 // TreeNode ans = deser.deserialize(ser.serialize(root));
-
 //        1
 //    2       3
 //  4   5   6   7

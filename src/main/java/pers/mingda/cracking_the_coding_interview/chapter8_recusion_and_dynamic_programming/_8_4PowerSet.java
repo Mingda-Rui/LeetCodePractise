@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_
 import java.util.ArrayList;
 
 public class _8_4PowerSet {
+
   ArrayList<ArrayList<Integer>> getSubsets(ArrayList<Integer> set, int index) {
     ArrayList<ArrayList<Integer>> allSubsets;
     if (set.size() == index) { // Base case - add empty set
@@ -24,7 +25,7 @@ public class _8_4PowerSet {
 
   ArrayList<ArrayList<Integer>> getSubsets2(ArrayList<Integer> set) {
     ArrayList<ArrayList<Integer>> allSubsets = new ArrayList<>();
-    int max = 1 << set.size(); /* Compute 2^n */
+    int max = 1 << set.size();/* Compute 2^n */
     for (int k = 0; k < max; k++) {
       ArrayList<Integer> subset = convertIntToSet(k, set);
       allSubsets.add(subset);

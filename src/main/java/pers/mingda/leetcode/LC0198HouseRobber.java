@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0198HouseRobber {
+
   public int rob(int[] nums) {
     if (nums.length == 1) return nums[0];
     int[] sum = new int[nums.length];

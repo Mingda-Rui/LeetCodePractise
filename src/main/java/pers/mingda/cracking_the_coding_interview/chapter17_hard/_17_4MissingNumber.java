@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 import java.util.ArrayList;
 
 public class _17_4MissingNumber {
+
   int findMissing(ArrayList<MissingNumberBitInteger> array) {
     /* Start from the least significant bit, and work our way up */
     return findMissing(array, 0);
@@ -12,8 +13,12 @@ public class _17_4MissingNumber {
     if (column >= MissingNumberBitInteger.INTEGER_SIZE) { // We're done!
       return 0;
     }
-    ArrayList<MissingNumberBitInteger> oneBits = new ArrayList<>(input.size() / 2);
-    ArrayList<MissingNumberBitInteger> zeroBits = new ArrayList<>(input.size() / 2);
+    ArrayList<MissingNumberBitInteger> oneBits = new ArrayList<>(
+      input.size() / 2
+    );
+    ArrayList<MissingNumberBitInteger> zeroBits = new ArrayList<>(
+      input.size() / 2
+    );
 
     for (MissingNumberBitInteger t : input) {
       if (t.fetch(column) == 0) {
@@ -33,6 +38,7 @@ public class _17_4MissingNumber {
 }
 
 class MissingNumberBitInteger {
+
   public static int INTEGER_SIZE;
   int value;
 

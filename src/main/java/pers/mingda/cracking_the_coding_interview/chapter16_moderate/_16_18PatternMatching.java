@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_18PatternMatching {
+
   boolean doesMatch(String pattern, String value) {
     if (pattern.length() == 0) return value.length() == 0;
 
@@ -30,7 +31,13 @@ public class _16_18PatternMatching {
    * this is the main string or the alternate string. Then checks if the next set of
    * characters in value match the original set of those characters (either the main
    * or the alternate. */
-  boolean matches(String pattern, String value, int mainSize, int altSize, int firstAlt) {
+  boolean matches(
+    String pattern,
+    String value,
+    int mainSize,
+    int altSize,
+    int firstAlt
+  ) {
     int stringIndex = mainSize;
     for (int i = 1; i < pattern.length(); i++) {
       int size = pattern.charAt(i) == pattern.charAt(0) ? mainSize : altSize;

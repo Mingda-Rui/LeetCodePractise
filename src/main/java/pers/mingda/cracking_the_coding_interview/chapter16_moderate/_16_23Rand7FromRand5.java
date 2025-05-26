@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_23Rand7FromRand5 {
+
   int rand7() {
     while (true) {
       int num = 5 * rand5() + rand5();

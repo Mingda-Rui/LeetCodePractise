@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LC1207UniqueNumberOfOccurrences {
+
   public boolean uniqueOccurrences(int[] arr) {
     Map<Integer, Integer> map = new HashMap<>();
     for (int num : arr) {

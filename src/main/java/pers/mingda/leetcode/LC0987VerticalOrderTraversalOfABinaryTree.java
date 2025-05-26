@@ -16,6 +16,7 @@ public class LC0987VerticalOrderTraversalOfABinaryTree {}
  * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 class LC0987Solution {
+
   public List<List<Integer>> verticalTraversal(TreeNode root) {
     List<Coord> list = new LinkedList<>();
     generateCoord(root, 0, 0, list);
@@ -55,6 +56,7 @@ class LC0987Solution {
 }
 
 class Coord {
+
   int x;
   int y;
   int val;
@@ -67,6 +69,7 @@ class Coord {
 }
 
 class IterateByLaySolution {
+
   public List<List<Integer>> verticalTraversal(TreeNode root) {
     List<List<Integer>> result = new LinkedList<>();
     Queue<CoordNode> queue = new LinkedList<>();
@@ -116,6 +119,7 @@ class IterateByLaySolution {
 }
 
 class CoordNode {
+
   int x;
   int y;
   TreeNode node;

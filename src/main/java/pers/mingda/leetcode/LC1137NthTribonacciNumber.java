@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1137NthTribonacciNumber {
+
   public int tribonacci(int n) {
     if (n == 0) {
       return 0;

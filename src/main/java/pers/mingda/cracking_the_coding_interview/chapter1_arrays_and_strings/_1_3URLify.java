@@ -11,6 +11,7 @@ package pers.mingda.cracking_the_coding_interview.chapter1_arrays_and_strings;
  * */
 
 public class _1_3URLify {
+
   public static String urlify(char[] url, int length) {
     StringBuilder sb = new StringBuilder();
     int consecutiveSpaceCounter = 0;

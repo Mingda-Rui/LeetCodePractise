@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Arrays;
 
 public class LC1984MinimumDifferenceBetweenHighestAndLowestOfKScores {
+
   public int minimumDifference(int[] nums, int k) {
     Arrays.sort(nums);
     int min = Integer.MAX_VALUE;

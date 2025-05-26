@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class _8_12EightQueens {
+
   private static final int GRID_SIZE = 8;
 
   public List<List<Integer>> solveNQueens(int n) {

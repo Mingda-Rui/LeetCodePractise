@@ -4,14 +4,18 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC0316RemoveDuplicateLetters {
+
   public String removeDuplicateLetters(String s) {
-    Queue<String> queue = new PriorityQueue<>((str1, str2) -> str2.length() - str1.length());
+    Queue<String> queue = new PriorityQueue<>(
+      (str1, str2) -> str2.length() - str1.length()
+    );
 
     return null;
   }
 }
 
 class FoodRating {
+
   private String food;
   private String cuisine;
   private int rating;

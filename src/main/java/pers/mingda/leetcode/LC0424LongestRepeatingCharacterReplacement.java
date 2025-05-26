@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LC0424LongestRepeatingCharacterReplacement {
+
   public int characterReplacement(String s, int k) {
     int max = 0;
     int start = 0;
@@ -45,8 +46,11 @@ public class LC0424LongestRepeatingCharacterReplacement {
 
         if (replacements.size() > k) {
           int index = replacements.remove(0);
-          while (index + 1 < s.length() && s.charAt(index + 1) != c && replacements.size() > 0)
-            index = replacements.remove(0);
+          while (
+            index + 1 < s.length() &&
+            s.charAt(index + 1) != c &&
+            replacements.size() > 0
+          ) index = replacements.remove(0);
           head = index + 1;
         }
       }

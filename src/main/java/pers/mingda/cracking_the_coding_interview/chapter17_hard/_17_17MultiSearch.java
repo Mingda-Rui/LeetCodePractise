@@ -26,6 +26,7 @@ public class _17_17MultiSearch {
 }
 
 class MultiSearchTrie {
+
   MultiSearchTrieNode root;
 
   public MultiSearchTrie() {
@@ -62,6 +63,7 @@ class MultiSearchTrie {
 }
 
 class MultiSearchTrieNode {
+
   char val;
   Map<Character, MultiSearchTrieNode> children;
 
@@ -76,7 +78,9 @@ class MultiSearchTrieNode {
       return;
     }
     char c = word.charAt(0);
-    children.computeIfAbsent(c, MultiSearchTrieNode::new).add(word.substring(1));
+    children
+      .computeIfAbsent(c, MultiSearchTrieNode::new)
+      .add(word.substring(1));
   }
 
   public boolean isLeaf() {

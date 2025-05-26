@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _16_8EnglishInt {
+
   // 2,147,483,647
   // 1 digit: one two three four five six seven eight nine ten
   // 2 digits: ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen
@@ -30,12 +31,21 @@ public class _16_8EnglishInt {
     "Sixteen",
     "Seventeen",
     "Eighteen",
-    "Nineteen"
+    "Nineteen",
   };
   String[] tens = {
-    "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    "",
+    "",
+    "Twenty",
+    "Thirty",
+    "Forty",
+    "Fifty",
+    "Sixty",
+    "Seventy",
+    "Eighty",
+    "Ninety",
   };
-  String[] bigNumbers = {"", "Thousand", "Million", "Billion"};
+  String[] bigNumbers = { "", "Thousand", "Million", "Billion" };
   static final String SPACE = " ";
   static final String HUNDRED = "Hundred";
   static final String NEGATIVE = "Negative";
@@ -65,7 +75,9 @@ public class _16_8EnglishInt {
 
   String convertHundreds(int num) {
     if (num > 999) {
-      throw new ArithmeticException("This method can not convert a number greater than 999");
+      throw new ArithmeticException(
+        "This method can not convert a number greater than 999"
+      );
     }
     StringBuilder sb = new StringBuilder();
     if (num > 99) {

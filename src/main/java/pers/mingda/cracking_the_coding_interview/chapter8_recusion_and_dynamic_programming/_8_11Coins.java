@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class _8_11Coins {
+
   public int countReps(int n) {
     // penny should be at the beginning of the list
     List<Coin> coins = Arrays.asList(Coin.values()).reversed();
@@ -24,7 +25,11 @@ public class _8_11Coins {
     remains.removeLast();
 
     int repCount = 0;
-    for (int coinCount = 0; coinCount <= amount / coin.getCents(); coinCount++) {
+    for (
+      int coinCount = 0;
+      coinCount <= amount / coin.getCents();
+      coinCount++
+    ) {
       int remainAmount = amount - coin.getCents() * coinCount;
       repCount += countReps(remainAmount, remains, map);
     }
@@ -39,6 +44,7 @@ enum Coin {
   Dime(10),
   Nickel(5),
   Penny(1);
+
   private final int cents;
 
   Coin(int cents) {

@@ -37,9 +37,12 @@ class RecentCounter {
 
   private int find(int t, int start, int end) {
     if (start + 1 == end) {
-      return pingHistory.get(start) == t || (start == 0 && pingHistory.get(start) > t)
-          ? start
-          : end;
+      return (
+          pingHistory.get(start) == t ||
+          (start == 0 && pingHistory.get(start) > t)
+        )
+        ? start
+        : end;
     }
 
     int mid = (start + end) / 2;
@@ -55,6 +58,7 @@ class RecentCounter {
 }
 
 class RecentCounterSlideWindow {
+
   private static final int DURATION_MILLI = 3000;
   private final Queue<Integer> queue;
 

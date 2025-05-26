@@ -24,7 +24,7 @@ public class _4_9BstSequencesTest {
   public void testAllSequences() {
     TreeNode node = testHelper.createTreeNode(2, 1, 3);
     List<List<Integer>> result = _4_9BstSequences.allSequences(node);
-    int[][] expected = {{2, 1, 3}, {2, 3, 1}};
+    int[][] expected = { { 2, 1, 3 }, { 2, 3, 1 } };
     Set<int[]> expectedSet = new HashSet<>();
     Collections.addAll(expectedSet, expected);
     assertTrue(arrayDeepEquals(expectedSet, result));
@@ -40,7 +40,10 @@ public class _4_9BstSequencesTest {
     assertEquals(2016, result.size());
   }
 
-  private boolean arrayDeepEquals(Set<int[]> expected, List<List<Integer>> results) {
+  private boolean arrayDeepEquals(
+    Set<int[]> expected,
+    List<List<Integer>> results
+  ) {
     if (expected.size() != results.size()) return false;
     for (List<Integer> result : results) {
       int[] resultArr = result.stream().mapToInt(i -> i).toArray();

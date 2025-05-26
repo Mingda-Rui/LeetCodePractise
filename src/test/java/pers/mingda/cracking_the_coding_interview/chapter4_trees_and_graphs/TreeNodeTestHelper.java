@@ -54,7 +54,10 @@ public class TreeNodeTestHelper {
     return "[" + serial + "]";
   }
 
-  protected String serializeTreeNode(Queue<TreeNode> queue, StringBuilder strBuilder) {
+  protected String serializeTreeNode(
+    Queue<TreeNode> queue,
+    StringBuilder strBuilder
+  ) {
     if (queue.isEmpty()) {
       return strBuilder.toString();
     }
@@ -83,7 +86,11 @@ public class TreeNodeTestHelper {
     return root;
   }
 
-  private void deserializeTreeNode(String treeSerial, Queue<TreeNode> queue, int prevIndex) {
+  private void deserializeTreeNode(
+    String treeSerial,
+    Queue<TreeNode> queue,
+    int prevIndex
+  ) {
     if (queue.isEmpty()) {
       return;
     }
@@ -107,10 +114,14 @@ public class TreeNodeTestHelper {
 
   protected int getNextIndex(String treeSerial, int currentIndex) {
     int invalidIndex = -1;
-    if (currentIndex < 0 || currentIndex >= treeSerial.length()) return invalidIndex;
+    if (
+      currentIndex < 0 || currentIndex >= treeSerial.length()
+    ) return invalidIndex;
     for (int i = currentIndex + 1; i < treeSerial.length(); i++) {
       char c = treeSerial.charAt(i);
-      if (Character.isDigit(c) && !Character.isDigit(treeSerial.charAt(i - 1))) {
+      if (
+        Character.isDigit(c) && !Character.isDigit(treeSerial.charAt(i - 1))
+      ) {
         return i;
       } else if (c == 'n') {
         char prevC = treeSerial.charAt(i - 1);
@@ -125,7 +136,9 @@ public class TreeNodeTestHelper {
     StringBuilder sb = new StringBuilder();
     for (int i = index; i < treeSerial.length(); i++) {
       char c = treeSerial.charAt(i);
-      if (c != 'n' && c != 'u' && c != 'l' && !Character.isDigit(c)) return sb.toString();
+      if (
+        c != 'n' && c != 'u' && c != 'l' && !Character.isDigit(c)
+      ) return sb.toString();
       sb.append(c);
     }
     return "";

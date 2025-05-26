@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0011ContainerWithMostWater {
+
   public int maxArea(int[] height) {
     int start = 0;
     int end = height.length - 1;

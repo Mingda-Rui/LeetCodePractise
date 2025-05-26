@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0006ZigzagConversion {}
 
 class LC0006Solution {
+
   public String convert(String s, int numRows) {
     if (numRows < 2) return s;
     char[] result = new char[s.length()];

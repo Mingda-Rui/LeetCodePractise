@@ -16,7 +16,9 @@ public class _3_1ThreeInOneTest {
     fms.push(2, 3);
     fms.push(0, 4);
 
-    RuntimeException re = assertThrows(RuntimeException.class, () -> fms.push(2, 5));
+    RuntimeException re = assertThrows(RuntimeException.class, () ->
+      fms.push(2, 5)
+    );
     assertEquals("The stack is full", re.getMessage());
 
     assertEquals(4, fms.pop(0));

@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 
 public class _17_21VolumeOfHistogram {
+
   int computeHistogramVolume(int[] histogram) {
     int[] leftHighestIndex = new int[histogram.length];
     int[] rightHighestIndex = new int[histogram.length];

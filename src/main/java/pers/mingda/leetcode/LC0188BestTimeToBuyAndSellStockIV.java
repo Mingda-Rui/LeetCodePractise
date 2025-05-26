@@ -3,13 +3,13 @@ package pers.mingda.leetcode;
 public class LC0188BestTimeToBuyAndSellStockIV {}
 
 class LC0188Solution {
+
   public int maxProfit(int k, int[] prices) {
     int len = prices.length;
     if (k * 2 >= len) return highFrequencyTrading(prices);
     int[][] record = new int[k + 1][len];
 
     for (int i = 1; i <= k; i++) {
-
       int maxProfit = 0;
       int minCost = Integer.MAX_VALUE;
       for (int j = 0; j < len; j++) {

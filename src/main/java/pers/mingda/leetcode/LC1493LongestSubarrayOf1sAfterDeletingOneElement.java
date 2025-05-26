@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1493LongestSubarrayOf1sAfterDeletingOneElement {
+
   public int longestSubarray(int[] nums) {
     int countOfZero = 0;
     int head;

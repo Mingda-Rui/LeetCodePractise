@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class _7_6Jigsaw {
-
   // JigsawSolver
   // JigsawMap
   //
@@ -60,7 +59,8 @@ enum Shape {
 }
 
 class Puzzle {
-  private LinkedList<Piece> pieces; /* Remaining pieces to put away. */
+
+  private LinkedList<Piece> pieces;/* Remaining pieces to put away. */
   private Piece[][] solution;
   private int size;
 
@@ -70,7 +70,12 @@ class Puzzle {
 
   /* Put piece into the solution, turn it appropriately, and remove from list. */
   private void setEdgeInSolution(
-      LinkedList<Piece> pieces, Edge edge, int row, int column, Orientation orientation) {
+    LinkedList<Piece> pieces,
+    Edge edge,
+    int row,
+    int column,
+    Orientation orientation
+  ) {
     Piece piece = edge.getParentPiece();
     piece.setEdgeAsOrientation(edge, orientation);
     pieces.remove(piece);
@@ -78,16 +83,26 @@ class Puzzle {
   }
 
   /* Find the matching piece in piecesToSearch and insert it at row, column. */
-  private boolean fitNextEdge(LinkedList<Piece> piecesToSearch, int row, int column) {
+  private boolean fitNextEdge(
+    LinkedList<Piece> piecesToSearch,
+    int row,
+    int column
+  ) {
     if (row == 0 && column == 0) { // On top left corner, just put in a piece???
       Piece p = piecesToSearch.remove();
       orientTopLeftCorner(p);
       solution[0][0] = p;
     } else {
       /* Get the right edge and list to match. */
-      Piece pieceToMatch = column == 0 ? solution[row - 1][0] : solution[row][column - 1];
-      Orientation orientationToMatch = column == 0 ? Orientation.BOTTOM : Orientation.RIGHT;
-      Edge edgeToMatch = pieceToMatch.getEdgeWithOrientation(orientationToMatch);
+      Piece pieceToMatch = column == 0
+        ? solution[row - 1][0]
+        : solution[row][column - 1];
+      Orientation orientationToMatch = column == 0
+        ? Orientation.BOTTOM
+        : Orientation.RIGHT;
+      Edge edgeToMatch = pieceToMatch.getEdgeWithOrientation(
+        orientationToMatch
+      );
 
       /* Get matching edge. */
       Edge edge = getMatchingEdge(edgeToMatch, piecesToSearch);
@@ -114,8 +129,13 @@ class Puzzle {
     solution = new Piece[size][size];
     for (int row = 0; row < size; row++) {
       for (int column = 0; column < size; column++) {
-        LinkedList<Piece> piecesToSearch =
-            getPieceListToSearch(cornerPieces, borderPieces, insidePieces, row, column);
+        LinkedList<Piece> piecesToSearch = getPieceListToSearch(
+          cornerPieces,
+          borderPieces,
+          insidePieces,
+          row,
+          column
+        );
         if (!fitNextEdge(piecesToSearch, row, column)) {
           return false;
         }
@@ -126,28 +146,34 @@ class Puzzle {
 
   private void orientTopLeftCorner(Piece piece) {}
 
-  private Edge getMatchingEdge(Edge edgeToMatch, LinkedList<Piece> piecesToSearch) {
+  private Edge getMatchingEdge(
+    Edge edgeToMatch,
+    LinkedList<Piece> piecesToSearch
+  ) {
     // ...
     return null;
   }
 
   private void groupPieces(
-      LinkedList<Piece> cornerPieces,
-      LinkedList<Piece> borderPieces,
-      LinkedList<Piece> insidePieces) {}
+    LinkedList<Piece> cornerPieces,
+    LinkedList<Piece> borderPieces,
+    LinkedList<Piece> insidePieces
+  ) {}
 
   private LinkedList<Piece> getPieceListToSearch(
-      LinkedList<Piece> cornerPieces,
-      LinkedList<Piece> borderPieces,
-      LinkedList<Piece> insidePieces,
-      int row,
-      int column) {
+    LinkedList<Piece> cornerPieces,
+    LinkedList<Piece> borderPieces,
+    LinkedList<Piece> insidePieces,
+    int row,
+    int column
+  ) {
     // ...
     return null;
   }
 }
 
 class Piece {
+
   private HashMap<Orientation, Edge> edges = new HashMap<>();
 
   public Piece(Edge[] edgeList) {
@@ -178,6 +204,7 @@ class Piece {
 }
 
 class Edge {
+
   private Shape shape;
   private Piece parentPiece;
 

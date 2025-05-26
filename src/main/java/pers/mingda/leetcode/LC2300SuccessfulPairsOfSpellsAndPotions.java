@@ -6,12 +6,16 @@ import java.util.Comparator;
 public class LC2300SuccessfulPairsOfSpellsAndPotions {}
 
 class LC2300Solution {
+
   public int[] successfulPairs(int[] spells, int[] potions, long success) {
     Arrays.sort(potions);
 
     int[] result = new int[spells.length];
     for (int i = 0; i < spells.length; i++) {
-      result[i] = findSuccess(potions, (long) Math.ceil(1.0 * success / spells[i]));
+      result[i] = findSuccess(
+        potions,
+        (long) Math.ceil((1.0 * success) / spells[i])
+      );
     }
     return result;
   }
@@ -46,6 +50,7 @@ class LC2300Solution {
 }
 
 class LC2300SlidingWindowSolution {
+
   public int[] successfulPairs(int[] spells, int[] potions, long success) {
     int[][] sortedSpells = new int[spells.length][2];
     for (int i = 0; i < spells.length; i++) {

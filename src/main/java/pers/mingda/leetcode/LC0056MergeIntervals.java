@@ -82,7 +82,7 @@ public class LC0056MergeIntervals {
       if (rights[i] != 0) {
         offset -= rights[i];
         if (offset != 0) rights[i] = 0;
-        else merged.add(new int[] {previousLegitStart, i});
+        else merged.add(new int[] { previousLegitStart, i });
       }
     }
     return merged.toArray(new int[merged.size()][]);
@@ -119,7 +119,7 @@ public class LC0056MergeIntervals {
         startQueue.remove();
         currentEnd = endQueue.remove();
       }
-      result.add(new int[] {currentStart, currentEnd});
+      result.add(new int[] { currentStart, currentEnd });
     }
     return result.toArray(int[][]::new);
   }
@@ -144,7 +144,7 @@ public class LC0056MergeIntervals {
       offset += lefts[i];
       offset -= rights[i];
       if (offset == 0 && rights[i] != 0) {
-        result.add(new int[] {currentLeft, i});
+        result.add(new int[] { currentLeft, i });
         currentLeft = -1;
       }
     }

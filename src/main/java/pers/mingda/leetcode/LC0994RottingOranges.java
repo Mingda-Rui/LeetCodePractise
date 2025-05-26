@@ -6,6 +6,7 @@ import java.util.Queue;
 public class LC0994RottingOranges {}
 
 class LC0994Solution {
+
   public int orangesRotting(int[][] grid) {
     Queue<int[]> queue = new LinkedList<>();
 
@@ -27,7 +28,7 @@ class LC0994Solution {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
         if (grid[i][j] == 2) {
-          int[] point = {i, j};
+          int[] point = { i, j };
           queue.offer(point);
         }
       }
@@ -39,14 +40,14 @@ class LC0994Solution {
     if (queue.isEmpty()) return -1;
     int size = queue.size();
     orangeCount -= size;
-    int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    int[][] dirs = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
     for (int i = 0; i < size; i++) {
       int[] rottenOrange = queue.poll();
       for (int[] dir : dirs) {
         int neighX = rottenOrange[0] + dir[0];
         int neighY = rottenOrange[1] + dir[1];
         if (checkBoundary(grid, neighX, neighY) && grid[neighX][neighY] == 1) {
-          int[] point = {neighX, neighY};
+          int[] point = { neighX, neighY };
           queue.offer(point);
           grid[neighX][neighY] = 2;
         }

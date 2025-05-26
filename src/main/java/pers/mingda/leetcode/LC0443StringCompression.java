@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LC0443StringCompression {
+
   public int compress(char[] chars) {
     int sameCharCount = 1;
     char prev = chars[0];

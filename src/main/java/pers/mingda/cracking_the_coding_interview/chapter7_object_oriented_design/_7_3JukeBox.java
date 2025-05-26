@@ -6,12 +6,18 @@ import java.util.Set;
 public class _7_3JukeBox {}
 
 class JukeBox {
+
   private CDPlayer cdPlayer;
   private User user;
   private Set<CD> cdCollection;
   private SongSelector ts;
 
-  public JukeBox(CDPlayer cdPlayer, User user, Set<CD> cdCollection, SongSelector ts) {
+  public JukeBox(
+    CDPlayer cdPlayer,
+    User user,
+    Set<CD> cdCollection,
+    SongSelector ts
+  ) {
     // ...
   }
 
@@ -25,6 +31,7 @@ class JukeBox {
 }
 
 class CDPlayer {
+
   private Playlist p;
   private CD c;
 
@@ -65,6 +72,7 @@ class CDPlayer {
 }
 
 class Playlist {
+
   private Song song;
   private Queue<Song> queue;
 
@@ -90,6 +98,7 @@ class Song {
 }
 
 class User {
+
   private String name;
   private long ID;
 
@@ -124,6 +133,7 @@ class User {
 }
 
 class SongSelector {
+
   public Song getCurrentSong() {
     // ...
     return null;

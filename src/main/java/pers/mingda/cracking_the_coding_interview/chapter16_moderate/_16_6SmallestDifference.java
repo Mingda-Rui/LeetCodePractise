@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 import java.util.Arrays;
 
 public class _16_6SmallestDifference {
+
   int findSmallestDifference(int[] array1, int[] array2) {
     Arrays.sort(array1);
     Arrays.sort(array2);

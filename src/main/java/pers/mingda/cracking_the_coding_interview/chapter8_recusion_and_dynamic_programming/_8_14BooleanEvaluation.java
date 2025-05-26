@@ -4,7 +4,11 @@ import java.util.Map;
 
 public class _8_14BooleanEvaluation {
 
-  public int countEval(String expression, boolean result, Map<String, Integer> countMap) {
+  public int countEval(
+    String expression,
+    boolean result,
+    Map<String, Integer> countMap
+  ) {
     if (countMap.containsKey(expression + result)) {
       return countMap.get(expression);
     }
@@ -25,11 +29,11 @@ public class _8_14BooleanEvaluation {
       int total = (leftTrue + leftFalse) + (rightTrue + rightFalse);
 
       int totalTrue =
-          switch (operator) {
-            case AND -> leftTrue * rightTrue;
-            case XOR -> leftTrue * rightFalse;
-            case OR -> total - (leftFalse * rightFalse);
-          };
+        switch (operator) {
+          case AND -> leftTrue * rightTrue;
+          case XOR -> leftTrue * rightFalse;
+          case OR -> total - (leftFalse * rightFalse);
+        };
       int count = result ? totalTrue : total - totalTrue;
       totalCount += count;
     }
@@ -50,6 +54,7 @@ enum OPERATOR {
   AND("&"),
   XOR("^"),
   OR("|");
+
   private String operator;
 
   OPERATOR(String operator) {
@@ -61,7 +66,9 @@ enum OPERATOR {
       case '&' -> AND;
       case '^' -> XOR;
       case '|' -> OR;
-      default -> throw new IllegalStateException("Unexpected value: " + operator);
+      default -> throw new IllegalStateException(
+        "Unexpected value: " + operator
+      );
     };
   }
 }

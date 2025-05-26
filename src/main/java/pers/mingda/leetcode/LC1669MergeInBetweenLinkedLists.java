@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1669MergeInBetweenLinkedLists {
+
   public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
     ListNode beforeANode = list1;
     for (int i = 0; i < a - 1; i++) beforeANode = beforeANode.next;

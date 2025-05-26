@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LC0448FindAllNumbersDisappearedInAnArray {
+
   public List<Integer> findDisappearedNumbers(int[] nums) {
     Set<Integer> set = new HashSet<>();
     for (int i = 1; i <= nums.length; i++) set.add(i);
@@ -22,7 +23,9 @@ public class LC0448FindAllNumbersDisappearedInAnArray {
     }
 
     List<Integer> result = new LinkedList<>();
-    for (int i = 0; i < nums.length; i++) if (nums[i] != i + 1) result.add(i + 1);
+    for (int i = 0; i < nums.length; i++) if (nums[i] != i + 1) result.add(
+      i + 1
+    );
     return result;
   }
 

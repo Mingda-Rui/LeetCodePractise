@@ -8,6 +8,7 @@ import java.util.Queue;
 import java.util.Set;
 
 public class LC0841KeysAndRooms {
+
   public boolean canVisitAllRooms(List<List<Integer>> rooms) {
     Set<Integer> visitedRoom = new HashSet<>();
 
@@ -18,7 +19,11 @@ public class LC0841KeysAndRooms {
     return visitedRoom.size() == rooms.size();
   }
 
-  private void visitRoom(List<List<Integer>> rooms, Set<Integer> visitedRooms, List<Integer> keys) {
+  private void visitRoom(
+    List<List<Integer>> rooms,
+    Set<Integer> visitedRooms,
+    List<Integer> keys
+  ) {
     if (keys.isEmpty()) {
       return;
     }

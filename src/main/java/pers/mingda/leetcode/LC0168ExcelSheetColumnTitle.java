@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LC0168ExcelSheetColumnTitle {
+
   public String convertToTitle(int columnNumber) {
     StringBuilder sb = new StringBuilder();
 
@@ -18,10 +19,34 @@ public class LC0168ExcelSheetColumnTitle {
   }
 
   private char covertInt(int num) {
-    List<Character> letterList =
-        Arrays.asList(
-            'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y');
+    List<Character> letterList = Arrays.asList(
+      'Z',
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y'
+    );
     return letterList.get(num);
   }
 }

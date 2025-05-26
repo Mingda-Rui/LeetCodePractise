@@ -11,7 +11,11 @@ public class _17_13ReSpace {
   }
 
   ReSpacePairResult bestSplit(
-      Set<String> dictionary, String sentence, int start, ReSpacePairResult[] memo) {
+    Set<String> dictionary,
+    String sentence,
+    int start,
+    ReSpacePairResult[] memo
+  ) {
     if (start == sentence.length()) {
       return new ReSpacePairResult("", 0);
     }
@@ -22,14 +26,25 @@ public class _17_13ReSpace {
     ReSpacePairResult smallest = new ReSpacePairResult("", Integer.MAX_VALUE);
     for (int i = 0; i < start; i++) {
       current += sentence.charAt(i);
-      int currentUnrecognized = dictionary.contains(current) ? 0 : current.length();
+      int currentUnrecognized = dictionary.contains(current)
+        ? 0
+        : current.length();
       if (currentUnrecognized >= smallest.unrecognizedLetters) {
         // short circuit
         continue;
       }
-      ReSpacePairResult subSentence = bestSplit(dictionary, sentence, i + 1, memo);
-      if (subSentence.unrecognizedLetters + currentUnrecognized < smallest.unrecognizedLetters) {
-        int newUnrecognized = currentUnrecognized + smallest.unrecognizedLetters;
+      ReSpacePairResult subSentence = bestSplit(
+        dictionary,
+        sentence,
+        i + 1,
+        memo
+      );
+      if (
+        subSentence.unrecognizedLetters + currentUnrecognized <
+        smallest.unrecognizedLetters
+      ) {
+        int newUnrecognized =
+          currentUnrecognized + smallest.unrecognizedLetters;
         String newSentence = current + " " + smallest.sentence;
         smallest = new ReSpacePairResult(newSentence, newUnrecognized);
       }
@@ -44,6 +59,7 @@ public class _17_13ReSpace {
 }
 
 class ReSpacePairResult {
+
   String sentence;
   int unrecognizedLetters;
 

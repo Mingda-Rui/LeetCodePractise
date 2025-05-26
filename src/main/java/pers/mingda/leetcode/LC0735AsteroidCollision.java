@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0735AsteroidCollision {
+
   public int[] asteroidCollision(int[] asteroids) {
     Stack<Integer> stack = new Stack<>();
     int asteroidIndex = 0;

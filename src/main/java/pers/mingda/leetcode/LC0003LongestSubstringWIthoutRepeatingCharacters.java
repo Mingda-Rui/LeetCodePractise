@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0003LongestSubstringWithoutRepeatingCharacters {
+
   public int lengthOfLongestSubstring(String s) {
     int[] record = new int[256];
     int mark = 1;

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0605CanPlaceFlowers {
+
   public boolean canPlaceFlowers(int[] flowerbed, int n) {
     for (int i = 0; i < flowerbed.length; i++) {
       if (n == 0) return true;

@@ -10,9 +10,12 @@ import java.util.Set;
 public class LC0743NetworkDelayTime {}
 
 class LC0743Solution {
+
   public int networkDelayTime(int[][] times, int n, int k) {
     Map<Integer, LC0743Node> network = buildNetwork(times);
-    Comparator<LC0743Node> comparator = Comparator.comparingInt(LC0743Node -> LC0743Node.time);
+    Comparator<LC0743Node> comparator = Comparator.comparingInt(LC0743Node ->
+      LC0743Node.time
+    );
     PriorityQueue<LC0743Node> queue = new PriorityQueue<>(comparator);
     LC0743Node start = network.get(k);
     start.time = 0;
@@ -51,6 +54,7 @@ class LC0743Solution {
 }
 
 class LC0743Node {
+
   int label;
   int time;
   Map<Integer, Integer> map;

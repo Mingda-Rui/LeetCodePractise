@@ -7,6 +7,7 @@ import java.util.Stack;
 public class LC0556NextGreaterElementIII {}
 
 class LC0556Solution {
+
   public int nextGreaterElement(int n) {
     String s = String.valueOf(n);
     Stack<Character> stack = new Stack<>();
@@ -39,19 +40,23 @@ class LC0556Solution {
 }
 
 class ArraySolution {
+
   public int nextGreaterElement(int n) {
     char[] chars = String.valueOf(n).toCharArray();
     int len = chars.length;
 
     int swapIndex = len - 2;
-    while (swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1]) swapIndex--;
+    while (
+      swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1]
+    ) swapIndex--;
 
     if (swapIndex < 0) return -1;
 
     int nextGreaterIndex = swapIndex;
     char toBeSwapped = chars[swapIndex];
-    while (nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped)
-      nextGreaterIndex++;
+    while (
+      nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped
+    ) nextGreaterIndex++;
 
     swap(chars, swapIndex, nextGreaterIndex);
     reverse(chars, swapIndex + 1, len);

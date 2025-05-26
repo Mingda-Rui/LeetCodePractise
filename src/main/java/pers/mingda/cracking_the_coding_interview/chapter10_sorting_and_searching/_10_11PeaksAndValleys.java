@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searchin
 import java.util.Arrays;
 
 public class _10_11PeaksAndValleys {
+
   void sortValleyPeak(int[] array) {
     Arrays.sort(array);
     for (int i = 1; i < array.length; i += 2) {

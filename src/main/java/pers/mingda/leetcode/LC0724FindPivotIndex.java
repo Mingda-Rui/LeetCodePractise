@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0724FindPivotIndex {
+
   public int pivotIndex(int[] nums) {
     int sum = 0;
     for (int num : nums) sum += num;

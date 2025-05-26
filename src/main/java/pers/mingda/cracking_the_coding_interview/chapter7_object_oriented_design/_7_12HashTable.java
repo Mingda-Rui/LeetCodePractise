@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class _7_12HashTable {}
 
 class Hash<K, V> {
+
   /* Linked list node class. Used only within hash table. No one else should get
    * access to this. Implemented as doubly linked list. */
   private static class LinkedListNode<K, V> {
+
     public LinkedListNode<K, V> next;
     public LinkedListNode<K, V> prev;
     public K key;

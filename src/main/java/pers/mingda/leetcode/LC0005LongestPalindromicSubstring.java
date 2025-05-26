@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0005LongestPalindromicSubstring {
+
   public String longestPalindromeBruteForce(String s) {
     int head = 0;
     int len = 0;
@@ -17,7 +18,9 @@ public class LC0005LongestPalindromicSubstring {
   }
 
   private int getLongest(String s, int left, int right) {
-    while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+    while (
+      left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)
+    ) {
       left--;
       right++;
     }

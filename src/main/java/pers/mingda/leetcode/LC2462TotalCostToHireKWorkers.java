@@ -4,6 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC2462TotalCostToHireKWorkers {
+
   public long totalCost(int[] costs, int k, int candidates) {
     long cost = 0;
     Queue<Integer> firstCandidates = new PriorityQueue<>();
@@ -20,8 +21,11 @@ public class LC2462TotalCostToHireKWorkers {
         lastIndex--;
       }
 
-      if (!firstCandidates.isEmpty()
-          && (lastCandidates.isEmpty() || firstCandidates.peek() <= lastCandidates.peek())) {
+      if (
+        !firstCandidates.isEmpty() &&
+        (lastCandidates.isEmpty() ||
+          firstCandidates.peek() <= lastCandidates.peek())
+      ) {
         cost += firstCandidates.poll();
       } else if (!lastCandidates.isEmpty()) {
         cost += lastCandidates.poll();

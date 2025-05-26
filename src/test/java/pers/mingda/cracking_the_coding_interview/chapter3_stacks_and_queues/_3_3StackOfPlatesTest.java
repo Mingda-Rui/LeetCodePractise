@@ -7,6 +7,7 @@ import java.util.EmptyStackException;
 import org.junit.jupiter.api.Test;
 
 public class _3_3StackOfPlatesTest {
+
   @Test
   public void testStackOfPlates() {
     SetOfStacks sos = new SetOfStacks(2);

@@ -21,7 +21,7 @@ class LC0478Solution {
       xOffset = getRandome(-radius, radius);
       yOffset = getRandome(-radius, radius);
     }
-    double[] result = {x + xOffset, y + yOffset};
+    double[] result = { x + xOffset, y + yOffset };
     return result;
   }
 
@@ -58,7 +58,7 @@ class LC0478RadianSolution {
     double x = Math.cos(radian) * hypotenuse;
     double y = Math.sin(radian) * hypotenuse;
 
-    double[] result = {x + xCenter, y + yCenter};
+    double[] result = { x + xCenter, y + yCenter };
     return result;
   }
 

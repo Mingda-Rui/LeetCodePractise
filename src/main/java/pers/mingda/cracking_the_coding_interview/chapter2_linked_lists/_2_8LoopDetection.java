@@ -16,7 +16,6 @@ public class _2_8LoopDetection {
       fast = fast.next.next;
       slow1 = slow1.next;
       if (fast == slow1) meet = true;
-      ;
     }
     if (!meet) return null;
 

@@ -11,8 +11,12 @@ import java.util.Stack;
  * (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295. Output: 9 -> 1 -> 2. That is, 912.
  */
 public class _2_5SumLists {
-  public static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
 
+  public static LinkedListNode addLists(
+    LinkedListNode l1,
+    LinkedListNode l2,
+    int carry
+  ) {
     return null;
   }
 
@@ -22,7 +26,6 @@ public class _2_5SumLists {
     LinkedListNode sumHead = sum;
 
     while (l1 != null || l2 != null) {
-
       int l1Data = (l1 == null) ? 0 : l1.data;
       int l2Data = (l2 == null) ? 0 : l2.data;
       carry = (sum.data + l1Data + l2Data) / 10;
@@ -40,11 +43,18 @@ public class _2_5SumLists {
     return sumHead;
   }
 
-  public static LinkedListNode sumListsRecursive(LinkedListNode l1, LinkedListNode l2) {
+  public static LinkedListNode sumListsRecursive(
+    LinkedListNode l1,
+    LinkedListNode l2
+  ) {
     return sumListsRecursive(l1, l2, 0);
   }
 
-  public static LinkedListNode sumListsRecursive(LinkedListNode l1, LinkedListNode l2, int carry) {
+  public static LinkedListNode sumListsRecursive(
+    LinkedListNode l1,
+    LinkedListNode l2,
+    int carry
+  ) {
     if (l1 == null && l2 == null && carry == 0) return null;
     int l1Data = (l1 == null) ? 0 : l1.data;
     int l2Data = (l2 == null) ? 0 : l2.data;
@@ -57,7 +67,10 @@ public class _2_5SumLists {
     return result;
   }
 
-  public static LinkedListNode sumListsFollowUpReverse(LinkedListNode l1, LinkedListNode l2) {
+  public static LinkedListNode sumListsFollowUpReverse(
+    LinkedListNode l1,
+    LinkedListNode l2
+  ) {
     LinkedListNode reversedL1 = reverse(l1);
     LinkedListNode reversedL2 = reverse(l2);
     LinkedListNode result = sumLists(reversedL1, reversedL2);
@@ -68,7 +81,10 @@ public class _2_5SumLists {
     return reverse(list, null);
   }
 
-  private static LinkedListNode reverse(LinkedListNode list, LinkedListNode previous) {
+  private static LinkedListNode reverse(
+    LinkedListNode list,
+    LinkedListNode previous
+  ) {
     if (list == null) {
       return previous;
     }
@@ -77,7 +93,10 @@ public class _2_5SumLists {
     return reverse(next, list);
   }
 
-  public static LinkedListNode sumListsFollowUp(LinkedListNode l1, LinkedListNode l2) {
+  public static LinkedListNode sumListsFollowUp(
+    LinkedListNode l1,
+    LinkedListNode l2
+  ) {
     Stack<Integer> l1Stack = convertToStack(l1);
     Stack<Integer> l2Stack = convertToStack(l2);
 
@@ -111,7 +130,10 @@ public class _2_5SumLists {
     }
   }
 
-  public static LinkedListNode sumListsFollowUpRecursion(LinkedListNode l1, LinkedListNode l2) {
+  public static LinkedListNode sumListsFollowUpRecursion(
+    LinkedListNode l1,
+    LinkedListNode l2
+  ) {
     int l1Size = getListSize(l1);
     int l2Size = getListSize(l2);
 
@@ -126,7 +148,11 @@ public class _2_5SumLists {
   }
 
   public static LinkedListNode sumListsFollowUpRecursion(
-      LinkedListNode l1, int l1Size, LinkedListNode l2, int l2Size) {
+    LinkedListNode l1,
+    int l1Size,
+    LinkedListNode l2,
+    int l2Size
+  ) {
     // termination condition
     if (l1.next == null && l2.next == null) {
       return new LinkedListNode(null, l1.data + l2.data);
@@ -138,12 +164,19 @@ public class _2_5SumLists {
     LinkedListNode l2Next = (l2Size >= l1Size) ? l2.next : l1;
     int l2NextSize = (l2Size >= l1Size) ? l2Size - 1 : l2Size;
 
-    LinkedListNode previous = sumListsFollowUpRecursion(l1Next, l1NextSize, l2Next, l2NextSize);
+    LinkedListNode previous = sumListsFollowUpRecursion(
+      l1Next,
+      l1NextSize,
+      l2Next,
+      l2NextSize
+    );
 
     int l1CurrentData = (l1Size >= l2Size) ? l1.data : 0;
     int l2CurrentData = (l2Size >= l1Size) ? l2.data : 0;
-    LinkedListNode current =
-        new LinkedListNode(previous, l1CurrentData + l2CurrentData + previous.data / 10);
+    LinkedListNode current = new LinkedListNode(
+      previous,
+      l1CurrentData + l2CurrentData + previous.data / 10
+    );
     previous.data = previous.data % 10;
 
     // return

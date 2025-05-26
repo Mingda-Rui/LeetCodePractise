@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LC1124LongestWellPerformingInterval {
+
   public int longestWPI(int[] hours) {
     int[] tiringDays = new int[hours.length];
     int numOfTiringDays = 0;
@@ -25,7 +26,11 @@ public class LC1124LongestWellPerformingInterval {
         if (size > relaxDays) {
           int diff = size - relaxDays;
           int pDays =
-              days + Math.min(diff - 1, tiringDays[head] + (hours.length - tiringDays[tail] - 1));
+            days +
+            Math.min(
+              diff - 1,
+              tiringDays[head] + (hours.length - tiringDays[tail] - 1)
+            );
           max = Math.max(max, pDays);
         }
       }
@@ -81,7 +86,6 @@ public class LC1124LongestWellPerformingInterval {
     int result = 0;
     int sum = 0;
     for (int i = 0; i < hours.length; i++) {
-
       sum += hours[i] > 8 ? -1 : 1;
 
       if (sum < 0) {
@@ -111,8 +115,10 @@ public class LC1124LongestWellPerformingInterval {
           numOfRelaxDay = netRelaxDay;
           record[numOfRelaxDay] = i;
         }
-        if (netRelaxDay + 1 <= numOfRelaxDay)
-          result = Math.max(result, i - record[netRelaxDay + 1]);
+        if (netRelaxDay + 1 <= numOfRelaxDay) result = Math.max(
+          result,
+          i - record[netRelaxDay + 1]
+        );
       }
     }
 

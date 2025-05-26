@@ -8,6 +8,7 @@ import java.util.Set;
 public class LC0323NumberOfConnectedComponentsInAnUndirectedGraph {}
 
 class LC0323LC0323UnionFindSolution {
+
   public int countComponents(int n, int[][] edges) {
     LC0323UnionFind uf = new LC0323UnionFind(n);
     for (int[] edge : edges) uf.union(edge[0], edge[1]);
@@ -16,6 +17,7 @@ class LC0323LC0323UnionFindSolution {
 }
 
 class LC0323UnionFind {
+
   private int[] parent;
   private int setCount;
 
@@ -43,6 +45,7 @@ class LC0323UnionFind {
 }
 
 class LC0323DfsSolution {
+
   public int countComponents(int n, int[][] edges) {
     Set<Integer> unvisited = new HashSet<>();
     List<List<Integer>> graph = new ArrayList<>();
@@ -66,10 +69,15 @@ class LC0323DfsSolution {
     return counter;
   }
 
-  private void traverseSet(int node, Set<Integer> unvisted, List<List<Integer>> graph) {
+  private void traverseSet(
+    int node,
+    Set<Integer> unvisted,
+    List<List<Integer>> graph
+  ) {
     unvisted.remove(node);
     // System.out.println(unvisted.size());
-    for (int neighbour : graph.get(node))
-      if (unvisted.contains(neighbour)) traverseSet(neighbour, unvisted, graph);
+    for (int neighbour : graph.get(node)) if (
+      unvisted.contains(neighbour)
+    ) traverseSet(neighbour, unvisted, graph);
   }
 }

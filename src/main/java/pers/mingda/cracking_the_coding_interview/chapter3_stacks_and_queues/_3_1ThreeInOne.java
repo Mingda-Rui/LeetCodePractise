@@ -11,8 +11,9 @@ class FixedMultiStack {
   private int[] currentSizes = new int[3];
 
   public FixedMultiStack(int totalSize) {
-    if (totalSize < 2)
-      throw new IllegalArgumentException("Total stack size should not less than 3");
+    if (totalSize < 2) throw new IllegalArgumentException(
+      "Total stack size should not less than 3"
+    );
     stack = new int[totalSize];
   }
 
@@ -51,6 +52,7 @@ class FixedMultiStack {
 }
 
 class MultiStack {
+
   int[] values;
   StackInfo[] stacks;
 
@@ -73,7 +75,9 @@ class MultiStack {
   }
 
   public int push(int stackNum, int val) {
-    if (getTotalSize() >= values.length) throw new RuntimeException("The stacks are all full!");
+    if (getTotalSize() >= values.length) throw new RuntimeException(
+      "The stacks are all full!"
+    );
     shift(stackNum);
     values[getNextIndex(getStackEndIndex(stackNum))] = val;
     getStackInfo(stackNum).increaseSizeByOne();
@@ -88,18 +92,23 @@ class MultiStack {
   }
 
   private void shift(int stackNum) {
-
     int stackEndIndex = getStackEndIndex(stackNum);
     int nextStackNum = (stackNum + 1) % stacks.length;
     StackInfo nextStackInfo = getStackInfo(nextStackNum);
     if (getNextIndex(stackEndIndex) == nextStackInfo.getStartIndex()) {
       shift(nextStackNum);
       int nextStackStartIndex = nextStackInfo.getStartIndex();
-      for (int i = getStackEndIndex(nextStackNum); i >= nextStackStartIndex; i--) {
+      for (
+        int i = getStackEndIndex(nextStackNum);
+        i >= nextStackStartIndex;
+        i--
+      ) {
         values[getNextIndex(i)] = values[i];
       }
       values[nextStackStartIndex] = 0;
-      getStackInfo(nextStackNum).setStartIndex(getNextIndex(nextStackStartIndex));
+      getStackInfo(nextStackNum).setStartIndex(
+        getNextIndex(nextStackStartIndex)
+      );
     }
   }
 
@@ -135,6 +144,7 @@ class MultiStack {
 }
 
 class StackInfo {
+
   private int start;
   private int size;
 

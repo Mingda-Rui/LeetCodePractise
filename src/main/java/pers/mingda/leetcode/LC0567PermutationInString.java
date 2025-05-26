@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC0567PermutationInString {
+
   public boolean checkInclusion(String s1, String s2) {
     Map<Character, Integer> map = new HashMap<>();
     for (char c : s1.toCharArray()) {

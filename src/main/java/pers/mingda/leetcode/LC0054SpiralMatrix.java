@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LC0054SpiralMatrix {
+
   public List<Integer> spiralOrder(int[][] matrix) {
     return spiralOrderIterative(matrix);
   }
@@ -12,7 +13,7 @@ public class LC0054SpiralMatrix {
     List<Integer> result = new LinkedList<>();
     int rowL = matrix.length;
     int columnL = matrix[0].length;
-    int[] coord = new int[] {0, 0};
+    int[] coord = new int[] { 0, 0 };
     while (rowL > 0 && columnL > 0) {
       if (rowL == 1) {
         fastForwardLine(matrix, coord, result, 0, 1, columnL);
@@ -32,7 +33,12 @@ public class LC0054SpiralMatrix {
   }
 
   private void fastForwardCircle(
-      int[][] matrix, int[] coord, List<Integer> result, int rowL, int columnL) {
+    int[][] matrix,
+    int[] coord,
+    List<Integer> result,
+    int rowL,
+    int columnL
+  ) {
     fastForwardLine(matrix, coord, result, 0, 1, columnL - 1);
     fastForwardLine(matrix, coord, result, 1, 0, rowL - 1);
     fastForwardLine(matrix, coord, result, 0, -1, columnL - 1);
@@ -43,7 +49,7 @@ public class LC0054SpiralMatrix {
     List<Integer> result = new LinkedList<>();
     int rowL = matrix.length;
     int columnL = matrix[0].length;
-    int[] coord = new int[] {0, 0};
+    int[] coord = new int[] { 0, 0 };
     while (rowL > 0 && columnL > 0) {
       fastForwardCircleRefactored(matrix, coord, result, rowL, columnL);
       coord[0]++;
@@ -56,7 +62,12 @@ public class LC0054SpiralMatrix {
   }
 
   private void fastForwardCircleRefactored(
-      int[][] matrix, int[] coord, List<Integer> result, int rowL, int columnL) {
+    int[][] matrix,
+    int[] coord,
+    List<Integer> result,
+    int rowL,
+    int columnL
+  ) {
     int columnB = columnL - (rowL == 1 ? 0 : 1);
     int rowB = rowL - (columnL == 1 && rowL != 1 ? 0 : 1);
     fastForwardLine(matrix, coord, result, 0, 1, columnB);
@@ -68,7 +79,13 @@ public class LC0054SpiralMatrix {
   }
 
   private void fastForwardLine(
-      int[][] matrix, int[] coord, List<Integer> result, int xOffset, int yOffset, int length) {
+    int[][] matrix,
+    int[] coord,
+    List<Integer> result,
+    int xOffset,
+    int yOffset,
+    int length
+  ) {
     for (int i = 0; i < length; i++) {
       int val = getVal(matrix, coord);
       result.add(val);
@@ -84,14 +101,18 @@ public class LC0054SpiralMatrix {
   }
 
   public List<Integer> spiralOrderRecursive(int[][] matrix) {
-    int[] coord = new int[] {0, 0};
-    int[] boundary = new int[] {0, 0};
+    int[] coord = new int[] { 0, 0 };
+    int[] boundary = new int[] { 0, 0 };
     List<Integer> result = new LinkedList<>();
     return spiralOrderRecursive(matrix, coord, boundary, result);
   }
 
   private List<Integer> spiralOrderRecursive(
-      int[][] matrix, int[] coord, int[] boundary, List<Integer> result) {
+    int[][] matrix,
+    int[] coord,
+    int[] boundary,
+    List<Integer> result
+  ) {
     int x = coord[0];
     int y = coord[1];
 
@@ -110,8 +131,12 @@ public class LC0054SpiralMatrix {
     boolean onLeft = y == left;
     boolean onRight = y == right;
 
-    if ((onTop && !onRight) || (onBottom && !onLeft)) coord[1] += (onTop ? 1 : -1);
-    else if ((onLeft && !onTop) || (onRight && !onBottom)) coord[0] += (onRight ? 1 : -1);
+    if ((onTop && !onRight) || (onBottom && !onLeft)) coord[1] += (onTop
+        ? 1
+        : -1);
+    else if ((onLeft && !onTop) || (onRight && !onBottom)) coord[0] += (onRight
+        ? 1
+        : -1);
 
     if (top == coord[0] && left == coord[1]) {
       coord[0]++;

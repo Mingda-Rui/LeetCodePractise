@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0977SquaresOfASortedArray {
+
   public int[] sortedSquares(int[] nums) {
     int[] result = new int[nums.length];
     int head = 0;

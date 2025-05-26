@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LC0226InvertBinaryTree {
+
   public TreeNode invertTree(TreeNode root) {
     if (root == null) return null;
     TreeNode left = invertTree(root.left);

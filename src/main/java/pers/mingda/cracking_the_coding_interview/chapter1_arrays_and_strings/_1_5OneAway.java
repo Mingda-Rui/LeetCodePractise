@@ -7,6 +7,7 @@ package pers.mingda.cracking_the_coding_interview.chapter1_arrays_and_strings;
  * true pale, bae -> false
  */
 public class _1_5OneAway {
+
   // insert:
   // acd
   // abcd
@@ -62,9 +63,7 @@ public class _1_5OneAway {
     return true;
   }
 }
-
 // ab3cd
 // 0121
 // abcd
-
 // abcde

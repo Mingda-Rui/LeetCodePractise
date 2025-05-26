@@ -22,7 +22,6 @@ public class _1_9StringRotation {
     return str1.contains(str2);
   }
 }
-
 // a b c d
 //   b c d a
 //     c d a b

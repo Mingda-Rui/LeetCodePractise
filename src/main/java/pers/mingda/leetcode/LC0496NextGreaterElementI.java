@@ -7,6 +7,7 @@ import java.util.Stack;
 public class LC0496NextGreaterElementI {}
 
 class LC0496Solution {
+
   public int[] nextGreaterElement(int[] nums1, int[] nums2) {
     Map<Integer, Integer> map = new HashMap<>();
     for (int i = 0; i < nums2.length; i++) {
@@ -30,11 +31,11 @@ class LC0496Solution {
 }
 
 class StackSolution {
+
   public int[] nextGreaterElement(int[] nums1, int[] nums2) {
     Map<Integer, Integer> map = new HashMap<>();
     Stack<Integer> stack = new Stack<>();
     for (int num : nums2) {
-
       while (!stack.isEmpty() && stack.peek() < num) {
         int smaller = stack.pop();
         map.put(smaller, num);

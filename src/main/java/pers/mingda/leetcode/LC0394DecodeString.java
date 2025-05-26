@@ -3,8 +3,9 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0394DecodeString {
+
   public String decodeString(String s) {
-    int[] indexHolder = {0};
+    int[] indexHolder = { 0 };
     String modifiedS = "1[" + s + "]";
     return decodeStringRecursive(modifiedS, indexHolder);
   }

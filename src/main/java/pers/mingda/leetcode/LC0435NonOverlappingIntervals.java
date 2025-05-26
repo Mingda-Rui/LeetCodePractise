@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class LC0435NonOverlappingIntervals {
+
   public int eraseOverlapIntervals(int[][] intervals) {
     Comparator<int[]> comparator = Comparator.comparingInt(i -> i[0]);
     Arrays.sort(intervals, comparator);

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LC0846HandOfStraights {
+
   public boolean isNStraightHand(int[] hand, int groupSize) {
     Map<Integer, Integer> map = new TreeMap<>();
     for (int num : hand) {

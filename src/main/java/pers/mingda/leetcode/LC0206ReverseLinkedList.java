@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0206ReverseLinkedList {
+
   public ListNode reverseList(ListNode head) {
     if (head == null || head.next == null) return head;
     ListNode tempHead = new ListNode();
@@ -147,7 +148,10 @@ public class LC0206ReverseLinkedList {
     return reverseListInPlaceRecursive2(head, null);
   }
 
-  private ListNode reverseListInPlaceRecursive2(ListNode current, ListNode newHead) {
+  private ListNode reverseListInPlaceRecursive2(
+    ListNode current,
+    ListNode newHead
+  ) {
     if (current == null) return newHead;
     ListNode next = current.next;
     current.next = newHead;

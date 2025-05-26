@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0953VerifyingAnAlienDictionary {}
 
 class LC0953Solution {
+
   public boolean isAlienSorted(String[] words, String order) {
     int[] orderMap = buildOrderMap(order);
     for (int i = 0; i < words.length - 1; i++) {

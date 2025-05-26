@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1299ReplaceElementsWithGreatestElementOnRightSide {
+
   public int[] replaceElements(int[] arr) {
     int len = arr.length;
     int max = arr[len - 1];

@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0042TrappingRainWater {
+
   public int trap(int[] height) {
     int result = 0;
     Stack<Integer> stack = new Stack<>();

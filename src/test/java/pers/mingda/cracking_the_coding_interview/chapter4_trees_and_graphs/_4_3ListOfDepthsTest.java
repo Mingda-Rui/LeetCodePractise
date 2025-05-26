@@ -59,7 +59,8 @@ public class _4_3ListOfDepthsTest {
   @Test
   public void testCreateLevelLinkedListRecursive() {
     TreeNode node = testHelper.createTreeNode(1, 2, 3);
-    List<List<TreeNode>> result = _4_3ListOfDepths.createLevelLinkedListRecursive(node);
+    List<List<TreeNode>> result =
+      _4_3ListOfDepths.createLevelLinkedListRecursive(node);
     assertEquals(2, result.size());
     List<TreeNode> firstList = result.get(0);
     assertEquals(1, firstList.size());

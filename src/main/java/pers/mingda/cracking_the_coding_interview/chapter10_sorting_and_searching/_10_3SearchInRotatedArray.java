@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searching;
 
 public class _10_3SearchInRotatedArray {
+
   public int search(int[] a, int left, int right, int target) {
     if (left > right) {
       return -1;

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0718MaximumLengthOfRepeatedSubarray {
+
   public int findLength(int[] nums1, int[] nums2) {
     int maxLen = 0;
     for (int i = 0; i < nums1.length; i++) {

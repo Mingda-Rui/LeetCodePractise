@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class _7_11FileSystem {}
 
 abstract class Entry {
+
   protected Directory parent;
   protected long created;
   protected long lastUpdated;
@@ -81,6 +82,7 @@ class File extends Entry {
 }
 
 class Directory extends Entry {
+
   protected ArrayList<Entry> contents;
 
   public Directory(String n, Directory p) {

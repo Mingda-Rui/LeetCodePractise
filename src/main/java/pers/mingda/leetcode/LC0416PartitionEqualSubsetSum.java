@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Arrays;
 
 public class LC0416PartitionEqualSubsetSum {
+
   public boolean canPartition(int[] nums) {
     int totalSum = sum(nums);
     if (totalSum % 2 != 0) {
@@ -33,7 +34,8 @@ public class LC0416PartitionEqualSubsetSum {
 
     int current = nums[index];
     boolean result =
-        dfs(nums, index + 1, remain, memo) || dfs(nums, index + 1, remain - current, memo);
+      dfs(nums, index + 1, remain, memo) ||
+      dfs(nums, index + 1, remain - current, memo);
     memo[index][remain] = result ? 1 : 2;
     return result;
   }

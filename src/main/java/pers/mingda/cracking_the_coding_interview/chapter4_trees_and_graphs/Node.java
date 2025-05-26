@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Node {
+
   State state;
   int value;
   List<Node> adjacentNodes;
@@ -30,5 +31,5 @@ public class Node {
 enum State {
   Unvisited,
   Visited,
-  Visiting;
+  Visiting,
 }

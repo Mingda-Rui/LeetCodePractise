@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0086PartitionList {
+
   public ListNode partition(ListNode head, int x) {
     ListNode dummyHead = new ListNode(-1, head);
     head = dummyHead;

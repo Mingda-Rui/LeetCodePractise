@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0055JumpGame {
+
   public boolean canJumpReversed(int[] nums) {
     int currentAt = nums.length - 1;
     for (int i = nums.length - 2; i >= 0; i--) {

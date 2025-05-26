@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searching;
 
 public class _10_1SortedMerge {
+
   /*
   10.1 Sorted Merge: You are given two sorted arrays,
   A and B, where A has a large enough buffer at the end

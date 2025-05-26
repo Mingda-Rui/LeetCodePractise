@@ -7,14 +7,13 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC0973KClosestPointsToOrigin {
-  public int[][] kClosest(int[][] points, int k) {
 
-    Comparator<List<Integer>> comparator =
-        (o1, o2) -> {
-          int distance1 = o1.get(0) * o1.get(0) + o1.get(1) * o1.get(1);
-          int distance2 = o2.get(0) * o2.get(0) + o2.get(1) * o2.get(1);
-          return distance2 - distance1;
-        };
+  public int[][] kClosest(int[][] points, int k) {
+    Comparator<List<Integer>> comparator = (o1, o2) -> {
+      int distance1 = o1.get(0) * o1.get(0) + o1.get(1) * o1.get(1);
+      int distance2 = o2.get(0) * o2.get(0) + o2.get(1) * o2.get(1);
+      return distance2 - distance1;
+    };
 
     Queue<List<Integer>> queue = new PriorityQueue<>(k + 1, comparator);
     for (int[] point : points) {

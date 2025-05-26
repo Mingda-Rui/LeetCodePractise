@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _8_9Parens {
+
   private static final String OPEN_PARENS = "(";
   private static final String CLOSE_PARENS = ")";
 
@@ -21,15 +22,15 @@ public class _8_9Parens {
     }
 
     List<String> allParens = new ArrayList<>();
-    List<String> openPrefix =
-        generateParens(remainOpenP - 1, remainCloseP).stream()
-            .map(parens -> OPEN_PARENS + parens)
-            .toList();
+    List<String> openPrefix = generateParens(remainOpenP - 1, remainCloseP)
+      .stream()
+      .map(parens -> OPEN_PARENS + parens)
+      .toList();
     allParens.addAll(openPrefix);
-    List<String> closePrefix =
-        generateParens(remainOpenP, remainCloseP - 1).stream()
-            .map(parens -> CLOSE_PARENS + parens)
-            .toList();
+    List<String> closePrefix = generateParens(remainOpenP, remainCloseP - 1)
+      .stream()
+      .map(parens -> CLOSE_PARENS + parens)
+      .toList();
     allParens.addAll(closePrefix);
     return allParens;
   }

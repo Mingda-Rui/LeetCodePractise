@@ -5,13 +5,16 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC0778SwimInRisingWater {
+
   public int swimInWater(int[][] grid) {
     int row = grid.length;
     int col = grid[0].length;
     int maxElevation = 0;
 
     boolean[][] visited = new boolean[row][col];
-    Queue<LC0778Node> queue = new PriorityQueue<>(Comparator.comparingInt(n -> n.val));
+    Queue<LC0778Node> queue = new PriorityQueue<>(
+      Comparator.comparingInt(n -> n.val)
+    );
     LC0778Node dest = new LC0778Node(row - 1, col - 1, grid);
     queue.add(dest);
     visited[row - 1][col - 1] = true;
@@ -28,7 +31,11 @@ public class LC0778SwimInRisingWater {
   }
 
   private void exploreNode(
-      LC0778Node node, Queue<LC0778Node> queue, int[][] grid, boolean[][] visited) {
+    LC0778Node node,
+    Queue<LC0778Node> queue,
+    int[][] grid,
+    boolean[][] visited
+  ) {
     if (node.row - 1 >= 0 && !visited[node.row - 1][node.col]) {
       LC0778Node top = new LC0778Node(node.row - 1, node.col, grid);
       queue.add(top);
@@ -56,6 +63,7 @@ public class LC0778SwimInRisingWater {
 }
 
 class LC0778Node {
+
   int row;
   int col;
   int val;

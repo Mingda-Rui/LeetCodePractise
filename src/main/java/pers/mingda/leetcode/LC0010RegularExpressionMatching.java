@@ -7,7 +7,8 @@ public class LC0010RegularExpressionMatching {
 
     char pattern = p.charAt(0);
     boolean isStarPattern = p.length() > 1 && p.charAt(1) == '*';
-    boolean isFirstLetterMatch = !s.isEmpty() && (s.charAt(0) == pattern || pattern == '.');
+    boolean isFirstLetterMatch =
+      !s.isEmpty() && (s.charAt(0) == pattern || pattern == '.');
 
     //        if (isFirstLetterMatch) {
     //            if (isStarPattern) {
@@ -21,7 +22,10 @@ public class LC0010RegularExpressionMatching {
 
     if (isStarPattern) {
       boolean foundSkipPatternMatch = isMatch(s, p.substring(2));
-      return foundSkipPatternMatch || (isFirstLetterMatch && isMatch(s.substring(1), p));
+      return (
+        foundSkipPatternMatch ||
+        (isFirstLetterMatch && isMatch(s.substring(1), p))
+      );
     } else {
       return isFirstLetterMatch && isMatch(s.substring(1), p.substring(1));
     }

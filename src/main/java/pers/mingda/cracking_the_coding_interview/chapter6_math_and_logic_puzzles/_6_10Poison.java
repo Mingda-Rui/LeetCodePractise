@@ -3,7 +3,11 @@ package pers.mingda.cracking_the_coding_interview.chapter6_math_and_logic_puzzle
 import java.util.ArrayList;
 
 public class _6_10Poison {
-  int findPoisonedBottle(ArrayList<Bottle> bottles, ArrayList<TestStrip> strips) {
+
+  int findPoisonedBottle(
+    ArrayList<Bottle> bottles,
+    ArrayList<TestStrip> strips
+  ) {
     runTests(bottles, strips);
     ArrayList<Integer> positive = getPositiveOnDay(strips, 7);
     return setBits(positive);
@@ -25,7 +29,10 @@ public class _6_10Poison {
   }
 
   /* Get test strips that are positive on a particular day. */
-  ArrayList<Integer> getPositiveOnDay(ArrayList<TestStrip> testStrips, int day) {
+  ArrayList<Integer> getPositiveOnDay(
+    ArrayList<TestStrip> testStrips,
+    int day
+  ) {
     ArrayList<Integer> positive = new ArrayList<>();
     for (TestStrip testStrip : testStrips) {
       int id = testStrip.getId();
@@ -47,6 +54,7 @@ public class _6_10Poison {
 }
 
 class Bottle {
+
   private boolean poisoned = false;
   private final int id;
 
@@ -68,6 +76,7 @@ class Bottle {
 }
 
 class TestStrip {
+
   public static int DAYS_FOR_RESULT = 7;
   private final ArrayList<ArrayList<Bottle>> dropsByDay = new ArrayList<>();
   private final int id;

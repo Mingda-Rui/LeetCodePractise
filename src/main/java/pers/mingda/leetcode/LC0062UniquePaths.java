@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0062UniquePaths {
+
   public int uniquePaths(int m, int n) {
     int[][] record = new int[m][n];
     for (int i = 0; i < m; i++) {

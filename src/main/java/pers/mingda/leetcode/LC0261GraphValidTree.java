@@ -8,6 +8,7 @@ import java.util.Set;
 public class LC0261GraphValidTree {}
 
 class LC0261Solution {
+
   public boolean validTree(int n, int[][] edges) {
     if (edges.length != n - 1) return false;
     List<List<Integer>> graph = new ArrayList<>();
@@ -23,7 +24,11 @@ class LC0261Solution {
     return seen.size() == n;
   }
 
-  private boolean checkCircle(int node, Set<Integer> seen, List<List<Integer>> graph) {
+  private boolean checkCircle(
+    int node,
+    Set<Integer> seen,
+    List<List<Integer>> graph
+  ) {
     if (seen.contains(node)) return false;
     seen.add(node);
     for (int neighbour : graph.get(node)) checkCircle(neighbour, seen, graph);
@@ -33,6 +38,7 @@ class LC0261Solution {
 }
 
 class LC0261UnionFindSolution {
+
   public boolean validTree(int n, int[][] edges) {
     if (edges.length != n - 1) return false;
     LC0261UnionFind uf = new LC0261UnionFind(n);
@@ -43,6 +49,7 @@ class LC0261UnionFindSolution {
 }
 
 class LC0261UnionFind {
+
   private int[] parent;
   private int[] size;
 

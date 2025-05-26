@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC1046LastStoneWeight {
+
   public int lastStoneWeight(int[] stones) {
     Queue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
     for (int stone : stones) queue.add(stone);

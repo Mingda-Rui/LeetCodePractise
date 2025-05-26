@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0334IncreasingTripletSubsequence {
+
   public boolean increasingTriplet(int[] nums) {
     int first = Integer.MAX_VALUE;
     int second = Integer.MAX_VALUE;

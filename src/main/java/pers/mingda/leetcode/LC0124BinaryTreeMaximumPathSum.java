@@ -7,8 +7,9 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class LC0124BinaryTreeMaximumPathSum {
+
   public int maxPathSum(TreeNode root) {
-    int[] maxHolder = new int[] {Integer.MIN_VALUE};
+    int[] maxHolder = new int[] { Integer.MIN_VALUE };
     maxPathSumRecursive(root, maxHolder);
     return maxHolder[0];
   }

@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter6_math_and_logic_puzzle
 import com.google.common.primitives.Ints;
 
 public class _6_7TheApocalypse {
+
   public double runNFamilies(int families) {
     int girls = 0;
     int boys = 0;

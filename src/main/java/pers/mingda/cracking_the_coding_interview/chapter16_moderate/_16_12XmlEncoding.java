@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 
 public class _16_12XmlEncoding {
+
   String encodeToString(XmlEncodingElement root) {
     StringBuilder sb = new StringBuilder();
     encode(root, sb);
@@ -35,6 +36,7 @@ public class _16_12XmlEncoding {
 }
 
 abstract class XmlEncodingElement {
+
   XmlEncodingAttribute[] attributes;
   String value;
   XmlEncodingElement[] children;
@@ -43,6 +45,7 @@ abstract class XmlEncodingElement {
 }
 
 abstract class XmlEncodingAttribute {
+
   String value;
 
   abstract String getTagCode();

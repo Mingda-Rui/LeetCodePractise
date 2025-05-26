@@ -27,7 +27,10 @@ class NestedIterator implements Iterator<Integer> {
     return iterator.hasNext();
   }
 
-  private List<Integer> parseNestedInt(List<LC0341NestedInteger> nestedList, List<Integer> result) {
+  private List<Integer> parseNestedInt(
+    List<LC0341NestedInteger> nestedList,
+    List<Integer> result
+  ) {
     for (LC0341NestedInteger nestedInt : nestedList) {
       if (nestedInt.isInteger()) result.add(nestedInt.getInteger());
       else parseNestedInt(nestedInt.getList(), result);
@@ -107,7 +110,6 @@ class NestedIteratorWithIteratorStack implements Iterator<Integer> {
 }
 
 interface LC0341NestedInteger {
-
   // @return true if this LC0341NestedInteger holds a single integer, rather than a nested list.
   public boolean isInteger();
 

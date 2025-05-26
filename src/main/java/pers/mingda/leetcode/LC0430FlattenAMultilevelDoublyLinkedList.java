@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0430FlattenAMultilevelDoublyLinkedList {
+
   public LC0430Node flatten(LC0430Node head) {
     flattenRecursive(head);
     return head;
@@ -53,6 +54,7 @@ public class LC0430FlattenAMultilevelDoublyLinkedList {
 }
 
 class LC0430Node {
+
   public int val;
   public LC0430Node prev;
   public LC0430Node next;

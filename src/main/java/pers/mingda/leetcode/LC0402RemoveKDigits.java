@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0402RemoveKDigits {
+
   public String removeKdigits(String num, int k) {
     if (k >= num.length()) return "0";
 

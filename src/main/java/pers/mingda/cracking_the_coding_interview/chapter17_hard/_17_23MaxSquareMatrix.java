@@ -5,14 +5,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class _17_23MaxSquareMatrix {
+
   public static final int BLACK = 0;
   public static final int WHITE = 1;
 
   MaxSquareMatrixSquare findSquare(int[][] matrix) {
     MaxSquareMatrixSquareCell[][] preComputed = preComputeMatrix(matrix);
     for (int n = matrix.length - 1; n >= 0; n--) {
-      Optional<MaxSquareMatrixSquare> square =
-          findSquares(matrix, n).stream().filter(s -> s.isBlackBordered(preComputed)).findFirst();
+      Optional<MaxSquareMatrixSquare> square = findSquares(matrix, n)
+        .stream()
+        .filter(s -> s.isBlackBordered(preComputed))
+        .findFirst();
       if (square.isPresent()) {
         return square.get();
       }
@@ -23,7 +26,8 @@ public class _17_23MaxSquareMatrix {
   MaxSquareMatrixSquareCell[][] preComputeMatrix(int[][] matrix) {
     int row = matrix.length;
     int col = matrix[0].length;
-    MaxSquareMatrixSquareCell[][] result = new MaxSquareMatrixSquareCell[row][col];
+    MaxSquareMatrixSquareCell[][] result =
+      new MaxSquareMatrixSquareCell[row][col];
     for (int i = row - 1; i >= 0; i--) {
       for (int j = col - 1; j >= 0; j--) {
         if (matrix[i][j] == WHITE) {
@@ -53,7 +57,12 @@ record MaxSquareMatrixSquareCell(int blacksRight, int blacksBelow) {}
 
 record MaxSquareMatrixSquare(int x, int y, int n) {
   public boolean isValid(int[][] matrix) {
-    return x >= 0 && x + n - 1 < matrix.length && y >= 0 && y + n - 1 < matrix[0].length;
+    return (
+      x >= 0 &&
+      x + n - 1 < matrix.length &&
+      y >= 0 &&
+      y + n - 1 < matrix[0].length
+    );
   }
 
   public boolean isBlackBordered(MaxSquareMatrixSquareCell[][] preComputed) {

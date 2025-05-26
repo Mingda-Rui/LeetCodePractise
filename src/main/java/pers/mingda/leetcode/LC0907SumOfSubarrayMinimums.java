@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0907SumOfSubarrayMinimums {
+
   public int sumSubarrayMins(int[] arr) {
     Stack<Integer> stack = new Stack<>();
     long result = 0;

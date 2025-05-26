@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class LC0590NAryTreePostorderTraversal {
+
   public List<Integer> postorderIterative(LC0590Node root) {
     LinkedList<Integer> result = new LinkedList<>();
     if (root == null) return result;
@@ -24,7 +25,10 @@ public class LC0590NAryTreePostorderTraversal {
     return postorderRecursive(root, result);
   }
 
-  private List<Integer> postorderRecursive(LC0590Node root, List<Integer> result) {
+  private List<Integer> postorderRecursive(
+    LC0590Node root,
+    List<Integer> result
+  ) {
     if (root == null) return result;
 
     for (LC0590Node child : root.children) postorderRecursive(child, result);
@@ -34,6 +38,7 @@ public class LC0590NAryTreePostorderTraversal {
 }
 
 class LC0590Node {
+
   public int val;
   public List<LC0590Node> children;
 

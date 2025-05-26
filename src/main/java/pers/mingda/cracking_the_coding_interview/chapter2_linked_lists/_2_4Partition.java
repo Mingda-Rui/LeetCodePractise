@@ -9,6 +9,7 @@ package pers.mingda.cracking_the_coding_interview.chapter2_linked_lists;
  * -> 2 -> 10 -> 5 -> 5 -> 8
  */
 public class _2_4Partition {
+
   public static LinkedListNode partition(LinkedListNode node, int x) {
     LinkedListNode left = new LinkedListNode(null, x - 1);
     LinkedListNode pseudoLeftHead = left;
@@ -44,7 +45,10 @@ public class _2_4Partition {
     return head;
   }
 
-  public static LinkedListNode partitionAddToHeadAndTail(LinkedListNode node, int x) {
+  public static LinkedListNode partitionAddToHeadAndTail(
+    LinkedListNode node,
+    int x
+  ) {
     LinkedListNode head = node;
     LinkedListNode tail = node;
 

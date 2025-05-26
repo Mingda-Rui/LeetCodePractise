@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1143LongestCommonSubsequence {
+
   public int longestCommonSubsequence(String text1, String text2) {
     int[][] record = new int[text1.length()][text2.length()];
     for (int i = 0; i < text1.length(); i++) {

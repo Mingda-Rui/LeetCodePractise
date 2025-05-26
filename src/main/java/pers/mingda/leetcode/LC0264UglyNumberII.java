@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0264UglyNumberII {
+
   public int nthUglyNumber(int n) {
     int[] uglyNums = new int[n];
     uglyNums[0] = 1;

@@ -28,7 +28,6 @@ public class _3_6AnimalShelter {
     if (animal instanceof Dog) {
       Dog dog = (Dog) animal;
       dogQueue.offer(dog);
-
     } else if (animal instanceof Cat) {
       Cat cat = (Cat) animal;
       catQueue.offer(cat);
@@ -65,6 +64,7 @@ public class _3_6AnimalShelter {
 }
 
 class AnimalQueue {
+
   Queue<Dog> dogQueue;
   Queue<Cat> catQueue;
   int counter;
@@ -106,11 +106,13 @@ class AnimalQueue {
 }
 
 abstract class Animal {
+
   boolean isAdopted;
   int number;
 }
 
 class Cat extends Animal {
+
   public Cat() {}
 
   public Cat(int number) {
@@ -119,6 +121,7 @@ class Cat extends Animal {
 }
 
 class Dog extends Animal {
+
   public Dog() {}
 
   public Dog(int number) {

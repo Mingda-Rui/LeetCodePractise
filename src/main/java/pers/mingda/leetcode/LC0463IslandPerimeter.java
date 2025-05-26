@@ -2,7 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC0463IslandPerimeter {
 
-  private int[][] dirs = {{-1, 0}, {0, -1}};
+  private int[][] dirs = { { -1, 0 }, { 0, -1 } };
 
   public int islandPerimeter(int[][] grid) {
     int perimeter = 0;
@@ -19,7 +19,9 @@ public class LC0463IslandPerimeter {
     for (int[] dir : dirs) {
       int neighX = x + dir[0];
       int neighY = y + dir[1];
-      if (boardCheck(grid, neighX, neighY) && grid[neighX][neighY] == 1) count -= 2;
+      if (
+        boardCheck(grid, neighX, neighY) && grid[neighX][neighY] == 1
+      ) count -= 2;
     }
     return count;
   }

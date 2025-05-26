@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0061RotateList {
+
   public ListNode rotateRight(ListNode head, int k) {
     if (k == 0 || head == null) return head;
     int length = 1;

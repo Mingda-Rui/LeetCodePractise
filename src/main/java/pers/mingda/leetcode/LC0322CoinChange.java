@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0322CoinChange {
+
   public int coinChange(int[] coins, int amount) {
     int[] record = new int[amount + 1];
     record[0] = 0;

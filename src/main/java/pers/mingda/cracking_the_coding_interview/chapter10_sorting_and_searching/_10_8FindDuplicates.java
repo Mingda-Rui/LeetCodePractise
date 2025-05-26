@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter10_sorting_and_searching;
 
 public class _10_8FindDuplicates {
+
   void checkDuplicates(int[] array) {
     MyBitSet bs = new MyBitSet(32000);
     for (int i = 0; i < array.length; i++) {
@@ -16,6 +17,7 @@ public class _10_8FindDuplicates {
 }
 
 class MyBitSet {
+
   int[] bitset;
 
   public MyBitSet(int size) {

@@ -5,6 +5,7 @@ package pers.mingda.cracking_the_coding_interview.chapter1_arrays_and_strings;
  * bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
  */
 public class _1_7RotateMatrix {
+
   public static void rotate(int[][] matrix) {
     int rows = matrix.length;
     int columns = matrix[0].length;

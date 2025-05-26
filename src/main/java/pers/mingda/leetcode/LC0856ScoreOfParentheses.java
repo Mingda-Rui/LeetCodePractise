@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0856ScoreOfParentheses {
+
   public int scoreOfParentheses(String s) {
     return score(s, new int[1]);
   }

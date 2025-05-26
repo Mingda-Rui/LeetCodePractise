@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0045JumpGameII {
+
   public int jump(int[] nums) {
     return countJump(nums, 0, 1, 0);
   }

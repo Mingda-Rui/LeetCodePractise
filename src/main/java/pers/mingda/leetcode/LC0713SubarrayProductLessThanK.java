@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0713SubarrayProductLessThanK {
+
   public int numSubarrayProductLessThanK(int[] nums, int k) {
     int counter = 0;
     int slow = 0;

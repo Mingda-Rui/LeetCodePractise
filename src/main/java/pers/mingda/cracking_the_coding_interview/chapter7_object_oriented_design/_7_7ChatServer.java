@@ -24,6 +24,7 @@ public class _7_7ChatServer {
 
 /* UserManager serves as a central place for core user actions */
 class ChatServerUserManager {
+
   private static ChatServerUserManager instance;
 
   /* maps from a user id to a user */
@@ -54,6 +55,7 @@ class ChatServerUserManager {
 }
 
 class ChatServerUser {
+
   private int id;
   private UserStatus status = null;
 
@@ -121,6 +123,7 @@ class ChatServerUser {
 }
 
 abstract class Conversation {
+
   protected ArrayList<ChatServerUser> participants;
   protected int id;
   protected ArrayList<Message> messages;
@@ -139,12 +142,14 @@ abstract class Conversation {
 }
 
 class GroupChat extends Conversation {
+
   public void removeParticipant(ChatServerUser user) {}
 
   public void addParticipant(ChatServerUser user) {}
 }
 
 class PrivateChat extends Conversation {
+
   public PrivateChat(ChatServerUser user1, ChatServerUser user2) {}
 
   public ChatServerUser getOtherParticipant(ChatServerUser user) {
@@ -154,6 +159,7 @@ class PrivateChat extends Conversation {
 }
 
 class Message {
+
   private String content;
   private Date date;
 
@@ -169,6 +175,7 @@ class Message {
 }
 
 class AddRequest {
+
   private ChatServerUser fromUser;
   private ChatServerUser toUser;
   private Date date;
@@ -194,6 +201,7 @@ class AddRequest {
 }
 
 class UserStatus {
+
   private String message;
   private UserStatusType type;
 
@@ -213,12 +221,12 @@ enum UserStatusType {
   Away,
   Idle,
   Available,
-  Busy
+  Busy,
 }
 
 enum RequestStatus {
   Unread,
   Read,
   Accepted,
-  Rejected
+  Rejected,
 }

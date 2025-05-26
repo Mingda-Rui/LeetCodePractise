@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_programming;
 
 public class _8_5RecursiveMultiply {
+
   public int recursiveMultiply(int a, int b) {
     int smaller = Math.min(a, b);
     int larger = Math.max(a, b);

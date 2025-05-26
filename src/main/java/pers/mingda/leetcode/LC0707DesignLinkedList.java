@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0707DesignLinkedList {}
 
 class MyDoublyLinkedList {
+
   int size;
   LC0707Node head;
   LC0707Node tail;
@@ -66,7 +67,11 @@ class MyDoublyLinkedList {
       LC0707Node prevLC0707Node = getLC0707Node(index - 1);
       if (prevLC0707Node != null) {
         LC0707Node nextLC0707Node = prevLC0707Node.next;
-        LC0707Node LC0707Node = new LC0707Node(val, prevLC0707Node, nextLC0707Node);
+        LC0707Node LC0707Node = new LC0707Node(
+          val,
+          prevLC0707Node,
+          nextLC0707Node
+        );
         prevLC0707Node.next = LC0707Node;
         nextLC0707Node.prev = LC0707Node;
         size++;
@@ -177,6 +182,7 @@ class MySinglyLinkedList {
 }
 
 class LC0707Node {
+
   int val;
   LC0707Node next;
   LC0707Node prev;
@@ -196,7 +202,6 @@ class LC0707Node {
     this.next = next;
   }
 }
-
 /**
  * Your MyLinkedList object will be instantiated and called as such: MyLinkedList obj = new
  * MyLinkedList(); int param_1 = obj.get(index); obj.addAtHead(val); obj.addAtTail(val);

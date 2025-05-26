@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class ListNode {
+
   int val;
   ListNode next;
 

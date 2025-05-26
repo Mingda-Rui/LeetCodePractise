@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0204CountPrimes {
+
   public int countPrimes(int n) {
     if (n < 3) return 0;
 

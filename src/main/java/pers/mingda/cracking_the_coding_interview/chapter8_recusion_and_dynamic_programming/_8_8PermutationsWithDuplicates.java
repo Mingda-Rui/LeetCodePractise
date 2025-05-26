@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class _8_8PermutationsWithDuplicates {
+
   public List<String> calculatePerms(String str) {
     Map<Character, Integer> charCount = builcCountMap(str);
     return getPerms(charCount, str.length());
@@ -19,7 +20,10 @@ public class _8_8PermutationsWithDuplicates {
     return charCount;
   }
 
-  private List<String> getPerms(Map<Character, Integer> charCount, int remains) {
+  private List<String> getPerms(
+    Map<Character, Integer> charCount,
+    int remains
+  ) {
     if (remains == 0) {
       return List.of("");
     }

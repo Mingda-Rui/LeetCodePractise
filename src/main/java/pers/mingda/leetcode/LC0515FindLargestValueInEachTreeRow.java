@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class LC0515FindLargestValueInEachTreeRow {
+
   public List<Integer> largestValues(TreeNode root) {
     List<Integer> result = new LinkedList<>();
     if (root == null) return result;
@@ -29,7 +30,11 @@ public class LC0515FindLargestValueInEachTreeRow {
     return largestValuesRecursive(root, 0, new ArrayList<>());
   }
 
-  public List<Integer> largestValuesRecursive(TreeNode root, int level, List<Integer> result) {
+  public List<Integer> largestValuesRecursive(
+    TreeNode root,
+    int level,
+    List<Integer> result
+  ) {
     if (root == null) return result;
     if (level == result.size()) {
       result.add(root.val);

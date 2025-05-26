@@ -41,6 +41,7 @@ class LC0706MyHashMap {
 }
 
 class LC0706Bucket {
+
   private final List<LC0706Pair> records;
 
   public LC0706Bucket() {
@@ -78,7 +79,6 @@ class LC0706Bucket {
 }
 
 record LC0706Pair(int key, int val) {}
-
 /**
  * Your MyHashMap object will be instantiated and called as such: MyHashMap obj = new MyHashMap();
  * obj.put(key,value); int param_2 = obj.get(key); obj.remove(key);

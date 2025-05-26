@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class _17_16TheMasseuse {
+
   int maxMinutes(int[] massages) {
     Map<Integer, Integer> record = new HashMap<>();
     return maxMinutes(massages, 0, record);

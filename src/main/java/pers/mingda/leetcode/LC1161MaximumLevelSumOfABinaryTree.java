@@ -9,6 +9,7 @@ import java.util.Queue;
  * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 public class LC1161MaximumLevelSumOfABinaryTree {
+
   public int maxLevelSum(TreeNode root) {
     Queue<TreeNode> queue = new LinkedList<>();
     int maxSum = Integer.MIN_VALUE;

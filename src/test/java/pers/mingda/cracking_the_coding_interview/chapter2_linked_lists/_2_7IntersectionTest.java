@@ -21,7 +21,10 @@ public class _2_7IntersectionTest {
     LinkedListNode l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
     LinkedListNode l2 = testHelper.buildNodeList(List.of(4, 6, 7, 2, 1));
 
-    LinkedListNode actualIntersection = _2_7Intersection.findIntersection(l1, l2);
+    LinkedListNode actualIntersection = _2_7Intersection.findIntersection(
+      l1,
+      l2
+    );
     assertNull(actualIntersection);
 
     l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
@@ -69,7 +72,8 @@ public class _2_7IntersectionTest {
     LinkedListNode l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
     LinkedListNode l2 = testHelper.buildNodeList(List.of(4, 6, 7, 2, 1));
 
-    LinkedListNode actualIntersection = _2_7Intersection.findIntersectionChopOff(l1, l2);
+    LinkedListNode actualIntersection =
+      _2_7Intersection.findIntersectionChopOff(l1, l2);
     assertNull(actualIntersection);
 
     l1 = testHelper.buildNodeList(List.of(3, 1, 5, 9, 7, 2, 1));
@@ -90,7 +94,10 @@ public class _2_7IntersectionTest {
     l1Front.next = intersection;
     l2Front.next = intersection;
 
-    actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
+    actualIntersection = _2_7Intersection.findIntersectionChopOff(
+      l1Front,
+      l2Front
+    );
     assertTrue(intersection == actualIntersection);
 
     l1Front = testHelper.buildNodeList(List.of(5, 9));
@@ -99,7 +106,10 @@ public class _2_7IntersectionTest {
     l1Front.next = intersection;
     l2Front.next = intersection;
 
-    actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
+    actualIntersection = _2_7Intersection.findIntersectionChopOff(
+      l1Front,
+      l2Front
+    );
     assertTrue(intersection == actualIntersection);
 
     l1Front = testHelper.buildNodeList(List.of(3, 1, 5, 9));
@@ -108,7 +118,10 @@ public class _2_7IntersectionTest {
     l1Front.next = intersection;
     l2Front.next = intersection;
 
-    actualIntersection = _2_7Intersection.findIntersectionChopOff(l1Front, l2Front);
+    actualIntersection = _2_7Intersection.findIntersectionChopOff(
+      l1Front,
+      l2Front
+    );
     assertTrue(intersection == actualIntersection);
   }
 }

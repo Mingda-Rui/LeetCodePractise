@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC0992SubarraysWithKDifferentIntegers {
+
   public int subarraysWithKDistinct(int[] nums, int k) {
     int fast = 0;
     int slow = -1;

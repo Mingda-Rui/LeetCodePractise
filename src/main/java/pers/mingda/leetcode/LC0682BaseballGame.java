@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0682BaseballGame {
+
   public int calPoints(String[] ops) {
     Stack<Integer> stack = new Stack<>();
     for (String op : ops) {

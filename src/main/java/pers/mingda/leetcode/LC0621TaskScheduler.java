@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0621TaskScheduler {}
 
 class LC0621Solution {
+
   public int leastInterval(char[] tasks, int n) {
     int[] lettersFreq = new int[26];
     int maxFreq = 0;
@@ -30,6 +31,7 @@ class LC0621Solution {
 }
 
 class LC0621MathSolution {
+
   public int leastInterval(char[] tasks, int n) {
     int[] freqs = new int[26];
     int maxFreq = 0;

@@ -1,14 +1,18 @@
 package pers.mingda.leetcode;
 
 public class LC0029DivideTwoIntegers {
+
   public int divide(int dividend, int divisor) {
     if (dividend == 0) return 0;
     else if (divisor == 1) return dividend;
-    else if (divisor == -1) return dividend == Integer.MIN_VALUE ? Integer.MAX_VALUE : -dividend;
+    else if (divisor == -1) return dividend == Integer.MIN_VALUE
+      ? Integer.MAX_VALUE
+      : -dividend;
     long dividendL = Math.abs((long) dividend);
     long divisorL = Math.abs((long) divisor);
     int positiveResult = (int) binarySearch(dividendL, divisorL);
-    boolean isSameSign = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
+    boolean isSameSign =
+      (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
     return isSameSign ? positiveResult : -positiveResult;
   }
 
@@ -34,7 +38,6 @@ public class LC0029DivideTwoIntegers {
   }
 
   public int divideBitManipulation(int dividend, int divisor) {
-
     while (dividend >> 1 != 0 && divisor >> 1 != 0) {
       dividend = dividend >> 1;
       divisor = divisor >> 1;

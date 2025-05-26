@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0781RabbitsInForest {
+
   public int numRabbits(int[] answers) {
     int[] record = new int[1001];
     int total = 0;

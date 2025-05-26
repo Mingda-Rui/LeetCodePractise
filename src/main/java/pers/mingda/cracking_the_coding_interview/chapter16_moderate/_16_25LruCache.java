@@ -82,6 +82,7 @@ public class _16_25LruCache {
 }
 
 class LruCacheNode {
+
   int key;
   String value;
   LruCacheNode prev;

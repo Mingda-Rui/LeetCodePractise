@@ -9,12 +9,18 @@ import java.util.Map;
  * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 public class LC0437PathSumIII {
+
   public int pathSum(TreeNode root, int targetSum) {
     Map<Long, Integer> record = new HashMap<>();
     return pathSum(root, targetSum, 0, record);
   }
 
-  private int pathSum(TreeNode root, long targetSum, long currentSum, Map<Long, Integer> record) {
+  private int pathSum(
+    TreeNode root,
+    long targetSum,
+    long currentSum,
+    Map<Long, Integer> record
+  ) {
     if (root == null) {
       return 0;
     }

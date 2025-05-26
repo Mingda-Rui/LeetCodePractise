@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0456OneThreeTwoPattern {
+
   public boolean find132patternStack(int[] nums) {
     Stack<Integer> stack = new Stack<>();
     int third = Integer.MIN_VALUE;

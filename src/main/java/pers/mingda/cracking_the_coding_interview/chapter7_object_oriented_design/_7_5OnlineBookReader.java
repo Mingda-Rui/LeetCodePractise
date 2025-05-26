@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class _7_5OnlineBookReader {}
 
 class OnlineReaderSystem {
+
   private Library library;
   private UserManager userManager;
   private Display display;
@@ -50,6 +51,7 @@ class OnlineReaderSystem {
 }
 
 class Library {
+
   private HashMap<Integer, Book> books;
 
   public Book addBook(int id, String details) {
@@ -79,6 +81,7 @@ class Library {
 }
 
 class UserManager {
+
   private HashMap<Integer, ReaderUser> users;
 
   public ReaderUser addUser(int id, String details, int accountType) {
@@ -108,6 +111,7 @@ class UserManager {
 }
 
 class Display {
+
   private Book activeBook;
   private ReaderUser activeUser;
   private int pageNumber = 0;
@@ -154,6 +158,7 @@ class Display {
 }
 
 class Book {
+
   private int bookId;
   private String details;
 
@@ -180,6 +185,7 @@ class Book {
 }
 
 class ReaderUser {
+
   private int userId;
   private String details;
   private int accountType;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC0560SubarraySumEqualsK {
+
   public int subarraySum(int[] nums, int k) {
     int counter = 0;
     Map<Integer, Integer> map = new HashMap<>();

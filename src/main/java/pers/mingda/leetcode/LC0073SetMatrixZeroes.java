@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0073SetMatrixZeroes {
+
   public void setZeroes(int[][] matrix) {
     int row = matrix.length;
     int column = matrix[0].length;

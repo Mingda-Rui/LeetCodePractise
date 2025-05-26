@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class _17_25WordRectangle {
+
   String[] list;
-  WordRectangleWordGroup[] groupList = WordRectangleWordGroup.createWordGroups(list);
+  WordRectangleWordGroup[] groupList = WordRectangleWordGroup.createWordGroups(
+    list
+  );
   int maxWordLength = groupList.length;
   WordRectangleTrie[] trieList = new WordRectangleTrie[maxWordLength];
 
@@ -54,6 +57,7 @@ public class _17_25WordRectangle {
 }
 
 class WordRectangle {
+
   public int height, length;
   public char[][] matrix;
 
@@ -133,6 +137,7 @@ class WordRectangle {
 }
 
 class WordRectangleWordGroup {
+
   private HashMap<String, Boolean> lookup = new HashMap<>();
   private ArrayList<String> group = new ArrayList<>();
 
@@ -184,6 +189,7 @@ class WordRectangleWordGroup {
 }
 
 class WordRectangleTrie {
+
   public WordRectangleTrie(List<String> words) {}
 
   public boolean contains(String s) {

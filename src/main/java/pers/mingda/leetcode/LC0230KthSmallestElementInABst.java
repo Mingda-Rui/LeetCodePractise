@@ -3,8 +3,9 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0230KthSmallestElementInABst {
+
   public int kthSmallest(TreeNode root, int k) {
-    int[] resultHolder = new int[] {-1};
+    int[] resultHolder = new int[] { -1 };
     kthSmallestRecursive(root, k, resultHolder);
     return resultHolder[0];
   }

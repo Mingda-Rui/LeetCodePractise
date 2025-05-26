@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 import java.util.*;
 
 public class _17_18ShortestSuperSequence {
+
   int[] shortestSuperSequence(int[] bigArray, int[] smallArray) {
     int[][] locMap = buildLocMap(bigArray, smallArray);
     int start = 0;
@@ -18,7 +19,7 @@ public class _17_18ShortestSuperSequence {
         end = maxTail;
       }
     }
-    return new int[] {start, end};
+    return new int[] { start, end };
   }
 
   int[][] buildLocMap(int[] bigArray, int[] smallArray) {
@@ -96,11 +97,12 @@ public class _17_18ShortestSuperSequence {
       minHeap.add(new ShortestSuperSequenceNode(minNode.val, newHeadIndex));
     }
 
-    return new int[] {start, end};
+    return new int[] { start, end };
   }
 }
 
 class ShortestSuperSequenceNode {
+
   int val;
   int index;
 

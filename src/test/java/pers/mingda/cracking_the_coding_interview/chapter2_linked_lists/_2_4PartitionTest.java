@@ -53,7 +53,10 @@ public class _2_4PartitionTest {
     LinkedListNode testNode = testHelper.buildNodeList(testValues);
 
     int partitionVal = 5;
-    LinkedListNode result = _2_4Partition.partitionAddToHead(testNode, partitionVal);
+    LinkedListNode result = _2_4Partition.partitionAddToHead(
+      testNode,
+      partitionVal
+    );
     int resultSize = testHelper.getSize(result);
     assertEquals(testValues.size(), resultSize);
 
@@ -80,7 +83,10 @@ public class _2_4PartitionTest {
     LinkedListNode testNode = testHelper.buildNodeList(testValues);
 
     int partitionVal = 2;
-    LinkedListNode result = _2_4Partition.partitionAddToHeadAndTail(testNode, partitionVal);
+    LinkedListNode result = _2_4Partition.partitionAddToHeadAndTail(
+      testNode,
+      partitionVal
+    );
     int resultSize = testHelper.getSize(result);
     assertEquals(testValues.size(), resultSize);
 

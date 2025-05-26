@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class _17_7BabyNames {
-  Map<String, Integer> trulyMostPopular(Map<String, Integer> names, String[][] synonyms) {
+
+  Map<String, Integer> trulyMostPopular(
+    Map<String, Integer> names,
+    String[][] synonyms
+  ) {
     Map<String, Set<String>> synonymMap = buildSynonymMap(synonyms);
     return getTrulyMostPopular(names, synonymMap);
   }
@@ -33,11 +37,16 @@ public class _17_7BabyNames {
   }
 
   Map<String, Integer> getTrulyMostPopular(
-      Map<String, Integer> names, Map<String, Set<String>> synonymMap) {
+    Map<String, Integer> names,
+    Map<String, Set<String>> synonymMap
+  ) {
     Map<String, Integer> trulyMostPopular = new HashMap<>();
     for (Set<String> synonyms : new HashSet<>(synonymMap.values())) {
       String trueName = synonyms.iterator().next();
-      trulyMostPopular.put(trueName, synonyms.stream().mapToInt(names::get).sum());
+      trulyMostPopular.put(
+        trueName,
+        synonyms.stream().mapToInt(names::get).sum()
+      );
     }
     return trulyMostPopular;
   }

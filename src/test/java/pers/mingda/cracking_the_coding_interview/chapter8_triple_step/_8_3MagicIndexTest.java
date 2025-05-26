@@ -18,35 +18,35 @@ public class _8_3MagicIndexTest {
   @Test
   public void itFindsMagicIndex() {
     // Case with a Magic Index
-    int[] array1 = new int[] {-3, -1, 1, 3, 5, 7};
+    int[] array1 = new int[] { -3, -1, 1, 3, 5, 7 };
     assertEquals(3, subject.findMagicIndex(array1));
 
     // Case with No Magic Index:
-    int[] array2 = new int[] {-5, -2, 0, 2, 4, 7};
+    int[] array2 = new int[] { -5, -2, 0, 2, 4, 7 };
     assertEquals(4, subject.findMagicIndex(array2));
 
     // Case with Multiple Elements, Magic Index at Start
-    int[] array3 = new int[] {0, 2, 5, 10, 12};
+    int[] array3 = new int[] { 0, 2, 5, 10, 12 };
     assertEquals(0, subject.findMagicIndex(array3));
 
     // Case with a Large Array and Magic Index in Middle
-    int[] array4 = new int[] {-10, -5, -2, 3, 7, 12, 17};
+    int[] array4 = new int[] { -10, -5, -2, 3, 7, 12, 17 };
     assertEquals(3, subject.findMagicIndex(array4));
 
     // Edge Case with Only One Element (Matching)
-    int[] array5 = new int[] {0};
+    int[] array5 = new int[] { 0 };
     assertEquals(0, subject.findMagicIndex(array5));
 
     // Edge Case with Only One Element (Not Matching)
-    int[] array6 = new int[] {2};
+    int[] array6 = new int[] { 2 };
     assertEquals(-1, subject.findMagicIndex(array6));
 
     // Case with All Positive Integers
-    int[] array7 = new int[] {1, 2, 3, 4, 5, 6};
+    int[] array7 = new int[] { 1, 2, 3, 4, 5, 6 };
     assertEquals(-1, subject.findMagicIndex(array7));
 
     // Case with Negative Numbers
-    int[] array8 = new int[] {-5, -3, -2, -1, 0, 1, 3};
+    int[] array8 = new int[] { -5, -3, -2, -1, 0, 1, 3 };
     assertEquals(-1, subject.findMagicIndex(array8));
   }
 }

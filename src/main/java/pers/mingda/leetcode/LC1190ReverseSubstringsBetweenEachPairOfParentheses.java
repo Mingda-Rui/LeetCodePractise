@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC1190ReverseSubstringsBetweenEachPairOfParentheses {
+
   public String reverseParentheses(String s) {
     return reverseParenthesesRecursive(s, new int[1]);
   }

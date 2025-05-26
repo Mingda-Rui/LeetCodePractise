@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class _16_21SumSwap {
+
   int[] findSwapValues(int[] array1, int[] array2) {
     Optional<Integer> maybeTarget = getTargetDiff(array1, array2);
     if (maybeTarget.isEmpty()) {
@@ -17,7 +18,7 @@ public class _16_21SumSwap {
     for (int num1 : array1) {
       int num2 = num1 - target;
       if (set2.contains(num2)) {
-        return new int[] {num1, num2};
+        return new int[] { num1, num2 };
       }
     }
 

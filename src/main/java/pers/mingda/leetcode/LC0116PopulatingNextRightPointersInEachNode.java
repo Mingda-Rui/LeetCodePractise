@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LC0116PopulatingNextRightPointersInEachNode {
+
   public LC0116Node connect(LC0116Node root) {
     if (root == null) return root;
     Queue<LC0116Node> queue = new LinkedList<>();
@@ -53,6 +54,7 @@ public class LC0116PopulatingNextRightPointersInEachNode {
 }
 
 class LC0116Node {
+
   public int val;
   public LC0116Node left;
   public LC0116Node right;
@@ -64,7 +66,12 @@ class LC0116Node {
     val = _val;
   }
 
-  public LC0116Node(int _val, LC0116Node _left, LC0116Node _right, LC0116Node _next) {
+  public LC0116Node(
+    int _val,
+    LC0116Node _left,
+    LC0116Node _right,
+    LC0116Node _next
+  ) {
     val = _val;
     left = _left;
     right = _right;

@@ -64,7 +64,9 @@ class LC0355Twitter {
 
   public void unfollow(int followerId, int followeeId) {
     if (followerId == followeeId) return;
-    if (followeeMap.containsKey(followerId)) followeeMap.get(followerId).remove(followeeId);
+    if (followeeMap.containsKey(followerId)) followeeMap
+      .get(followerId)
+      .remove(followeeId);
   }
 
   private int timer() {
@@ -72,6 +74,7 @@ class LC0355Twitter {
   }
 
   class Tweet {
+
     Tweet next;
     private final int ts;
     final int tId;
@@ -83,7 +86,6 @@ class LC0355Twitter {
     }
   }
 }
-
 /**
  * Your Twitter object will be instantiated and called as such: Twitter obj = new Twitter();
  * obj.postTweet(userId,tweetId); List<Integer> param_2 = obj.getNewsFeed(userId);

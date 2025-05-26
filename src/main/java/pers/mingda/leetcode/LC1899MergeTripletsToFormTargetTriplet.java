@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1899MergeTripletsToFormTargetTriplet {
+
   public boolean mergeTriplets(int[][] triplets, int[] target) {
     boolean[] result = new boolean[3];
     for (int[] triplet : triplets) {

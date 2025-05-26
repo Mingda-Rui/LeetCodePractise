@@ -13,7 +13,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LC0787CheapestFlightsWithinKStops {
-  public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+
+  public int findCheapestPrice(
+    int n,
+    int[][] flights,
+    int src,
+    int dst,
+    int k
+  ) {
     Map<Integer, Set<List<Integer>>> fromCityFlights = buildFlightMap(flights);
     Map<Integer, Integer> bestPriceToCity = new HashMap<>();
     bestPriceToCity.put(src, 0);
@@ -35,7 +42,10 @@ public class LC0787CheapestFlightsWithinKStops {
         for (List<Integer> flight : fromCityFlights.get(from)) {
           int to = flight.get(1);
           int toPrice = fromPrice + flight.get(2);
-          if (!bestPriceToCity.containsKey(to) || bestPriceToCity.get(to) > toPrice) {
+          if (
+            !bestPriceToCity.containsKey(to) ||
+            bestPriceToCity.get(to) > toPrice
+          ) {
             queue.add(to);
             int tempPrice = tempMap.getOrDefault(to, toPrice);
             tempMap.put(to, Math.min(toPrice, tempPrice));
@@ -56,13 +66,19 @@ public class LC0787CheapestFlightsWithinKStops {
     for (int[] flight : flights) {
       int from = flight[0];
       flightMap
-          .computeIfAbsent(from, k -> new HashSet<>())
-          .add(Arrays.stream(flight).boxed().collect(Collectors.toList()));
+        .computeIfAbsent(from, k -> new HashSet<>())
+        .add(Arrays.stream(flight).boxed().collect(Collectors.toList()));
     }
     return flightMap;
   }
 
-  public int findCheapestPriceBellmanFord(int n, int[][] flights, int src, int dst, int k) {
+  public int findCheapestPriceBellmanFord(
+    int n,
+    int[][] flights,
+    int src,
+    int dst,
+    int k
+  ) {
     Map<Integer, Integer> cheapestPrice = new HashMap<>();
     cheapestPrice.put(src, 0);
     boolean updated = false;
@@ -76,7 +92,9 @@ public class LC0787CheapestFlightsWithinKStops {
         }
         int next = flight[1];
         int nextPrice = cheapestPrice.get(city) + flight[2];
-        if (!newCheapest.containsKey(next) || newCheapest.get(next) > nextPrice) {
+        if (
+          !newCheapest.containsKey(next) || newCheapest.get(next) > nextPrice
+        ) {
           updated = true;
           newCheapest.put(next, nextPrice);
         }
@@ -90,9 +108,17 @@ public class LC0787CheapestFlightsWithinKStops {
     return cheapestPrice.getOrDefault(dst, -1);
   }
 
-  public int findCheapestPriceDijkstra(int n, int[][] flights, int src, int dst, int k) {
+  public int findCheapestPriceDijkstra(
+    int n,
+    int[][] flights,
+    int src,
+    int dst,
+    int k
+  ) {
     Map<Integer, Set<List<Integer>>> flightMap = buildFlightMap(flights);
-    Queue<List<Integer>> minHeap = new PriorityQueue<>(Comparator.comparingInt(f -> f.get(1)));
+    Queue<List<Integer>> minHeap = new PriorityQueue<>(
+      Comparator.comparingInt(f -> f.get(1))
+    );
     // node, dist_from_src, number_of_stops_from_src
     minHeap.add(List.of(src, 0, -1));
     Map<Integer, Integer> stopCounter = new HashMap<>();

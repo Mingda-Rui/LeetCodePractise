@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class _17_26SparseSimilarity {
+
   Map<SparseSimilarityDocPair, Double> computeSimilarities(
-      List<SparseSimilarityDocument> documents) {
+    List<SparseSimilarityDocument> documents
+  ) {
     Map<Integer, List<SparseSimilarityDocument>> wordToDoc = new HashMap<>();
     for (SparseSimilarityDocument document : documents) {
       for (Integer word : document.words()) {
@@ -30,13 +32,18 @@ public class _17_26SparseSimilarity {
   }
 
   private void calculateIntersection(
-      List<SparseSimilarityDocument> docs, Map<SparseSimilarityDocPair, Double> intersections) {
+    List<SparseSimilarityDocument> docs,
+    Map<SparseSimilarityDocPair, Double> intersections
+  ) {
     docs.sort(Comparator.comparingInt(SparseSimilarityDocument::docId));
     for (int i = 0; i < docs.size(); i++) {
       for (int j = i + 1; j < docs.size(); j++) {
         SparseSimilarityDocument doc1 = docs.get(i);
         SparseSimilarityDocument doc2 = docs.get(j);
-        SparseSimilarityDocPair docPair = new SparseSimilarityDocPair(doc1.docId(), doc2.docId());
+        SparseSimilarityDocPair docPair = new SparseSimilarityDocPair(
+          doc1.docId(),
+          doc2.docId()
+        );
         double count = intersections.getOrDefault(docPair, 0d);
         intersections.put(docPair, count + 1);
       }
@@ -44,20 +51,28 @@ public class _17_26SparseSimilarity {
   }
 
   private Map<SparseSimilarityDocPair, Double> calculateSimilarity(
-      Map<SparseSimilarityDocPair, Double> intersections,
-      List<SparseSimilarityDocument> documents) {
-    return intersections.entrySet().stream()
-        .collect(
-            Collectors.toMap(
-                Map.Entry::getKey,
-                e ->
-                    e.getValue()
-                        / (getDocSizeById(e.getKey().doc1(), documents)
-                            + getDocSizeById(e.getKey().doc1(), documents)
-                            - e.getValue())));
+    Map<SparseSimilarityDocPair, Double> intersections,
+    List<SparseSimilarityDocument> documents
+  ) {
+    return intersections
+      .entrySet()
+      .stream()
+      .collect(
+        Collectors.toMap(
+          Map.Entry::getKey,
+          e ->
+            e.getValue() /
+            (getDocSizeById(e.getKey().doc1(), documents) +
+              getDocSizeById(e.getKey().doc1(), documents) -
+              e.getValue())
+        )
+      );
   }
 
-  private int getDocSizeById(int docId, List<SparseSimilarityDocument> documents) {
+  private int getDocSizeById(
+    int docId,
+    List<SparseSimilarityDocument> documents
+  ) {
     return documents.get(docId).words().size();
   }
 }

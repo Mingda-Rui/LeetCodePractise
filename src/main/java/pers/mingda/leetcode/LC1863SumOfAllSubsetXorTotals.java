@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1863SumOfAllSubsetXorTotals {
+
   public int subsetXORSum(int[] nums) {
     return sumXor(nums, 0, 0);
   }

@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0035SearchInsertPosition {
+
   public int searchInsert(int[] nums, int target) {
     int start = 0;
     int end = nums.length;

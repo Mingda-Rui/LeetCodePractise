@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LC0720LongestWordInDictionary {
+
   public String longestWord(String[] words) {
     LC0720Trie root = new LC0720Trie();
     root.word = "";
@@ -51,6 +52,7 @@ public class LC0720LongestWordInDictionary {
 }
 
 class LC0720Trie {
+
   LC0720Trie[] arr;
   String word;
 

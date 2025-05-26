@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class _17_5LettersAndNumbers {
+
   char[] findLongestSubarray(char[] array) {
     Map<Integer, Integer> deltasMap = new HashMap<>();
     deltasMap.put(0, -1);

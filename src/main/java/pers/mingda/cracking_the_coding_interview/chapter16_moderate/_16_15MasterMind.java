@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class _16_15MasterMind {
+
   MasterMindResult estimate(String guess, String solution) {
     int hits = getHits(guess, solution);
     int pseudoHits = getPseudoHits(guess, solution);
@@ -37,14 +38,15 @@ public class _16_15MasterMind {
     }
 
     return Arrays.stream(MasterMindColor.values())
-        .map(MasterMindColor::getCode)
-        .map(c -> Math.min(guessMap.get(c), solutionMap.get(c)))
-        .mapToInt(Integer::intValue)
-        .sum();
+      .map(MasterMindColor::getCode)
+      .map(c -> Math.min(guessMap.get(c), solutionMap.get(c)))
+      .mapToInt(Integer::intValue)
+      .sum();
   }
 }
 
 class MasterMindResult {
+
   int hits;
   int pseudoHits;
 

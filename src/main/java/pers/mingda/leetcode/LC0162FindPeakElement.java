@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0162FindPeakElement {
+
   public int findPeakElement(int[] nums) {
     int start = 0;
     int end = nums.length;

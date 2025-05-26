@@ -2,13 +2,18 @@ package pers.mingda.cracking_the_coding_interview.chapter4_trees_and_graphs;
 
 /** 4.5 Validate BST: Implement a function to check if a binary tree is a binary search tree. */
 public class _4_5ValidateBst {
+
   public static boolean checkBst(TreeNode node) {
     ResultRecorder result = new ResultRecorder();
     checkBst(node, new TreeNode(Integer.MIN_VALUE), result);
     return result.isValide;
   }
 
-  private static TreeNode checkBst(TreeNode node, TreeNode previous, ResultRecorder result) {
+  private static TreeNode checkBst(
+    TreeNode node,
+    TreeNode previous,
+    ResultRecorder result
+  ) {
     if (!result.isValide) return node;
     if (node == null) return previous;
 
@@ -34,10 +39,14 @@ public class _4_5ValidateBst {
 
     if (node.data <= min || node.data > max) return false;
 
-    return checkBstMinMax(node.left, min, node.data) && checkBstMinMax(node.right, node.data, max);
+    return (
+      checkBstMinMax(node.left, min, node.data) &&
+      checkBstMinMax(node.right, node.data, max)
+    );
   }
 }
 
 class ResultRecorder {
+
   boolean isValide = true;
 }

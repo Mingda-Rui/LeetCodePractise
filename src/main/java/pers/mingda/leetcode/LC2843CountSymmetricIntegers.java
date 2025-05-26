@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LC2843CountSymmetricIntegers {
+
   public int countSymmetricIntegers(int low, int high) {
     int count = 0;
     Map<Integer, Integer> sumRecord = new HashMap<>();
@@ -21,7 +22,10 @@ public class LC2843CountSymmetricIntegers {
       return false;
     }
     int divider = getDivider(digits / 2);
-    return getDigitSum(num % divider, sumRecord) == getDigitSum(num / divider, sumRecord);
+    return (
+      getDigitSum(num % divider, sumRecord) ==
+      getDigitSum(num / divider, sumRecord)
+    );
   }
 
   private int countDigits(int num) {
@@ -72,6 +76,6 @@ public class LC2843CountSymmetricIntegers {
   }
 
   private int sumByDigit(int num) {
-    return num / 10 + num % 10;
+    return num / 10 + (num % 10);
   }
 }

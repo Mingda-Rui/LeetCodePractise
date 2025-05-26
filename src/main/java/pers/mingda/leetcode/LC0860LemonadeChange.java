@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0860LemonadeChange {
+
   public boolean lemonadeChange(int[] bills) {
     int[] change = new int[21];
     for (int bill : bills) {

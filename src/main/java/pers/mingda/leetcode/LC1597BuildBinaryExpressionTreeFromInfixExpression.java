@@ -10,6 +10,7 @@ public class LC1597BuildBinaryExpressionTreeFromInfixExpression {}
  * val; this.left = left; this.right = right; } }
  */
 class LC1597Solution {
+
   public LC1597Node expTree(String s) {
     return expTree(s, 0, s.length());
   }
@@ -53,7 +54,10 @@ class LC1597Solution {
     return start;
   }
 
-  private boolean greaterThanPrevSign(LC1597Node sign, Stack<LC1597Node> stack) {
+  private boolean greaterThanPrevSign(
+    LC1597Node sign,
+    Stack<LC1597Node> stack
+  ) {
     // TODO sign check
     if (stack.isEmpty()) return true;
     LC1597Node prevSign = stack.peek();
@@ -71,7 +75,11 @@ class LC1597Solution {
     };
   }
 
-  private LC1597Node popStack(Stack<LC1597Node> stack, LC1597Node digit, LC1597Node sign) {
+  private LC1597Node popStack(
+    Stack<LC1597Node> stack,
+    LC1597Node digit,
+    LC1597Node sign
+  ) {
     while (!stack.isEmpty() && !greaterThanPrevSign(sign, stack)) {
       LC1597Node prevSign = stack.pop();
       LC1597Node prev = stack.pop();
@@ -84,6 +92,7 @@ class LC1597Solution {
 }
 
 class LC1597Node {
+
   char val;
   LC1597Node left;
   LC1597Node right;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class LC0103BinaryTreeZigzagLevelOrderTraversal {
+
   public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
     List<List<Integer>> result = new LinkedList<>();
     if (root == null) return result;
@@ -34,7 +35,10 @@ public class LC0103BinaryTreeZigzagLevelOrderTraversal {
   }
 
   private List<List<Integer>> zigzagLevelOrderRecursive(
-      TreeNode root, int level, List<List<Integer>> result) {
+    TreeNode root,
+    int level,
+    List<List<Integer>> result
+  ) {
     if (root == null) return result;
     if (result.size() < level) result.add(new LinkedList<>());
     List<Integer> currentLevel = result.get(level - 1);

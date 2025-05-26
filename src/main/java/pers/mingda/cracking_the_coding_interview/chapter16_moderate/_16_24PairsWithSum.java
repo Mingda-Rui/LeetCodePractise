@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class _16_24PairsWithSum {
+
   List<PairWithSum> printPariSums(int[] array, int sum) {
     Multimap<Integer, Integer> valueToIndex = ArrayListMultimap.create();
     for (int i = 0; i < array.length; i++) {
@@ -30,6 +31,7 @@ public class _16_24PairsWithSum {
 }
 
 class PairWithSum {
+
   int left, right;
 
   public PairWithSum(int left, int right) {

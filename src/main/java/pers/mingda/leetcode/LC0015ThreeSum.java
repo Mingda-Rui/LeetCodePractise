@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LC0015ThreeSum {
+
   public List<List<Integer>> threeSum(int[] nums) {
     List<List<Integer>> result = new LinkedList<>();
     Map<Integer, Integer> noOfValue = new HashMap<>();
@@ -26,8 +27,9 @@ public class LC0015ThreeSum {
         if (tmpMap.get(secondVal) > 0) {
           tmpMap.computeIfPresent(secondVal, (k, v) -> v - 1);
           int remain = -firstVal - secondVal;
-          if (tmpMap.getOrDefault(remain, 0) > 0)
-            result.add(Arrays.asList(firstVal, secondVal, remain));
+          if (tmpMap.getOrDefault(remain, 0) > 0) result.add(
+            Arrays.asList(firstVal, secondVal, remain)
+          );
           // tmpMap.computeIfPresent(secondVal, (k, v) -> v + 1);
         }
         tmpMap.put(secondVal, 0);
@@ -50,10 +52,12 @@ public class LC0015ThreeSum {
         int secondVal = nums[j];
         int remain = -firstVal - secondVal;
 
-        if (remain == secondVal && j + 1 < nums.length && nums[j + 1] == remain)
-          result.add(Arrays.asList(firstVal, secondVal, remain));
-        else if (remain > secondVal && valueMap.getOrDefault(remain, 0) > 0)
-          result.add(Arrays.asList(firstVal, secondVal, remain));
+        if (
+          remain == secondVal && j + 1 < nums.length && nums[j + 1] == remain
+        ) result.add(Arrays.asList(firstVal, secondVal, remain));
+        else if (
+          remain > secondVal && valueMap.getOrDefault(remain, 0) > 0
+        ) result.add(Arrays.asList(firstVal, secondVal, remain));
         j = getLastSameIndex(nums, j);
       }
       i = getLastSameIndex(nums, i);

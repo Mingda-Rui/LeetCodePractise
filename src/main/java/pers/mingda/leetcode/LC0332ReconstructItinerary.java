@@ -8,12 +8,15 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class LC0332ReconstructItinerary {
+
   public List<String> findItinerary(List<List<String>> tickets) {
     Map<String, Queue<String>> flightMap = buildFlightMap(tickets);
     return buildItinerary(flightMap, new ArrayList<>(), "JFK");
   }
 
-  private Map<String, Queue<String>> buildFlightMap(List<List<String>> tickets) {
+  private Map<String, Queue<String>> buildFlightMap(
+    List<List<String>> tickets
+  ) {
     Map<String, Queue<String>> flightMap = new HashMap<>();
     for (List<String> ticket : tickets) {
       String from = ticket.getFirst();
@@ -24,7 +27,10 @@ public class LC0332ReconstructItinerary {
   }
 
   private List<String> buildItinerary(
-      Map<String, Queue<String>> flightMap, List<String> itinerary, String airport) {
+    Map<String, Queue<String>> flightMap,
+    List<String> itinerary,
+    String airport
+  ) {
     if (!flightMap.containsKey(airport)) {
       itinerary.addFirst(airport);
       return itinerary;

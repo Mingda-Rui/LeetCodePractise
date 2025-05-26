@@ -14,6 +14,7 @@ public class _10_10RankFromStream {
 }
 
 class RankNode {
+
   int count;
   int value;
   RankNode left, right;

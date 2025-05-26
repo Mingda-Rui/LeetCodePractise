@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _8_7PermutationsWithoutDups {
+
   public List<String> permutationsWithoutDups(String str) {
     if (str.isEmpty() || str.length() == 1) {
       return List.of(str);
@@ -14,8 +15,10 @@ public class _8_7PermutationsWithoutDups {
       char c = str.charAt(i);
       StringBuilder sb = new StringBuilder(str);
       sb.deleteCharAt(i);
-      List<String> partialP =
-          permutationsWithoutDups(sb.toString()).stream().map(p -> c + p).toList();
+      List<String> partialP = permutationsWithoutDups(sb.toString())
+        .stream()
+        .map(p -> c + p)
+        .toList();
       allPermutations.addAll(partialP);
     }
     return allPermutations;

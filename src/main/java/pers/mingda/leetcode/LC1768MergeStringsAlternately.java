@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1768MergeStringsAlternately {
+
   public String mergeAlternately(String word1, String word2) {
     int i = 0;
     StringBuilder sb = new StringBuilder();

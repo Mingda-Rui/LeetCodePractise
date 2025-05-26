@@ -31,7 +31,11 @@ public class _2_2ReturnKthToLast {
     return kthNode.get(0);
   }
 
-  private static int kthToLastRecursive(LinkedListNode head, int k, List<LinkedListNode> kthNode) {
+  private static int kthToLastRecursive(
+    LinkedListNode head,
+    int k,
+    List<LinkedListNode> kthNode
+  ) {
     if (head == null) {
       return 0;
     }
@@ -43,8 +47,8 @@ public class _2_2ReturnKthToLast {
   }
 
   private static void checkSize(int size, int k) {
-    if (size < k)
-      throw new IllegalArgumentException(
-          "The size of the list is " + size + ", which is less than " + k);
+    if (size < k) throw new IllegalArgumentException(
+      "The size of the list is " + size + ", which is less than " + k
+    );
   }
 }

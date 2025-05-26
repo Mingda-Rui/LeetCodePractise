@@ -22,7 +22,10 @@ public class _4_9BstSequences {
   }
 
   private static List<List<Integer>> allSequences(
-      Set<TreeNode> activeNodes, List<List<Integer>> result, List<Integer> current) {
+    Set<TreeNode> activeNodes,
+    List<List<Integer>> result,
+    List<Integer> current
+  ) {
     if (activeNodes.isEmpty()) {
       List<Integer> currentList = List.copyOf(current);
       result.add(currentList);
@@ -41,7 +44,10 @@ public class _4_9BstSequences {
     return result;
   }
 
-  private static Set<TreeNode> addChildNode(Set<TreeNode> activeNodes, TreeNode node) {
+  private static Set<TreeNode> addChildNode(
+    Set<TreeNode> activeNodes,
+    TreeNode node
+  ) {
     Set<TreeNode> withChildNodes = new HashSet<>(activeNodes);
     if (node == null) return withChildNodes;
     if (node.left != null) withChildNodes.add(node.left);

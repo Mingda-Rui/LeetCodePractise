@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0134GasStation {
+
   public int canCompleteCircuit(int[] gas, int[] cost) {
     int currentGas = 0;
     int totalGas = 0;

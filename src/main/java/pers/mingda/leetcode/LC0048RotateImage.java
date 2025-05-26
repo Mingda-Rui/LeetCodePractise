@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0048RotateImage {
+
   public void rotate(int[][] matrix) {
     int n = matrix.length;
     int rowBoundary = (n + 1) / 2;

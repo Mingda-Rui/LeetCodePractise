@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 public class LC0794ValidTicTacToeState {}
 
 class LC0794Solution {
+
   public boolean validTicTacToe(String[] board) {
     int playerX = 1;
     int playerO = -1;
@@ -39,7 +40,11 @@ class LC0794Solution {
       if (i < 3) difference += num;
     }
     if (winsForX > 0 && winsForO > 0) return false;
-    else if (winsForX == 0 && winsForO == 0) return difference == 0 || difference == 1;
-    return (winsForX > 0 && difference == 1) || (winsForO > 0 && difference == 0);
+    else if (winsForX == 0 && winsForO == 0) return (
+      difference == 0 || difference == 1
+    );
+    return (
+      (winsForX > 0 && difference == 1) || (winsForO > 0 && difference == 0)
+    );
   }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class LC0636ExclusiveTimeOfFunctions {
+
   public int[] exclusiveTime(int n, List<String> logs) {
     Stack<Integer> funcIdStack = new Stack<>();
     int prevTs = 0;

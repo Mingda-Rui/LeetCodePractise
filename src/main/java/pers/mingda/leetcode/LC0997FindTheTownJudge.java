@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0997FindTheTownJudge {
+
   public int findJudge(int n, int[][] trust) {
     if (trust.length < n - 1) {
       return -1;

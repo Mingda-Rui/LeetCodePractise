@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0021MergeTwoSortedLists {
+
   public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
     ListNode list = new ListNode();
     ListNode head = list;

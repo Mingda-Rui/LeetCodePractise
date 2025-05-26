@@ -7,10 +7,11 @@ public class _7_4ParkingLot {}
 enum VehicleSize {
   Motorcycle,
   Compact,
-  Large
+  Large,
 }
 
 abstract class Vehicle {
+
   protected ArrayList<ParkingSpot> parkingSpots = new ArrayList<>();
   protected String licensePlate;
   protected int spotsNeeded;
@@ -41,6 +42,7 @@ abstract class Vehicle {
 }
 
 class Bus extends Vehicle {
+
   public Bus() {
     spotsNeeded = 5;
     size = VehicleSize.Large;
@@ -54,6 +56,7 @@ class Bus extends Vehicle {
 }
 
 class Car extends Vehicle {
+
   public Car() {
     spotsNeeded = 1;
     size = VehicleSize.Compact;
@@ -67,6 +70,7 @@ class Car extends Vehicle {
 }
 
 class Motorcycle extends Vehicle {
+
   public Motorcycle() {
     spotsNeeded = 1;
     size = VehicleSize.Motorcycle;
@@ -79,6 +83,7 @@ class Motorcycle extends Vehicle {
 }
 
 class ParkingLot {
+
   private Level[] levels;
   private final int NUM_LEVELS = 5;
 
@@ -95,6 +100,7 @@ class ParkingLot {
 
 /* Represents a level in a parking garage */
 class Level {
+
   private int floor;
   private ParkingSpot[] spots;
   private int availableSpots = 0; // number of free spots
@@ -134,6 +140,7 @@ class Level {
 }
 
 class ParkingSpot {
+
   private Vehicle vehicle;
   private VehicleSize spotSize;
   private int row;

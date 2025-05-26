@@ -8,6 +8,7 @@ import java.util.Stack;
  * this.next = next; } }
  */
 public class LC2130MaximumTwinSumOfALinkedList {
+
   public int pairSum(ListNode head) {
     ListNode fast = head;
     ListNode slow = head;

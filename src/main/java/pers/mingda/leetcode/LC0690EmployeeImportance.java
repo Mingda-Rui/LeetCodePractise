@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Queue;
 
 public class LC0690EmployeeImportance {
+
   public int getImportance(List<Employee> employees, int id) {
     Map<Integer, Employee> map = new HashMap<>();
     Queue<Employee> queue = new LinkedList<>();
@@ -34,12 +35,14 @@ public class LC0690EmployeeImportance {
   private int getImportanceDfsHelper(Map<Integer, Employee> map, int id) {
     Employee employee = map.get(id);
     int totalImportance = employee.importance;
-    for (int subId : employee.subordinates) totalImportance += getImportanceDfsHelper(map, subId);
+    for (int subId : employee.subordinates) totalImportance +=
+      getImportanceDfsHelper(map, subId);
     return totalImportance;
   }
 }
 
 class Employee {
+
   public int id;
   public int importance;
   public List<Integer> subordinates;

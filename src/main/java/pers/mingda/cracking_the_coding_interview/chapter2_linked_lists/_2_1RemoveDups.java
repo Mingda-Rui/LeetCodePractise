@@ -8,6 +8,7 @@ import java.util.Set;
  * would you solve this problem if a temporary bugger is not allowed?
  */
 public class _2_1RemoveDups {
+
   public static void deleteDups(LinkedListNode n) {
     Set<Integer> set = new HashSet<>();
     set.add(n.data);

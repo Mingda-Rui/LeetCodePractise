@@ -1,6 +1,7 @@
 package pers.mingda.cracking_the_coding_interview.chapter17_hard;
 
 public class _17_10MajorityElement {
+
   int findMajorityElement(int[] array) {
     int delta = 0;
     int current = 0;

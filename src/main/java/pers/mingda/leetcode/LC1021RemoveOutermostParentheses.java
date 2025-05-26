@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1021RemoveOutermostParentheses {
+
   public String removeOuterParentheses(String s) {
     StringBuilder sb = new StringBuilder();
     int balance = 0;

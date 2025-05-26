@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class LC0649Dota2Senate {
+
   public String predictPartyVictory(String senate) {
     Queue<Character> queue = new LinkedList<>();
     int rCount = 0;

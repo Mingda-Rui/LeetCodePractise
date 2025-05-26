@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0875KokoEatingBananas {
+
   public int minEatingSpeed(int[] piles, int h) {
     int total = 0;
     int maxPile = 0;

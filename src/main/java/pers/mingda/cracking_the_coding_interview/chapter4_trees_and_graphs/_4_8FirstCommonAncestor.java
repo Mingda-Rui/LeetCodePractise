@@ -11,15 +11,22 @@ import java.util.Set;
  * not necessarily a binary search tree.
  */
 public class _4_8FirstCommonAncestor {
+
   public static TreeNode commonAncestor(TreeNode root, TreeNode p, TreeNode q) {
     List<TreeNode> result = new LinkedList<>();
-    if (!commonAncestor(root, p, q, result)) throw new RuntimeException("No common ancestor!");
+    if (!commonAncestor(root, p, q, result)) throw new RuntimeException(
+      "No common ancestor!"
+    );
 
     return result.get(0);
   }
 
   private static boolean commonAncestor(
-      TreeNode node, TreeNode p, TreeNode q, List<TreeNode> result) {
+    TreeNode node,
+    TreeNode p,
+    TreeNode q,
+    List<TreeNode> result
+  ) {
     if (!result.isEmpty() || node == p || node == q) return true;
     if (node == null) return false;
 
@@ -30,7 +37,11 @@ public class _4_8FirstCommonAncestor {
     return left || right;
   }
 
-  public static TreeNode commonAncestorReturnNode(TreeNode root, TreeNode p, TreeNode q) {
+  public static TreeNode commonAncestorReturnNode(
+    TreeNode root,
+    TreeNode p,
+    TreeNode q
+  ) {
     TreeNode commonAncestor = commonAncestorReturnNodeRecursive(root, p, q);
     if (commonAncestor == p || commonAncestor == q || commonAncestor == null) {
       throw new RuntimeException("No common ancestor!");
@@ -38,7 +49,11 @@ public class _4_8FirstCommonAncestor {
     return commonAncestor;
   }
 
-  private static TreeNode commonAncestorReturnNodeRecursive(TreeNode root, TreeNode p, TreeNode q) {
+  private static TreeNode commonAncestorReturnNodeRecursive(
+    TreeNode root,
+    TreeNode p,
+    TreeNode q
+  ) {
     if (root == null || root == p || root == q) return root;
 
     TreeNode left = commonAncestorReturnNodeRecursive(root.left, p, q);
@@ -64,7 +79,10 @@ public class _4_8FirstCommonAncestor {
     throw new RuntimeException("No common ancestor!");
   }
 
-  public static TreeNode commonAncestorCheckCoverTheOtherNode(TreeNode p, TreeNode q) {
+  public static TreeNode commonAncestorCheckCoverTheOtherNode(
+    TreeNode p,
+    TreeNode q
+  ) {
     if (p == null || q == null) return null;
     if (isChild(p, q)) return p;
     if (isChild(q, p)) return q;

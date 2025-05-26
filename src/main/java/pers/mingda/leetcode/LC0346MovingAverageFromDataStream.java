@@ -6,6 +6,7 @@ import java.util.Queue;
 public class LC0346MovingAverageFromDataStream {}
 
 class MovingAverage {
+
   Queue<Integer> queue;
   int size;
   double sum;
@@ -28,6 +29,7 @@ class MovingAverage {
 }
 
 class MovingAverageArraySolution {
+
   int[] queue;
   int size;
   int counter;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LC0872LeafSimilarTrees {
+
   /**
    * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
    * right; TreeNode() {} TreeNode(int val) { this.val = val; } TreeNode(int val, TreeNode left,

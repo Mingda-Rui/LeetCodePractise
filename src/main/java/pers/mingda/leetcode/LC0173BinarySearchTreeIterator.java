@@ -7,6 +7,7 @@ import java.util.Stack;
 public class LC0173BinarySearchTreeIterator {}
 
 class BSTIterator {
+
   List<TreeNode> list;
   int pointer;
 
@@ -35,6 +36,7 @@ class BSTIterator {
 }
 
 class BSTIteratorSmallInit {
+
   private Stack<TreeNode> stack;
 
   public BSTIteratorSmallInit(TreeNode root) {

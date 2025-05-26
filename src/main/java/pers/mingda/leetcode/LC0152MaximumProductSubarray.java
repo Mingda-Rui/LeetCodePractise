@@ -16,7 +16,9 @@ public class LC0152MaximumProductSubarray {
         int currentMax = product < 0 ? product / maxNegative : product;
         max = Math.max(max, currentMax);
         if (product < 0) {
-          maxNegative = maxNegative > 0 ? product : Math.max(maxNegative, product);
+          maxNegative = maxNegative > 0
+            ? product
+            : Math.max(maxNegative, product);
         }
       }
     }

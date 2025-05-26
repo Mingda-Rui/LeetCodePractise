@@ -6,6 +6,7 @@ import java.util.Map;
 public class LC0146LruCache {}
 
 class LRUCache {
+
   private DoubleLinkedNode head;
   private DoubleLinkedNode tail;
   private Map<Integer, DoubleLinkedNode> map;
@@ -74,6 +75,7 @@ class LRUCache {
 }
 
 class DoubleLinkedNode {
+
   private int key;
   private int value;
   DoubleLinkedNode prev;
@@ -96,7 +98,6 @@ class DoubleLinkedNode {
     this.value = value;
   }
 }
-
 /**
  * Your LRUCache object will be instantiated and called as such: LRUCache obj = new
  * LRUCache(capacity); int param_1 = obj.get(key); obj.put(key,value);

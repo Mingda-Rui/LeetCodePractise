@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0066PlusOne {
+
   public int[] plusOne(int[] digits) {
     int len = digits.length;
     for (int i = len - 1; i >= 0; i--) {

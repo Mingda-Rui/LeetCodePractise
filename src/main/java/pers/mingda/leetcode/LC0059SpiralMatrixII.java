@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0059SpiralMatrixII {
+
   public int[][] generateMatrix(int n) {
     int[][] result = new int[n][n];
     int numOfLayers = (n + 1) / 2;
@@ -9,10 +10,12 @@ public class LC0059SpiralMatrixII {
       result[i][i] = startNum;
       int length = n - i * 2;
       int boundary = n - i - 1;
-      for (int j = 1; j < length; j++) result[i][i + j] = result[i][i + j - 1] + 1;
-      for (int j = 1; j < length; j++) result[i + j][boundary] = result[i + j - 1][boundary] + 1;
-      for (int j = 1; j < length; j++)
-        result[boundary][boundary - j] = result[boundary][boundary - j + 1] + 1;
+      for (int j = 1; j < length; j++) result[i][i + j] =
+        result[i][i + j - 1] + 1;
+      for (int j = 1; j < length; j++) result[i + j][boundary] =
+        result[i + j - 1][boundary] + 1;
+      for (int j = 1; j < length; j++) result[boundary][boundary - j] =
+        result[boundary][boundary - j + 1] + 1;
       for (int j = 1; j < length - 1; j++) {
         result[boundary - j][i] = result[boundary - j + 1][i] + 1;
       }
@@ -31,7 +34,6 @@ public class LC0059SpiralMatrixII {
   }
 
   private int calcNum(int[][] matrix, int x, int y) {
-
     int n = matrix.length;
     int numOfLayers = (n + 1) / 2;
     int mid = matrix.length / 2;
@@ -49,13 +51,15 @@ public class LC0059SpiralMatrixII {
     if (x == y && x == layer) return startNumOfTheLayer;
     if (x <= y) return startNumOfTheLayer + (x - layer) + (y - layer);
     int length = n - 1 - layer * 2;
-    if (x == n - layer * 2) return startNumOfTheLayer + length * 2 + (length - y);
+    if (x == n - layer * 2) return (
+      startNumOfTheLayer + length * 2 + (length - y)
+    );
     else return startNumOfTheLayer + length * 3 + (length - x);
   }
 
   public int[][] generateMatrixFourDir(int n) {
     int[][] result = new int[n][n];
-    int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    int[][] dirs = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
     int counter = 0;
     int x = 0;
     int y = 0;

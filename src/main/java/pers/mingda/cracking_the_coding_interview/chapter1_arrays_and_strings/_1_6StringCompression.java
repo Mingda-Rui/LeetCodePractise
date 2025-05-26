@@ -48,5 +48,4 @@ public class _1_6StringCompression {
     return sb.toString();
   }
 }
-
 // aabbccdd

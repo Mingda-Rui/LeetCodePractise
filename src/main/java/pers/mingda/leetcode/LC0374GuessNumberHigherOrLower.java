@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0374GuessNumberHigherOrLower {
+
   public int guessNumber(int n) {
     return guessNumber(1, n);
   }

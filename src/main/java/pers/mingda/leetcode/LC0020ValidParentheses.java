@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Stack;
 
 public class LC0020ValidParentheses {
+
   public boolean isValid(String s) {
     if (s.length() % 2 != 0) return false;
 

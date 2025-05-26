@@ -5,6 +5,7 @@ package pers.mingda.cracking_the_coding_interview.chapter4_trees_and_graphs;
  * algorithm to create a binary search tree with minimal height.
  */
 public class _4_2MinimalTree {
+
   public static TreeNode createMinimalBST(int[] array) {
     if (array.length == 0) return null;
     return createMinimalBST(array, 0, array.length);
@@ -36,7 +37,11 @@ public class _4_2MinimalTree {
   }
 
   private static TreeNode createMinimalBstInsertNode(
-      TreeNode root, int[] array, int start, int end) {
+    TreeNode root,
+    int[] array,
+    int start,
+    int end
+  ) {
     if (start >= end) return root;
 
     int midIndex = getMidIndex(start, end);

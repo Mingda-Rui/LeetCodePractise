@@ -7,6 +7,7 @@ import java.util.TreeMap;
 public class LC0253MeetingRoomsII {}
 
 class LC0253Solution {
+
   public int minMeetingRooms(int[][] intervals) {
     int[] startTime = new int[intervals.length];
     int[] endTime = new int[intervals.length];
@@ -29,6 +30,7 @@ class LC0253Solution {
 }
 
 class TreeMapSolution {
+
   public int minMeetingRooms(int[][] intervals) {
     Map<Integer, Integer> map = new TreeMap<>();
     for (int[] interval : intervals) {

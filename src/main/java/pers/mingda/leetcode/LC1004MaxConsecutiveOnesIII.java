@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1004MaxConsecutiveOnesIII {
+
   public int longestOnes(int[] nums, int k) {
     int head;
     int tail = 0;

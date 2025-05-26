@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0058LengthOfLastWord {
+
   public int lengthOfLastWord(String s) {
     int len = 0;
     s = s.trim();

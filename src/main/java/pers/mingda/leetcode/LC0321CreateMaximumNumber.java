@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class LC0321CreateMaximumNumber {
+
   public int[] maxNumber(int[] nums1, int[] nums2, int k) {
     int[] result = new int[k];
     int resultInt = 0;

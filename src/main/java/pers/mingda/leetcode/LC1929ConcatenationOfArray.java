@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC1929ConcatenationOfArray {
+
   public int[] getConcatenation(int[] nums) {
     int n = nums.length;
     int[] res = new int[n * 2];

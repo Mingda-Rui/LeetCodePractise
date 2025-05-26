@@ -39,7 +39,6 @@ class LC0208Trie {
     return search(prefix, 0);
   }
 }
-
 /**
  * Your LC0208Trie object will be instantiated and called as such: LC0208Trie obj = new
  * LC0208Trie(); obj.insert(word); boolean param_2 = obj.search(word); boolean param_3 =

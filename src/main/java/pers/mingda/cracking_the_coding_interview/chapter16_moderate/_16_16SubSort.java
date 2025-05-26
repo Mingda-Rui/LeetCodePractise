@@ -3,6 +3,7 @@ package pers.mingda.cracking_the_coding_interview.chapter16_moderate;
 import java.util.List;
 
 public class _16_16SubSort {
+
   List<Integer> findUnsortedSequence(int[] array) {
     int leftMostSortedIndex = findLeftmostSorted(array);
     if (leftMostSortedIndex == array.length - 1) {
@@ -18,8 +19,16 @@ public class _16_16SubSort {
       maxInLeft = Math.max(maxInLeft, array[i]);
     }
 
-    int adjustedLeftMost = adjustLeftWithMin(array, leftMostSortedIndex, minInRight);
-    int adjustedRightMost = adjustRightWithMax(array, rightMostSortedIndex, maxInLeft);
+    int adjustedLeftMost = adjustLeftWithMin(
+      array,
+      leftMostSortedIndex,
+      minInRight
+    );
+    int adjustedRightMost = adjustRightWithMax(
+      array,
+      rightMostSortedIndex,
+      maxInLeft
+    );
 
     return List.of(adjustedLeftMost + 1, adjustedRightMost - 1);
   }

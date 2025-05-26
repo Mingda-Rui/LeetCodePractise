@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 public class LC0227BasicCalculator2 {
+
   public int calculate(String s) {
     int prevVal = 0;
     int val = 0;
@@ -11,7 +12,9 @@ public class LC0227BasicCalculator2 {
       if (Character.isDigit(current)) {
         val = val * 10 + (current - '0');
       }
-      if ((current != ' ' && !Character.isDigit(current)) || i == s.length() - 1) {
+      if (
+        (current != ' ' && !Character.isDigit(current)) || i == s.length() - 1
+      ) {
         switch (prevOp) {
           case '+':
             result += prevVal;

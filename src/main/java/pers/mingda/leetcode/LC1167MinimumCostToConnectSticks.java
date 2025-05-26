@@ -6,6 +6,7 @@ import java.util.Queue;
 public class LC1167MinimumCostToConnectSticks {}
 
 class LC1167Solution {
+
   public int connectSticks(int[] sticks) {
     Queue<Integer> queue = new PriorityQueue<>();
     for (int stick : sticks) {

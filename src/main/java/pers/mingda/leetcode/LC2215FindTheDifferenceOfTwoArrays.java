@@ -7,9 +7,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LC2215FindTheDifferenceOfTwoArrays {
+
   public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-    Set<Integer> set1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
-    Set<Integer> set2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+    Set<Integer> set1 = Arrays.stream(nums1)
+      .boxed()
+      .collect(Collectors.toSet());
+    Set<Integer> set2 = Arrays.stream(nums2)
+      .boxed()
+      .collect(Collectors.toSet());
 
     Set<Integer> newSet1 = new HashSet<>(set1);
     newSet1.removeAll(set2);
