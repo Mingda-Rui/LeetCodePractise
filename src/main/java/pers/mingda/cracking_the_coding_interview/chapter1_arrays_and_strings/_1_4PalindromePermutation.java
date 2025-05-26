@@ -11,31 +11,27 @@ package pers.mingda.cracking_the_coding_interview.chapter1_arrays_and_strings;
  */
 
 public class _1_4PalindromePermutation {
-    public static boolean palindromePermutationCaseSensitive(String str) {
-        return palindromePermutation(str, true);
+  public static boolean palindromePermutationCaseSensitive(String str) {
+    return palindromePermutation(str, true);
+  }
+
+  public static boolean palindromePermutationCaseInsensitive(String str) {
+    return palindromePermutation(str, false);
+  }
+
+  private static boolean palindromePermutation(String str, boolean caseSensitive) {
+    int[] charCounter = new int[256];
+    int oddCounter = 0;
+    for (char c : str.toCharArray()) {
+      if (c == ' ') continue;
+      if (!caseSensitive) c = Character.toLowerCase(c);
+      charCounter[c]++;
     }
 
-    public static boolean palindromePermutationCaseInsensitive(String str) {
-        return palindromePermutation(str, false);
+    for (int i : charCounter) {
+      if (i % 2 != 0) oddCounter++;
+      if (oddCounter > 1) return false;
     }
-
-    private static boolean palindromePermutation(String str, boolean caseSensitive) {
-        int[] charCounter = new int[256];
-        int oddCounter = 0;
-        for (char c: str.toCharArray()) {
-            if (c == ' ')
-                continue;
-            if (!caseSensitive)
-                c = Character.toLowerCase(c);
-            charCounter[c] ++;
-        }
-
-        for (int i: charCounter) {
-            if (i % 2 != 0) 
-                oddCounter ++;
-            if (oddCounter > 1)
-                return false;
-        }
-        return true;
-    }
+    return true;
+  }
 }

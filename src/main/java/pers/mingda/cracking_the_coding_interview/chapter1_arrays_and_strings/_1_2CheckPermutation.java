@@ -9,42 +9,36 @@ import java.util.Arrays;
 
 public class _1_2CheckPermutation {
 
-    /*
-     * Note, we need to ask whether the permutation is considered case sensitive.
-     * Also, whether white space is significant. e.g. "god   " vs "dog"
-     */
-    
-    public static boolean checkPermutation(String str1, String str2) {
-        if (str1.length() != str2.length())
-            return false;
+  /*
+   * Note, we need to ask whether the permutation is considered case sensitive.
+   * Also, whether white space is significant. e.g. "god   " vs "dog"
+   */
 
-        int[] charRecorder = new int[256];
-        for (char c: str1.toCharArray()) {
-            charRecorder[c] ++;
-        }
+  public static boolean checkPermutation(String str1, String str2) {
+    if (str1.length() != str2.length()) return false;
 
-        for (char c: str2.toCharArray()) {
-            if (charRecorder[c] == 0) 
-                return false;
-            charRecorder[c] --;
-        }
-        
-        for (int i: charRecorder) {
-            if (i != 0) 
-                return false;
-        }
-        return true;
+    int[] charRecorder = new int[256];
+    for (char c : str1.toCharArray()) {
+      charRecorder[c]++;
     }
 
-    public static boolean checkPermutationSorting(String str1, String str2) {
-        if (str1.length() != str2.length()) 
-            return false;
-        char[] charArr1 = str1.toCharArray();
-        char[] charArr2 = str2.toCharArray();
-        Arrays.sort(charArr1);
-        Arrays.sort(charArr2);
-        return Arrays.equals(charArr1, charArr2);
+    for (char c : str2.toCharArray()) {
+      if (charRecorder[c] == 0) return false;
+      charRecorder[c]--;
     }
 
+    for (int i : charRecorder) {
+      if (i != 0) return false;
+    }
+    return true;
+  }
 
+  public static boolean checkPermutationSorting(String str1, String str2) {
+    if (str1.length() != str2.length()) return false;
+    char[] charArr1 = str1.toCharArray();
+    char[] charArr2 = str2.toCharArray();
+    Arrays.sort(charArr1);
+    Arrays.sort(charArr2);
+    return Arrays.equals(charArr1, charArr2);
+  }
 }

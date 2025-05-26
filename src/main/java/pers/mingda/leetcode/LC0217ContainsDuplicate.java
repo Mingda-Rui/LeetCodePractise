@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LC0217ContainsDuplicate {
-    public boolean containsDuplicate(int[] nums) {
-        Set<Integer> duplication = new HashSet<>();
-        for (int num : nums) {
-            if (!duplication.add(num)) return true;
-        }
-        return false;
+  public boolean containsDuplicate(int[] nums) {
+    Set<Integer> duplication = new HashSet<>();
+    for (int num : nums) {
+      if (!duplication.add(num)) return true;
     }
+    return false;
+  }
 }
