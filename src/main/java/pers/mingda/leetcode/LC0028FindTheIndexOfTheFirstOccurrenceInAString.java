@@ -24,3 +24,50 @@ class LC0028Solution {
     return true;
   }
 }
+
+class Solution {
+
+  public int strStr(String haystack, String needle) {
+    int[] lps = constructLps(needle);
+    int nI = 0;
+    int hI = 0;
+    while (hI < haystack.length()) {
+      if (haystack.charAt(hI) == needle.charAt(nI)) {
+        nI++;
+        hI++;
+        if (nI == needle.length()) {
+          return hI - needle.length();
+        }
+      } else if (nI != 0) {
+        nI = lps[nI - 1];
+      } else {
+        hI++;
+      }
+    }
+    return -1;
+  }
+
+  private int[] constructLps(String needle) {
+    if (needle == null || needle.isEmpty()) {
+      throw new IllegalArgumentException("Needle can not be null or empty");
+    }
+    int[] lps = new int[needle.length()];
+    if (needle.length() == 1) {
+      return lps;
+    }
+    int head = 0;
+    int index = 1;
+    while (index < needle.length()) {
+      if (needle.charAt(head) == needle.charAt(index)) {
+        head++;
+        lps[index] = head;
+        index++;
+      } else if (head == 0) {
+        index++;
+      } else {
+        head = lps[head - 1];
+      }
+    }
+    return lps;
+  }
+}
