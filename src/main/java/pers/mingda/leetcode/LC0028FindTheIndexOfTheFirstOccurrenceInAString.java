@@ -38,10 +38,10 @@ class Solution {
         if (nI == needle.length()) {
           return hI - needle.length();
         }
-      } else if (nI != 0) {
-        nI = lps[nI - 1];
-      } else {
+      } else if (nI == 0) {
         hI++;
+      } else {
+        nI = lps[nI - 1];
       }
     }
     return -1;
