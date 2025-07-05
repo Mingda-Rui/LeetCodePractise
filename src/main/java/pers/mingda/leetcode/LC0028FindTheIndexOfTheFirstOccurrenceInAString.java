@@ -25,7 +25,7 @@ class LC0028Solution {
   }
 }
 
-class Solution {
+class LC0028IterativeSolution {
 
   public int strStr(String haystack, String needle) {
     int[] lps = constructLps(needle);
