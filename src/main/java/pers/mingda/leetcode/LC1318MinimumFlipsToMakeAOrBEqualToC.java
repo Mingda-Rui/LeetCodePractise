@@ -28,3 +28,11 @@ class LC1318Solution {
     }
   }
 }
+
+class LC1318PopCountSolution {
+
+  public int minFlips(int a, int b, int c) {
+    int bitDiff = (a | b) ^ c;
+    return Integer.bitCount(bitDiff) + Integer.bitCount(a & b & bitDiff);
+  }
+}
