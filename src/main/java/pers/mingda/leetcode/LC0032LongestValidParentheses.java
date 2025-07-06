@@ -65,3 +65,35 @@ class LC0032StackSolution {
     return longest;
   }
 }
+
+class LC0032CounterSolution {
+
+  public int longestValidParentheses(String s) {
+    int longest = 0;
+    longest = Math.max(longest, findLongest(s, '('));
+    String reversedS = new StringBuilder(s).reverse().toString();
+    longest = Math.max(longest, findLongest(reversedS, ')'));
+    return longest;
+  }
+
+  private int findLongest(String s, char left) {
+    int leftCount = 0;
+    int rightCount = 0;
+    int longest = 0;
+    for (char current : s.toCharArray()) {
+      if (current == left) {
+        leftCount++;
+      } else {
+        rightCount++;
+      }
+      if (rightCount > leftCount) {
+        leftCount = 0;
+        rightCount = 0;
+      } else if (leftCount == rightCount) {
+        int currentLength = 2 * leftCount;
+        longest = Math.max(longest, currentLength);
+      }
+    }
+    return longest;
+  }
+}
