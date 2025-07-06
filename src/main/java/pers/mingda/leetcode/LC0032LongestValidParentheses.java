@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC0032LongestValidParentheses {}
 
 class LC0032Solution {
@@ -35,5 +37,31 @@ class LC0032Solution {
       return 0;
     }
     return dp[index];
+  }
+}
+
+class LC0032StackSolution {
+
+  public int longestValidParentheses(String s) {
+    Stack<Integer> stack = new Stack<>();
+    stack.push(-1);
+
+    int longest = 0;
+
+    for (int i = 0; i < s.length(); i++) {
+      char current = s.charAt(i);
+      if (current == '(') {
+        stack.push(i);
+      } else {
+        stack.pop();
+        if (stack.isEmpty()) {
+          stack.push(i);
+        } else {
+          longest = Math.max(longest, i - stack.peek());
+        }
+      }
+    }
+
+    return longest;
   }
 }
