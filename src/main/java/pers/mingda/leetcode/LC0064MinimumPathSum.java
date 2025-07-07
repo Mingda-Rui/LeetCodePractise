@@ -21,23 +21,19 @@ class LC0064Solution {
 
   private int findMinPathSum(int[][] grid, int row, int column, int[][] dp) {
     if (row >= grid.length || column >= grid[0].length) {
-      return -1;
+      return Integer.MAX_VALUE;
+    }
+    if (row == grid.length - 1 && column == grid[0].length - 1) {
+      return grid[row][column];
     }
     if (dp[row][column] != -1) {
       return dp[row][column];
     }
-    int val = grid[row][column];
+
     int moveRight = findMinPathSum(grid, row, column + 1, dp);
     int moveDown = findMinPathSum(grid, row + 1, column, dp);
 
-    if (moveRight >= 0 && moveDown >= 0) {
-      val += Math.min(moveRight, moveDown);
-    } else if (moveRight >= 0) {
-      val += moveRight;
-    } else if (moveDown >= 0) {
-      val += moveDown;
-    }
-    dp[row][column] = val;
-    return val;
+    dp[row][column] = grid[row][column] + Math.min(moveRight, moveDown);
+    return dp[row][column];
   }
 }
