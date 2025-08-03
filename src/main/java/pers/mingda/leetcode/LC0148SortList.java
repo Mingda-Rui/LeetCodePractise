@@ -12,7 +12,7 @@ public class LC0148SortList {}
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class LC0148Solution {
 
   public ListNode sortList(ListNode head) {
     if (head == null || head.next == null) {
@@ -55,7 +55,7 @@ class Solution {
   }
 }
 
-class InPlaceSortingSolution {
+class LC0148SolutionInPlaceSort {
 
   public ListNode sortList(ListNode head) {
     int totalLen = countNodes(head);
