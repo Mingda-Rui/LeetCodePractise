@@ -29,3 +29,29 @@ class LC0189Solution {
     nums[index2] = temp;
   }
 }
+
+class LC0189CyclicReplacementsSolution {
+
+  public void rotate(int[] nums, int k) {
+    int temp = -1;
+    int count = 0;
+    for (int i = 0; count < nums.length; i++) {
+      count += cyclicTraverse(nums, k, i);
+    }
+  }
+
+  private int cyclicTraverse(int[] nums, int k, int start) {
+    int currentIndex = start;
+    int prevVal = nums[currentIndex];
+    int count = 0;
+    do {
+      int nextIndex = (currentIndex + k) % nums.length;
+      int tmp = nums[nextIndex];
+      nums[nextIndex] = prevVal;
+      prevVal = tmp;
+      currentIndex = nextIndex;
+      count++;
+    } while (currentIndex != start);
+    return count;
+  }
+}
