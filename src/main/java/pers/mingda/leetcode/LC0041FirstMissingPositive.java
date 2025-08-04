@@ -10,11 +10,7 @@ class LC0041Solution {
     for (int i = 0; i < nums.length; i++) {
       int num = nums[i];
       hasNumsLen = hasNumsLen || num == len;
-      if (num <= 0 || num >= len || num == i) {
-        continue;
-      } else if (num < i) {
-        nums[num] = num;
-      } else if (num != nums[num]) {
+      if (num > 0 && num < len && num != nums[num]) {
         swap(nums, i, num);
         i--;
       }
