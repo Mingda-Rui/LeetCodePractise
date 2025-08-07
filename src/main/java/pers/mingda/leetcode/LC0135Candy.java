@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
+
 public class LC0135Candy {}
 
 class LC0135Solution {
@@ -71,5 +73,34 @@ class LC0135Solution {
       }
     }
     return 0;
+  }
+}
+
+class LC0135TwoArraySolution {
+
+  public int candy(int[] ratings) {
+    int len = ratings.length;
+    int[] leftToRight = new int[ratings.length];
+    int[] rightToLeft = new int[ratings.length];
+    Arrays.fill(leftToRight, 1);
+    Arrays.fill(rightToLeft, 1);
+
+    for (int i = 1; i < ratings.length; i++) {
+      if (ratings[i] > ratings[i - 1]) {
+        leftToRight[i] = leftToRight[i - 1] + 1;
+      }
+    }
+
+    for (int i = len - 2; i >= 0; i--) {
+      if (ratings[i] > ratings[i + 1]) {
+        rightToLeft[i] = rightToLeft[i + 1] + 1;
+      }
+    }
+
+    int sum = 0;
+    for (int i = 0; i < len; i++) {
+      sum += Math.max(leftToRight[i], rightToLeft[i]);
+    }
+    return sum;
   }
 }
