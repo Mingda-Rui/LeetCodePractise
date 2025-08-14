@@ -6,9 +6,7 @@ class LC1427Solution {
 
   public String stringShift(String s, int[][] shift) {
     int combinedShift = calculateShifts(shift);
-    int len = s.length();
-    int normalizedShift = ((combinedShift % len) + len) % len;
-    return shift(s, normalizedShift);
+    return shift(s, combinedShift % s.length());
   }
 
   private int calculateShifts(int[][] shift) {
@@ -26,7 +24,7 @@ class LC1427Solution {
     if (s == null || s.isEmpty() || shiftAmount == 0) {
       return s;
     }
-    int newHead = s.length() - shiftAmount;
+    int newHead = (s.length() - shiftAmount) % s.length();
     return s.substring(newHead) + s.substring(0, newHead);
   }
 }
