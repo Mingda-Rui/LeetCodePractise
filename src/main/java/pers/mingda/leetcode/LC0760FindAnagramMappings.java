@@ -26,3 +26,21 @@ class LC0760Solution {
     return result;
   }
 }
+
+class LC0760SimplifiedSolution {
+
+  public int[] anagramMappings(int[] nums1, int[] nums2) {
+    int[] result = new int[nums1.length];
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums2.length; i++) {
+      int num = nums2[i];
+      map.put(num, i);
+    }
+
+    for (int i = 0; i < nums1.length; i++) {
+      int num = nums1[i];
+      result[i] = map.get(num);
+    }
+    return result;
+  }
+}
