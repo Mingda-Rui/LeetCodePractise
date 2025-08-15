@@ -2,7 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC1165SingleRowKeyboard {}
 
-class Solution {
+class LC1165Solution {
 
   public int calculateTime(String keyboard, String word) {
     int[] letterIndexMap = new int[26];
