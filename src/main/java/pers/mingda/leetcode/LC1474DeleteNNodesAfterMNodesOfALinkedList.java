@@ -16,25 +16,22 @@ class LC1474Solution {
 
   public ListNode deleteNodes(ListNode head, int m, int n) {
     ListNode pointer = head;
+    ListNode prevTail = head;
     int mCount = m;
     int nCount = n;
     while (pointer != null) {
-      while (mCount > 1 && pointer != null) {
+      while (mCount != 0 && pointer != null) {
+        prevTail = pointer;
         pointer = pointer.next;
         mCount--;
       }
-      if (pointer == null) {
-        break;
-      }
-      ListNode prev = pointer;
-      pointer = pointer.next;
       mCount = m;
       while (nCount != 0 && pointer != null) {
         pointer = pointer.next;
         nCount--;
       }
       nCount = n;
-      prev.next = pointer;
+      prevTail.next = pointer;
     }
     return head;
   }
