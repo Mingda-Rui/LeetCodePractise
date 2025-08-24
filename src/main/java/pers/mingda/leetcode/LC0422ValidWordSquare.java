@@ -18,10 +18,7 @@ class LC0422Solution {
 
   private boolean compare(List<String> words, int index) {
     String rowWord = words.get(index);
-    int rowWordLen = rowWord.length();
-    if (words.size() > rowWordLen && words.get(rowWordLen).length() > index) {
-      return false;
-    }
+
     for (int i = 0; i < rowWord.length(); i++) {
       if (words.size() <= i || words.get(i).length() <= index) {
         return false;
