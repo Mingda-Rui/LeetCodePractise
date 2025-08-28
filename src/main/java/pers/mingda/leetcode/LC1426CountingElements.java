@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class LC1426CountingElements {}
 
-class Solution {
+class LC1426Solution {
 
   public int countElements(int[] arr) {
     Set<Integer> nums = new HashSet<>();
