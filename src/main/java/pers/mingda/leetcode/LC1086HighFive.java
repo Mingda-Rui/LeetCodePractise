@@ -1,6 +1,5 @@
 package pers.mingda.leetcode;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -15,7 +14,10 @@ public class LC1086HighFive {
       for (int[] item : items) {
         int id = item[0];
         int score = item[1];
-        topFiveScores.computeIfAbsent(id, i -> initReverseQueue()).add(score);
+        topFiveScores.computeIfAbsent(id, i -> initQueue()).add(score);
+        if (topFiveScores.get(id).size() > 5) {
+          topFiveScores.get(id).remove();
+        }
       }
 
       int[][] result = new int[topFiveScores.size()][2];
@@ -28,8 +30,8 @@ public class LC1086HighFive {
       return result;
     }
 
-    private Queue<Integer> initReverseQueue() {
-      return new PriorityQueue<>(Comparator.reverseOrder());
+    private Queue<Integer> initQueue() {
+      return new PriorityQueue<>();
     }
 
     private int getTopFiveAve(Queue<Integer> scores) {
