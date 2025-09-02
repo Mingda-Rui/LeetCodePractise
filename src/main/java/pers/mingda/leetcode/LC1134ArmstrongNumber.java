@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LC1134ArmstrongNumber {}
 
-class Solution {
+class LC1134Solution {
 
   public boolean isArmstrong(int n) {
     int originalN = n;
