@@ -39,3 +39,31 @@ class LC1134Solution {
     return result;
   }
 }
+
+class LC1134BinarySearchSolution {
+
+  public boolean isMajorityElement(int[] nums, int target) {
+    int len = nums.length;
+    int halfLen = len / 2;
+    int index = binarySearch(nums, target, 0, len);
+    int minimumLastIndex = index + halfLen;
+    return nums[index] == target && minimumLastIndex < len && nums[minimumLastIndex] == target;
+  }
+
+  private int binarySearch(int[] nums, int target, int start, int end) {
+    if (start == end - 1) {
+      return start;
+    }
+    int mid = (start + end) / 2;
+    int prev = mid - 1;
+    int val = nums[mid];
+    if (val > target || (val == target && nums[prev] == target)) {
+      end = mid;
+    } else if (val < target) {
+      start = mid;
+    } else {
+      return mid;
+    }
+    return binarySearch(nums, target, start, end);
+  }
+}
