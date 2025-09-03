@@ -46,23 +46,21 @@ class LC1134BinarySearchSolution {
     int len = nums.length;
     int halfLen = len / 2;
     int index = binarySearch(nums, target, 0, len);
+
     int minimumLastIndex = index + halfLen;
-    return nums[index] == target && minimumLastIndex < len && nums[minimumLastIndex] == target;
+    return minimumLastIndex < len && nums[minimumLastIndex] == target;
   }
 
   private int binarySearch(int[] nums, int target, int start, int end) {
     if (start == end - 1) {
-      return start;
+      return nums[start] == target ? start : start + 1;
     }
     int mid = (start + end) / 2;
-    int prev = mid - 1;
     int val = nums[mid];
-    if (val > target || (val == target && nums[prev] == target)) {
-      end = mid;
-    } else if (val < target) {
+    if (val < target) {
       start = mid;
     } else {
-      return mid;
+      end = mid;
     }
     return binarySearch(nums, target, start, end);
   }
