@@ -19,18 +19,15 @@ class LC0012Solution {
       int placeValue = digit * placeUnitVal;
       if (numToRoman.containsKey(placeValue)) {
         sb.insert(0, numToRoman.get(placeValue));
-      } else if (digit < 5) {
-        while (digit != 0) {
-          sb.insert(0, numToRoman.get(placeUnitVal));
-          digit--;
-        }
-      } else {
-        while (digit != 5) {
-          sb.insert(0, numToRoman.get(placeUnitVal));
-          digit--;
-        }
-        sb.insert(0, numToRoman.get(5 * placeUnitVal));
+        continue;
       }
+      int baseDigit = digit < 5 ? 1 : 5;
+      int counter = digit;
+      while (counter != baseDigit) {
+        sb.insert(0, numToRoman.get(placeUnitVal));
+        counter--;
+      }
+      sb.insert(0, numToRoman.get(baseDigit * placeUnitVal));
     }
 
     return sb.toString();
@@ -47,6 +44,7 @@ class LC0012Solution {
 
   private Map<Integer, String> initNumToRomanMap() {
     Map<Integer, String> numToRoman = new HashMap<>();
+    numToRoman.put(0, "");
     numToRoman.put(1, "I");
     numToRoman.put(4, "IV");
     numToRoman.put(5, "V");
