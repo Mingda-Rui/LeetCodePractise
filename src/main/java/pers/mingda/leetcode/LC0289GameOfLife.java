@@ -5,22 +5,27 @@ public class LC0289GameOfLife {}
 class LC0289Solution {
 
   public void gameOfLife(int[][] board) {
-    int[][] currentStates = new int[board.length][board[0].length];
-    copy2DArray(board, currentStates);
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[0].length; j++) {
-        board[i][j] = nextState(i, j, currentStates);
+        board[i][j] = nextEncodedState(i, j, board);
+      }
+    }
+
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[0].length; j++) {
+        board[i][j] = decodeState(i, j, board);
       }
     }
   }
 
-  private int nextState(int row, int col, int[][] board) {
-    int currentState = getState(row, col, board);
+  private int nextEncodedState(int row, int col, int[][] board) {
+    int currentState = decodeState(row, col, board);
     int neighborsSum = getNeighborsSum(row, col, board);
     if ((neighborsSum == 2 && currentState == 1) || neighborsSum == 3) {
-      return 1;
+      // next: live
+      return currentState == 1 ? 1 : 2;
     }
-    return 0;
+    return currentState == 0 ? 0 : -1;
   }
 
   private int getNeighborsSum(int row, int col, int[][] board) {
@@ -30,26 +35,30 @@ class LC0289Solution {
         if (i == row && j == col) {
           continue;
         }
-        neighborsSum += getState(i, j, board);
+        neighborsSum += decodePrevState(i, j, board);
       }
     }
     return neighborsSum;
   }
 
-  private int getState(int row, int col, int[][] board) {
+  private int decodePrevState(int row, int col, int[][] board) {
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
       return 0;
     }
-    return board[row][col];
+
+    int state = board[row][col];
+    return state == 1 || state == -1 ? 1 : 0;
   }
 
-  private void copy2DArray(int[][] original, int[][] copied) {
-    if (original.length != copied.length || original[0].length != copied[0].length) {
-      return;
+  private int decodeState(int row, int col, int[][] board) {
+    // dead -> live : 2
+    // live -> live : 1
+    // dead -> dead : 0
+    // live -> dead : -1
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+      return 0;
     }
-
-    for (int i = 0; i < original.length; i++) {
-      System.arraycopy(original[i], 0, copied[i], 0, original[0].length);
-    }
+    int state = board[row][col];
+    return state > 0 ? 1 : 0;
   }
 }
