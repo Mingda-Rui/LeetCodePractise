@@ -4,6 +4,14 @@ public class LC0289GameOfLife {}
 
 class LC0289Solution {
 
+  private static final int DEAD = 0;
+  private static final int LIVE = 1;
+
+  private static final int DEAD_TO_LIVE = 2;
+  private static final int LIVE_TO_LIVE = LIVE;
+  private static final int DEAD_TO_DEAD = DEAD;
+  private static final int LIVE_TO_DEAD = -1;
+
   public void gameOfLife(int[][] board) {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[0].length; j++) {
@@ -21,11 +29,12 @@ class LC0289Solution {
   private int nextEncodedState(int row, int col, int[][] board) {
     int currentState = decodeState(row, col, board);
     int neighborsSum = getNeighborsSum(row, col, board);
-    if ((neighborsSum == 2 && currentState == 1) || neighborsSum == 3) {
+    if ((neighborsSum == 2 && currentState == LIVE) || neighborsSum == 3) {
       // next: live
-      return currentState == 1 ? 1 : 2;
+      return currentState == LIVE ? LIVE_TO_LIVE : DEAD_TO_LIVE;
     }
-    return currentState == 0 ? 0 : -1;
+    // next: dead
+    return currentState == DEAD ? DEAD_TO_DEAD : LIVE_TO_DEAD;
   }
 
   private int getNeighborsSum(int row, int col, int[][] board) {
@@ -42,23 +51,23 @@ class LC0289Solution {
   }
 
   private int decodePrevState(int row, int col, int[][] board) {
-    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
-      return 0;
+    if (outOfBounds(row, col, board)) {
+      return DEAD;
     }
 
     int state = board[row][col];
-    return state == 1 || state == -1 ? 1 : 0;
+    return state == LIVE_TO_LIVE || state == LIVE_TO_DEAD ? LIVE : DEAD;
   }
 
   private int decodeState(int row, int col, int[][] board) {
-    // dead -> live : 2
-    // live -> live : 1
-    // dead -> dead : 0
-    // live -> dead : -1
-    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
-      return 0;
+    if (outOfBounds(row, col, board)) {
+      return DEAD;
     }
     int state = board[row][col];
-    return state > 0 ? 1 : 0;
+    return state == LIVE_TO_LIVE || state == DEAD_TO_LIVE ? LIVE : DEAD;
+  }
+
+  private boolean outOfBounds(int row, int col, int[][] board) {
+    return row < 0 || row >= board.length || col < 0 || col >= board[0].length;
   }
 }
