@@ -43,9 +43,8 @@ class LC0433Solution {
 
   private Map<String, Set<String>> buildMutationMap(String startGene, String[] bank) {
     Map<String, Set<String>> map = new HashMap<>();
-    Set<String> geneBank = new HashSet<>();
+    Set<String> geneBank = new HashSet<>(Arrays.asList(bank));
     geneBank.add(startGene);
-    geneBank.addAll(Arrays.asList(bank));
     for (String gene : geneBank) {
       if (map.containsKey(gene)) {
         continue;
