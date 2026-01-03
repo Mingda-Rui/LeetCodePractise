@@ -14,22 +14,12 @@ class LC0502Solution {
     // k! = k * (k - 1) * ... * 1
     LinkedList<Integer> rankedByProfits = rankByProfits(profits);
     while (k != 0) {
-      int prevW = w;
-
-      Iterator<Integer> it = rankedByProfits.iterator();
-      while (it.hasNext()) {
-        int p = it.next();
-        if (!isEnoughCapitalForProject(p, w, capital)) {
-          continue;
-        }
-        it.remove();
-        w += profits[p];
-        k--;
+      int p = findNextMostProfitableProjectByCapital(w, rankedByProfits, capital);
+      k--;
+      if (p == -1 || profits[p] == 0) {
         break;
       }
-      if (prevW == w) {
-        break;
-      }
+      w += profits[p];
     }
     return w;
   }
@@ -40,6 +30,23 @@ class LC0502Solution {
       .boxed()
       .sorted(profitComparator.reversed())
       .collect(Collectors.toCollection(LinkedList::new));
+  }
+
+  private int findNextMostProfitableProjectByCapital(
+    int w,
+    LinkedList<Integer> rankedByProfits,
+    int[] capital
+  ) {
+    Iterator<Integer> it = rankedByProfits.iterator();
+    while (it.hasNext()) {
+      int p = it.next();
+      if (!isEnoughCapitalForProject(p, w, capital)) {
+        continue;
+      }
+      it.remove();
+      return p;
+    }
+    return -1;
   }
 
   private boolean isEnoughCapitalForProject(int p, int w, int[] capital) {
