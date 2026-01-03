@@ -3,6 +3,9 @@ package pers.mingda.leetcode;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -47,6 +50,46 @@ class LC0502Solution {
       return p;
     }
     return -1;
+  }
+
+  private boolean isEnoughCapitalForProject(int p, int w, int[] capital) {
+    return w >= capital[p];
+  }
+}
+
+class LC0502GreedySolution {
+
+  public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+    List<Integer> sortedByCapital = sortByCapital(capital);
+    int index = 0;
+
+    Comparator<Integer> profitsComparator = Comparator.comparingInt(p -> profits[p]);
+    Queue<Integer> sortedByProfitsDescending = new PriorityQueue<>(profitsComparator.reversed());
+
+    while ((index != sortedByCapital.size() || !sortedByProfitsDescending.isEmpty()) && k != 0) {
+      if (
+        index != sortedByCapital.size() &&
+        isEnoughCapitalForProject(sortedByCapital.get(index), w, capital)
+      ) {
+        int p = sortedByCapital.get(index);
+        sortedByProfitsDescending.add(p);
+        index++;
+      } else if (sortedByProfitsDescending.isEmpty()) {
+        return w;
+      } else {
+        int next = sortedByProfitsDescending.remove();
+        w += profits[next];
+        k--;
+      }
+    }
+    return w;
+  }
+
+  private List<Integer> sortByCapital(int[] capital) {
+    return IntStream.range(0, capital.length)
+      .boxed()
+      .sorted(Comparator.comparingInt(p -> capital[p]))
+      .toList();
   }
 
   private boolean isEnoughCapitalForProject(int p, int w, int[] capital) {
