@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LC0120Triangle {}
 
-class Solution {
+class LC0120Solution {
 
   public int minimumTotal(List<List<Integer>> triangle) {
     int[] memo = new int[triangle.size()];
