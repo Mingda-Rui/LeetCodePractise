@@ -33,3 +33,30 @@ class LC0918Solution {
     return Math.max(max, circularMax);
   }
 }
+
+class LC0918KadaneSolution {
+
+  public int maxSubarraySumCircular(int[] nums) {
+    int len = nums.length;
+
+    int max = Integer.MIN_VALUE;
+    int currSum = 0;
+
+    int min = Integer.MAX_VALUE;
+    int currSumForMin = 0;
+    int sum = 0;
+    for (int num : nums) {
+      currSum = Math.max(currSum + num, num);
+      max = Math.max(max, currSum);
+
+      currSumForMin = Math.min(currSumForMin + num, num);
+      min = Math.min(min, currSumForMin);
+
+      sum += num;
+    }
+    if (sum == min) {
+      return max;
+    }
+    return Math.max(max, sum - min);
+  }
+}
