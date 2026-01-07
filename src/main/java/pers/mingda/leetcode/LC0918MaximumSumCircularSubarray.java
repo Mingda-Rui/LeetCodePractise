@@ -16,7 +16,6 @@ class LC0918Solution {
     }
 
     int leftSum = 0;
-    int leftMax = Integer.MIN_VALUE;
     int circularMax = Integer.MIN_VALUE;
 
     int currSum = 0;
@@ -24,8 +23,7 @@ class LC0918Solution {
     for (int i = 0; i < len; i++) {
       if (i < len - 2) {
         leftSum += nums[i];
-        leftMax = Math.max(leftMax, leftSum);
-        circularMax = Math.max(circularMax, leftMax + subarraySumStartBy[i + 2]);
+        circularMax = Math.max(circularMax, leftSum + subarraySumStartBy[i + 2]);
       }
 
       currSum = Math.max(currSum + nums[i], nums[i]);
