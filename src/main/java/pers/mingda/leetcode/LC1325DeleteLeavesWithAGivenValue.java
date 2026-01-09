@@ -20,7 +20,7 @@ public class LC1325DeleteLeavesWithAGivenValue {}
 class LC1325Solution {
 
   public TreeNode removeLeafNodes(TreeNode root, int target) {
-    if (root == null || shouldRemove(root, target)) {
+    if (root == null) {
       return null;
     }
     root.left = removeLeafNodes(root.left, target);
