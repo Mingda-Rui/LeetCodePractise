@@ -31,3 +31,28 @@ class LC0701Solution {
     return root;
   }
 }
+
+class LC0701IterativeSolution {
+
+  public TreeNode insertIntoBST(TreeNode root, int val) {
+    TreeNode node = root;
+
+    // TODO: revisit the exist logic
+    while (node != null) {
+      if (node.val > val) {
+        if (node.left == null) {
+          node.left = new TreeNode(val);
+          return root;
+        }
+        node = node.left;
+      } else {
+        if (node.right == null) {
+          node.right = new TreeNode(val);
+          return root;
+        }
+        node = node.right;
+      }
+    }
+    return new TreeNode(val);
+  }
+}
