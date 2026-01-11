@@ -48,3 +48,38 @@ class LC0144Solution {
     return result;
   }
 }
+
+class LC0144MorrisAlgorithmSolution {
+
+  public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+
+    TreeNode node = root;
+    while (node != null) {
+      if (node.left == null) {
+        result.add(node.val);
+        node = node.right;
+      } else {
+        TreeNode predecessor = findRightMostPredecessor(node);
+        if (predecessor.right == null) {
+          result.add(node.val);
+          predecessor.right = node;
+          node = node.left;
+        } else {
+          predecessor.right = null;
+          node = node.right;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  private TreeNode findRightMostPredecessor(TreeNode node) {
+    TreeNode predecessor = node.left;
+    while (predecessor.right != null && predecessor.right != node) {
+      predecessor = predecessor.right;
+    }
+    return predecessor;
+  }
+}
