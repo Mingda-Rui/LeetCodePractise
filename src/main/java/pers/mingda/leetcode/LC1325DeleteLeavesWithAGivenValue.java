@@ -53,8 +53,20 @@ class LC1325IterativeSolution {
       } else {
         node = stack.peek();
         if (node.right == null || node.right == prev) {
-          deleteLeaves(node, target);
           stack.pop();
+
+          if (isLeaf(node) && node.val == target) {
+            if (stack.empty()) {
+              return null;
+            }
+            TreeNode parent = stack.peek();
+            if (parent.left == node) {
+              parent.left = null;
+            } else {
+              parent.right = null;
+            }
+          }
+
           prev = node;
           node = null;
         } else {
@@ -63,23 +75,7 @@ class LC1325IterativeSolution {
       }
     }
 
-    if (isLeaf(root) && root.val == target) {
-      return null;
-    }
-
     return root;
-  }
-
-  private void deleteLeaves(TreeNode node, int target) {
-    if (node == null) {
-      return;
-    }
-    if (isLeaf(node.left) && node.left.val == target) {
-      node.left = null;
-    }
-    if (isLeaf(node.right) && node.right.val == target) {
-      node.right = null;
-    }
   }
 
   private boolean isLeaf(TreeNode node) {
