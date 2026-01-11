@@ -25,25 +25,18 @@ class LC0094IterativeSolution {
 
   public List<Integer> inorderTraversal(TreeNode root) {
     List<Integer> result = new ArrayList<>();
-    if (root == null) {
-      return result;
-    }
 
     TreeNode node = root;
     Stack<TreeNode> stack = new Stack<>();
 
     while (node != null || !stack.empty()) {
-      while (node.left != null) {
+      while (node != null) {
         stack.push(node);
         node = node.left;
       }
+      node = stack.pop();
       result.add(node.val);
       node = node.right;
-      while (node == null && !stack.empty()) {
-        node = stack.pop();
-        result.add(node.val);
-        node = node.right;
-      }
     }
 
     return result;
