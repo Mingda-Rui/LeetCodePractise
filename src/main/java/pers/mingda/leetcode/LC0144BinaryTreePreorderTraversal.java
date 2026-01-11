@@ -21,7 +21,7 @@ public class LC0144BinaryTreePreorderTraversal {}
  *     }
  * }
  */
-class LC0144Solution {
+class LC0144SingleWhileLoopSolution {
 
   public List<Integer> preorderTraversal(TreeNode root) {
     List<Integer> result = new ArrayList<>();
@@ -43,6 +43,30 @@ class LC0144Solution {
       if (node.left != null) {
         stack.push(node.left);
       }
+    }
+
+    return result;
+  }
+}
+
+class LC0144Solution {
+
+  public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+
+    Stack<TreeNode> stack = new Stack<>();
+
+    TreeNode node = root;
+
+    while (node != null || !stack.empty()) {
+      while (node != null) {
+        result.add(node.val);
+        stack.push(node);
+        node = node.left;
+      }
+
+      node = stack.pop();
+      node = node.right;
     }
 
     return result;
