@@ -26,24 +26,23 @@ class LC0144Solution {
   public List<Integer> preorderTraversal(TreeNode root) {
     List<Integer> result = new ArrayList<>();
 
+    if (root == null) {
+      return result;
+    }
+
     Stack<TreeNode> stack = new Stack<>();
-    TreeNode node = root;
+    stack.push(root);
 
-    while (node != null || !stack.empty()) {
-      if (node == null) {
-        node = stack.pop();
-      }
-
-      while (node.left != null) {
-        result.add(node.val);
-        if (node.right != null) {
-          stack.push(node.right);
-        }
-        node = node.left;
-      }
-
+    while (!stack.empty()) {
+      TreeNode node = stack.pop();
       result.add(node.val);
-      node = node.right;
+
+      if (node.right != null) {
+        stack.push(node.right);
+      }
+      if (node.left != null) {
+        stack.push(node.left);
+      }
     }
 
     return result;
