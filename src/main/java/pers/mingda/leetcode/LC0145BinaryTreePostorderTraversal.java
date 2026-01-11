@@ -57,3 +57,37 @@ class LC0145IterativeNaturalOrderSolution {
     return result;
   }
 }
+
+class LC0145MorrisSolution {
+
+  public List<Integer> postorderTraversal(TreeNode root) {
+    List<Integer> result = new LinkedList<>();
+    TreeNode node = root;
+    while (node != null) {
+      if (node.right != null) {
+        TreeNode leftMostPred = findLeftMostPred(node);
+        if (leftMostPred.left == node) {
+          leftMostPred.left = null;
+          node = node.left;
+        } else {
+          result.addFirst(node.val);
+          leftMostPred.left = node;
+          node = node.right;
+        }
+      } else {
+        result.addFirst(node.val);
+        node = node.left;
+      }
+    }
+    return result;
+  }
+
+  private TreeNode findLeftMostPred(TreeNode root) {
+    // can always check root.right == null
+    TreeNode node = root.right;
+    while (node.left != null && node.left != root) {
+      node = node.left;
+    }
+    return node;
+  }
+}
