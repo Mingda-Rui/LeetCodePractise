@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC1325DeleteLeavesWithAGivenValue {}
 
 /**
@@ -30,6 +32,54 @@ class LC1325Solution {
 
   private boolean shouldRemove(TreeNode node, int target) {
     return isLeaf(node) && node.val == target;
+  }
+
+  private boolean isLeaf(TreeNode node) {
+    return node != null && node.left == null && node.right == null;
+  }
+}
+
+class LC1325IterativeSolution {
+
+  public TreeNode removeLeafNodes(TreeNode root, int target) {
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode node = root;
+    TreeNode prev = null;
+
+    while (node != null || !stack.empty()) {
+      if (node != null) {
+        stack.push(node);
+        node = node.left;
+      } else {
+        node = stack.peek();
+        if (node.right == null || node.right == prev) {
+          deleteLeaves(node, target);
+          stack.pop();
+          prev = node;
+          node = null;
+        } else {
+          node = node.right;
+        }
+      }
+    }
+
+    if (isLeaf(root) && root.val == target) {
+      return null;
+    }
+
+    return root;
+  }
+
+  private void deleteLeaves(TreeNode node, int target) {
+    if (node == null) {
+      return;
+    }
+    if (isLeaf(node.left) && node.left.val == target) {
+      node.left = null;
+    }
+    if (isLeaf(node.right) && node.right.val == target) {
+      node.right = null;
+    }
   }
 
   private boolean isLeaf(TreeNode node) {
