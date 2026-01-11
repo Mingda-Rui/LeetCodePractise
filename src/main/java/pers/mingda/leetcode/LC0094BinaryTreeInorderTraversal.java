@@ -42,3 +42,36 @@ class LC0094IterativeSolution {
     return result;
   }
 }
+
+class LC0094MorrisAlgorithmSolution {
+
+  public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    TreeNode node = root;
+    while (node != null) {
+      if (node.left == null) {
+        result.add(node.val);
+        node = node.right;
+      } else {
+        TreeNode predecessor = findRightMostPred(node);
+        if (predecessor.right == null) {
+          predecessor.right = node;
+          node = node.left;
+        } else {
+          predecessor.right = null;
+          result.add(node.val);
+          node = node.right;
+        }
+      }
+    }
+    return result;
+  }
+
+  private TreeNode findRightMostPred(TreeNode root) {
+    TreeNode pred = root.left;
+    while (pred.right != null && pred.right != root) {
+      pred = pred.right;
+    }
+    return pred;
+  }
+}
