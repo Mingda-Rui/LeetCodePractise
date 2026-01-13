@@ -32,51 +32,33 @@ class LC0877Solution {
       aliceRecord[leftPile][rightPile] = currentStones;
     }
 
-    if (aliceTurn) {
-      int leftPiles = piles[leftPile];
-      int leftStones = stoneGame(
-        piles,
-        leftPile + 1,
-        rightPile,
-        totalStones,
-        currentStones + leftPiles,
-        false,
-        aliceRecord
-      );
-
-      int rightPiles = piles[rightPile];
-      int rightStones = stoneGame(
-        piles,
-        leftPile,
-        rightPile - 1,
-        totalStones,
-        currentStones + rightPiles,
-        false,
-        aliceRecord
-      );
-      aliceRecord[leftPile][rightPile] = Math.max(leftStones, rightStones);
-      return aliceRecord[leftPile][rightPile];
-    } else {
-      int leftStones = stoneGame(
-        piles,
-        leftPile + 1,
-        rightPile,
-        totalStones,
-        currentStones,
-        true,
-        aliceRecord
-      );
-      int rightStones = stoneGame(
-        piles,
-        leftPile,
-        rightPile,
-        totalStones,
-        currentStones,
-        true,
-        aliceRecord
-      );
-      aliceRecord[leftPile][rightPile] = Math.max(leftStones, rightStones);
-      return aliceRecord[leftPile][rightPile];
+    int leftPiles = piles[leftPile];
+    int leftStones = stoneGame(
+      piles,
+      leftPile + 1,
+      rightPile,
+      totalStones,
+      aliceTurn ? currentStones + leftPiles : currentStones,
+      !aliceTurn,
+      aliceRecord
+    );
+    if (leftStones > totalStones / 2) {
+      return leftStones;
     }
+    int rightPiles = piles[rightPile];
+    int rightStones = stoneGame(
+      piles,
+      leftPile,
+      rightPile - 1,
+      totalStones,
+      aliceTurn ? currentStones + rightPiles : currentStones,
+      !aliceTurn,
+      aliceRecord
+    );
+    int maxStone = Math.max(leftStones, rightStones);
+    if (aliceTurn) {
+      aliceRecord[leftPile][rightPile] = maxStone;
+    }
+    return maxStone;
   }
 }
