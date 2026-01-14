@@ -7,26 +7,15 @@ class LC0978Solution {
   public int maxTurbulenceSize(int[] arr) {
     int max = 1;
     int head = 0;
-    int tail = 1;
-    int isGreater = 0;
-    while (tail < arr.length) {
-      if (head == tail - 1) {
-        if (arr[head] == arr[tail]) {
-          head++;
-        } else {
-          isGreater = arr[head] > arr[tail] ? 1 : -1;
-        }
-        tail++;
-      } else if (
-        (isGreater == 1 && arr[tail - 1] < arr[tail]) ||
-        (isGreater == -1 && arr[tail - 1] > arr[tail])
-      ) {
-        tail++;
-        isGreater *= -1;
-      } else {
-        head = tail - 1;
+
+    for (int tail = 1; tail < arr.length; tail++) {
+      int c = Integer.compare(arr[tail - 1], arr[tail]);
+      if (c == 0) {
+        head = tail;
+      } else if (tail == arr.length - 1 || c * Integer.compare(arr[tail], arr[tail + 1]) != -1) {
+        max = Math.max(max, tail - head + 1);
+        head = tail;
       }
-      max = Math.max(max, tail - head);
     }
     return max;
   }
