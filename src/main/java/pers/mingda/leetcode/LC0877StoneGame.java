@@ -6,46 +6,31 @@ class LC0877Solution {
 
   public boolean stoneGame(int[] piles) {
     int[][] record = new int[piles.length][piles.length];
-    int maxStone = stoneGame(piles, 0, piles.length - 1, 0, record);
-    return maxStone > 0;
+    return stoneGame(piles, 0, piles.length - 1, record) > 0;
   }
 
-  private int stoneGame(
-    int[] piles,
-    int leftPile,
-    int rightPile,
-    int currentStones,
-    int[][] record
-  ) {
-    if (leftPile > rightPile) {
-      return currentStones;
+  private int stoneGame(int[] piles, int leftPile, int rightPile, int[][] record) {
+    boolean isAlice = (rightPile - leftPile) % 2 == 1;
+    if (leftPile == rightPile) {
+      return isAlice ? piles[leftPile] : -piles[leftPile];
     }
     if (record[leftPile][rightPile] != 0) {
       return record[leftPile][rightPile];
     }
 
-    boolean isAlice = (rightPile - leftPile) % 2 == 0;
-    int leftPiles = piles[leftPile];
-    int leftStones = stoneGame(
-      piles,
-      leftPile + 1,
-      rightPile,
-      isAlice ? currentStones + leftPiles : currentStones - leftPiles,
-      record
-    );
+    int leftStones = stoneGame(piles, leftPile + 1, rightPile, record);
+    int rightStones = stoneGame(piles, leftPile, rightPile - 1, record);
 
-    int rightPiles = piles[rightPile];
-    int rightStones = stoneGame(
-      piles,
-      leftPile,
-      rightPile - 1,
-      isAlice ? currentStones + rightPiles : currentStones - rightPiles,
-      record
-    );
     if (isAlice) {
-      record[leftPile][rightPile] = Math.max(leftStones, rightStones);
+      record[leftPile][rightPile] = Math.max(
+        piles[leftPile] + leftStones,
+        piles[rightPile] + rightStones
+      );
     } else {
-      record[leftPile][rightPile] = Math.min(leftStones, rightStones);
+      record[leftPile][rightPile] = Math.min(
+        -piles[leftPile] + leftStones,
+        -piles[rightPile] + rightStones
+      );
     }
 
     return record[leftPile][rightPile];
