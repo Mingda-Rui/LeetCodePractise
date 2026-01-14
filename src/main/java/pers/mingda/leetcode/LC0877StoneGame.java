@@ -42,8 +42,12 @@ class LC0877Solution {
       isAlice ? currentStones + rightPiles : currentStones - rightPiles,
       record
     );
-    int maxStone = Math.max(leftStones, rightStones);
-    record[leftPile][rightPile] = maxStone;
-    return maxStone;
+    if (isAlice) {
+      record[leftPile][rightPile] = Math.max(leftStones, rightStones);
+    } else {
+      record[leftPile][rightPile] = Math.min(leftStones, rightStones);
+    }
+
+    return record[leftPile][rightPile];
   }
 }
