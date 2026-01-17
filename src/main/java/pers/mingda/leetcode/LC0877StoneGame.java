@@ -37,7 +37,7 @@ class LC0877Solution {
   }
 }
 
-class Solution {
+class LC0877IterativeSolution {
 
   public boolean stoneGame(int[] piles) {
     int[][] record = new int[piles.length][piles.length];
