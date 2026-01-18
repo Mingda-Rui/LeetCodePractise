@@ -6,17 +6,9 @@ class Solution {
 
   public int trailingZeroes(int n) {
     int count = 0;
-    for (int i = 5; i <= n; i += 5) {
-      count += countPowerOfFive(i);
-    }
-    return count;
-  }
-
-  private int countPowerOfFive(int num) {
-    int count = 0;
-    while (num % 5 == 0) {
-      count++;
-      num /= 5;
+    while (n > 0) {
+      count += n / 5;
+      n /= 5;
     }
     return count;
   }
