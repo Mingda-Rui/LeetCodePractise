@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LC0137SingleNumberII {}
 
-class Solution {
+class LC0137Solution {
 
   public int singleNumber(int[] nums) {
     Map<Integer, Integer> counter = new HashMap<>();
