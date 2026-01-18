@@ -7,11 +7,14 @@ public class LC1011CapacityToShipPackagesWithinDDays {}
 class LC1011Solution {
 
   public int shipWithinDays(int[] weights, int days) {
-    int sumWeight = Arrays.stream(weights).sum();
-    int minWeight = sumWeight / days;
-    for (int i = minWeight; i < sumWeight; i++) {
-      if (canShipWithinDays(weights, i, days)) {
-        return i;
+    int maxWeight = Arrays.stream(weights).sum();
+    int minWeight = maxWeight / days;
+    while (minWeight < maxWeight) {
+      int mid = (minWeight + maxWeight) / 2;
+      if (canShipWithinDays(weights, mid, days)) {
+        maxWeight = mid;
+      } else {
+        minWeight = mid + 1;
       }
     }
     return minWeight;
