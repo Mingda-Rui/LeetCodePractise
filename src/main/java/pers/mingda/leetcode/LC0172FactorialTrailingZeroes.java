@@ -2,7 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC0172FactorialTrailingZeroes {}
 
-class Solution {
+class LC0172Solution {
 
   public int trailingZeroes(int n) {
     int count = 0;
