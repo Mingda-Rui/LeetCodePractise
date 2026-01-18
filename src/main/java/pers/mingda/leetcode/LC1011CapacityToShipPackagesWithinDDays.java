@@ -18,25 +18,28 @@ class LC1011Solution {
   }
 
   private boolean canShipWithinDays(int[] weights, int capacity, int days) {
-    int todayWeights = 0;
-    for (int i = 0; i < weights.length; i++) {
-      if (days == 0 || weights[i] > capacity) {
+    int index = 0;
+    while (days > 0) {
+      int nextIndex = findBatch(weights, index, capacity);
+      if (nextIndex == index) {
         return false;
       }
-      if (todayWeights + weights[i] < capacity) {
-        todayWeights += weights[i];
-      } else if (todayWeights + weights[i] > capacity) {
-        days--;
-        todayWeights = weights[i];
-      } else {
-        days--;
-        todayWeights = 0;
+      if (nextIndex >= weights.length) {
+        return true;
       }
-
-      if (i == weights.length - 1 && days == 0 && todayWeights != 0) {
-        return false;
-      }
+      index = nextIndex;
+      days--;
     }
-    return true;
+
+    return false;
+  }
+
+  private int findBatch(int[] weights, int index, int capacity) {
+    int load = 0;
+    while (index < weights.length && load + weights[index] <= capacity) {
+      load += weights[index];
+      index++;
+    }
+    return index;
   }
 }
