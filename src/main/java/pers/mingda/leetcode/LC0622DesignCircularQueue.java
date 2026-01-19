@@ -68,14 +68,12 @@ class LC0622MyCircularQueueArraySolution {
   private final int[] array;
   private final int capacity;
   private int head;
-  private int tail;
   private int size;
 
   public LC0622MyCircularQueueArraySolution(int k) {
     this.array = new int[k];
     this.capacity = k;
     this.head = 0;
-    this.tail = 0;
     this.size = 0;
   }
 
@@ -83,14 +81,9 @@ class LC0622MyCircularQueueArraySolution {
     if (isFull()) {
       return false;
     }
-    if (isEmpty()) {
-      head = 0;
-      tail = 0;
-    } else {
-      tail = (tail + 1) % capacity;
-    }
-    array[tail] = value;
     size++;
+    int tail = getTail();
+    array[tail] = value;
     return true;
   }
 
@@ -114,6 +107,7 @@ class LC0622MyCircularQueueArraySolution {
     if (isEmpty()) {
       return -1;
     }
+    int tail = getTail();
     return array[tail];
   }
 
@@ -123,5 +117,9 @@ class LC0622MyCircularQueueArraySolution {
 
   public boolean isFull() {
     return size == capacity;
+  }
+
+  private int getTail() {
+    return (head + size - 1) % capacity;
   }
 }
