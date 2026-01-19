@@ -1,10 +1,8 @@
 package pers.mingda.leetcode;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LC0460LfuCache {}
 
@@ -18,15 +16,17 @@ public class LC0460LfuCache {}
 class LC0460LfuCacheSolution {
 
   private final int capacity;
+  private int leastFreq;
   private final Map<Integer, Integer> cache;
   private final Map<Integer, Integer> keyToFreq;
-  private final TreeMap<Integer, LinkedList<Integer>> freqToKey;
+  private final Map<Integer, LinkedHashSet<Integer>> freqToKey;
 
   public LC0460LfuCacheSolution(int capacity) {
     this.capacity = capacity;
+    this.leastFreq = 0;
     this.cache = new HashMap<>();
     this.keyToFreq = new HashMap<>();
-    this.freqToKey = new TreeMap<>();
+    this.freqToKey = new HashMap<>();
   }
 
   public int get(int key) {
@@ -51,16 +51,19 @@ class LC0460LfuCacheSolution {
     keyToFreq.put(key, newFreq);
 
     if (lastFreq > 0) {
-      freqToKey.get(lastFreq).remove((Integer) key);
+      freqToKey.get(lastFreq).remove(key);
       if (freqToKey.get(lastFreq).isEmpty()) {
         freqToKey.remove(lastFreq);
+        if (lastFreq == leastFreq) {
+          leastFreq++;
+        }
       }
+    } else {
+      leastFreq = newFreq;
     }
 
-    if (!freqToKey.containsKey(newFreq)) {
-      freqToKey.put(newFreq, new LinkedList<>());
-    }
-    freqToKey.get(newFreq).add(key);
+    LinkedHashSet<Integer> keys = freqToKey.computeIfAbsent(newFreq, n -> new LinkedHashSet<>());
+    keys.add(key);
   }
 
   private boolean isFull() {
@@ -68,13 +71,12 @@ class LC0460LfuCacheSolution {
   }
 
   private void removeLeastFreqUsed() {
-    int leastFreq = freqToKey.firstKey();
-    List<Integer> keys = freqToKey.get(leastFreq);
+    LinkedHashSet<Integer> keys = freqToKey.get(leastFreq);
     int key = keys.getFirst();
     if (freqToKey.get(leastFreq).size() == 1) {
       freqToKey.remove(leastFreq);
     } else {
-      freqToKey.get(leastFreq).remove((Integer) key);
+      freqToKey.get(leastFreq).remove(key);
     }
     keyToFreq.remove(key);
     cache.remove(key);
