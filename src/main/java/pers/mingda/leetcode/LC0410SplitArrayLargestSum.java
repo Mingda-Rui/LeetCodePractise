@@ -72,23 +72,22 @@ class LC0410TabulationSolution {
   }
 }
 
-class Solution {
+class LC0410BinarySearchSolution {
 
   public int splitArray(int[] nums, int k) {
-    int[] prefixSum = new int[nums.length];
-    for (int i = 0; i < nums.length; i++) {
-      prefixSum[i] = (i == 0 ? 0 : prefixSum[i - 1]) + nums[i];
+    int maxNum = 0;
+    int sum = 0;
+    for (int num : nums) {
+      sum += num;
+      maxNum = Math.max(maxNum, num);
     }
-    return findLargestSum(k, prefixSum);
+    return findLargestSum(nums, k, maxNum, sum);
   }
 
-  private int findLargestSum(int k, int[] prefixSum) {
-    int len = prefixSum.length;
-    int head = 0;
-    int tail = prefixSum[len - 1];
+  private int findLargestSum(int[] nums, int k, int head, int tail) {
     while (head < tail) {
       int mid = (head + tail) / 2;
-      if (canSplitWork(k, mid, prefixSum)) {
+      if (canSplit(nums, k, mid)) {
         tail = mid;
       } else {
         head = mid + 1;
@@ -97,18 +96,18 @@ class Solution {
     return head;
   }
 
-  private boolean canSplitWork(int k, int splitSize, int[] prefixSum) {
+  private boolean canSplit(int[] nums, int k, int splitSize) {
     int index = 0;
-    int prevIndex = -1;
-    while (index < prefixSum.length && k > 0) {
-      int size = prefixSum[index] - (prevIndex == -1 ? 0 : prefixSum[prevIndex]);
-      if (size <= splitSize) {
-        index++;
-      } else {
-        prevIndex = index - 1;
+    int size = 0;
+    while (index < nums.length && k > 0) {
+      size += nums[index];
+      if (size > splitSize) {
+        size = 0;
         k--;
+      } else {
+        index++;
       }
     }
-    return index == prefixSum.length;
+    return index == nums.length;
   }
 }
