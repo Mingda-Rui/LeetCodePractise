@@ -71,3 +71,44 @@ class LC0410TabulationSolution {
     return memo[k][0];
   }
 }
+
+class Solution {
+
+  public int splitArray(int[] nums, int k) {
+    int[] prefixSum = new int[nums.length];
+    for (int i = 0; i < nums.length; i++) {
+      prefixSum[i] = (i == 0 ? 0 : prefixSum[i - 1]) + nums[i];
+    }
+    return findLargestSum(k, prefixSum);
+  }
+
+  private int findLargestSum(int k, int[] prefixSum) {
+    int len = prefixSum.length;
+    int head = 0;
+    int tail = prefixSum[len - 1];
+    while (head < tail) {
+      int mid = (head + tail) / 2;
+      if (canSplitWork(k, mid, prefixSum)) {
+        tail = mid;
+      } else {
+        head = mid + 1;
+      }
+    }
+    return head;
+  }
+
+  private boolean canSplitWork(int k, int splitSize, int[] prefixSum) {
+    int index = 0;
+    int prevIndex = -1;
+    while (index < prefixSum.length && k > 0) {
+      int size = prefixSum[index] - (prevIndex == -1 ? 0 : prefixSum[prevIndex]);
+      if (size <= splitSize) {
+        index++;
+      } else {
+        prevIndex = index - 1;
+        k--;
+      }
+    }
+    return index == prefixSum.length;
+  }
+}
