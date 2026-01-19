@@ -37,3 +37,37 @@ class LC0410Solution {
     return min;
   }
 }
+
+class LC0410TabulationSolution {
+
+  public int splitArray(int[] nums, int k) {
+    int len = nums.length;
+    int[] prefixSum = new int[len];
+    for (int i = 0; i < len; i++) {
+      prefixSum[i] = (i == 0 ? 0 : prefixSum[i - 1]) + nums[i];
+    }
+
+    int[][] memo = new int[k + 1][len];
+    for (int i = 1; i <= k; i++) {
+      for (int j = 0; j <= len - i; j++) {
+        int minimumLargestSum = Integer.MAX_VALUE;
+        if (i == 1) {
+          memo[i][j] = prefixSum[len - 1] - (j == 0 ? 0 : prefixSum[j - 1]);
+          continue;
+        }
+
+        for (int z = j; z <= len - i; z++) {
+          int leftMostSum = prefixSum[z] - (j == 0 ? 0 : prefixSum[j - 1]);
+          int largestSum = Math.max(leftMostSum, memo[i - 1][z + 1]);
+          minimumLargestSum = Math.min(minimumLargestSum, largestSum);
+          if (leftMostSum >= largestSum) {
+            break;
+          }
+        }
+
+        memo[i][j] = minimumLargestSum;
+      }
+    }
+    return memo[k][0];
+  }
+}
