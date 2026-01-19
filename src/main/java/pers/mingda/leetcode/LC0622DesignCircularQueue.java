@@ -4,6 +4,17 @@ import java.util.LinkedList;
 
 public class LC0622DesignCircularQueue {}
 
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */
+
 class LC0622MyCircularQueueLinkedListSolution {
 
   private final LinkedList<Integer> list;
@@ -51,13 +62,66 @@ class LC0622MyCircularQueueLinkedListSolution {
     return list.size() == capacity;
   }
 }
-/**
- * Your MyCircularQueue object will be instantiated and called as such:
- * MyCircularQueue obj = new MyCircularQueue(k);
- * boolean param_1 = obj.enQueue(value);
- * boolean param_2 = obj.deQueue();
- * int param_3 = obj.Front();
- * int param_4 = obj.Rear();
- * boolean param_5 = obj.isEmpty();
- * boolean param_6 = obj.isFull();
- */
+
+class LC0622MyCircularQueueArraySolution {
+
+  private final int[] array;
+  private final int capacity;
+  private int head;
+  private int tail;
+  private int size;
+
+  public LC0622MyCircularQueueArraySolution(int k) {
+    this.array = new int[k];
+    this.capacity = k;
+    this.head = 0;
+    this.tail = 0;
+    this.size = 0;
+  }
+
+  public boolean enQueue(int value) {
+    if (isFull()) {
+      return false;
+    }
+    if (isEmpty()) {
+      head = 0;
+      tail = 0;
+    } else {
+      tail = (tail + 1) % capacity;
+    }
+    array[tail] = value;
+    size++;
+    return true;
+  }
+
+  public boolean deQueue() {
+    if (isEmpty()) {
+      return false;
+    }
+    head = (head + 1) % capacity;
+    size--;
+    return true;
+  }
+
+  public int Front() {
+    if (isEmpty()) {
+      return -1;
+    }
+    return array[head];
+  }
+
+  public int Rear() {
+    if (isEmpty()) {
+      return -1;
+    }
+    return array[tail];
+  }
+
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
+  public boolean isFull() {
+    return size == capacity;
+  }
+}
