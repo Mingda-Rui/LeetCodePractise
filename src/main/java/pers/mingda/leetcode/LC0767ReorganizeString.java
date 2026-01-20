@@ -64,52 +64,42 @@ class LC0767CountOnOddEvenSolution {
 
   public String reorganizeString(String s) {
     int[] letterCount = new int[26];
-    int maxLetter = 0;
+    int maxLetterCount = 0;
+    int maxLetter = -1;
     for (char c : s.toCharArray()) {
       int intC = c - 'a';
       letterCount[intC]++;
-      maxLetter = Math.max(letterCount[intC], maxLetter);
+      if (letterCount[intC] > maxLetterCount) {
+        maxLetterCount = letterCount[intC];
+        maxLetter = intC;
+      }
     }
-    if (maxLetter > (s.length() + 1) / 2) {
+    if (maxLetterCount > (s.length() + 1) / 2) {
       return "";
     }
 
-    Comparator<Integer> comparator = Comparator.<Integer>comparingInt(i -> letterCount[i]
-    ).reversed();
-    Queue<Integer> queue = new PriorityQueue<>(comparator);
-    for (int i = 0; i < letterCount.length; i++) {
-      if (letterCount[i] > 0) {
-        queue.add(i);
-      }
-    }
-
     char[] result = new char[s.length()];
-    int evenIndex = 0;
-    int l = queue.remove();
-    while (evenIndex < s.length()) {
-      char c = (char) ('a' + l);
-      while (letterCount[l] != 0 && evenIndex < s.length()) {
-        result[evenIndex] = c;
-        evenIndex += 2;
-        letterCount[l]--;
-      }
-      if (!queue.isEmpty() && letterCount[l] == 0) {
-        l = queue.remove();
+
+    int index = 0;
+    while (letterCount[maxLetter] != 0) {
+      char c = (char) ('a' + maxLetter);
+      result[index] = c;
+      index += 2;
+      letterCount[maxLetter]--;
+    }
+
+    for (int i = 0; i < letterCount.length; i++) {
+      while (letterCount[i] != 0) {
+        if (index >= s.length()) {
+          index = 1;
+        }
+        char c = (char) ('a' + i);
+        result[index] = c;
+        index += 2;
+        letterCount[i]--;
       }
     }
 
-    int oddIndex = 1;
-    while (oddIndex < s.length()) {
-      char c = (char) ('a' + l);
-      while (letterCount[l] != 0) {
-        result[oddIndex] = c;
-        oddIndex += 2;
-        letterCount[l]--;
-      }
-      if (!queue.isEmpty()) {
-        l = queue.remove();
-      }
-    }
-    return new String(result);
+    return String.valueOf(result);
   }
 }
