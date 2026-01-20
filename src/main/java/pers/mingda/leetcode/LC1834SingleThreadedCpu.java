@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class LC1834SingleThreadedCpu {}
 
-class Solution {
+class LC1834Solution {
 
   public int[] getOrder(int[][] tasks) {
     Comparator<Task> taskComparator = Comparator.comparingInt(Task::enqueueTime);
