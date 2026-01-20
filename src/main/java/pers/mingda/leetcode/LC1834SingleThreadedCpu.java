@@ -16,12 +16,10 @@ class Solution {
       queue.add(t);
     }
 
-    Comparator<Task> taskQueueComparator = (t1, t2) -> {
-      if (t1.processingTime() == t2.processingTime()) {
-        return t1.id() - t2.id();
-      }
-      return t1.processingTime() - t2.processingTime();
-    };
+    Comparator<Task> taskQueueComparator = (t1, t2) ->
+      t1.processingTime() == t2.processingTime()
+        ? Integer.compare(t1.id(), t2.id())
+        : Integer.compare(t1.processingTime(), t2.processingTime());
     Queue<Task> availableTasks = new PriorityQueue<>(taskQueueComparator);
 
     int[] result = new int[tasks.length];
