@@ -59,3 +59,57 @@ class LC0767Solution {
     return sb.toString();
   }
 }
+
+class LC0767CountOnOddEvenSolution {
+
+  public String reorganizeString(String s) {
+    int[] letterCount = new int[26];
+    int maxLetter = 0;
+    for (char c : s.toCharArray()) {
+      int intC = c - 'a';
+      letterCount[intC]++;
+      maxLetter = Math.max(letterCount[intC], maxLetter);
+    }
+    if (maxLetter > (s.length() + 1) / 2) {
+      return "";
+    }
+
+    Comparator<Integer> comparator = Comparator.<Integer>comparingInt(i -> letterCount[i]
+    ).reversed();
+    Queue<Integer> queue = new PriorityQueue<>(comparator);
+    for (int i = 0; i < letterCount.length; i++) {
+      if (letterCount[i] > 0) {
+        queue.add(i);
+      }
+    }
+
+    char[] result = new char[s.length()];
+    int evenIndex = 0;
+    int l = queue.remove();
+    while (evenIndex < s.length()) {
+      char c = (char) ('a' + l);
+      while (letterCount[l] != 0 && evenIndex < s.length()) {
+        result[evenIndex] = c;
+        evenIndex += 2;
+        letterCount[l]--;
+      }
+      if (!queue.isEmpty() && letterCount[l] == 0) {
+        l = queue.remove();
+      }
+    }
+
+    int oddIndex = 1;
+    while (oddIndex < s.length()) {
+      char c = (char) ('a' + l);
+      while (letterCount[l] != 0) {
+        result[oddIndex] = c;
+        oddIndex += 2;
+        letterCount[l]--;
+      }
+      if (!queue.isEmpty()) {
+        l = queue.remove();
+      }
+    }
+    return new String(result);
+  }
+}
