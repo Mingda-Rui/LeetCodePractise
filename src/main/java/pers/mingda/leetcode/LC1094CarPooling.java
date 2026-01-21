@@ -1,40 +1,26 @@
 package pers.mingda.leetcode;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.TreeMap;
 
 public class LC1094CarPooling {}
 
-class LC1094DoublePriorityQueueSolution {
+class LC1094TreeMapQueueSolution {
 
   public boolean carPooling(int[][] trips, int capacity) {
-    Queue<Integer> fromQueue = new PriorityQueue<>(Comparator.comparingInt(i -> trips[i][1]));
-    Queue<Integer> toQueue = new PriorityQueue<>(Comparator.comparingInt(i -> trips[i][2]));
-    for (int i = 0; i < trips.length; i++) {
-      fromQueue.add(i);
-      toQueue.add(i);
+    TreeMap<Integer, Integer> map = new TreeMap<>();
+    for (int[] trip : trips) {
+      int passengers = trip[0];
+      int from = trip[1];
+      map.merge(from, passengers, Integer::sum);
+
+      int to = trip[2];
+      map.merge(to, -passengers, Integer::sum);
     }
 
-    int totalPassengers = 0;
-    int location = 0;
-    while (!fromQueue.isEmpty() || !toQueue.isEmpty()) {
-      if (!fromQueue.isEmpty()) {
-        int t = fromQueue.remove();
-        totalPassengers += trips[t][0];
-        location = trips[t][1];
-      }
-
-      while (
-        !toQueue.isEmpty() &&
-        (trips[toQueue.peek()][2] <= location ||
-          (fromQueue.isEmpty() && totalPassengers <= capacity))
-      ) {
-        int t = toQueue.remove();
-        totalPassengers -= trips[t][0];
-      }
-
-      if (totalPassengers > capacity) {
+    int passengerCount = 0;
+    for (int p : map.values()) {
+      passengerCount += p;
+      if (passengerCount > capacity) {
         return false;
       }
     }
