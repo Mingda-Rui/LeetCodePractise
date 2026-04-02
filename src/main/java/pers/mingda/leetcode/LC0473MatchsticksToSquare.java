@@ -25,11 +25,8 @@ class LC0473Solution {
   }
 
   private boolean makeSquare(int[] matchsticks, int index, int[] len, int targetLen) {
-    if (len[0] == targetLen && isSquare(len)) {
-      return true;
-    }
     if (index < 0) {
-      return false;
+      return isSquare(len);
     }
     int stick = matchsticks[index];
     for (int side = 0; side < 4; side++) {
