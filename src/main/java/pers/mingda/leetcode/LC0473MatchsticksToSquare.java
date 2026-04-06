@@ -105,3 +105,54 @@ class LC0473DpSolution {
     return usedSticks | bitPos;
   }
 }
+
+class LC0473OptimizedDfsSolution {
+  public boolean makeSquare(int[] matchsticks) {
+    int sum = sum(matchsticks);
+    if (sum % 4 != 0) {
+      return false;
+    }
+
+    Arrays.sort(matchsticks);
+
+    int targetLen = sum / 4;
+    boolean[] isStickUsed = new boolean[matchsticks.length];
+    return makeSquare(matchsticks, isStickUsed, matchsticks.length - 1, 0, 0, targetLen);
+  }
+
+  private int sum(int[] matchsticks) {
+    return Arrays.stream(matchsticks).sum();
+  }
+
+  private boolean makeSquare(int[] matchsticks, boolean[] isStickUsed, int index, int matchedSides,
+                             int currentSideLen, int targetSideLen) {
+    if (currentSideLen == targetSideLen) {
+      matchedSides++;
+      currentSideLen = 0;
+      index = matchsticks.length - 1;;
+    }
+
+    if (matchedSides == 3) {
+      return true;
+    }
+
+    for (int i = index; i >= 0; i--) {
+      if (isStickUsed[i] || matchsticks[i] + currentSideLen > targetSideLen) {
+        continue;
+      }
+
+      if (i != index && matchsticks[i] == matchsticks[i + 1] && !isStickUsed[i + 1]) {
+        continue;
+      }
+
+      isStickUsed[i] = true;
+      boolean matched = makeSquare(matchsticks, isStickUsed, i, matchedSides, currentSideLen + matchsticks[i], targetSideLen);
+      isStickUsed[i] = false;
+      if (matched) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+}
