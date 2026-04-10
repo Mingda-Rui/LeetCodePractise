@@ -58,7 +58,7 @@ class LC0473DpSolution {
     Arrays.sort(matchsticks);
 
     int targetLen = sum / 4;
-    int[][] memo = new int[(1 << matchsticks.length)][4];
+    int[] memo = new int[(1 << matchsticks.length) - 1];
     return makeSquare(matchsticks, 0, 0, 0, targetLen, memo);
   }
 
@@ -66,18 +66,18 @@ class LC0473DpSolution {
     return Arrays.stream(matchsticks).sum();
   }
 
-  private boolean makeSquare(int[] matchsticks, int usedSticks, int matchedSides, int currentSideLen, int targetSideLen, int[][] memo) {
+  private boolean makeSquare(int[] matchsticks, int usedSticks, int matchedSides, int currentSideLen, int targetSideLen, int[] memo) {
     if (currentSideLen == targetSideLen) {
       matchedSides++;
       currentSideLen = 0;
     }
 
     if (matchedSides == 3) {
-      memo[usedSticks][matchedSides] = 1;
+      memo[usedSticks] = 1;
       return true;
     }
-    if (memo[usedSticks][matchedSides] != 0) {
-      return memo[usedSticks][matchedSides] == 1;
+    if (memo[usedSticks] != 0) {
+      return memo[usedSticks] == 1;
     }
 
     for (int i = matchsticks.length - 1; i >= 0; i--) {
@@ -87,11 +87,11 @@ class LC0473DpSolution {
 
       boolean matched = makeSquare(matchsticks, markUsed(usedSticks, i), matchedSides, currentSideLen + matchsticks[i], targetSideLen, memo);
       if (matched) {
-        memo[usedSticks][matchedSides] = 1;
+        memo[usedSticks] = 1;
         return true;
       }
     }
-    memo[usedSticks][matchedSides] = -1;
+    memo[usedSticks] = -1;
     return false;
   }
 
