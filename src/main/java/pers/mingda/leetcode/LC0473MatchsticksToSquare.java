@@ -156,3 +156,44 @@ class LC0473OptimizedDfsSolution {
     return false;
   }
 }
+
+class LC0473DpTabulationSolution {
+  public boolean canPartitionKSubsets(int[] nums, int k) {
+    int len = nums.length;
+
+    int sum = Arrays.stream(nums).sum();
+    if (sum % k != 0) {
+      return false;
+    }
+    int target = sum / k;
+
+    int bitMaskLen = 1 << len;
+
+    int[] bitMaskTable = new int[bitMaskLen];
+    Arrays.fill(bitMaskTable, -1);
+
+    bitMaskTable[0] = 0;
+
+    for (int bitMask = 0; bitMask < bitMaskLen; bitMask++) {
+      if (bitMaskTable[bitMask] == -1) {
+        continue;
+      }
+      for (int j = 0; j < nums.length; j++) {
+        int num = nums[j];
+        int newBitMask = bitMask | (1 << j);
+        if (bitMaskTable[newBitMask] != -1) {
+          continue;
+        }
+        int nextSum = bitMaskTable[bitMask] + num;
+        if (nextSum > target) {
+          continue;
+        }
+        bitMaskTable[newBitMask] = nextSum % target;
+        if (bitMaskTable[bitMaskLen - 1] == 0) {
+          return true;
+        }
+      }
+    }
+    return bitMaskTable[bitMaskLen - 1] == 0;
+  }
+}
