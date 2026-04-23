@@ -40,11 +40,11 @@ class LC2707Solution {
 
 class LC2707Trie {
   LC2707Trie[] nodes;
-  boolean[] isWord;
+  boolean isWord;
 
   public LC2707Trie() {
     this.nodes = new LC2707Trie[26];
-    this.isWord = new boolean[26];
+    this.isWord = false;
   }
 
   public void initialize(String[] dictionary) {
@@ -67,7 +67,7 @@ class LC2707Trie {
     if (nodes[letterPos] == null) {
       return result;
     }
-    if (isWord[letterPos]) {
+    if (nodes[letterPos].isWord) {
       result.add(singleLetterStr);
     }
     if (index == word.length() - 1) {
@@ -86,7 +86,7 @@ class LC2707Trie {
       nodes[letterPos] = new LC2707Trie();
     }
     if (index == word.length() - 1) {
-      isWord[letterPos] = true;
+      nodes[letterPos].isWord = true;
     } else {
       nodes[letterPos].add(word, index + 1);
     }
