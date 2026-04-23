@@ -42,13 +42,12 @@ class LC2707DpTabulationSolution {
   public int minExtraChar(String s, String[] dictionary) {
     LC2707Trie trie = new LC2707Trie();
     trie.initialize(dictionary);
-    int[] tabulation = new int[s.length()];
+    int[] tabulation = new int[s.length() + 1];
     for (int i = s.length() - 1; i >= 0; i--) {
-      int min = i + 1 < s.length() ? tabulation[i + 1] + 1 : 1;
+      int min = tabulation[i + 1] + 1;
       for (String matchedWord : trie.find(s, i)) {
         int indexAfterMatchedWord = i + matchedWord.length();
-        int prevExtraChar = indexAfterMatchedWord <= s.length() - 1 ? tabulation[indexAfterMatchedWord] : 0;
-        min = Math.min(min, prevExtraChar);
+        min = Math.min(min, tabulation[indexAfterMatchedWord]);
       }
       tabulation[i] = min;
     }
