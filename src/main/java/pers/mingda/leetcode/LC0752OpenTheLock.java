@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -12,8 +11,7 @@ public class LC0752OpenTheLock {
 
 class LC0752Solution {
   public int openLock(String[] deadEnds, String target) {
-    Set<String> deadendSet = Arrays.stream(deadEnds).collect(Collectors.toSet());
-    Set<String> seen = new HashSet<>();
+    Set<String> seen = Arrays.stream(deadEnds).collect(Collectors.toSet());
 
     Queue<String> queue = new LinkedList<>();
     queue.add("0000");
@@ -26,7 +24,7 @@ class LC0752Solution {
         if (current.equals(target)) {
           return count;
         }
-        if (seen.contains(current) || deadendSet.contains(current)) {
+        if (seen.contains(current)) {
           continue;
         }
         seen.add(current);
