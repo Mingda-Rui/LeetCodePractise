@@ -38,6 +38,24 @@ class LC2707Solution {
   }
 }
 
+class LC2707DpTabulationSolution {
+  public int minExtraChar(String s, String[] dictionary) {
+    LC2707Trie trie = new LC2707Trie();
+    trie.initialize(dictionary);
+    int[] tabulation = new int[s.length()];
+    for (int i = s.length() - 1; i >= 0; i--) {
+      int min = i + 1 < s.length() ? tabulation[i + 1] + 1 : 1;
+      for (String matchedWord : trie.find(s, i)) {
+        int indexAfterMatchedWord = i + matchedWord.length();
+        int prevExtraChar = indexAfterMatchedWord <= s.length() - 1 ? tabulation[indexAfterMatchedWord] : 0;
+        min = Math.min(min, prevExtraChar);
+      }
+      tabulation[i] = min;
+    }
+    return tabulation[0];
+  }
+}
+
 class LC2707Trie {
   LC2707Trie[] nodes;
   boolean isWord;
