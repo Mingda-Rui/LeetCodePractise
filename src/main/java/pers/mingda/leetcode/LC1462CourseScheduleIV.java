@@ -3,8 +3,10 @@ package pers.mingda.leetcode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class LC1462CourseScheduleIV {
@@ -53,6 +55,53 @@ class LC1462Solution {
     for (int next : prerequisiteMap.get(current)) {
       if (findDependent(next, target, prerequisiteMap, seen)) {
         return true;
+      }
+    }
+    return false;
+  }
+}
+
+class LC1462BfsSolution {
+  public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+    Map<Integer, Set<Integer>> prerequisiteMap = buildMap(prerequisites);
+    List<Boolean> result = new ArrayList<>();
+    for (int[] query : queries) {
+      result.add(checkPrerequisite(query, prerequisiteMap));
+    }
+    return result;
+  }
+
+  private Map<Integer, Set<Integer>> buildMap(int[][] prerequisites) {
+    Map<Integer, Set<Integer>> prerequisiteMap = new HashMap<>();
+    for (int[] prerequisite : prerequisites) {
+      int prerequisiteClass = prerequisite[0];
+      int dependentClass = prerequisite[1];
+      prerequisiteMap.computeIfAbsent(prerequisiteClass, k -> new HashSet<>()).add(dependentClass);
+    }
+    return prerequisiteMap;
+  }
+
+  private boolean checkPrerequisite(int[] query, Map<Integer, Set<Integer>> prerequisiteMap) {
+    int startClass = query[0];
+    int targetClass = query[1];
+    Queue<Integer> classQueue = new LinkedList<>();
+    classQueue.add(startClass);
+
+    Set<Integer> seen = new HashSet<>();
+    while (!classQueue.isEmpty()) {
+      int size = classQueue.size();
+      for (int i = 0; i < size; i++) {
+        int current = classQueue.remove();
+        if (seen.contains(current)) {
+          continue;
+        }
+        seen.add(current);
+        if (current == targetClass) {
+          return true;
+        }
+        if (prerequisiteMap.containsKey(current)) {
+          classQueue.addAll(prerequisiteMap.get(current));
+        }
       }
     }
     return false;
