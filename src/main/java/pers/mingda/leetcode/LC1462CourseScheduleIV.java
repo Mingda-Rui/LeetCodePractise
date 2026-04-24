@@ -107,3 +107,55 @@ class LC1462BfsSolution {
     return false;
   }
 }
+
+class LC1462BiDirectionMapSolution {
+  public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+    Map<Integer, Set<Integer>> dependentMap = buildMap(prerequisites);
+    List<Boolean> result = new LinkedList<>();
+    for (int[] query : queries) {
+      int prerequisiteCourse = query[0];
+      int dependentCourse = query[1];
+      boolean isPrerequisite = dependentMap.containsKey(prerequisiteCourse) && dependentMap.get(prerequisiteCourse).contains(dependentCourse);
+      result.add(isPrerequisite);
+    }
+    return result;
+  }
+
+  private Map<Integer, Set<Integer>> buildMap(int[][] prerequisites) {
+
+    Map<Integer, Set<Integer>> prerequisiteMap = new HashMap<>();
+    for (int[] prerequisite : prerequisites) {
+      int prerequisiteCourse = prerequisite[0];
+      int dependentCourse = prerequisite[1];
+
+      prerequisiteMap.computeIfAbsent(dependentCourse, k -> new HashSet<>()).add(prerequisiteCourse);
+    }
+
+    Map<Integer, Set<Integer>> dependentMap = new HashMap<>();
+    for (int dependentCourse : prerequisiteMap.keySet()) {
+      for (int prerequisiteCourse : findAllPrerequisites(dependentCourse, prerequisiteMap)) {
+        dependentMap.computeIfAbsent(prerequisiteCourse, k -> new HashSet<>()).add(dependentCourse);
+      }
+    }
+    return dependentMap;
+  }
+
+  private Set<Integer> findAllPrerequisites(int course, Map<Integer, Set<Integer>> prerequisiteMap) {
+    Set<Integer> seen = new HashSet<>();
+    findAllPrerequisites(course, prerequisiteMap, seen);
+    return seen;
+  }
+
+  private void findAllPrerequisites(int course, Map<Integer, Set<Integer>> prerequisiteMap, Set<Integer> seen) {
+    if (seen.contains(course)) {
+      return;
+    }
+    seen.add(course);
+    if (!prerequisiteMap.containsKey(course)) {
+      return;
+    }
+    for (int prerequisiteCourse : prerequisiteMap.get(course)) {
+      findAllPrerequisites(prerequisiteCourse, prerequisiteMap, seen);
+    }
+  }
+}
