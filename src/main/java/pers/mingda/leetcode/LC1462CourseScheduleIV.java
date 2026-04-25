@@ -208,3 +208,37 @@ class LC1462TopologySortSolution {
     return result;
   }
 }
+
+class LC1462FloydWarshallSolution {
+  public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+    boolean[][] isPrerequisite = new boolean[numCourses][numCourses];
+    for (int[] prerequisite : prerequisites) {
+      int prerequisiteCourse = prerequisite[0];
+      int dependentCourse = prerequisite[1];
+      isPrerequisite[prerequisiteCourse][dependentCourse] = true;
+    }
+
+
+    for (int intermediate = 0; intermediate < numCourses; intermediate++) {
+      for (int start = 0; start < numCourses; start++) {
+        for (int end = 0; end < numCourses; end++) {
+          if (isPrerequisite[start][end]) {
+            continue;
+          }
+
+          if (isPrerequisite[start][intermediate] && isPrerequisite[intermediate][end]) {
+            isPrerequisite[start][end] = true;
+          }
+        }
+      }
+    }
+
+    List<Boolean> result = new LinkedList<>();
+    for (int[] query : queries) {
+      int prerequisiteCourse = query[0];
+      int dependentCourse = query[1];
+      result.add(isPrerequisite[prerequisiteCourse][dependentCourse]);
+    }
+    return result;
+  }
+}
