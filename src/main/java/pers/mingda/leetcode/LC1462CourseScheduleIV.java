@@ -159,3 +159,52 @@ class LC1462BiDirectionMapSolution {
     }
   }
 }
+
+class LC1462TopologySortSolution {
+  public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+    int[] indegree = new int[numCourses];
+    Map<Integer, List<Integer>> adj = new HashMap<>();
+    for (int[] prerequisite : prerequisites) {
+      int prerequisiteCourse = prerequisite[0];
+      int dependentCourse = prerequisite[1];
+
+      indegree[dependentCourse]++;
+      adj.computeIfAbsent(prerequisiteCourse, k -> new ArrayList<>()).add(dependentCourse);
+    }
+
+    Queue<Integer> courses = new LinkedList<>();
+    for (int i = 0; i < numCourses; i++) {
+      if (indegree[i] == 0) {
+        courses.add(i);
+      }
+    }
+
+    Map<Integer, Set<Integer>> prerequisiteMap = new HashMap<>();
+    while (!courses.isEmpty()) {
+      int course = courses.remove();
+      if (!adj.containsKey(course)) {
+        continue;
+      }
+      for (int dependentCourse : adj.get(course)) {
+        indegree[dependentCourse]--;
+        if (indegree[dependentCourse] == 0) {
+          courses.add(dependentCourse);
+        }
+        Set<Integer> prerequisiteCourses = prerequisiteMap.computeIfAbsent(dependentCourse, k -> new HashSet<>());
+        prerequisiteCourses.add(course);
+        if (prerequisiteMap.containsKey(course)) {
+          prerequisiteCourses.addAll(prerequisiteMap.get(course));
+        }
+      }
+    }
+
+    List<Boolean> result = new ArrayList<>();
+    for (int[] query : queries) {
+      int prerequisiteCourse = query[0];
+      int dependentCourse = query[1];
+      boolean isPrerequisite = prerequisiteMap.containsKey(dependentCourse) && prerequisiteMap.get(dependentCourse).contains(prerequisiteCourse);
+      result.add(isPrerequisite);
+    }
+    return result;
+  }
+}
