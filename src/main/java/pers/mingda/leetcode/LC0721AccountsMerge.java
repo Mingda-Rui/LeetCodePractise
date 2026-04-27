@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -61,5 +62,77 @@ class LC0721Solution {
     result.add(name);
     result.addAll(mergedAccount.stream().sorted().toList());
     return result;
+  }
+}
+
+class LC0721UnionFindSolution {
+  public List<List<String>> accountsMerge(List<List<String>> accounts) {
+    LC0721UnionFind uf = new LC0721UnionFind(accounts.size());
+
+    Map<String, Integer> emailToAccountIndex = new HashMap<>();
+    for (int i = 0; i < accounts.size(); i++) {
+      List<String> account = accounts.get(i);
+      for (int j = 1; j < account.size(); j++) {
+        String email = account.get(j);
+        if (emailToAccountIndex.containsKey(email)) {
+          uf.union(emailToAccountIndex.get(email), i);
+        } else {
+          emailToAccountIndex.put(email, i);
+        }
+      }
+    }
+
+    Map<Integer, List<String>> mergedEmails = new HashMap<>();
+    for (String email : emailToAccountIndex.keySet()) {
+      int group = uf.find(emailToAccountIndex.get(email));
+      mergedEmails.computeIfAbsent(group, g -> new LinkedList<>()).add(email);
+    }
+
+    List<List<String>> result = new ArrayList<>();
+    for (int group : mergedEmails.keySet()) {
+      List<String> emails = mergedEmails.get(group);
+      Collections.sort(emails);
+      String name = accounts.get(group).get(0);
+      emails.addFirst(name);
+      result.add(emails);
+    }
+    return result;
+  }
+}
+
+class LC0721UnionFind {
+
+  private final int[] groups;
+  private final int[] sizes;
+
+  public LC0721UnionFind(int size) {
+    this.groups = new int[size];
+    this.sizes = new int[size];
+    for (int i = 0; i < size; i++) {
+      groups[i] = i;
+      sizes[i] = 1;
+    }
+  }
+
+  public void union(int group1, int group2) {
+    int parent1 = find(group1);
+    int parent2 = find(group2);
+    if (parent1 == parent2) {
+      return;
+    }
+    if (sizes[parent1] > sizes[parent2]) {
+      sizes[parent1] += sizes[parent2];
+      groups[parent2] = parent1;
+    } else {
+      sizes[parent2] += sizes[parent1];
+      groups[parent1] = parent2;
+    }
+  }
+
+  public int find(int group) {
+    if (group == groups[group]) {
+      return group;
+    }
+    return find(groups[group]);
   }
 }
