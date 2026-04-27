@@ -133,6 +133,7 @@ class LC0721UnionFind {
     if (group == groups[group]) {
       return group;
     }
-    return find(groups[group]);
+    groups[group] = find(groups[group]);
+    return groups[group];
   }
 }
