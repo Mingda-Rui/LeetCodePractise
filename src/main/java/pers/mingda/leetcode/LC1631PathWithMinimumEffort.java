@@ -129,4 +129,61 @@ class LC1631UnionFind {
   }
 }
 
-record LC1631Edge(int start, int end, int diff){};
+record LC1631Edge(int start, int end, int diff){}
+
+class LC1631BinarySearchSolution {
+  public int minimumEffortPath(int[][] heights) {
+    int start = 0;
+    int end = 1_000_000;
+    while (start < end) {
+      int diff = (start + end) / 2;
+      if (canFindRoute(heights, diff)) {
+        end = diff;
+      } else {
+        start = diff + 1;
+      }
+    }
+    return end;
+  }
+
+  private boolean canFindRoute(int[][] heights, int maxDiff) {
+    int rows = heights.length;
+    int cols = heights[0].length;
+    boolean[][] visited = new boolean[rows][cols];
+    return canFindRoute(heights, maxDiff, 0, 0, visited);
+  }
+
+  private boolean canFindRoute(int[][] heights, int maxDiff, int row, int col, boolean[][] visited) {
+    if (visited[row][col]) {
+      return false;
+    }
+
+    visited[row][col] = true;
+
+    if (row == heights.length - 1 && col == heights[0].length - 1) {
+      return true;
+    }
+
+    int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    for (int[] direction : directions) {
+      int nextRow = row + direction[0];
+      int nextCol = col + direction[1];
+      if (!isInBounds(heights, nextRow, nextCol)) {
+        continue;
+      }
+      int diff = Math.abs(heights[row][col] - heights[nextRow][nextCol]);
+      if (diff > maxDiff) {
+        continue;
+      }
+
+      if (canFindRoute(heights, maxDiff, nextRow, nextCol, visited)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isInBounds(int[][] heights, int row, int col) {
+    return row >= 0 && row < heights.length && col >= 0 && col < heights[0].length;
+  }
+}
