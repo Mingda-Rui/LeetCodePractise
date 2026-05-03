@@ -93,11 +93,11 @@ class LC1631UnionFindSolution {
 
 class LC1631UnionFind {
   private final int[] parent;
-  private final int[] size;
+  private final int[] rank;
 
   public LC1631UnionFind(int size) {
     this.parent = new int[size];
-    this.size = new int[size];
+    this.rank = new int[size];
     for (int i = 0; i < parent.length; i++) {
       parent[i] = i;
     }
@@ -111,21 +111,20 @@ class LC1631UnionFind {
       return;
     }
 
-    if (size[parent1] > size[parent2]) {
+    if (rank[parent1] > rank[parent2]) {
       parent[parent2] = parent1;
-      size[parent1] += size[parent2];
-    } else {
+    } else if (rank[parent2] > rank[parent1]) {
       parent[parent1] = parent2;
-      size[parent2] += size[parent1];
+    } else {
+      parent[parent2] = parent1;
+      rank[parent1]++;
     }
   }
 
   public int find(int node) {
-    if (parent[node] == node) {
-      return node;
+    if (parent[node] != node) {
+      parent[node] = find(parent[node]);
     }
-
-    parent[node] = find(parent[node]);
     return parent[node];
   }
 }
