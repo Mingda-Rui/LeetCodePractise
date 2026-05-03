@@ -8,7 +8,7 @@ import java.util.Queue;
 public class LC1631PathWithMinimumEffort {
 }
 
-class Solution {
+class LC1632Solution {
   public int minimumEffortPath(int[][] heights) {
     int rows = heights.length;
     int cols = heights[0].length;
@@ -17,11 +17,11 @@ class Solution {
     for (int[] row : efforts) {
       Arrays.fill(row, Integer.MAX_VALUE);
     }
-    Comparator<Cell> effortComparator = Comparator.comparingInt(Cell::effort);
-    Queue<Cell> pq = new PriorityQueue<>(effortComparator);
-    pq.add(new Cell(0, 0, 0));
+    Comparator<LC1631Cell> effortComparator = Comparator.comparingInt(LC1631Cell::effort);
+    Queue<LC1631Cell> pq = new PriorityQueue<>(effortComparator);
+    pq.add(new LC1631Cell(0, 0, 0));
     while (!pq.isEmpty()) {
-      Cell c = pq.remove();
+      LC1631Cell c = pq.remove();
       if (c.row() == rows - 1 && c.col() == cols - 1) {
         return c.effort();
       }
@@ -36,7 +36,7 @@ class Solution {
           int newEffort = Math.max(c.effort(), Math.abs(heights[c.row()][c.col()] - heights[i][j]));
           if (newEffort < efforts[i][j]) {
             efforts[i][j] = newEffort;
-            pq.add(new Cell(i, j, newEffort));
+            pq.add(new LC1631Cell(i, j, newEffort));
           }
         }
       }
@@ -45,4 +45,4 @@ class Solution {
   }
 }
 
-record Cell(int row, int col, int effort){}
+record LC1631Cell(int row, int col, int effort){}
