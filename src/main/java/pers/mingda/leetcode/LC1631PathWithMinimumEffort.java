@@ -168,7 +168,7 @@ class LC1631BinarySearchSolution {
     for (int[] direction : directions) {
       int nextRow = row + direction[0];
       int nextCol = col + direction[1];
-      if (!isInBounds(heights, nextRow, nextCol)) {
+      if (!isInBounds (heights, nextRow, nextCol)) {
         continue;
       }
       int diff = Math.abs(heights[row][col] - heights[nextRow][nextCol]);
