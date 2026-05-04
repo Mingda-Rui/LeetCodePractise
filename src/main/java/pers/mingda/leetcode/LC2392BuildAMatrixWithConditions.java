@@ -60,11 +60,7 @@ class LC2392TopologySortSolution {
         int node = nodes.remove();
         result.add(node);
 
-        if (!adj.containsKey(node)) {
-          continue;
-        }
-
-        for (int dependent : adj.get(node)) {
+        for (int dependent : adj.computeIfAbsent(node, a ->  new HashSet<>())) {
           indegree[dependent]--;
           if (indegree[dependent] == 0) {
             nodes.add(dependent);
