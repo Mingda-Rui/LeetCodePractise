@@ -31,3 +31,23 @@ class LC0343Solution {
     return maxProduct;
   }
 }
+
+class LC0343DpTabulationSolution {
+  public int integerBreak(int n) {
+    if (n <= 3) {
+      return n - 1;
+    }
+    int[] memo = new int[n + 1];
+    memo[1] = 1;
+    memo[2] = 2;
+    memo[3] = 3;
+    for (int i = 4; i <= n; i++) {
+      int max = Integer.MIN_VALUE;
+      for (int num = 1; num < i; num++) {
+        max = Math.max(max, num * memo[i - num]);
+      }
+      memo[i] = max;
+    }
+    return memo[n];
+  }
+}
