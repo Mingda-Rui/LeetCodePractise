@@ -1,5 +1,8 @@
 package pers.mingda.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class LC1871JumpGameVII {
 }
 
@@ -29,5 +32,34 @@ class LC1871Solution {
     }
 
     return reachable;
+  }
+}
+
+class LC1871BfsSolution {
+  public boolean canReach(String s, int minJump, int maxJump) {
+    int sLen = s.length();
+    if (s.charAt(sLen - 1) != '0') {
+      return false;
+    }
+    Queue<Integer> queue = new LinkedList<>();
+    queue.add(0);
+    int furthestReached = 0;
+    while (!queue.isEmpty()) {
+      int index = queue.remove();
+      if (index + maxJump <= furthestReached) {
+        continue;
+      }
+      for (int i = Math.max(furthestReached, index + minJump); i <= Math.min(index + maxJump, sLen - 1); i++) {
+
+        if (s.charAt(i) == '0') {
+          if (i == sLen - 1) {
+            return true;
+          }
+          queue.add(i);
+        }
+      }
+      furthestReached = index + maxJump;
+    }
+    return false;
   }
 }
