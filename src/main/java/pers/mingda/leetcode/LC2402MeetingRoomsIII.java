@@ -15,15 +15,14 @@ class LC2402Solution {
     int[] meetingCounts = new int[n];
     boolean[] occupiedRooms = new boolean[n];
 
-    for (int i = 0; i < meetings.length; i++) {
-      int[] meeting = meetings[i];
+    for (int[] meeting : meetings) {
       while (!pq.isEmpty() && pq.peek().end() <= meeting[0]) {
         LC2402MeetingRoom finishedMeeting = pq.remove();
         int finishedRoom = finishedMeeting.room();
         occupiedRooms[finishedRoom] = false;
       }
 
-      if (pq.size() < n){
+      if (pq.size() < n) {
         int room = getNextRoom(occupiedRooms);
         meetingCounts[room]++;
         occupiedRooms[room] = true;
