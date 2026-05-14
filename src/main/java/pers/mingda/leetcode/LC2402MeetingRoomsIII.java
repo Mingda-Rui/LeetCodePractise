@@ -11,30 +11,31 @@ class LC2402Solution {
   public int mostBooked(int n, int[][] meetings) {
     Arrays.sort(meetings, Comparator.comparingInt(i -> i[0]));
 
-    Queue<LC2402MeetingRoom> pq = new PriorityQueue<>((m1, m2) -> Math.toIntExact(m1.end() == m2.end() ? m1.room() - m2.room() : m1.end() - m2.end()));
+    Comparator<LC2402RoomAvailability> usedRoomComparator = (a1, a2) -> Math.toIntExact(a1.availability() == a2.availability() ? a1.room() - a2.room() : a1.availability() - a2.availability());
+    Queue<LC2402RoomAvailability> usedRooms = new PriorityQueue<>(usedRoomComparator);
+    Queue<Integer> unusedRooms = new PriorityQueue<>();
     int[] meetingCounts = new int[n];
-    boolean[] occupiedRooms = new boolean[n];
+
+    for (int i = 0; i < n; i++) {
+      unusedRooms.add(i);
+    }
 
     for (int[] meeting : meetings) {
-      while (!pq.isEmpty() && pq.peek().end() <= meeting[0]) {
-        LC2402MeetingRoom finishedMeeting = pq.remove();
-        int finishedRoom = finishedMeeting.room();
-        occupiedRooms[finishedRoom] = false;
+      while (!usedRooms.isEmpty() && usedRooms.peek().availability() <= meeting[0]) {
+        LC2402RoomAvailability ra = usedRooms.remove();
+        unusedRooms.add(ra.room());
       }
 
-      if (pq.size() < n) {
-        int room = getNextRoom(occupiedRooms);
+      if (!unusedRooms.isEmpty()) {
+        int room = unusedRooms.remove();
         meetingCounts[room]++;
-        occupiedRooms[room] = true;
-        pq.add(new LC2402MeetingRoom(meeting[0], meeting[1], room));
+        usedRooms.add(new LC2402RoomAvailability(room, meeting[1]));
       } else {
-        LC2402MeetingRoom prevMr = pq.remove();
-        int room = prevMr.room();
-        long adjustTime = Math.max(0, prevMr.end() - meeting[0]);
-
+        LC2402RoomAvailability ra = usedRooms.remove();
+        int room = ra.room();
         int duration = meeting[1] - meeting[0];
         meetingCounts[room]++;
-        pq.add(new LC2402MeetingRoom(prevMr.end(), prevMr.end() + duration, room));
+        usedRooms.add(new LC2402RoomAvailability(room, ra.availability() + duration));
       }
     }
 
@@ -48,15 +49,6 @@ class LC2402Solution {
     }
     return room;
   }
-
-  private int getNextRoom(boolean[] occupiedRooms) {
-    for (int i = 0; i < occupiedRooms.length; i++) {
-      if (!occupiedRooms[i]) {
-        return i;
-      }
-    }
-    return -1;
-  }
 }
 
-record LC2402MeetingRoom(long start, long end, int room) {}
+record LC2402RoomAvailability(int room, long availability) {}
