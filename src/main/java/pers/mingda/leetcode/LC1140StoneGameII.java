@@ -26,9 +26,8 @@ class LC1140Solution {
 
     int max = Integer.MIN_VALUE;
     for (int X = 1; X <= 2 * M; X++) {
-      int take = suffixSum[pointer] - suffixSum[pointer + X];
       int opponentMax = stoneGameII(piles, suffixSum, pointer + X, Math.max(X, M), memo);
-      max = Math.max(max, take + suffixSum[pointer + X] - opponentMax);
+      max = Math.max(max, suffixSum[pointer] - opponentMax);
     }
     memo[pointer][M] = max;
     return max;
