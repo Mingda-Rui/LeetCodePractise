@@ -1,0 +1,47 @@
+package pers.mingda.leetcode;
+
+public class LC2487RemoveNodesFromLinkedList {
+}
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class LC2487Solution {
+  public ListNode removeNodes(ListNode head) {
+    ListNode reversed = reverse(head);
+    ListNode pointer = reversed;
+    int max = reversed.val;
+    while (pointer.next != null) {
+      int val = pointer.next.val;
+      if (val < max) {
+        ListNode next = pointer.next;
+        pointer.next = next.next;
+        next.next = null;
+      } else {
+        max = val;
+        pointer = pointer.next;
+      }
+    }
+    return reverse(reversed);
+  }
+
+  private ListNode reverse(ListNode head) {
+    ListNode node = new ListNode();
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = node.next;
+      node.next = head;
+      head = next;
+    }
+    head = node.next;
+    node.next = null;
+    return head;
+  }
+}
