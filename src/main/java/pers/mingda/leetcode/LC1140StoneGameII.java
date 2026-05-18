@@ -34,3 +34,28 @@ class LC1140Solution {
     return max;
   }
 }
+
+class LC1140TabulationSolution {
+  public int stoneGameII(int[] piles) {
+    int pilesLen = piles.length;
+    int[][] memo = new int[pilesLen][pilesLen + 1];
+    int[] suffixSum = new int[pilesLen + 1];
+    for (int i = pilesLen - 1; i >= 0; i--) {
+      suffixSum[i] = suffixSum[i + 1] + piles[i];
+    }
+
+    for (int i = pilesLen - 1; i >= 0; i--) {
+      for (int M = 1; M <= pilesLen; M++) {
+        if (i + 2 * M >= pilesLen) {
+          memo[i][M] = suffixSum[i];
+        } else {
+          for (int X = 1; X <= 2 * M; X++) {
+            int opponentMax = memo[i + X][Math.max(M, X)];
+            memo[i][M] = Math.max(memo[i][M], suffixSum[i] - opponentMax);
+          }
+        }
+      }
+    }
+    return memo[0][1];
+  }
+}
