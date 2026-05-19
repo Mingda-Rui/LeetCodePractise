@@ -93,3 +93,19 @@ class LC2487StackSolution {
     return head;
   }
 }
+
+class LC2487RecursiveSolution {
+  public ListNode removeNodes(ListNode head) {
+    if (head.next == null) {
+      return head;
+    }
+
+    ListNode max = removeNodes(head.next);
+    if (max.val > head.val) {
+      return max;
+    } else {
+      head.next = max;
+      return head;
+    }
+  }
+}
