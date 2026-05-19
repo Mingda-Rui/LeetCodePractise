@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Stack;
+
 public class LC2487RemoveNodesFromLinkedList {
 }
 
@@ -42,6 +44,29 @@ class LC2487Solution {
     }
     head = node.next;
     node.next = null;
+    return head;
+  }
+}
+
+class LC2487MonotonicStackSolution {
+  public ListNode removeNodes(ListNode head) {
+    Stack<ListNode> stack = new Stack<>();
+    ListNode pointer = head;
+    while (pointer != null) {
+      if (!stack.isEmpty() && stack.peek().val < pointer.val) {
+        stack.pop();
+      } else {
+        stack.add(pointer);
+        pointer = pointer.next;
+      }
+    }
+    head = stack.pop();
+    head.next = null;
+    while (!stack.isEmpty()) {
+      pointer = stack.pop();
+      pointer.next = head;
+      head = pointer;
+    }
     return head;
   }
 }
