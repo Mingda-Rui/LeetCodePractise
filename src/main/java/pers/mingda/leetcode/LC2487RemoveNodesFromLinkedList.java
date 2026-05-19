@@ -70,3 +70,26 @@ class LC2487MonotonicStackSolution {
     return head;
   }
 }
+
+class LC2487StackSolution {
+  public ListNode removeNodes(ListNode head) {
+    Stack<ListNode> stack = new Stack<>();
+    while (head != null) {
+      stack.push(head);
+      head = head.next;
+    }
+
+    head = stack.pop();
+    head.next = null;
+    int max = head.val;
+    while (!stack.isEmpty()) {
+      ListNode node = stack.pop();
+      if (node.val >= max) {
+        node.next = head;
+        head = node;
+        max = node.val;
+      }
+    }
+    return head;
+  }
+}
