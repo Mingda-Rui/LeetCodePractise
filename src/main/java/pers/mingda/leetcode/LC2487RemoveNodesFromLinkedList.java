@@ -35,16 +35,14 @@ class LC2487Solution {
   }
 
   private ListNode reverse(ListNode head) {
-    ListNode node = new ListNode();
+    ListNode pointer = null;
     while (head != null) {
       ListNode next = head.next;
-      head.next = node.next;
-      node.next = head;
+      head.next = pointer;
+      pointer = head;
       head = next;
     }
-    head = node.next;
-    node.next = null;
-    return head;
+    return pointer;
   }
 }
 
