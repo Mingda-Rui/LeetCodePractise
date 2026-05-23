@@ -43,3 +43,34 @@ class LC1498Solution {
     return start - 1;
   }
 }
+
+class LC1498TwoPointersSolution {
+  public int numSubSeq(int[] nums, int target) {
+    Arrays.sort(nums);
+    int modulo = 1_000_000_007;
+    int[] powers = calculatePowers(nums.length, modulo);
+    int left = 0;
+    int right = nums.length - 1;
+    int result = 0;
+    while (left <= right) {
+      while (left <= right && nums[left] + nums[right] > target) {
+        right--;
+      }
+
+      if (left <= right) {
+        result = (result + powers[right - left]) % modulo;
+      }
+      left++;
+    }
+    return result;
+  }
+
+  private int[] calculatePowers(int digits, int modulo) {
+    int[] powers = new int[digits];
+    powers[0] = 1;
+    for (int i = 1; i < digits; i++) {
+      powers[i] = powers[i - 1] * 2 % modulo;
+    }
+    return powers;
+  }
+}
