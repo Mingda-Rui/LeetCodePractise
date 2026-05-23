@@ -53,14 +53,12 @@ class LC1498TwoPointersSolution {
     int right = nums.length - 1;
     int result = 0;
     while (left <= right) {
-      while (left <= right && nums[left] + nums[right] > target) {
+      if (nums[left] + nums[right] <= target) {
+        result = (result + powers[right - left]) % modulo;
+        left++;
+      } else {
         right--;
       }
-
-      if (left <= right) {
-        result = (result + powers[right - left]) % modulo;
-      }
-      left++;
     }
     return result;
   }
