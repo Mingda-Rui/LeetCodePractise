@@ -17,16 +17,13 @@ class LC1653Solution {
     }
 
     int aCounter = 0;
+    int min = Integer.MAX_VALUE;
     for (int i = s.length() - 1; i >= 0; i--) {
-      rightAs[i] = aCounter;
+
+      min = Math.min(min, leftBs[i] + aCounter);
       if (s.charAt(i) == 'a') {
         aCounter++;
       }
-    }
-
-    int min = Integer.MAX_VALUE;
-    for (int i = 0; i < s.length(); i++) {
-      min = Math.min(min, leftBs[i] + rightAs[i]);
     }
     return min;
   }
