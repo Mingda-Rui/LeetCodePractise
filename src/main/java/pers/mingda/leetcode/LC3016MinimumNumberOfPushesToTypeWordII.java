@@ -1,32 +1,26 @@
 package pers.mingda.leetcode;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 
 public class LC3016MinimumNumberOfPushesToTypeWordII {
 }
 
 class LC3016Solution {
   public int minimumPushes(String word) {
-    Map<Character, Integer> letterCount = new HashMap<>();
+    int[] letterCount = new int[26];
     for (char l : word.toCharArray()) {
-      int count = letterCount.getOrDefault(l, 0);
-      letterCount.put(l, count + 1);
+      int lIndex = l - 'a';
+      letterCount[lIndex]++;
     }
-    Comparator<Map.Entry<Character, Integer>> comparator = Comparator.<Map.Entry<Character, Integer>>comparingInt(Map.Entry::getValue).reversed();
-    List<Map.Entry<Character, Integer>> sorted = letterCount.entrySet().stream().sorted(comparator).toList();
-
-    Map<Character, Integer> pushCount = new HashMap<>();
-    for (int i = 0; i < sorted.size(); i++) {
-      Map.Entry<Character, Integer> entry = sorted.get(i);
-      pushCount.put(entry.getKey(), i / 8 + 1);
-    }
+    Arrays.sort(letterCount);
 
     int result = 0;
-    for (char c : word.toCharArray()) {
-      result += pushCount.get(c);
+    for (int i = letterCount.length - 1; i >= 0; i--) {
+      if (letterCount[i] == 0) {
+        break;
+      }
+      int pushes = (letterCount.length - 1 - i) / 8 + 1;
+      result += letterCount[i] * pushes;
     }
     return result;
   }
