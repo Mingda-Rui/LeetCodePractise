@@ -28,3 +28,28 @@ class LC1653Solution {
     return min;
   }
 }
+
+class LC1653TwoVariablesSolution {
+  public int minimumDeletions(String s) {
+    int bCounter = 0;
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == 'b') {
+        bCounter++;
+      }
+    }
+
+    int aCounter = 0;
+    int min = Integer.MAX_VALUE;
+    for (int i = s.length() - 1; i >= 0; i--) {
+      if (s.charAt(i) == 'b') {
+        bCounter--;
+      }
+
+      min = Math.min(min, bCounter + aCounter);
+      if (s.charAt(i) == 'a') {
+        aCounter++;
+      }
+    }
+    return min;
+  }
+}
