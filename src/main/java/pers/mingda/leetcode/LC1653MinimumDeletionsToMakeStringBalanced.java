@@ -53,3 +53,19 @@ class LC1653TwoVariablesSolution {
     return min;
   }
 }
+
+class LC1653StackSolution {
+  public int minimumDeletions(String s) {
+    int bCounter = 0;
+    int result = 0;
+    for (char c : s.toCharArray()) {
+      if (c == 'b') {
+        bCounter++;
+      } else if (bCounter != 0) {
+        bCounter--;
+        result++;
+      }
+    }
+    return result;
+  }
+}
