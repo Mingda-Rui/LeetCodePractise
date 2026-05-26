@@ -37,22 +37,22 @@ class LC2134Solution {
 
 class LC2134SlidingWindowSolution {
   public int minSwaps(int[] nums) {
-    return Math.min(minSwaps(nums, 0), minSwaps(nums, 1));
-  }
-
-  private int minSwaps(int[] nums, int target) {
+    int target = 1;
     int totalTarget = 0;
     for (int num : nums) {
       if (num == target) {
         totalTarget++;
       }
     }
+    if (totalTarget == 0 || totalTarget == nums.length) {
+      return 0;
+    }
 
     int head = 0;
     int tail = 0;
     int targetCount = 0;
     int minSwap = totalTarget;
-    while (tail < nums.length) {
+    while (tail < nums.length + totalTarget) {
       if (tail - head == totalTarget) {
         if (nums[head] == target) {
           targetCount--;
@@ -60,7 +60,7 @@ class LC2134SlidingWindowSolution {
         head++;
       }
 
-      if (nums[tail] == target) {
+      if (nums[tail % nums.length] == target) {
         targetCount++;
       }
       tail++;
