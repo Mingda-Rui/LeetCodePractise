@@ -34,3 +34,41 @@ class LC2134Solution {
     return minSwap;
   }
 }
+
+class LC2134SlidingWindowSolution {
+  public int minSwaps(int[] nums) {
+    return Math.min(minSwaps(nums, 0), minSwaps(nums, 1));
+  }
+
+  private int minSwaps(int[] nums, int target) {
+    int totalTarget = 0;
+    for (int num : nums) {
+      if (num == target) {
+        totalTarget++;
+      }
+    }
+
+    int head = 0;
+    int tail = 0;
+    int targetCount = 0;
+    int minSwap = totalTarget;
+    while (tail < nums.length) {
+      if (tail - head == totalTarget) {
+        if (nums[head] == target) {
+          targetCount--;
+        }
+        head++;
+      }
+
+      if (nums[tail] == target) {
+        targetCount++;
+      }
+      tail++;
+
+      if (tail - head == totalTarget) {
+        minSwap = Math.min(minSwap, totalTarget - targetCount);
+      }
+    }
+    return minSwap;
+  }
+}
