@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Stack;
+import java.util.TreeSet;
 
 /**
  * Your MaxStack object will be instantiated and called as such:
@@ -89,3 +90,67 @@ class StackObject {
     this.isRemoved = false;
   }
 }
+
+/**
+ * Your MaxStack object will be instantiated and called as such:
+ * MaxStack obj = new MaxStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.peekMax();
+ * int param_5 = obj.popMax();
+ */
+
+class LC0716MaxStackTwoTreeSetsSolution {
+
+  final private TreeSet<LC0716NumVal> stack;
+  final private TreeSet<LC0716NumVal> maxHeap;
+  private int counter;
+
+  public LC0716MaxStackTwoTreeSetsSolution() {
+    this.stack = new TreeSet<>(Comparator.comparingInt(LC0716NumVal::number));
+    Comparator<LC0716NumVal> maxHeapComparator = (nv1, nv2) -> {
+      if (nv1.val() != nv2.val()) {
+        return nv1.val() - nv2.val();
+      }
+      return nv1.number() - nv2.number();
+    };
+    this.maxHeap = new TreeSet<>(maxHeapComparator);
+    this.counter = 0;
+  }
+
+  public void push(int x) {
+    LC0716NumVal nv = new LC0716NumVal(counter, x);
+    counter++;
+    stack.add(nv);
+    maxHeap.add(nv);
+  }
+
+  public int pop() {
+    LC0716NumVal nv = stack.pollLast();
+    if (nv == null) {
+      return -1;
+    }
+    maxHeap.remove(nv);
+    return nv.val();
+  }
+
+  public int top() {
+    return stack.last().val();
+  }
+
+  public int peekMax() {
+    return maxHeap.last().val();
+  }
+
+  public int popMax() {
+    LC0716NumVal nv = maxHeap.pollLast();
+    if (nv == null) {
+      return -1;
+    }
+    stack.remove(nv);
+    return nv.val();
+  }
+}
+
+record LC0716NumVal(int number, int val) {}
