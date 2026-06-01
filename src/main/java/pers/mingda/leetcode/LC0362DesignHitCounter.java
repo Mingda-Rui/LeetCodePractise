@@ -1,7 +1,9 @@
 package pers.mingda.leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LC0362DesignHitCounter {
 }
@@ -48,5 +50,35 @@ class LC0362HitCounter {
       }
     }
     return start + 1;
+  }
+}
+
+class LC0362HitCounterQueueSolution {
+
+  private final Queue<Integer> queue;
+  private int timestamp;
+
+  public LC0362HitCounterQueueSolution() {
+    this.queue = new LinkedList<>();
+    this.timestamp = 0;
+  }
+
+  public void hit(int timestamp) {
+    this.timestamp = timestamp;
+    queue.add(timestamp);
+    flushStaleHits();
+  }
+
+  public int getHits(int timestamp) {
+    this.timestamp = timestamp;
+    flushStaleHits();
+    return queue.size();
+  }
+
+  private void flushStaleHits() {
+    int fiveMinutesAgo = Math.max(0, timestamp - 300);
+    while (!queue.isEmpty() && queue.peek() <= fiveMinutesAgo) {
+      queue.remove();
+    }
   }
 }
