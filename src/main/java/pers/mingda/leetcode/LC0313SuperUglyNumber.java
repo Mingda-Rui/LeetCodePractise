@@ -7,7 +7,7 @@ import java.util.Queue;
 public class LC0313SuperUglyNumber {
 }
 
-class Solution {
+class LC0313Solution {
   // Change val to long to handle overflow cleanly
   record UglyNumber(int val, int prime, int index) {}
 
