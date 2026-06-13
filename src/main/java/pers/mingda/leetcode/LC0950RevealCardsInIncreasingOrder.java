@@ -5,28 +5,23 @@ import java.util.Arrays;
 public class LC0950RevealCardsInIncreasingOrder {
 }
 
-class Solution {
+class LC0950Solution {
   public int[] deckRevealedIncreasing(int[] deck) {
     int len = deck.length;
     Arrays.sort(deck);
     int[] result = new int[len];
-
-    boolean[] seen = new boolean[len];
-    int seenIndex = 0;
-
+    int resultIndex = 0;
     boolean skip = false;
     int i = 0;
     while(i != len) {
-      while (seen[seenIndex]) {
-        seenIndex = (seenIndex + 1) % len;
+      if (result[resultIndex] == 0) {
+        if (!skip) {
+          result[resultIndex] = deck[i];
+          i++;
+        }
+        skip = !skip;
       }
-      if (!skip) {
-        result[seenIndex] = deck[i];
-        seen[seenIndex] = true;
-        i++;
-      }
-      seenIndex = (seenIndex + 1) % len;
-      skip = !skip;
+      resultIndex = (resultIndex + 1) % len;
     }
 
     return result;
