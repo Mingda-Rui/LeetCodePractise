@@ -1,6 +1,8 @@
 package pers.mingda.leetcode;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class LC0950RevealCardsInIncreasingOrder {
 }
@@ -24,6 +26,26 @@ class LC0950Solution {
       resultIndex = (resultIndex + 1) % len;
     }
 
+    return result;
+  }
+}
+
+class LC0950QueueSolution {
+  public int[] deckRevealedIncreasing(int[] deck) {
+    Queue<Integer> queue = new LinkedList<>();
+    for (int i = 0; i < deck.length; i++) {
+      queue.add(i);
+    }
+    Arrays.sort(deck);
+    int[] result = new int[deck.length];
+    for (int card: deck) {
+      int index = queue.remove();
+      result[index] = card;
+      if (!queue.isEmpty()) {
+        queue.add(queue.poll());
+      }
+
+    }
     return result;
   }
 }
