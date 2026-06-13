@@ -35,3 +35,30 @@ class LC0873Solution {
     return longest > 2 ? longest : 0;
   }
 }
+
+class LC0873TwoPointersSolution {
+  public int lenLongestFibSubsequence(int[] arr) {
+    int longest = 0;
+    int[][] dp = new int[arr.length][arr.length];
+
+    for (int curr = 0; curr < arr.length; curr++) {
+      int currVal = arr[curr];
+      int start = 0;
+      int end = curr - 1;
+      while (start < end) {
+        int sum = arr[start] + arr[end];
+        if (sum < currVal) {
+          start++;
+        } else if (sum > currVal) {
+          end--;
+        } else {
+          dp[end][curr] = dp[start][end] + 1;
+          longest = Math.max(longest, dp[end][curr]);
+          start++;
+          end--;
+        }
+      }
+    }
+    return longest > 0 ? longest + 2 : 0;
+  }
+}
