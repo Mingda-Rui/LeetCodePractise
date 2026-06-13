@@ -17,7 +17,7 @@ public class LC3217DeleteNodesFromLinkedListPresentInArray {
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class LC3217Solution {
   public ListNode modifiedList(int[] nums, ListNode head) {
     Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
     ListNode prev = new ListNode();
