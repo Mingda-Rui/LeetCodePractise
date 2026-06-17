@@ -72,3 +72,46 @@ class LC0951StackSolution {
     return node1.val == node2.val;
   }
 }
+
+class LC0951CanonicalSolution {
+  public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+    canonicalize(root1);
+    canonicalize(root2);
+    return isEqual(root1, root2);
+  }
+
+  private void canonicalize(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+
+    canonicalize(root.left);
+    canonicalize(root.right);
+
+    boolean onlyRight = root.left == null && root.right != null;
+    boolean largetRight = root.left != null && root.right != null && root.right.val > root.left.val;
+    if (onlyRight || largetRight) {
+      swapChild(root);
+    }
+  }
+
+  private boolean isEqual(TreeNode root1, TreeNode root2) {
+    if (root1 == null && root2 == null) {
+      return true;
+    } else if (root1 == null || root2 == null) {
+      return false;
+    } else if (root1.val != root2.val) {
+      return false;
+    }
+    return isEqual(root1.left, root2.left) && isEqual(root1.right, root2.right);
+  }
+
+  private void swapChild(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    TreeNode temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+  }
+}
