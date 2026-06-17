@@ -3,8 +3,7 @@ package pers.mingda.leetcode;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class LC1871JumpGameVII {
-}
+public class LC1871JumpGameVII {}
 
 class LC1871Solution {
   public boolean canReach(String s, int minJump, int maxJump) {
@@ -49,7 +48,9 @@ class LC1871BfsSolution {
       if (index + maxJump <= furthestReached) {
         continue;
       }
-      for (int i = Math.max(furthestReached, index + minJump); i <= Math.min(index + maxJump, sLen - 1); i++) {
+      for (int i = Math.max(furthestReached, index + minJump);
+          i <= Math.min(index + maxJump, sLen - 1);
+          i++) {
 
         if (s.charAt(i) == '0') {
           if (i == sLen - 1) {

@@ -30,25 +30,13 @@ public class LC0092ReverseLinkedListII {
     return reverse(head, left, right, 1, new ListNode[1]);
   }
 
-  private ListNode reverse(
-    ListNode head,
-    int left,
-    int right,
-    int counter,
-    ListNode[] tailHolder
-  ) {
+  private ListNode reverse(ListNode head, int left, int right, int counter, ListNode[] tailHolder) {
     if (head == null) return head;
     if (counter < left || counter >= right) {
       head.next = reverse(head.next, left, right, counter + 1, tailHolder);
       tailHolder[0] = head;
     } else if (counter <= right) {
-      ListNode newHead = reverse(
-        head.next,
-        left,
-        right,
-        counter + 1,
-        tailHolder
-      );
+      ListNode newHead = reverse(head.next, left, right, counter + 1, tailHolder);
       ListNode tail = tailHolder[0];
 
       head.next = tail.next;

@@ -36,9 +36,7 @@ public class LC0076MinimumWindowSubstring {
         if (offset > 0) map.put(charAtStart, offset);
       }
     }
-    return resultEnd == s.length()
-      ? ""
-      : s.substring(resultStart, resultEnd + 1);
+    return resultEnd == s.length() ? "" : s.substring(resultStart, resultEnd + 1);
   }
 
   public String minWindowArraySolution(String s, String t) {
@@ -52,9 +50,7 @@ public class LC0076MinimumWindowSubstring {
       char rightChar = s.charAt(right);
 
       record[rightChar]--;
-      numOfIncludedChar = record[rightChar] >= 0
-        ? numOfIncludedChar + 1
-        : numOfIncludedChar;
+      numOfIncludedChar = record[rightChar] >= 0 ? numOfIncludedChar + 1 : numOfIncludedChar;
       while (numOfIncludedChar == t.length()) {
         if (right - left < minRight - minLeft) {
           minLeft = left;
@@ -63,9 +59,7 @@ public class LC0076MinimumWindowSubstring {
         char leftChar = s.charAt(left);
         left++;
         record[leftChar]++;
-        numOfIncludedChar = record[leftChar] > 0
-          ? numOfIncludedChar - 1
-          : numOfIncludedChar;
+        numOfIncludedChar = record[leftChar] > 0 ? numOfIncludedChar - 1 : numOfIncludedChar;
       }
     }
 

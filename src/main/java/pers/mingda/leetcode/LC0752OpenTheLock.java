@@ -6,8 +6,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LC0752OpenTheLock {
-}
+public class LC0752OpenTheLock {}
 
 class LC0752Solution {
   public int openLock(String[] deadEnds, String target) {
@@ -40,7 +39,7 @@ class LC0752Solution {
 
   private String dial(String current, int pos, boolean increase) {
     int num = current.charAt(pos) - '0';
-    int dialedNum = (num +  10 + (increase ? 1 : -1)) % 10;
+    int dialedNum = (num + 10 + (increase ? 1 : -1)) % 10;
     return current.substring(0, pos) + Integer.toString(dialedNum) + current.substring(pos + 1);
   }
 }

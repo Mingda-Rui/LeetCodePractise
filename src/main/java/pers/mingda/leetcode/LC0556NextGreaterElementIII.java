@@ -46,17 +46,14 @@ class ArraySolution {
     int len = chars.length;
 
     int swapIndex = len - 2;
-    while (
-      swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1]
-    ) swapIndex--;
+    while (swapIndex >= 0 && chars[swapIndex] >= chars[swapIndex + 1]) swapIndex--;
 
     if (swapIndex < 0) return -1;
 
     int nextGreaterIndex = swapIndex;
     char toBeSwapped = chars[swapIndex];
-    while (
-      nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped
-    ) nextGreaterIndex++;
+    while (nextGreaterIndex + 1 < len && chars[nextGreaterIndex + 1] > toBeSwapped)
+      nextGreaterIndex++;
 
     swap(chars, swapIndex, nextGreaterIndex);
     reverse(chars, swapIndex + 1, len);

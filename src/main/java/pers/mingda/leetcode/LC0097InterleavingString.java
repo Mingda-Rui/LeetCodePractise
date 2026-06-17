@@ -8,14 +8,7 @@ public class LC0097InterleavingString {
   }
 
   private boolean interleave(
-    String s1,
-    int i1,
-    String s2,
-    int i2,
-    String s3,
-    int i3,
-    boolean[][] invalidMemo
-  ) {
+      String s1, int i1, String s2, int i2, String s3, int i3, boolean[][] invalidMemo) {
     if (invalidMemo[i1][i2]) {
       return false;
     }
@@ -54,8 +47,7 @@ public class LC0097InterleavingString {
           continue;
         }
         dp[j] = index1 >= 0 && s1.charAt(index1) == s3.charAt(index3) && dp[j];
-        dp[j] |=
-          index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1];
+        dp[j] |= index2 >= 0 && s2.charAt(index2) == s3.charAt(index3) && dp[j - 1];
       }
     }
     return dp[s2.length()];

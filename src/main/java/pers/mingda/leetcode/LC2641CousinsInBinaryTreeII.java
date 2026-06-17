@@ -5,23 +5,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class LC2641CousinsInBinaryTreeII {
-}
+public class LC2641CousinsInBinaryTreeII {}
 
 /**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
+ * Definition for a binary tree node. public class TreeNode { int val; TreeNode left; TreeNode
+ * right; TreeNode() {} TreeNode(int val) { this.val = val; } TreeNode(int val, TreeNode left,
+ * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
  */
 class LC2641Solution {
   public TreeNode replaceValueInTree(TreeNode root) {

@@ -14,10 +14,10 @@ public class LC0355DesignTwitter {}
 
 class LC0355Twitter {
 
+  private static final int FEED_LIMIT = 10;
   private Map<Integer, Tweet> tweets;
   private Map<Integer, Set<Integer>> followeeMap;
   private int timestamp;
-  private static final int FEED_LIMIT = 10;
 
   public LC0355Twitter() {
     this.tweets = new HashMap<>();
@@ -64,9 +64,7 @@ class LC0355Twitter {
 
   public void unfollow(int followerId, int followeeId) {
     if (followerId == followeeId) return;
-    if (followeeMap.containsKey(followerId)) followeeMap
-      .get(followerId)
-      .remove(followeeId);
+    if (followeeMap.containsKey(followerId)) followeeMap.get(followerId).remove(followeeId);
   }
 
   private int timer() {
@@ -75,9 +73,9 @@ class LC0355Twitter {
 
   class Tweet {
 
-    Tweet next;
-    private final int ts;
     final int tId;
+    private final int ts;
+    Tweet next;
 
     public Tweet(int ts, int tId, Tweet next) {
       this.ts = ts;

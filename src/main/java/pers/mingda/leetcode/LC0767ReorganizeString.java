@@ -20,8 +20,8 @@ class LC0767Solution {
       return "";
     }
 
-    Comparator<Integer> comparator = Comparator.<Integer>comparingInt(i -> letterCount[i]
-    ).reversed();
+    Comparator<Integer> comparator =
+        Comparator.<Integer>comparingInt(i -> letterCount[i]).reversed();
     Queue<Integer> queue = new PriorityQueue<>(comparator);
     for (int i = 0; i < letterCount.length; i++) {
       if (letterCount[i] > 0) {

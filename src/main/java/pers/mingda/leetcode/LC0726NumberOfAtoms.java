@@ -50,17 +50,11 @@ public class LC0726NumberOfAtoms {
   }
 
   public String countOfAtomsRecursive(String formula) {
-    Map<String, Integer> map = countOfAtomsRecursive(
-      formula.toCharArray(),
-      new int[1]
-    );
+    Map<String, Integer> map = countOfAtomsRecursive(formula.toCharArray(), new int[1]);
     return generateCountOfAtoms(map);
   }
 
-  private Map<String, Integer> countOfAtomsRecursive(
-    char[] formula,
-    int[] indexHolder
-  ) {
+  private Map<String, Integer> countOfAtomsRecursive(char[] formula, int[] indexHolder) {
     Map<String, Integer> map = new TreeMap<>();
     String currentElement = "";
     int magnitude = 0;
@@ -69,15 +63,10 @@ public class LC0726NumberOfAtoms {
       char c = formula[indexHolder[0]];
       if (c == '(') {
         indexHolder[0]++;
-        Map<String, Integer> innerMap = countOfAtomsRecursive(
-          formula,
-          indexHolder
-        );
+        Map<String, Integer> innerMap = countOfAtomsRecursive(formula, indexHolder);
         magnitude = 0;
-        while (
-          indexHolder[0] + 1 < formula.length &&
-          Character.isDigit(formula[indexHolder[0] + 1])
-        ) {
+        while (indexHolder[0] + 1 < formula.length
+            && Character.isDigit(formula[indexHolder[0] + 1])) {
           indexHolder[0]++;
           magnitude = magnitude * 10 + (formula[indexHolder[0]] - '0');
         }
@@ -98,10 +87,10 @@ public class LC0726NumberOfAtoms {
 
       boolean atTail = index + 1 == formula.length;
       boolean foundElement =
-        atTail ||
-        (!currentElement.isEmpty() &&
-          !Character.isDigit(formula[index + 1]) &&
-          !Character.isLowerCase(formula[index + 1]));
+          atTail
+              || (!currentElement.isEmpty()
+                  && !Character.isDigit(formula[index + 1])
+                  && !Character.isLowerCase(formula[index + 1]));
       if (foundElement) {
         int prevVal = map.getOrDefault(currentElement, 0);
         map.put(currentElement, prevVal + Math.max(1, magnitude));

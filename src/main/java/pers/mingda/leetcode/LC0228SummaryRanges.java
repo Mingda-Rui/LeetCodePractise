@@ -13,9 +13,7 @@ class LC0228Solution {
     int head = 0;
     for (int i = 0; i < nums.length; i++) {
       if (i + 1 == nums.length || nums[i] + 1 != nums[i + 1]) {
-        String range = head == i
-          ? String.valueOf(nums[head])
-          : nums[head] + arrow + nums[i];
+        String range = head == i ? String.valueOf(nums[head]) : nums[head] + arrow + nums[i];
         result.add(range);
         head = i + 1;
       }

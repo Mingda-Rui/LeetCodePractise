@@ -10,11 +10,8 @@ public class LC0139WordBreak {
     for (int i = 0; i < length; i++) {
       for (String word : wordDict) {
         int prevIndex = i - word.length();
-        boolean prevPosFound =
-          prevIndex == -1 || (prevIndex >= 0 && record[prevIndex]);
-        if (
-          prevPosFound && word.equals(s.substring(prevIndex + 1, i + 1))
-        ) record[i] = true;
+        boolean prevPosFound = prevIndex == -1 || (prevIndex >= 0 && record[prevIndex]);
+        if (prevPosFound && word.equals(s.substring(prevIndex + 1, i + 1))) record[i] = true;
       }
     }
     return record[length - 1];

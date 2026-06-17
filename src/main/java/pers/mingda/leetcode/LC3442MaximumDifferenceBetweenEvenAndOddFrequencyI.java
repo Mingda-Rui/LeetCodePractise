@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC3442MaximumDifferenceBetweenEvenAndOddFrequencyI {
-}
+public class LC3442MaximumDifferenceBetweenEvenAndOddFrequencyI {}
 
 class LC3442Solution {
   public int maxDifference(String s) {

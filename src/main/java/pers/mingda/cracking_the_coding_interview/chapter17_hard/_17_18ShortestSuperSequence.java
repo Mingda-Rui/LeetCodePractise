@@ -19,7 +19,7 @@ public class _17_18ShortestSuperSequence {
         end = maxTail;
       }
     }
-    return new int[] { start, end };
+    return new int[] {start, end};
   }
 
   int[][] buildLocMap(int[] bigArray, int[] smallArray) {
@@ -97,7 +97,7 @@ public class _17_18ShortestSuperSequence {
       minHeap.add(new ShortestSuperSequenceNode(minNode.val, newHeadIndex));
     }
 
-    return new int[] { start, end };
+    return new int[] {start, end};
   }
 }
 

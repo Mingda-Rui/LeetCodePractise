@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Arrays;
 
-public class LC1049LastStoneWeightII {
-}
+public class LC1049LastStoneWeightII {}
 
 class LC1049Solution {
   public int lastStoneWeightII(int[] stones) {
@@ -17,7 +16,6 @@ class LC1049Solution {
       }
       dp[stone] = true;
     }
-
 
     for (int i = sum / 2; i >= 0; i--) {
       if (dp[i]) {

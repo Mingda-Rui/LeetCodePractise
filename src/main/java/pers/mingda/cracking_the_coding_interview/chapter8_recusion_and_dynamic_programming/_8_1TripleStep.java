@@ -17,9 +17,9 @@ public class _8_1TripleStep {
     }
 
     int ways =
-      countPossibleWays(nSteps - 1, possibleWays) +
-      countPossibleWays(nSteps - 2, possibleWays) +
-      countPossibleWays(nSteps - 3, possibleWays);
+        countPossibleWays(nSteps - 1, possibleWays)
+            + countPossibleWays(nSteps - 2, possibleWays)
+            + countPossibleWays(nSteps - 3, possibleWays);
     possibleWays[nSteps] = ways;
     return ways;
   }

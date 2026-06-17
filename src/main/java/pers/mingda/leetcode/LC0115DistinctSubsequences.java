@@ -12,13 +12,7 @@ public class LC0115DistinctSubsequences {
     return findNumDistinct(s, 0, t, 0, memo);
   }
 
-  private int findNumDistinct(
-    String s,
-    int sI,
-    String t,
-    int tI,
-    int[][] memo
-  ) {
+  private int findNumDistinct(String s, int sI, String t, int tI, int[][] memo) {
     if (tI == t.length()) {
       return 1;
     }

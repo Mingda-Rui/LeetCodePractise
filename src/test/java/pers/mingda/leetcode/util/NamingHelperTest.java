@@ -22,9 +22,7 @@ public class NamingHelperTest {
     assertEquals("ZAA", getClassPrefixByNum(16900));
     assertEquals("ZCA", getClassPrefixByNum(16952));
     assertEquals("ZZZ", getClassPrefixByNum(17575));
-    assertThrows(IllegalArgumentException.class, () ->
-      getClassPrefixByNum(17576)
-    );
+    assertThrows(IllegalArgumentException.class, () -> getClassPrefixByNum(17576));
   }
 
   @Test
@@ -44,10 +42,7 @@ public class NamingHelperTest {
     assertEquals(25, getClassNumByPrefix("Z"));
     assertEquals(26, getClassNumByPrefix("BA"));
     assertThrows(IllegalArgumentException.class, () -> getClassNumByPrefix(""));
-    assertThrows(IllegalArgumentException.class, () -> getClassNumByPrefix("6#")
-    );
-    assertThrows(IllegalArgumentException.class, () ->
-      getClassNumByPrefix("ZZZZ")
-    );
+    assertThrows(IllegalArgumentException.class, () -> getClassNumByPrefix("6#"));
+    assertThrows(IllegalArgumentException.class, () -> getClassNumByPrefix("ZZZZ"));
   }
 }

@@ -11,7 +11,12 @@ class LC2402Solution {
   public int mostBooked(int n, int[][] meetings) {
     Arrays.sort(meetings, Comparator.comparingInt(i -> i[0]));
 
-    Comparator<LC2402RoomAvailability> usedRoomComparator = (a1, a2) -> Math.toIntExact(a1.availability() == a2.availability() ? a1.room() - a2.room() : a1.availability() - a2.availability());
+    Comparator<LC2402RoomAvailability> usedRoomComparator =
+        (a1, a2) ->
+            Math.toIntExact(
+                a1.availability() == a2.availability()
+                    ? a1.room() - a2.room()
+                    : a1.availability() - a2.availability());
     Queue<LC2402RoomAvailability> usedRooms = new PriorityQueue<>(usedRoomComparator);
     Queue<Integer> unusedRooms = new PriorityQueue<>();
     int[] meetingCounts = new int[n];

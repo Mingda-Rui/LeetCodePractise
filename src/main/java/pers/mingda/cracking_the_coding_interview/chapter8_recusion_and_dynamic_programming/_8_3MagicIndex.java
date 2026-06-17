@@ -12,8 +12,8 @@ public class _8_3MagicIndex {
       return array[index] == index ? index : -1;
     }
     return array[index] > index
-      ? findMagicIndex(array, from, index)
-      : findMagicIndex(array, index, to);
+        ? findMagicIndex(array, from, index)
+        : findMagicIndex(array, index, to);
   }
 
   public int magicFastNonDistinctVal(int[] array, int start, int end) {

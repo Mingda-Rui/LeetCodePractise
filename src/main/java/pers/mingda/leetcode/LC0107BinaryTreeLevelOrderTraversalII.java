@@ -11,11 +11,7 @@ public class LC0107BinaryTreeLevelOrderTraversalII {
     return bottomUp(root, 1, result);
   }
 
-  private List<List<Integer>> bottomUp(
-    TreeNode root,
-    int level,
-    List<List<Integer>> result
-  ) {
+  private List<List<Integer>> bottomUp(TreeNode root, int level, List<List<Integer>> result) {
     if (root == null) return result;
 
     if (result.size() < level) result.add(0, new LinkedList<>());

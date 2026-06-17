@@ -30,16 +30,13 @@ class LC0502Solution {
   private LinkedList<Integer> rankByProfits(int[] profits) {
     Comparator<Integer> profitComparator = Comparator.comparingInt(i -> profits[i]);
     return IntStream.range(0, profits.length)
-      .boxed()
-      .sorted(profitComparator.reversed())
-      .collect(Collectors.toCollection(LinkedList::new));
+        .boxed()
+        .sorted(profitComparator.reversed())
+        .collect(Collectors.toCollection(LinkedList::new));
   }
 
   private int findNextMostProfitableProjectByCapital(
-    int w,
-    LinkedList<Integer> rankedByProfits,
-    int[] capital
-  ) {
+      int w, LinkedList<Integer> rankedByProfits, int[] capital) {
     Iterator<Integer> it = rankedByProfits.iterator();
     while (it.hasNext()) {
       int p = it.next();
@@ -67,10 +64,8 @@ class LC0502GreedySolution {
     Queue<Integer> sortedByProfitsDescending = new PriorityQueue<>(profitsComparator.reversed());
 
     while ((index != sortedByCapital.size() || !sortedByProfitsDescending.isEmpty()) && k != 0) {
-      if (
-        index != sortedByCapital.size() &&
-        isEnoughCapitalForProject(sortedByCapital.get(index), w, capital)
-      ) {
+      if (index != sortedByCapital.size()
+          && isEnoughCapitalForProject(sortedByCapital.get(index), w, capital)) {
         int p = sortedByCapital.get(index);
         sortedByProfitsDescending.add(p);
         index++;
@@ -87,9 +82,9 @@ class LC0502GreedySolution {
 
   private List<Integer> sortByCapital(int[] capital) {
     return IntStream.range(0, capital.length)
-      .boxed()
-      .sorted(Comparator.comparingInt(p -> capital[p]))
-      .toList();
+        .boxed()
+        .sorted(Comparator.comparingInt(p -> capital[p]))
+        .toList();
   }
 
   private boolean isEnoughCapitalForProject(int p, int w, int[] capital) {

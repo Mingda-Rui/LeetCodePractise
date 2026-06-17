@@ -22,10 +22,7 @@ public class LC2843CountSymmetricIntegers {
       return false;
     }
     int divider = getDivider(digits / 2);
-    return (
-      getDigitSum(num % divider, sumRecord) ==
-      getDigitSum(num / divider, sumRecord)
-    );
+    return (getDigitSum(num % divider, sumRecord) == getDigitSum(num / divider, sumRecord));
   }
 
   private int countDigits(int num) {

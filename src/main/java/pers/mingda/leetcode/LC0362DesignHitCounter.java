@@ -5,16 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class LC0362DesignHitCounter {
-}
+public class LC0362DesignHitCounter {}
 
 /**
- * Your HitCounter object will be instantiated and called as such:
- * HitCounter obj = new HitCounter();
- * obj.hit(timestamp);
- * int param_2 = obj.getHits(timestamp);
+ * Your HitCounter object will be instantiated and called as such: HitCounter obj = new
+ * HitCounter(); obj.hit(timestamp); int param_2 = obj.getHits(timestamp);
  */
-
 class LC0362HitCounter {
 
   private final List<Integer> hitHistory;

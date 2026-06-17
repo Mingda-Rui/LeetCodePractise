@@ -7,11 +7,7 @@ public class LC0143ReorderList {
   }
 
   public ListNode reorderListRecursive(
-    ListNode head,
-    ListNode[] tailHolder,
-    int index,
-    int[] length
-  ) {
+      ListNode head, ListNode[] tailHolder, int index, int[] length) {
     if (head == null) {
       length[0] = index - 1;
       return head;
@@ -80,15 +76,12 @@ public class LC0143ReorderList {
   }
 
   public ListNode reorderListTwoPointers(ListNode head) {
-    ListNode[] leftHolder = new ListNode[] { head };
+    ListNode[] leftHolder = new ListNode[] {head};
     reorderListTwoPointers(leftHolder, head);
     return head;
   }
 
-  private ListNode reorderListTwoPointers(
-    ListNode[] leftHolder,
-    ListNode right
-  ) {
+  private ListNode reorderListTwoPointers(ListNode[] leftHolder, ListNode right) {
     if (right == null) return null;
 
     ListNode tail = reorderListTwoPointers(leftHolder, right.next);

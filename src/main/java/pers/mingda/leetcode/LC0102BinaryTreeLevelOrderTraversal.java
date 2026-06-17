@@ -33,11 +33,7 @@ public class LC0102BinaryTreeLevelOrderTraversal {
     return result;
   }
 
-  private void levelOrderRecursiveRecursive(
-    TreeNode root,
-    List<List<Integer>> result,
-    int level
-  ) {
+  private void levelOrderRecursiveRecursive(TreeNode root, List<List<Integer>> result, int level) {
     if (root != null) {
       if (result.size() < level) result.add(new LinkedList<>());
       List<Integer> current = result.get(level - 1);

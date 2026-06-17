@@ -16,11 +16,7 @@ public class LC1152AnalyzeUserWebsiteVisitPattern {}
 
 class LC1152Solution {
 
-  public List<String> mostVisitedPattern(
-    String[] username,
-    int[] timestamp,
-    String[] website
-  ) {
+  public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
     Map<List<String>, Integer> patterns = new HashMap<>();
     Map<String, List<TimestampWebsite>> history = new HashMap<>();
     for (int i = 0; i < username.length; i++) {
@@ -30,10 +26,8 @@ class LC1152Solution {
       history.get(user).add(tsw);
     }
 
-    for (List<TimestampWebsite> historyForUser : history.values()) buildPattern(
-      historyForUser,
-      patterns
-    );
+    for (List<TimestampWebsite> historyForUser : history.values())
+      buildPattern(historyForUser, patterns);
 
     List<String> result = null;
     int maxCount = 0;
@@ -51,13 +45,9 @@ class LC1152Solution {
     return result;
   }
 
-  private void buildPattern(
-    List<TimestampWebsite> tsHistory,
-    Map<List<String>, Integer> patterns
-  ) {
-    Queue<TimestampWebsite> queue = new PriorityQueue<>(
-      Comparator.comparingInt(tsw -> tsw.timestamp)
-    );
+  private void buildPattern(List<TimestampWebsite> tsHistory, Map<List<String>, Integer> patterns) {
+    Queue<TimestampWebsite> queue =
+        new PriorityQueue<>(Comparator.comparingInt(tsw -> tsw.timestamp));
     for (TimestampWebsite tsw : tsHistory) queue.offer(tsw);
     List<String> history = new ArrayList<>();
     while (!queue.isEmpty()) history.add(queue.poll().website);
@@ -66,11 +56,7 @@ class LC1152Solution {
     for (int i = 0; i < len; i++) {
       for (int j = i + 1; j < len; j++) {
         for (int k = j + 1; k < len; k++) {
-          List<String> pattern = Arrays.asList(
-            history.get(i),
-            history.get(j),
-            history.get(k)
-          );
+          List<String> pattern = Arrays.asList(history.get(i), history.get(j), history.get(k));
           if (!seen.contains(pattern)) {
             int count = patterns.getOrDefault(pattern, 0);
             patterns.put(pattern, count + 1);
@@ -81,10 +67,7 @@ class LC1152Solution {
     }
   }
 
-  private List<String> getSmaller(
-    List<String> pattern1,
-    List<String> pattern2
-  ) {
+  private List<String> getSmaller(List<String> pattern1, List<String> pattern2) {
     for (int i = 0; i < 3; i++) {
       int result = compareNthItem(pattern1, pattern2, i);
       if (result != 0) return result > 0 ? pattern2 : pattern1;
@@ -92,11 +75,7 @@ class LC1152Solution {
     return pattern1;
   }
 
-  private int compareNthItem(
-    List<String> pattern1,
-    List<String> pattern2,
-    int nth
-  ) {
+  private int compareNthItem(List<String> pattern1, List<String> pattern2, int nth) {
     return pattern1.get(nth).compareTo(pattern2.get(nth));
   }
 }

@@ -25,10 +25,7 @@ public class LC0057InsertInterval {
 
   private void addInterval(List<int[]> result, int[] interval) {
     int[] last = result.isEmpty() ? null : result.get(result.size() - 1);
-    if (!result.isEmpty() && last[1] >= interval[0]) last[1] = Math.max(
-      last[1],
-      interval[1]
-    );
+    if (!result.isEmpty() && last[1] >= interval[0]) last[1] = Math.max(last[1], interval[1]);
     else result.add(interval);
   }
 

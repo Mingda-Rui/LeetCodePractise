@@ -2,6 +2,16 @@ package pers.mingda.leetcode;
 
 public class LC0206ReverseLinkedList {
 
+  public static void main(String... args) {
+    LC0206ReverseLinkedList test = new LC0206ReverseLinkedList();
+    ListNode five = new ListNode(5);
+    ListNode four = new ListNode(4, five);
+    ListNode three = new ListNode(3, four);
+    ListNode two = new ListNode(2, three);
+    ListNode one = new ListNode(1, two);
+    test.reverseList_recursive(one);
+  }
+
   public ListNode reverseList(ListNode head) {
     if (head == null || head.next == null) return head;
     ListNode tempHead = new ListNode();
@@ -81,16 +91,6 @@ public class LC0206ReverseLinkedList {
     return newHead;
   }
 
-  public static void main(String... args) {
-    LC0206ReverseLinkedList test = new LC0206ReverseLinkedList();
-    ListNode five = new ListNode(5);
-    ListNode four = new ListNode(4, five);
-    ListNode three = new ListNode(3, four);
-    ListNode two = new ListNode(2, three);
-    ListNode one = new ListNode(1, two);
-    test.reverseList_recursive(one);
-  }
-
   public ListNode reverseListLatest(ListNode head) {
     ListNode pseudoHead = new ListNode();
     ListNode tail = reverseListRecursive(head, pseudoHead);
@@ -148,10 +148,7 @@ public class LC0206ReverseLinkedList {
     return reverseListInPlaceRecursive2(head, null);
   }
 
-  private ListNode reverseListInPlaceRecursive2(
-    ListNode current,
-    ListNode newHead
-  ) {
+  private ListNode reverseListInPlaceRecursive2(ListNode current, ListNode newHead) {
     if (current == null) return newHead;
     ListNode next = current.next;
     current.next = newHead;

@@ -12,9 +12,7 @@ public class LC0227BasicCalculator2 {
       if (Character.isDigit(current)) {
         val = val * 10 + (current - '0');
       }
-      if (
-        (current != ' ' && !Character.isDigit(current)) || i == s.length() - 1
-      ) {
+      if ((current != ' ' && !Character.isDigit(current)) || i == s.length() - 1) {
         switch (prevOp) {
           case '+':
             result += prevVal;

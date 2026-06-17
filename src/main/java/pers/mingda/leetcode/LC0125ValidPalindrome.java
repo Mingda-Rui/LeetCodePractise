@@ -8,10 +8,7 @@ public class LC0125ValidPalindrome {
     while (left < right) {
       while (left <= right && !isAlphnumeric(s.charAt(left))) left++;
       while (left <= right && !isAlphnumeric(s.charAt(right))) right--;
-      if (
-        left <= right &&
-        !isEqualsCaseInsensitive(s.charAt(left), s.charAt(right))
-      ) return false;
+      if (left <= right && !isEqualsCaseInsensitive(s.charAt(left), s.charAt(right))) return false;
 
       left++;
       right--;
@@ -37,9 +34,7 @@ public class LC0125ValidPalindrome {
     while (left < right) {
       if (!isAlphnumeric(s.charAt(left))) left++;
       else if (!isAlphnumeric(s.charAt(right))) right--;
-      else if (
-        !isEqualsCaseInsensitive(s.charAt(left), s.charAt(right))
-      ) return false;
+      else if (!isEqualsCaseInsensitive(s.charAt(left), s.charAt(right))) return false;
       else {
         left++;
         right--;

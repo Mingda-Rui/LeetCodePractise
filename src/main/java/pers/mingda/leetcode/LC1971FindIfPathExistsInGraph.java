@@ -2,12 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC1971FindIfPathExistsInGraph {
 
-  public boolean validPathUnionFind(
-    int n,
-    int[][] edges,
-    int source,
-    int destination
-  ) {
+  public boolean validPathUnionFind(int n, int[][] edges, int source, int destination) {
     int[] unionTable = new int[n];
     unionEdges(edges, unionTable);
 
@@ -37,12 +32,7 @@ public class LC1971FindIfPathExistsInGraph {
   }
 
   // BFS
-  public boolean validPathIteration(
-    int n,
-    int[][] edges,
-    int source,
-    int destination
-  ) {
+  public boolean validPathIteration(int n, int[][] edges, int source, int destination) {
     boolean[] visited = new boolean[n];
     visited[source] = true;
     boolean newVisit = true;

@@ -17,11 +17,7 @@ class LC0140Solution {
   }
 
   private void buildResult(
-    List<List<String>> result,
-    List<String> sentence,
-    LC0140Trie LC0140Trie,
-    String s
-  ) {
+      List<List<String>> result, List<String> sentence, LC0140Trie LC0140Trie, String s) {
     if (s.isEmpty()) {
       List<String> copiedSentence = new LinkedList<>(sentence);
       result.add(copiedSentence);
@@ -48,9 +44,7 @@ class LC0140Solution {
     for (String word : wordDict) {
       LC0140Trie current = LC0140Trie;
       for (char letter : word.toCharArray()) {
-        if (current.next[letter] == null) current.next[letter] = new LC0140Trie(
-          letter
-        );
+        if (current.next[letter] == null) current.next[letter] = new LC0140Trie(letter);
         current = current.next[letter];
       }
       current.isWord = true;
@@ -58,10 +52,7 @@ class LC0140Solution {
     return LC0140Trie;
   }
 
-  private void buildSentences(
-    List<List<String>> result,
-    List<String> sentences
-  ) {
+  private void buildSentences(List<List<String>> result, List<String> sentences) {
     for (List<String> words : result) {
       StringBuilder sb = new StringBuilder();
       for (String word : words) {

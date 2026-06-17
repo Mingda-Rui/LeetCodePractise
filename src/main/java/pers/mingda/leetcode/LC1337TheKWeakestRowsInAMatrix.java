@@ -9,9 +9,7 @@ public class LC1337TheKWeakestRowsInAMatrix {}
 class LC1337Solution {
 
   public int[] kWeakestRows(int[][] mat, int k) {
-    Queue<LC1337Weakness> queue = new PriorityQueue<>(
-      Comparator.reverseOrder()
-    );
+    Queue<LC1337Weakness> queue = new PriorityQueue<>(Comparator.reverseOrder());
     for (int i = 0; i < mat.length; i++) {
       queue.add(getWeakness(mat[i], i));
       if (queue.size() > k) {
@@ -43,8 +41,7 @@ class LC1337Solution {
   }
 }
 
-record LC1337Weakness(int soldiers, int row)
-  implements Comparable<LC1337Weakness> {
+record LC1337Weakness(int soldiers, int row) implements Comparable<LC1337Weakness> {
   @Override
   public int compareTo(LC1337Weakness weakness) {
     if (this.soldiers != weakness.soldiers) {

@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class TreeNode {
 
+  private static final Random randomGenerator = new Random();
   public int data;
   public TreeNode left, right, parent;
   private int size;
-  private static final Random randomGenerator = new Random();
 
   public TreeNode(int d) {
     data = d;
@@ -94,8 +94,7 @@ public class TreeNode {
   private void reduceSize(int size) {
     if (this.size <= size) {
       throw new IllegalArgumentException(
-        "The size of tree node can not be less than or equal to 0"
-      );
+          "The size of tree node can not be less than or equal to 0");
     }
     this.size -= size;
     if (parent != null) {

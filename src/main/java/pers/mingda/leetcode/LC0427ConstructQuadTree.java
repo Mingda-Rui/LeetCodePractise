@@ -31,13 +31,12 @@ class LC0427Node {
   }
 
   public LC0427Node(
-    boolean val,
-    boolean isLeaf,
-    LC0427Node topLeft,
-    LC0427Node topRight,
-    LC0427Node bottomLeft,
-    LC0427Node bottomRight
-  ) {
+      boolean val,
+      boolean isLeaf,
+      LC0427Node topLeft,
+      LC0427Node topRight,
+      LC0427Node bottomLeft,
+      LC0427Node bottomRight) {
     this.val = val;
     this.isLeaf = isLeaf;
     this.topLeft = topLeft;
@@ -67,17 +66,13 @@ class LC0427Solution {
   }
 
   private LC0427Node combineLeaves(
-    LC0427Node topLeft,
-    LC0427Node topRight,
-    LC0427Node bottomLeft,
-    LC0427Node bottomRight
-  ) {
+      LC0427Node topLeft, LC0427Node topRight, LC0427Node bottomLeft, LC0427Node bottomRight) {
     boolean areAllLeaves =
-      topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf;
+        topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf;
     boolean areValEqual =
-      topLeft.val == topRight.val &&
-      topLeft.val == bottomLeft.val &&
-      topLeft.val == bottomRight.val;
+        topLeft.val == topRight.val
+            && topLeft.val == bottomLeft.val
+            && topLeft.val == bottomRight.val;
     if (areAllLeaves && areValEqual) {
       return new LC0427Node(topLeft.val, true);
     }

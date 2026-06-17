@@ -9,11 +9,7 @@ public class _4_5ValidateBst {
     return result.isValide;
   }
 
-  private static TreeNode checkBst(
-    TreeNode node,
-    TreeNode previous,
-    ResultRecorder result
-  ) {
+  private static TreeNode checkBst(TreeNode node, TreeNode previous, ResultRecorder result) {
     if (!result.isValide) return node;
     if (node == null) return previous;
 
@@ -39,10 +35,8 @@ public class _4_5ValidateBst {
 
     if (node.data <= min || node.data > max) return false;
 
-    return (
-      checkBstMinMax(node.left, min, node.data) &&
-      checkBstMinMax(node.right, node.data, max)
-    );
+    return (checkBstMinMax(node.left, min, node.data)
+        && checkBstMinMax(node.right, node.data, max));
   }
 }
 

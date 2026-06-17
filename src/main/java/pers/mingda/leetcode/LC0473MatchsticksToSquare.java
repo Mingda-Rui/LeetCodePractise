@@ -2,9 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Arrays;
 
-public class LC0473MatchsticksToSquare {
-
-}
+public class LC0473MatchsticksToSquare {}
 
 class LC0473Solution {
   public boolean makeSquare(int[] matchsticks) {
@@ -47,7 +45,6 @@ class LC0473Solution {
   }
 }
 
-
 class LC0473DpSolution {
   public boolean makeSquare(int[] matchsticks) {
     int sum = sum(matchsticks);
@@ -66,7 +63,13 @@ class LC0473DpSolution {
     return Arrays.stream(matchsticks).sum();
   }
 
-  private boolean makeSquare(int[] matchsticks, int usedSticks, int matchedSides, int currentSideLen, int targetSideLen, int[] memo) {
+  private boolean makeSquare(
+      int[] matchsticks,
+      int usedSticks,
+      int matchedSides,
+      int currentSideLen,
+      int targetSideLen,
+      int[] memo) {
     if (currentSideLen == targetSideLen) {
       matchedSides++;
       currentSideLen = 0;
@@ -85,7 +88,14 @@ class LC0473DpSolution {
         continue;
       }
 
-      boolean matched = makeSquare(matchsticks, markUsed(usedSticks, i), matchedSides, currentSideLen + matchsticks[i], targetSideLen, memo);
+      boolean matched =
+          makeSquare(
+              matchsticks,
+              markUsed(usedSticks, i),
+              matchedSides,
+              currentSideLen + matchsticks[i],
+              targetSideLen,
+              memo);
       if (matched) {
         memo[usedSticks] = 1;
         return true;
@@ -124,12 +134,18 @@ class LC0473OptimizedDfsSolution {
     return Arrays.stream(matchsticks).sum();
   }
 
-  private boolean makeSquare(int[] matchsticks, boolean[] isStickUsed, int index, int matchedSides,
-                             int currentSideLen, int targetSideLen) {
+  private boolean makeSquare(
+      int[] matchsticks,
+      boolean[] isStickUsed,
+      int index,
+      int matchedSides,
+      int currentSideLen,
+      int targetSideLen) {
     if (currentSideLen == targetSideLen) {
       matchedSides++;
       currentSideLen = 0;
-      index = matchsticks.length - 1;;
+      index = matchsticks.length - 1;
+      ;
     }
 
     if (matchedSides == 3) {
@@ -146,7 +162,14 @@ class LC0473OptimizedDfsSolution {
       }
 
       isStickUsed[i] = true;
-      boolean matched = makeSquare(matchsticks, isStickUsed, i, matchedSides, currentSideLen + matchsticks[i], targetSideLen);
+      boolean matched =
+          makeSquare(
+              matchsticks,
+              isStickUsed,
+              i,
+              matchedSides,
+              currentSideLen + matchsticks[i],
+              targetSideLen);
       isStickUsed[i] = false;
       if (matched) {
         return true;

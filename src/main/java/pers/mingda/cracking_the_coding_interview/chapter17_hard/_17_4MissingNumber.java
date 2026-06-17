@@ -13,12 +13,8 @@ public class _17_4MissingNumber {
     if (column >= MissingNumberBitInteger.INTEGER_SIZE) { // We're done!
       return 0;
     }
-    ArrayList<MissingNumberBitInteger> oneBits = new ArrayList<>(
-      input.size() / 2
-    );
-    ArrayList<MissingNumberBitInteger> zeroBits = new ArrayList<>(
-      input.size() / 2
-    );
+    ArrayList<MissingNumberBitInteger> oneBits = new ArrayList<>(input.size() / 2);
+    ArrayList<MissingNumberBitInteger> zeroBits = new ArrayList<>(input.size() / 2);
 
     for (MissingNumberBitInteger t : input) {
       if (t.fetch(column) == 0) {

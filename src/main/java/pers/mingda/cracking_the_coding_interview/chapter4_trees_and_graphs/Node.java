@@ -3,6 +3,12 @@ package pers.mingda.cracking_the_coding_interview.chapter4_trees_and_graphs;
 import java.util.LinkedList;
 import java.util.List;
 
+enum State {
+  Unvisited,
+  Visited,
+  Visiting,
+}
+
 public class Node {
 
   State state;
@@ -26,10 +32,4 @@ public class Node {
   public void addAdjacentNode(Node node) {
     this.adjacentNodes.add(node);
   }
-}
-
-enum State {
-  Unvisited,
-  Visited,
-  Visiting,
 }

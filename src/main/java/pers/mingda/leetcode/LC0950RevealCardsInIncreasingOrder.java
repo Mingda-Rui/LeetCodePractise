@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class LC0950RevealCardsInIncreasingOrder {
-}
+public class LC0950RevealCardsInIncreasingOrder {}
 
 class LC0950Solution {
   public int[] deckRevealedIncreasing(int[] deck) {
@@ -15,7 +14,7 @@ class LC0950Solution {
     int resultIndex = 0;
     boolean skip = false;
     int i = 0;
-    while(i != len) {
+    while (i != len) {
       if (result[resultIndex] == 0) {
         if (!skip) {
           result[resultIndex] = deck[i];
@@ -38,13 +37,12 @@ class LC0950QueueSolution {
     }
     Arrays.sort(deck);
     int[] result = new int[deck.length];
-    for (int card: deck) {
+    for (int card : deck) {
       int index = queue.remove();
       result[index] = card;
       if (!queue.isEmpty()) {
         queue.add(queue.poll());
       }
-
     }
     return result;
   }

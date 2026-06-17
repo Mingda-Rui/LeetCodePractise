@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC2498FrogJumpII {
-}
+public class LC2498FrogJumpII {}
 
 class LC2498Solution {
   public int maxJump(int[] stones) {

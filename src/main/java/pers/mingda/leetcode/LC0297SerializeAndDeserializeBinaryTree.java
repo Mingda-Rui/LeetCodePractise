@@ -18,11 +18,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     return sb.toString();
   }
 
-  private int serializeRecursive(
-    Queue<TreeNode> queue,
-    StringBuilder sb,
-    int numOfTailingNull
-  ) {
+  private int serializeRecursive(Queue<TreeNode> queue, StringBuilder sb, int numOfTailingNull) {
     TreeNode node = queue.poll();
     if (node == null) {
       sb.append("null,");
@@ -48,11 +44,7 @@ public class LC0297SerializeAndDeserializeBinaryTree {
     return deserializeRecursive(curr, vals, 1);
   }
 
-  private TreeNode deserializeRecursive(
-    Queue<TreeNode> curr,
-    String[] vals,
-    int index
-  ) {
+  private TreeNode deserializeRecursive(Queue<TreeNode> curr, String[] vals, int index) {
     TreeNode node = curr.poll();
     if (index >= vals.length) return node;
     if (node != null) {

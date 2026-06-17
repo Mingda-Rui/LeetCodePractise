@@ -8,14 +8,10 @@ class LC0122Solution {
     int result = 0;
     int pointer = 0;
     while (pointer < prices.length) {
-      while (
-        pointer + 1 < prices.length && prices[pointer] > prices[pointer + 1]
-      ) pointer++;
+      while (pointer + 1 < prices.length && prices[pointer] > prices[pointer + 1]) pointer++;
       int buyPrice = prices[pointer];
 
-      while (
-        pointer + 1 < prices.length && prices[pointer] < prices[pointer + 1]
-      ) pointer++;
+      while (pointer + 1 < prices.length && prices[pointer] < prices[pointer + 1]) pointer++;
       int sellPrice = prices[pointer];
 
       result += (sellPrice - buyPrice);

@@ -9,18 +9,13 @@ public class LC0385MiniParser {
     return constructLC0385NestedInteger(s.toCharArray(), new int[1]);
   }
 
-  private LC0385NestedInteger constructLC0385NestedInteger(
-    char[] arr,
-    int[] indexHolder
-  ) {
+  private LC0385NestedInteger constructLC0385NestedInteger(char[] arr, int[] indexHolder) {
     char c = arr[indexHolder[0]];
 
     if (Character.isDigit(c) || c == '-') {
       int val = 0;
       if (c == '-') indexHolder[0]++;
-      while (
-        indexHolder[0] < arr.length && Character.isDigit(arr[indexHolder[0]])
-      ) {
+      while (indexHolder[0] < arr.length && Character.isDigit(arr[indexHolder[0]])) {
         val = val * 10 + (arr[indexHolder[0]] - '0');
         indexHolder[0]++;
       }
@@ -31,10 +26,7 @@ public class LC0385MiniParser {
       LC0385NestedInteger next = new LC0385NestedInteger();
       indexHolder[0]++;
       while (indexHolder[0] < arr.length && arr[indexHolder[0]] != ']') {
-        LC0385NestedInteger child = constructLC0385NestedInteger(
-          arr,
-          indexHolder
-        );
+        LC0385NestedInteger child = constructLC0385NestedInteger(arr, indexHolder);
         next.add(child);
       }
       indexHolder[0]++;

@@ -37,11 +37,7 @@ public class _4_2MinimalTree {
   }
 
   private static TreeNode createMinimalBstInsertNode(
-    TreeNode root,
-    int[] array,
-    int start,
-    int end
-  ) {
+      TreeNode root, int[] array, int start, int end) {
     if (start >= end) return root;
 
     int midIndex = getMidIndex(start, end);

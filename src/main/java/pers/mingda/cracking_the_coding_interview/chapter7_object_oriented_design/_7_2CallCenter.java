@@ -2,6 +2,13 @@ package pers.mingda.cracking_the_coding_interview.chapter7_object_oriented_desig
 
 import java.util.List;
 
+enum Rank {
+  Respondent,
+  Manager,
+  Director,
+  Responder,
+}
+
 public class _7_2CallCenter {}
 
 class CallHandler {
@@ -110,17 +117,10 @@ class Call {
   }
 }
 
-enum Rank {
-  Respondent,
-  Manager,
-  Director,
-  Responder,
-}
-
 abstract class Employee {
 
-  private Call currentCall = null;
   protected Rank rank;
+  private Call currentCall = null;
 
   public Employee() {}
 

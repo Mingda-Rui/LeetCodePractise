@@ -44,17 +44,12 @@ public class LC1657DetermineIfTwoStringsAreClose {
     return convertCounts;
   }
 
-  private boolean compareMap(
-    Map<Integer, Integer> map1,
-    Map<Integer, Integer> map2
-  ) {
+  private boolean compareMap(Map<Integer, Integer> map1, Map<Integer, Integer> map2) {
     if (map1.size() != map2.size()) {
       return false;
     }
     for (int key : map1.keySet()) {
-      if (
-        !Objects.equals(map1.getOrDefault(key, 0), map2.getOrDefault(key, 0))
-      ) {
+      if (!Objects.equals(map1.getOrDefault(key, 0), map2.getOrDefault(key, 0))) {
         return false;
       }
     }

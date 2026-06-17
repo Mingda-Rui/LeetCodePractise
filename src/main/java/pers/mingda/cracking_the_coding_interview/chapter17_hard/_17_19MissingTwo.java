@@ -47,6 +47,6 @@ public class _17_19MissingTwo {
 
     int solutionX = (int) ((part1 + part2) / part3);
     int solutionY = r1 - solutionX;
-    return new int[] { solutionX, solutionY };
+    return new int[] {solutionX, solutionY};
   }
 }

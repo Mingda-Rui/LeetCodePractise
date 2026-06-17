@@ -4,6 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+enum UserStatusType {
+  Offline,
+  Away,
+  Idle,
+  Available,
+  Busy,
+}
+
+enum RequestStatus {
+  Unread,
+  Read,
+  Accepted,
+  Rejected,
+}
+
 public class _7_7ChatServer {
   // User
   //
@@ -176,10 +191,10 @@ class Message {
 
 class AddRequest {
 
+  RequestStatus status;
   private ChatServerUser fromUser;
   private ChatServerUser toUser;
   private Date date;
-  RequestStatus status;
 
   public AddRequest(ChatServerUser from, ChatServerUser to, Date data) {}
 
@@ -214,19 +229,4 @@ class UserStatus {
   public String getMessage() {
     return message;
   }
-}
-
-enum UserStatusType {
-  Offline,
-  Away,
-  Idle,
-  Available,
-  Busy,
-}
-
-enum RequestStatus {
-  Unread,
-  Read,
-  Accepted,
-  Rejected,
 }

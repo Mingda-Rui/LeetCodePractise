@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LC0698PartitionToKEqualSumSubsets {
-}
+public class LC0698PartitionToKEqualSumSubsets {}
 
 class LC0698Solution {
   public boolean canPartitionKSubsets(int[] nums, int k) {
@@ -25,7 +24,8 @@ class LC0698Solution {
     return findSubsets(nums, k, 0, 0, target, usedIndex, memo);
   }
 
-  private boolean findSubsets(int[] nums, int k, int index, int sum, int target, Set<Integer> usedIndex, int[] memo) {
+  private boolean findSubsets(
+      int[] nums, int k, int index, int sum, int target, Set<Integer> usedIndex, int[] memo) {
     int memoKey = getMemoKey(usedIndex);
     if (memo[memoKey] != 0) {
       return memo[memoKey] == 1;

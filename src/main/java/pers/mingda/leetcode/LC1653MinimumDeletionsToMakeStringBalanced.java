@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC1653MinimumDeletionsToMakeStringBalanced {
-}
+public class LC1653MinimumDeletionsToMakeStringBalanced {}
 
 class LC1653Solution {
   public int minimumDeletions(String s) {

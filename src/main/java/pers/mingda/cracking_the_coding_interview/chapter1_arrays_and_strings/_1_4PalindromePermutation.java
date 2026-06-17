@@ -20,10 +20,7 @@ public class _1_4PalindromePermutation {
     return palindromePermutation(str, false);
   }
 
-  private static boolean palindromePermutation(
-    String str,
-    boolean caseSensitive
-  ) {
+  private static boolean palindromePermutation(String str, boolean caseSensitive) {
     int[] charCounter = new int[256];
     int oddCounter = 0;
     for (char c : str.toCharArray()) {

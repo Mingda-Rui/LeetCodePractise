@@ -45,10 +45,7 @@ public class _2_4Partition {
     return head;
   }
 
-  public static LinkedListNode partitionAddToHeadAndTail(
-    LinkedListNode node,
-    int x
-  ) {
+  public static LinkedListNode partitionAddToHeadAndTail(LinkedListNode node, int x) {
     LinkedListNode head = node;
     LinkedListNode tail = node;
 

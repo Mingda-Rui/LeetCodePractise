@@ -20,11 +20,7 @@ public class LC0049GroupAnagrams {
     return result;
   }
 
-  private List<String> groupAnagramsBruteForce(
-    String[] strs,
-    int current,
-    boolean[] isProcessed
-  ) {
+  private List<String> groupAnagramsBruteForce(String[] strs, int current, boolean[] isProcessed) {
     String curStr = strs[current];
     List<String> anagram = new LinkedList<>();
     anagram.add(curStr);

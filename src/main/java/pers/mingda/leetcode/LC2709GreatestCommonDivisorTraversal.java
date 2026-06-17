@@ -3,8 +3,7 @@ package pers.mingda.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LC2709GreatestCommonDivisorTraversal {
-}
+public class LC2709GreatestCommonDivisorTraversal {}
 
 class LC2709Solution {
   public boolean canTraverseAllPairs(int[] nums) {
@@ -64,8 +63,8 @@ class LC2709Solution {
 
 class UnionFind {
 
-  final private int[] parents;
-  final private int[] sizes;
+  private final int[] parents;
+  private final int[] sizes;
 
   public UnionFind(int size) {
     this.parents = new int[size];

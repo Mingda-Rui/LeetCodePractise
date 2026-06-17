@@ -50,37 +50,20 @@ class TimeMapBinarySearchSolution {
     return tsVal == null ? "" : tsVal.value;
   }
 
-  private TimestampedValue findFloor(
-    List<TimestampedValue> timestamps,
-    int timestamp
-  ) {
+  private TimestampedValue findFloor(List<TimestampedValue> timestamps, int timestamp) {
     return findFloor(timestamps, 0, timestamps.size(), timestamp);
   }
 
   private TimestampedValue findFloor(
-    List<TimestampedValue> timestamps,
-    int start,
-    int end,
-    int timestamp
-  ) {
+      List<TimestampedValue> timestamps, int start, int end, int timestamp) {
     if (start + 1 == end) {
       TimestampedValue floorTsVal = timestamps.get(start);
       return floorTsVal.timestamp <= timestamp ? floorTsVal : null;
     }
     int mid = start + (end - start) / 2;
     TimestampedValue tsVal = timestamps.get(mid);
-    if (tsVal.timestamp < timestamp) return findFloor(
-      timestamps,
-      mid,
-      end,
-      timestamp
-    );
-    else if (tsVal.timestamp > timestamp) return findFloor(
-      timestamps,
-      start,
-      mid,
-      timestamp
-    );
+    if (tsVal.timestamp < timestamp) return findFloor(timestamps, mid, end, timestamp);
+    else if (tsVal.timestamp > timestamp) return findFloor(timestamps, start, mid, timestamp);
     return tsVal;
   }
 }

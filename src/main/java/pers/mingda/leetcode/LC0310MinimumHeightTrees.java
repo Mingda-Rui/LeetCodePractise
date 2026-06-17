@@ -10,8 +10,7 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 
-public class LC0310MinimumHeightTrees {
-}
+public class LC0310MinimumHeightTrees {}
 
 class LC0310Solution {
   public List<Integer> findMinHeightTrees(int n, int[][] edges) {

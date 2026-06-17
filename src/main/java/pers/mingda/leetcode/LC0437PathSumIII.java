@@ -15,12 +15,7 @@ public class LC0437PathSumIII {
     return pathSum(root, targetSum, 0, record);
   }
 
-  private int pathSum(
-    TreeNode root,
-    long targetSum,
-    long currentSum,
-    Map<Long, Integer> record
-  ) {
+  private int pathSum(TreeNode root, long targetSum, long currentSum, Map<Long, Integer> record) {
     if (root == null) {
       return 0;
     }

@@ -33,10 +33,8 @@ class LC1584Solution {
       sumOfEdge += minLen;
       numOfNode++;
       for (int i = 0; i < points.length; i++) {
-        if (!seen[i]) minDist[i] = Math.min(
-          minDist[i],
-          getLengthOfEdge(points[nearestNode], points[i])
-        );
+        if (!seen[i])
+          minDist[i] = Math.min(minDist[i], getLengthOfEdge(points[nearestNode], points[i]));
       }
     }
     return sumOfEdge;
@@ -50,9 +48,7 @@ class LC1584Solution {
 class LC1584LC1584UnionFindSolution {
 
   public int minCostConnectPoints(int[][] points) {
-    Comparator<int[][]> edgeComparator = Comparator.comparingInt(
-      this::getLengthOfEdge
-    );
+    Comparator<int[][]> edgeComparator = Comparator.comparingInt(this::getLengthOfEdge);
     Queue<int[][]> queue = new PriorityQueue<>(edgeComparator);
     Map<int[], Integer> map = new HashMap<>();
     for (int i = 0; i < points.length; i++) {
@@ -61,7 +57,7 @@ class LC1584LC1584UnionFindSolution {
 
       for (int j = i + 1; j < points.length; j++) {
         int[] point2 = points[j];
-        int[][] edge = { point, point2 };
+        int[][] edge = {point, point2};
         queue.offer(edge);
       }
     }

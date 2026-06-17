@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC2134MinimumSwapsToGroupAll1sTogetherII {
-}
+public class LC2134MinimumSwapsToGroupAll1sTogetherII {}
 
 class LC2134Solution {
   public int minSwaps(int[] nums) {

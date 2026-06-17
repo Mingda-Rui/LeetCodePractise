@@ -25,12 +25,10 @@ class LC1275Solution {
     record[columnIndex] += player;
     if (move[0] == move[1]) record[6] += player;
     if (move[0] + move[1] == 2) record[7] += player;
-    if (
-      Math.abs(record[rowIndex]) == 3 ||
-      Math.abs(record[columnIndex]) == 3 ||
-      Math.abs(record[6]) == 3 ||
-      Math.abs(record[7]) == 3
-    ) return true;
+    if (Math.abs(record[rowIndex]) == 3
+        || Math.abs(record[columnIndex]) == 3
+        || Math.abs(record[6]) == 3
+        || Math.abs(record[7]) == 3) return true;
     return false;
   }
 }

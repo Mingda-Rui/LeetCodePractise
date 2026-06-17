@@ -55,8 +55,7 @@ class LC0692Trie {
 
     for (int i = 0; i < word.length(); i++) {
       char letter = word.charAt(i);
-      if (pointer.children[letter] == null) pointer.children[letter] =
-        new LC0692Trie(letter);
+      if (pointer.children[letter] == null) pointer.children[letter] = new LC0692Trie(letter);
       pointer = pointer.children[letter];
       if (i == word.length() - 1) pointer.word = word;
     }

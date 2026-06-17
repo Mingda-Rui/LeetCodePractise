@@ -78,9 +78,7 @@ class MultiSearchTrieNode {
       return;
     }
     char c = word.charAt(0);
-    children
-      .computeIfAbsent(c, MultiSearchTrieNode::new)
-      .add(word.substring(1));
+    children.computeIfAbsent(c, MultiSearchTrieNode::new).add(word.substring(1));
   }
 
   public boolean isLeaf() {

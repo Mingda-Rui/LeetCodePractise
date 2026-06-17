@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC2114MaximumNumberOfWordsFoundInSentences {
-}
+public class LC2114MaximumNumberOfWordsFoundInSentences {}
 
 class LC2114Solution {
   public int mostWordsFound(String[] sentences) {

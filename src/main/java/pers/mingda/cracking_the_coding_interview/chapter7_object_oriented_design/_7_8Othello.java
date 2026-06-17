@@ -1,7 +1,5 @@
 package pers.mingda.cracking_the_coding_interview.chapter7_object_oriented_design;
 
-public class _7_8Othello {}
-
 enum Direction {
   left,
   right,
@@ -14,13 +12,15 @@ enum Color {
   Black,
 }
 
+public class _7_8Othello {}
+
 class Game {
 
-  private Player[] players;
   private static Game instance;
-  private Board board;
   private final int ROWS = 10;
   private final int COLUMNS = 10;
+  private Player[] players;
+  private Board board;
 
   private Game() {
     board = new Board(ROWS, COLUMNS);

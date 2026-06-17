@@ -24,11 +24,7 @@ class LC0261Solution {
     return seen.size() == n;
   }
 
-  private boolean checkCircle(
-    int node,
-    Set<Integer> seen,
-    List<List<Integer>> graph
-  ) {
+  private boolean checkCircle(int node, Set<Integer> seen, List<List<Integer>> graph) {
     if (seen.contains(node)) return false;
     seen.add(node);
     for (int neighbour : graph.get(node)) checkCircle(neighbour, seen, graph);

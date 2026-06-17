@@ -19,11 +19,7 @@ class LC0004Solution {
     return (double) lowerQueue.remove();
   }
 
-  private void enqueue(
-    int[] nums,
-    Queue<Integer> lowerQueue,
-    Queue<Integer> higherQueue
-  ) {
+  private void enqueue(int[] nums, Queue<Integer> lowerQueue, Queue<Integer> higherQueue) {
     for (int num : nums) {
       if (lowerQueue.size() == higherQueue.size()) {
         higherQueue.offer(num);

@@ -57,11 +57,9 @@ class SolutionOne {
     if (s.charAt(length - 1) == '0') {
       length -= 2;
     } else if (length >= 2 && s.charAt(length - 2) == '2') {
-      if (
-        s.charAt(length - 1) == '7' ||
-        s.charAt(length - 1) == '8' ||
-        s.charAt(length - 1) == '9'
-      ) {
+      if (s.charAt(length - 1) == '7'
+          || s.charAt(length - 1) == '8'
+          || s.charAt(length - 1) == '9') {
         length -= 1;
       }
     }

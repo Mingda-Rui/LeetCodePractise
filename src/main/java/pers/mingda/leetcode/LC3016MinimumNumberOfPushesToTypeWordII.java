@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Arrays;
 
-public class LC3016MinimumNumberOfPushesToTypeWordII {
-}
+public class LC3016MinimumNumberOfPushesToTypeWordII {}
 
 class LC3016Solution {
   public int minimumPushes(String word) {

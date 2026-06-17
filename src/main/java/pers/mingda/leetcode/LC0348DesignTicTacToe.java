@@ -24,12 +24,10 @@ class TicTacToe {
     columnRecord[col] += playerCode;
     if (row == col) diagRecord += playerCode;
     if (row + col == n - 1) antiDiagRecord += playerCode;
-    if (
-      Math.abs(rowRecord[row]) == n ||
-      Math.abs(columnRecord[col]) == n ||
-      Math.abs(diagRecord) == n ||
-      Math.abs(antiDiagRecord) == n
-    ) return player;
+    if (Math.abs(rowRecord[row]) == n
+        || Math.abs(columnRecord[col]) == n
+        || Math.abs(diagRecord) == n
+        || Math.abs(antiDiagRecord) == n) return player;
     return 0;
   }
 

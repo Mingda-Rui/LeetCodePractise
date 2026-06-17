@@ -7,6 +7,26 @@ import java.util.Stack;
 
 public class merge {
 
+  public static void main(String[] args) {
+    Stack<Integer> stack = new Stack<>();
+    stack.push(2);
+    final Scanner sc = new Scanner(System.in);
+    final int a = sc.nextInt();
+    final int[] ta = new int[a];
+    final int b = sc.nextInt();
+    final int[] tb = new int[b];
+    for (int ai = 0; ai < a; ++ai) {
+      ta[ai] = sc.nextInt();
+    }
+    for (int bi = 0; bi < b; ++bi) {
+      tb[bi] = sc.nextInt();
+    }
+    merge obj = new merge();
+    List<Integer> res = obj.mergeArrays(ta, ta.length, tb, tb.length);
+    obj.print(res);
+    sc.close();
+  }
+
   private List<Integer> mergeArrays(int[] nums1, int m, int[] nums2, int n) {
     List<Integer> list = new ArrayList<>();
     int i = 0, j = 0;
@@ -33,25 +53,5 @@ public class merge {
         System.out.println();
       }
     }
-  }
-
-  public static void main(String[] args) {
-    Stack<Integer> stack = new Stack<>();
-    stack.push(2);
-    final Scanner sc = new Scanner(System.in);
-    final int a = sc.nextInt();
-    final int[] ta = new int[a];
-    final int b = sc.nextInt();
-    final int[] tb = new int[b];
-    for (int ai = 0; ai < a; ++ai) {
-      ta[ai] = sc.nextInt();
-    }
-    for (int bi = 0; bi < b; ++bi) {
-      tb[bi] = sc.nextInt();
-    }
-    merge obj = new merge();
-    List<Integer> res = obj.mergeArrays(ta, ta.length, tb, tb.length);
-    obj.print(res);
-    sc.close();
   }
 }

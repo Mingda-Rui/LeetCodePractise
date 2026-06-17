@@ -19,8 +19,8 @@ public class _3_3StackOfPlates {}
 
 class SetOfStacks {
 
-  private int threshold;
   protected int currentStackIndex = 0;
+  private int threshold;
   private List<Stack<Integer>> stacks;
 
   public SetOfStacks(int threshold) {
@@ -79,11 +79,7 @@ class SetOfStacksShiftPopAt extends SetOfStacks {
     int val = peekAt(index);
     int stackNumber = (index + 1) / getThreshold();
     int indexInStack = (index + 1) % getThreshold();
-    if (indexInStack == 0) getTargetShiftStack(
-      stackNumber,
-      indexInStack,
-      1
-    ).pop();
+    if (indexInStack == 0) getTargetShiftStack(stackNumber, indexInStack, 1).pop();
     shiftByOne(stackNumber, indexInStack);
     if (getCurrentStack().isEmpty()) currentStackIndex--;
 
@@ -115,11 +111,7 @@ class SetOfStacksShiftPopAt extends SetOfStacks {
     return tmp[startIndex];
   }
 
-  private Stack<Integer> getTargetShiftStack(
-    int currentStack,
-    int startIndex,
-    int shifts
-  ) {
+  private Stack<Integer> getTargetShiftStack(int currentStack, int startIndex, int shifts) {
     int restInStack = getThreshold() - (startIndex + 1);
     int offset = (shifts + restInStack) / getThreshold();
     return getStack(currentStack - offset);
@@ -169,9 +161,8 @@ class SetOfStacksNonShiftPopAt extends SetOfStacks {
   }
 
   public int popAt(int index) {
-    if (index >= totalSize) throw new IllegalArgumentException(
-      "The index exceeds total size, index: " + index
-    );
+    if (index >= totalSize)
+      throw new IllegalArgumentException("The index exceeds total size, index: " + index);
 
     int stackNum = getStackNum(index);
     int indexInStack = getIndexInStack(index);

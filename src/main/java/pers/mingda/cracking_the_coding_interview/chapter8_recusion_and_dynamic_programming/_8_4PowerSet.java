@@ -25,7 +25,7 @@ public class _8_4PowerSet {
 
   ArrayList<ArrayList<Integer>> getSubsets2(ArrayList<Integer> set) {
     ArrayList<ArrayList<Integer>> allSubsets = new ArrayList<>();
-    int max = 1 << set.size();/* Compute 2^n */
+    int max = 1 << set.size(); /* Compute 2^n */
     for (int k = 0; k < max; k++) {
       ArrayList<Integer> subset = convertIntToSet(k, set);
       allSubsets.add(subset);

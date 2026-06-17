@@ -23,9 +23,7 @@ public class LC0448FindAllNumbersDisappearedInAnArray {
     }
 
     List<Integer> result = new LinkedList<>();
-    for (int i = 0; i < nums.length; i++) if (nums[i] != i + 1) result.add(
-      i + 1
-    );
+    for (int i = 0; i < nums.length; i++) if (nums[i] != i + 1) result.add(i + 1);
     return result;
   }
 

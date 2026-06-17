@@ -11,13 +11,7 @@ public class _8_10PaintFill {
     doPaintFill(matrix, row, col, originalColor, targetColor);
   }
 
-  private void doPaintFill(
-    int[][] matrix,
-    int row,
-    int col,
-    int originalColor,
-    int targetColor
-  ) {
+  private void doPaintFill(int[][] matrix, int row, int col, int originalColor, int targetColor) {
     if (row >= matrix.length || col >= matrix[0].length) {
       return;
     }

@@ -10,11 +10,7 @@ public class LC0199BinaryTreeRightSideView {
     return rightSideView(root, 0, new LinkedList<>());
   }
 
-  private List<Integer> rightSideView(
-    TreeNode root,
-    int level,
-    List<Integer> result
-  ) {
+  private List<Integer> rightSideView(TreeNode root, int level, List<Integer> result) {
     if (root == null) return result;
     if (level == result.size()) result.add(root.val);
     rightSideView(root.right, level + 1, result);

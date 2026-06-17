@@ -19,7 +19,7 @@ public class LC0347TopKFrequentElements {
       map.put(num, val + 1);
     }
     Comparator<Map.Entry<Integer, Integer>> comparator =
-      Comparator.comparingInt(Map.Entry::getValue);
+        Comparator.comparingInt(Map.Entry::getValue);
     Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>(comparator);
     for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
       queue.offer(entry);
@@ -60,11 +60,7 @@ public class LC0347TopKFrequentElements {
       }
     }
 
-    for (
-      int count = bucket.size() - 1;
-      count >= 0 && result.size() < k;
-      count--
-    ) {
+    for (int count = bucket.size() - 1; count >= 0 && result.size() < k; count--) {
       List<Integer> bigNums = bucket.get(count);
       if (bigNums != null) result.addAll(bigNums);
     }

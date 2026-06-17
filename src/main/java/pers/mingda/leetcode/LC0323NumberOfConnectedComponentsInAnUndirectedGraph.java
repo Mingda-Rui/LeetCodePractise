@@ -69,15 +69,10 @@ class LC0323DfsSolution {
     return counter;
   }
 
-  private void traverseSet(
-    int node,
-    Set<Integer> unvisted,
-    List<List<Integer>> graph
-  ) {
+  private void traverseSet(int node, Set<Integer> unvisted, List<List<Integer>> graph) {
     unvisted.remove(node);
     // System.out.println(unvisted.size());
-    for (int neighbour : graph.get(node)) if (
-      unvisted.contains(neighbour)
-    ) traverseSet(neighbour, unvisted, graph);
+    for (int neighbour : graph.get(node))
+      if (unvisted.contains(neighbour)) traverseSet(neighbour, unvisted, graph);
   }
 }

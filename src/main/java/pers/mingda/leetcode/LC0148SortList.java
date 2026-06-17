@@ -3,14 +3,9 @@ package pers.mingda.leetcode;
 public class LC0148SortList {}
 
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode() {}
+ * ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val;
+ * this.next = next; } }
  */
 class LC0148Solution {
 
@@ -97,12 +92,7 @@ class LC0148SolutionInPlaceSort {
   }
 
   private ListNode merge(
-    ListNode prevTail,
-    ListNode leftHead,
-    ListNode rightHead,
-    int leftLen,
-    int rightLen
-  ) {
+      ListNode prevTail, ListNode leftHead, ListNode rightHead, int leftLen, int rightLen) {
     if (rightLen == 0) {
       return leftHead;
     }

@@ -44,10 +44,8 @@ public class LC0033SearchInRotatedSortedArray {
       else if (start == end - 1) return -1;
 
       boolean getFirstHalf = true;
-      if (target <= nums[end - 1]) getFirstHalf = !(current < target ||
-        current > nums[end - 1]);
-      else if (target >= nums[start]) getFirstHalf =
-        current > target || current < nums[start];
+      if (target <= nums[end - 1]) getFirstHalf = !(current < target || current > nums[end - 1]);
+      else if (target >= nums[start]) getFirstHalf = current > target || current < nums[start];
       // else // fast break
       //     return - 1;
       start = getFirstHalf ? start : mid;
@@ -65,8 +63,7 @@ public class LC0033SearchInRotatedSortedArray {
       if (nums[mid] == target) return mid;
       else if (start == mid) return -1;
 
-      boolean midAndTargetOnSameSide =
-        (target >= nums[0]) == (nums[mid] >= nums[0]);
+      boolean midAndTargetOnSameSide = (target >= nums[0]) == (nums[mid] >= nums[0]);
       int inf = target > nums[mid] ? Integer.MAX_VALUE : Integer.MIN_VALUE;
       nums[mid] = midAndTargetOnSameSide ? nums[mid] : inf;
 

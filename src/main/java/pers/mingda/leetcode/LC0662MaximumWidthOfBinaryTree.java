@@ -12,12 +12,7 @@ public class LC0662MaximumWidthOfBinaryTree {
     return widthOfBinaryTree(root, 1, 0, min);
   }
 
-  private int widthOfBinaryTree(
-    TreeNode root,
-    int num,
-    int level,
-    List<Integer> min
-  ) {
+  private int widthOfBinaryTree(TreeNode root, int num, int level, List<Integer> min) {
     if (root == null) return 0;
     if (level == min.size()) min.add(num);
 

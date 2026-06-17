@@ -66,12 +66,7 @@ class LC0116Node {
     val = _val;
   }
 
-  public LC0116Node(
-    int _val,
-    LC0116Node _left,
-    LC0116Node _right,
-    LC0116Node _next
-  ) {
+  public LC0116Node(int _val, LC0116Node _left, LC0116Node _right, LC0116Node _next) {
     val = _val;
     left = _left;
     right = _right;

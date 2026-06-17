@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-public class LC1462CourseScheduleIV {
-}
+public class LC1462CourseScheduleIV {}
 
 class LC1462Solution {
   public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
@@ -32,13 +31,16 @@ class LC1462Solution {
     return prerequisiteMap;
   }
 
-  private boolean checkPrerequisite(int[] prerequisite, Map<Integer, Set<Integer>> prerequisiteMap) {
+  private boolean checkPrerequisite(
+      int[] prerequisite, Map<Integer, Set<Integer>> prerequisiteMap) {
     int prerequisiteClass = prerequisite[0];
     int dependentClass = prerequisite[1];
     Set<Integer> seen = new HashSet<>();
     return findDependent(prerequisiteClass, dependentClass, prerequisiteMap, seen);
   }
-  private boolean findDependent(int current, int target, Map<Integer, Set<Integer>> prerequisiteMap, Set<Integer> seen) {
+
+  private boolean findDependent(
+      int current, int target, Map<Integer, Set<Integer>> prerequisiteMap, Set<Integer> seen) {
     if (current == target) {
       return true;
     }
@@ -115,7 +117,9 @@ class LC1462BiDirectionMapSolution {
     for (int[] query : queries) {
       int prerequisiteCourse = query[0];
       int dependentCourse = query[1];
-      boolean isPrerequisite = dependentMap.containsKey(prerequisiteCourse) && dependentMap.get(prerequisiteCourse).contains(dependentCourse);
+      boolean isPrerequisite =
+          dependentMap.containsKey(prerequisiteCourse)
+              && dependentMap.get(prerequisiteCourse).contains(dependentCourse);
       result.add(isPrerequisite);
     }
     return result;
@@ -128,7 +132,9 @@ class LC1462BiDirectionMapSolution {
       int prerequisiteCourse = prerequisite[0];
       int dependentCourse = prerequisite[1];
 
-      prerequisiteMap.computeIfAbsent(dependentCourse, k -> new HashSet<>()).add(prerequisiteCourse);
+      prerequisiteMap
+          .computeIfAbsent(dependentCourse, k -> new HashSet<>())
+          .add(prerequisiteCourse);
     }
 
     Map<Integer, Set<Integer>> dependentMap = new HashMap<>();
@@ -140,13 +146,15 @@ class LC1462BiDirectionMapSolution {
     return dependentMap;
   }
 
-  private Set<Integer> findAllPrerequisites(int course, Map<Integer, Set<Integer>> prerequisiteMap) {
+  private Set<Integer> findAllPrerequisites(
+      int course, Map<Integer, Set<Integer>> prerequisiteMap) {
     Set<Integer> seen = new HashSet<>();
     findAllPrerequisites(course, prerequisiteMap, seen);
     return seen;
   }
 
-  private void findAllPrerequisites(int course, Map<Integer, Set<Integer>> prerequisiteMap, Set<Integer> seen) {
+  private void findAllPrerequisites(
+      int course, Map<Integer, Set<Integer>> prerequisiteMap, Set<Integer> seen) {
     if (seen.contains(course)) {
       return;
     }
@@ -190,7 +198,8 @@ class LC1462TopologySortSolution {
         if (indegree[dependentCourse] == 0) {
           courses.add(dependentCourse);
         }
-        Set<Integer> prerequisiteCourses = prerequisiteMap.computeIfAbsent(dependentCourse, k -> new HashSet<>());
+        Set<Integer> prerequisiteCourses =
+            prerequisiteMap.computeIfAbsent(dependentCourse, k -> new HashSet<>());
         prerequisiteCourses.add(course);
         if (prerequisiteMap.containsKey(course)) {
           prerequisiteCourses.addAll(prerequisiteMap.get(course));
@@ -202,7 +211,9 @@ class LC1462TopologySortSolution {
     for (int[] query : queries) {
       int prerequisiteCourse = query[0];
       int dependentCourse = query[1];
-      boolean isPrerequisite = prerequisiteMap.containsKey(dependentCourse) && prerequisiteMap.get(dependentCourse).contains(prerequisiteCourse);
+      boolean isPrerequisite =
+          prerequisiteMap.containsKey(dependentCourse)
+              && prerequisiteMap.get(dependentCourse).contains(prerequisiteCourse);
       result.add(isPrerequisite);
     }
     return result;
@@ -217,7 +228,6 @@ class LC1462FloydWarshallSolution {
       int dependentCourse = prerequisite[1];
       isPrerequisite[prerequisiteCourse][dependentCourse] = true;
     }
-
 
     for (int intermediate = 0; intermediate < numCourses; intermediate++) {
       for (int start = 0; start < numCourses; start++) {

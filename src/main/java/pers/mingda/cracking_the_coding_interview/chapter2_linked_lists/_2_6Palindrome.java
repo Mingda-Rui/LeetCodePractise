@@ -31,10 +31,7 @@ public class _2_6Palindrome {
   }
 
   private static boolean isPalindromeRecursion(
-    LinkedListNode node,
-    LinkedListNode copied,
-    int remainSize
-  ) {
+      LinkedListNode node, LinkedListNode copied, int remainSize) {
     if (node == null) return true;
     if (remainSize < 1 && node.data != copied.data) return false;
 
@@ -63,10 +60,7 @@ public class _2_6Palindrome {
   }
 
   public static boolean isPalindromeRecursionV2(
-    LinkedListNode node,
-    int size,
-    LinkedListNode[] restHolder
-  ) {
+      LinkedListNode node, int size, LinkedListNode[] restHolder) {
     if (size <= 1) {
       restHolder[0] = (size == 1) ? node.next : node;
       return true;

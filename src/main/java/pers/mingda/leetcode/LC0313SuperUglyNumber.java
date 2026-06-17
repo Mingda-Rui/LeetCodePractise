@@ -4,13 +4,9 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class LC0313SuperUglyNumber {
-}
+public class LC0313SuperUglyNumber {}
 
 class LC0313Solution {
-  // Change val to long to handle overflow cleanly
-  record UglyNumber(int val, int prime, int index) {}
-
   public int nthSuperUglyNumber(int n, int[] primes) {
     // Sort based on the long value safely
     Queue<UglyNumber> queue = new PriorityQueue<>(Comparator.comparingInt(UglyNumber::val));
@@ -27,7 +23,7 @@ class LC0313Solution {
       UglyNumber un = queue.remove();
 
       // Cast un.val() to int for comparison since nums holds ints
-      if ((int)un.val() != nums[counter - 1]) {
+      if ((int) un.val() != nums[counter - 1]) {
         nums[counter] = un.val();
         counter++;
       }
@@ -37,9 +33,12 @@ class LC0313Solution {
 
       // Only push back if it hasn't overflowed past Integer.MAX_VALUE
       if (nextVal <= Integer.MAX_VALUE) {
-        queue.add(new UglyNumber((int)nextVal, un.prime(), un.index() + 1));
+        queue.add(new UglyNumber((int) nextVal, un.prime(), un.index() + 1));
       }
     }
     return nums[n - 1];
   }
+
+  // Change val to long to handle overflow cleanly
+  record UglyNumber(int val, int prime, int index) {}
 }

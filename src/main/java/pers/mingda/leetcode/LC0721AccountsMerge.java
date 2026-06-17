@@ -10,8 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-public class LC0721AccountsMerge {
-}
+public class LC0721AccountsMerge {}
 
 class LC0721Solution {
   public List<List<String>> accountsMerge(List<List<String>> accounts) {
@@ -37,7 +36,11 @@ class LC0721Solution {
     return result;
   }
 
-  private List<String> mergeAccount(List<List<String>> accounts, int[] remainingAccounts, int accountIndex, Map<String, List<Integer>> emailToAccount) {
+  private List<String> mergeAccount(
+      List<List<String>> accounts,
+      int[] remainingAccounts,
+      int accountIndex,
+      Map<String, List<Integer>> emailToAccount) {
     Set<String> mergedAccount = new HashSet<>();
     String name = "";
 

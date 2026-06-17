@@ -23,7 +23,7 @@ class LC1642Solution {
       }
 
       boolean shouldUseLadder =
-        ladders != 0 && !ladderUsed.isEmpty() && ladderUsed.peek() < heightDiff;
+          ladders != 0 && !ladderUsed.isEmpty() && ladderUsed.peek() < heightDiff;
       if (shouldUseLadder) {
         ladderUsed.add(heightDiff);
       }

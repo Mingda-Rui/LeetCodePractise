@@ -9,12 +9,7 @@ public class _10_5SparseSearch {
     return binarySearch(sortedStr, target, 0, sortedStr.length);
   }
 
-  public int binarySearch(
-    String[] sortedStr,
-    String target,
-    int left,
-    int right
-  ) {
+  public int binarySearch(String[] sortedStr, String target, int left, int right) {
     if (left >= right) {
       return -1;
     }
@@ -33,9 +28,7 @@ public class _10_5SparseSearch {
     int mid = (left + right) / 2;
     int leftIndex = mid;
     int rightIndex = mid;
-    while (
-      sortedStr[mid].isEmpty() && (leftIndex >= left || rightIndex < right)
-    ) {
+    while (sortedStr[mid].isEmpty() && (leftIndex >= left || rightIndex < right)) {
       leftIndex--;
       rightIndex++;
       if (leftIndex >= left && !sortedStr[leftIndex].isEmpty()) {

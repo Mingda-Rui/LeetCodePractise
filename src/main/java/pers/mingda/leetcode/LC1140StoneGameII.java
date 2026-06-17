@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC1140StoneGameII {
-}
+public class LC1140StoneGameII {}
 
 class LC1140Solution {
   public int stoneGameII(int[] piles) {

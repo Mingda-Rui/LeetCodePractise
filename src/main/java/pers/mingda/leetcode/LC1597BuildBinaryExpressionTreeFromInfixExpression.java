@@ -54,10 +54,7 @@ class LC1597Solution {
     return start;
   }
 
-  private boolean greaterThanPrevSign(
-    LC1597Node sign,
-    Stack<LC1597Node> stack
-  ) {
+  private boolean greaterThanPrevSign(LC1597Node sign, Stack<LC1597Node> stack) {
     // TODO sign check
     if (stack.isEmpty()) return true;
     LC1597Node prevSign = stack.peek();
@@ -75,11 +72,7 @@ class LC1597Solution {
     };
   }
 
-  private LC1597Node popStack(
-    Stack<LC1597Node> stack,
-    LC1597Node digit,
-    LC1597Node sign
-  ) {
+  private LC1597Node popStack(Stack<LC1597Node> stack, LC1597Node digit, LC1597Node sign) {
     while (!stack.isEmpty() && !greaterThanPrevSign(sign, stack)) {
       LC1597Node prevSign = stack.pop();
       LC1597Node prev = stack.pop();

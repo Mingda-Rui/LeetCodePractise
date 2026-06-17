@@ -3,8 +3,7 @@ package pers.mingda.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC0343IntegerBreak {
-}
+public class LC0343IntegerBreak {}
 
 class LC0343Solution {
   public int integerBreak(int n) {

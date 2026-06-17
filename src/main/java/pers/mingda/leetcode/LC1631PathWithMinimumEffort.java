@@ -5,8 +5,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class LC1631PathWithMinimumEffort {
-}
+public class LC1631PathWithMinimumEffort {}
 
 class LC1632Solution {
   public int minimumEffortPath(int[][] heights) {
@@ -45,7 +44,7 @@ class LC1632Solution {
   }
 }
 
-record LC1631Cell(int row, int col, int effort){}
+record LC1631Cell(int row, int col, int effort) {}
 
 class LC1631UnionFindSolution {
   public int minimumEffortPath(int[][] heights) {
@@ -57,11 +56,13 @@ class LC1631UnionFindSolution {
       for (int j = 0; j < cols; j++) {
         int flatten = flatten(i, j, cols);
         if (i + 1 < rows) {
-          LC1631Edge toBelow = new LC1631Edge(flatten, flatten(i + 1, j, cols), getDiff(i, j, 1, 0, heights));
+          LC1631Edge toBelow =
+              new LC1631Edge(flatten, flatten(i + 1, j, cols), getDiff(i, j, 1, 0, heights));
           nonDecreaseEdges.add(toBelow);
         }
         if (j + 1 < cols) {
-          LC1631Edge toRight = new LC1631Edge(flatten, flatten(i, j + 1, cols), getDiff(i, j, 0, 1, heights));
+          LC1631Edge toRight =
+              new LC1631Edge(flatten, flatten(i, j + 1, cols), getDiff(i, j, 0, 1, heights));
           nonDecreaseEdges.add(toRight);
         }
       }
@@ -129,7 +130,7 @@ class LC1631UnionFind {
   }
 }
 
-record LC1631Edge(int start, int end, int diff){}
+record LC1631Edge(int start, int end, int diff) {}
 
 class LC1631BinarySearchSolution {
   public int minimumEffortPath(int[][] heights) {
@@ -153,7 +154,8 @@ class LC1631BinarySearchSolution {
     return canFindRoute(heights, maxDiff, 0, 0, visited);
   }
 
-  private boolean canFindRoute(int[][] heights, int maxDiff, int row, int col, boolean[][] visited) {
+  private boolean canFindRoute(
+      int[][] heights, int maxDiff, int row, int col, boolean[][] visited) {
     if (visited[row][col]) {
       return false;
     }
@@ -168,7 +170,7 @@ class LC1631BinarySearchSolution {
     for (int[] direction : directions) {
       int nextRow = row + direction[0];
       int nextCol = col + direction[1];
-      if (!isInBounds (heights, nextRow, nextCol)) {
+      if (!isInBounds(heights, nextRow, nextCol)) {
         continue;
       }
       int diff = Math.abs(heights[row][col] - heights[nextRow][nextCol]);

@@ -11,19 +11,15 @@ public class LC0417PacificAtlanticWaterFlow {
     int[][] record = new int[heights.length][heights[0].length];
     int maxX = heights.length - 1;
     int maxY = heights[0].length - 1;
-    for (int i = 0; i <= maxX; i++) for (int j = 0; j <= maxY; j++) if (
-      i == 0 || j == 0
-    ) dfs(heights, record, i, j, 1);
+    for (int i = 0; i <= maxX; i++)
+      for (int j = 0; j <= maxY; j++) if (i == 0 || j == 0) dfs(heights, record, i, j, 1);
 
-    for (int i = 0; i <= maxX; i++) for (int j = 0; j <= maxY; j++) if (
-      i == maxX || j == maxY
-    ) dfs(heights, record, i, j, 2);
+    for (int i = 0; i <= maxX; i++)
+      for (int j = 0; j <= maxY; j++) if (i == maxX || j == maxY) dfs(heights, record, i, j, 2);
 
-    for (int i = 0; i < heights.length; i++) for (
-      int j = 0;
-      j < heights[0].length;
-      j++
-    ) if (record[i][j] == 3) result.add(Arrays.asList(i, j));
+    for (int i = 0; i < heights.length; i++)
+      for (int j = 0; j < heights[0].length; j++)
+        if (record[i][j] == 3) result.add(Arrays.asList(i, j));
 
     return result;
   }
@@ -31,19 +27,18 @@ public class LC0417PacificAtlanticWaterFlow {
   private void dfs(int[][] heights, int[][] record, int x, int y, int sea) {
     if (record[x][y] >= sea) return;
     record[x][y] += sea;
-    int[][] neighbors = new int[][] {
-      { 0, 1 },
-      { 0, -1 },
-      { 1, 0 },
-      { -1, 0 },
-    };
+    int[][] neighbors =
+        new int[][] {
+          {0, 1},
+          {0, -1},
+          {1, 0},
+          {-1, 0},
+        };
     for (int[] neighbor : neighbors) {
       int nextX = x + neighbor[0];
       int nextY = y + neighbor[1];
-      if (
-        checkCoord(heights, nextX, nextY) &&
-        heights[nextX][nextY] >= heights[x][y]
-      ) dfs(heights, record, nextX, nextY, sea);
+      if (checkCoord(heights, nextX, nextY) && heights[nextX][nextY] >= heights[x][y])
+        dfs(heights, record, nextX, nextY, sea);
     }
   }
 

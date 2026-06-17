@@ -7,19 +7,16 @@ import java.util.Map;
 public class LC0460LfuCache {}
 
 /**
- * Your LFUCache object will be instantiated and called as such:
- * LFUCache obj = new LFUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
+ * Your LFUCache object will be instantiated and called as such: LFUCache obj = new
+ * LFUCache(capacity); int param_1 = obj.get(key); obj.put(key,value);
  */
-
 class LC0460LfuCacheSolution {
 
   private final int capacity;
-  private int leastFreq;
   private final Map<Integer, Integer> cache;
   private final Map<Integer, Integer> keyToFreq;
   private final Map<Integer, LinkedHashSet<Integer>> freqToKey;
+  private int leastFreq;
 
   public LC0460LfuCacheSolution(int capacity) {
     this.capacity = capacity;

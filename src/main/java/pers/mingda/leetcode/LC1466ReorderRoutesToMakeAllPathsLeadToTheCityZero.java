@@ -18,11 +18,7 @@ public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
     return countFlip(0, -1, map);
   }
 
-  private int countFlip(
-    int city,
-    int parentCity,
-    Map<Integer, Set<List<Integer>>> map
-  ) {
+  private int countFlip(int city, int parentCity, Map<Integer, Set<List<Integer>>> map) {
     int count = 0;
     for (List<Integer> dest : map.get(city)) {
       int destCity = dest.getFirst();
@@ -38,10 +34,7 @@ public class LC1466ReorderRoutesToMakeAllPathsLeadToTheCityZero {
     return count;
   }
 
-  private void mapConnection(
-    int[] connection,
-    Map<Integer, Set<List<Integer>>> map
-  ) {
+  private void mapConnection(int[] connection, Map<Integer, Set<List<Integer>>> map) {
     int origin = connection[0];
     int dest = connection[1];
     map.computeIfAbsent(origin, computeEmptySet()).add(List.of(dest, 1));

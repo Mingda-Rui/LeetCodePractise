@@ -3,6 +3,23 @@ package pers.mingda.cracking_the_coding_interview.chapter8_recusion_and_dynamic_
 import java.util.Arrays;
 import java.util.List;
 
+enum Coin {
+  Quarter(25),
+  Dime(10),
+  Nickel(5),
+  Penny(1);
+
+  private final int cents;
+
+  Coin(int cents) {
+    this.cents = cents;
+  }
+
+  public int getCents() {
+    return cents;
+  }
+}
+
 public class _8_11Coins {
 
   public int countReps(int n) {
@@ -25,33 +42,12 @@ public class _8_11Coins {
     remains.removeLast();
 
     int repCount = 0;
-    for (
-      int coinCount = 0;
-      coinCount <= amount / coin.getCents();
-      coinCount++
-    ) {
+    for (int coinCount = 0; coinCount <= amount / coin.getCents(); coinCount++) {
       int remainAmount = amount - coin.getCents() * coinCount;
       repCount += countReps(remainAmount, remains, map);
     }
     remains.add(coin);
     map[amount][coin.ordinal()] = repCount;
     return repCount;
-  }
-}
-
-enum Coin {
-  Quarter(25),
-  Dime(10),
-  Nickel(5),
-  Penny(1);
-
-  private final int cents;
-
-  Coin(int cents) {
-    this.cents = cents;
-  }
-
-  public int getCents() {
-    return cents;
   }
 }

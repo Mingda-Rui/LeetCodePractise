@@ -18,16 +18,12 @@ class Solution_String {
     char negativeSign = '-';
 
     if (numInString.charAt(0) == negativeSign) {
-      String unsignedReversedNum = new StringBuilder(
-        numInString.substring(1, lengthOfString)
-      )
-        .reverse()
-        .toString();
+      String unsignedReversedNum =
+          new StringBuilder(numInString.substring(1, lengthOfString)).reverse().toString();
       return reverseNum(negativeSign + unsignedReversedNum);
     } else if (numInString.charAt(endIndex) == '0') {
-      String reversedNum = new StringBuilder(numInString.substring(0, endIndex))
-        .reverse()
-        .toString();
+      String reversedNum =
+          new StringBuilder(numInString.substring(0, endIndex)).reverse().toString();
       return reverseNum(reversedNum);
     } else {
       String reversedNum = new StringBuilder(numInString).reverse().toString();
@@ -37,11 +33,9 @@ class Solution_String {
 
   private int reverseNum(String num) {
     long reversedNumInLong = Long.parseLong(num);
-    return (
-        lowerBoundary <= reversedNumInLong && reversedNumInLong <= upperBoundary
-      )
-      ? (int) reversedNumInLong
-      : 0;
+    return (lowerBoundary <= reversedNumInLong && reversedNumInLong <= upperBoundary)
+        ? (int) reversedNumInLong
+        : 0;
   }
 }
 

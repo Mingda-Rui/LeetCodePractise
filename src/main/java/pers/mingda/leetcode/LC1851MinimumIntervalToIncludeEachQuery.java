@@ -10,9 +10,7 @@ import java.util.Queue;
 public class LC1851MinimumIntervalToIncludeEachQuery {
 
   public int[] minInterval(int[][] intervals, int[] queries) {
-    Queue<int[]> pq = new PriorityQueue<>(
-      (i1, i2) -> (i1[1] - i1[0]) - (i2[1] - i2[0])
-    );
+    Queue<int[]> pq = new PriorityQueue<>((i1, i2) -> (i1[1] - i1[0]) - (i2[1] - i2[0]));
     int[] copied = Arrays.copyOf(queries, queries.length);
     Arrays.sort(copied);
     Arrays.sort(intervals, Comparator.comparingInt(i -> i[0]));
@@ -26,9 +24,7 @@ public class LC1851MinimumIntervalToIncludeEachQuery {
       if (smallestQueries.containsKey(query)) {
         continue;
       }
-      while (
-        intervalIndex < intervals.length && intervals[intervalIndex][0] <= query
-      ) {
+      while (intervalIndex < intervals.length && intervals[intervalIndex][0] <= query) {
         pq.add(intervals[intervalIndex]);
         intervalIndex++;
       }

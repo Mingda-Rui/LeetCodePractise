@@ -12,12 +12,7 @@ class JukeBox {
   private Set<CD> cdCollection;
   private SongSelector ts;
 
-  public JukeBox(
-    CDPlayer cdPlayer,
-    User user,
-    Set<CD> cdCollection,
-    SongSelector ts
-  ) {
+  public JukeBox(CDPlayer cdPlayer, User user, Set<CD> cdCollection, SongSelector ts) {
     // ...
   }
 
@@ -102,6 +97,15 @@ class User {
   private String name;
   private long ID;
 
+  public User(String name, long ID) {
+    // ...
+  }
+
+  public static User addUser(String name, long id) {
+    // ...
+    return null;
+  }
+
   public String getName() {
     return name;
   }
@@ -118,17 +122,8 @@ class User {
     this.ID = id;
   }
 
-  public User(String name, long ID) {
-    // ...
-  }
-
   public User getUser() {
     return this;
-  }
-
-  public static User addUser(String name, long id) {
-    // ...
-    return null;
   }
 }
 

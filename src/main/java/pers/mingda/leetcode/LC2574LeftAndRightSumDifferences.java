@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC2574LeftAndRightSumDifferences {
-}
+public class LC2574LeftAndRightSumDifferences {}
 
 class LC2574Solution {
   public int[] leftRightDifference(int[] nums) {

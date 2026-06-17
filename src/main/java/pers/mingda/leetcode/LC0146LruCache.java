@@ -76,10 +76,10 @@ class LRUCache {
 
 class DoubleLinkedNode {
 
-  private int key;
-  private int value;
   DoubleLinkedNode prev;
   DoubleLinkedNode next;
+  private int key;
+  private int value;
 
   public DoubleLinkedNode(int key, int value) {
     this.key = key;

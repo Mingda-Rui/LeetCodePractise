@@ -32,12 +32,7 @@ class LC0030Solution {
   }
 
   private List<Integer> checkConcatenatedStr(
-    String s,
-    int head,
-    int wordLen,
-    int totalLen,
-    Map<String, Integer> wordCount
-  ) {
+      String s, int head, int wordLen, int totalLen, Map<String, Integer> wordCount) {
     List<Integer> result = new ArrayList<>();
     int tail = head;
     Map<String, Integer> currCount = new HashMap<>();

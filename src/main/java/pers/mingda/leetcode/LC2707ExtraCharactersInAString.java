@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LC2707ExtraCharactersInAString {
-}
+public class LC2707ExtraCharactersInAString {}
 
 class LC2707Solution {
   public int minExtraChar(String s, String[] dictionary) {

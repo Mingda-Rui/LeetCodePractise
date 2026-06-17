@@ -3,19 +3,16 @@ package pers.mingda.leetcode;
 public class LC0604DesignCompressedStringIterator {}
 
 /**
- * Your StringIterator object will be instantiated and called as such:
- * StringIterator obj = new StringIterator(compressedString);
- * char param_1 = obj.next();
- * boolean param_2 = obj.hasNext();
+ * Your StringIterator object will be instantiated and called as such: StringIterator obj = new
+ * StringIterator(compressedString); char param_1 = obj.next(); boolean param_2 = obj.hasNext();
  */
 class LC0603StringIterator {
 
   private static final char WHITE_SPACE = ' ';
-
+  private final String compressedString;
   private int currentCount;
   private char currentChar;
   private int index;
-  private final String compressedString;
 
   public LC0603StringIterator(String compressedString) {
     this.currentCount = 0;

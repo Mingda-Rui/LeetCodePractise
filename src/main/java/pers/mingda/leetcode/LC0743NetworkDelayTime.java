@@ -13,9 +13,7 @@ class LC0743Solution {
 
   public int networkDelayTime(int[][] times, int n, int k) {
     Map<Integer, LC0743Node> network = buildNetwork(times);
-    Comparator<LC0743Node> comparator = Comparator.comparingInt(LC0743Node ->
-      LC0743Node.time
-    );
+    Comparator<LC0743Node> comparator = Comparator.comparingInt(LC0743Node -> LC0743Node.time);
     PriorityQueue<LC0743Node> queue = new PriorityQueue<>(comparator);
     LC0743Node start = network.get(k);
     start.time = 0;

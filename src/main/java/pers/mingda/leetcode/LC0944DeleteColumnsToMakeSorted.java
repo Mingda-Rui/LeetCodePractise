@@ -1,7 +1,6 @@
 package pers.mingda.leetcode;
 
-public class LC0944DeleteColumnsToMakeSorted {
-}
+public class LC0944DeleteColumnsToMakeSorted {}
 
 class LC0944Solution {
   public int minDeletionSize(String[] strs) {

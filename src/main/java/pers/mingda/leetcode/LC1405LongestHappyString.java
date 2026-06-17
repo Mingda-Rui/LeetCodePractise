@@ -9,9 +9,9 @@ public class LC1405LongestHappyString {}
 class LC1405Solution {
 
   public String longestDiverseString(int a, int b, int c) {
-    int[] count = { a, b, c };
-    Comparator<Character> comparator = Comparator.<Character>comparingInt(ch -> count[ch - 'a']
-    ).reversed();
+    int[] count = {a, b, c};
+    Comparator<Character> comparator =
+        Comparator.<Character>comparingInt(ch -> count[ch - 'a']).reversed();
     Queue<Character> queue = new PriorityQueue<>(comparator);
     for (char ch = 'a'; ch <= 'c'; ch++) {
       if (count[ch - 'a'] > 0) {
@@ -61,28 +61,22 @@ class LC1405GreedySolution {
 
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < maxLen; i++) {
-      if (
-        (a >= b && a >= c && consecutiveA < 2) ||
-        (a > 0 && (consecutiveB == 2 || consecutiveC == 2))
-      ) {
+      if ((a >= b && a >= c && consecutiveA < 2)
+          || (a > 0 && (consecutiveB == 2 || consecutiveC == 2))) {
         sb.append('a');
         a--;
         consecutiveA++;
         consecutiveB = 0;
         consecutiveC = 0;
-      } else if (
-        (b >= a && b >= c && consecutiveB < 2) ||
-        (b > 0 && (consecutiveA == 2 || consecutiveC == 2))
-      ) {
+      } else if ((b >= a && b >= c && consecutiveB < 2)
+          || (b > 0 && (consecutiveA == 2 || consecutiveC == 2))) {
         sb.append('b');
         b--;
         consecutiveB++;
         consecutiveA = 0;
         consecutiveC = 0;
-      } else if (
-        (c >= a && c >= b && consecutiveC < 2) ||
-        (c > 0 && (consecutiveA == 2 || consecutiveB == 2))
-      ) {
+      } else if ((c >= a && c >= b && consecutiveC < 2)
+          || (c > 0 && (consecutiveA == 2 || consecutiveB == 2))) {
         sb.append('c');
         c--;
         consecutiveC++;

@@ -12,12 +12,7 @@ public class LC0518CoinChangeII {
     return findChange(amount, coins, 0, changeRecord);
   }
 
-  private int findChange(
-    int amount,
-    int[] coins,
-    int coinIndex,
-    int[][] changeRecord
-  ) {
+  private int findChange(int amount, int[] coins, int coinIndex, int[][] changeRecord) {
     if (amount == 0) {
       return 1;
     }
@@ -41,9 +36,7 @@ public class LC0518CoinChangeII {
     for (int i = 1; i <= coins.length; i++) {
       for (int a = 1; a <= amount; a++) {
         int amountLessCoin = a - coins[i - 1];
-        int sameCoinCount = amountLessCoin >= 0
-          ? changeRecord[amountLessCoin]
-          : 0;
+        int sameCoinCount = amountLessCoin >= 0 ? changeRecord[amountLessCoin] : 0;
         changeRecord[a] += sameCoinCount;
       }
     }

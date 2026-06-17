@@ -19,16 +19,8 @@ public class _16_16SubSort {
       maxInLeft = Math.max(maxInLeft, array[i]);
     }
 
-    int adjustedLeftMost = adjustLeftWithMin(
-      array,
-      leftMostSortedIndex,
-      minInRight
-    );
-    int adjustedRightMost = adjustRightWithMax(
-      array,
-      rightMostSortedIndex,
-      maxInLeft
-    );
+    int adjustedLeftMost = adjustLeftWithMin(array, leftMostSortedIndex, minInRight);
+    int adjustedRightMost = adjustRightWithMax(array, rightMostSortedIndex, maxInLeft);
 
     return List.of(adjustedLeftMost + 1, adjustedRightMost - 1);
   }

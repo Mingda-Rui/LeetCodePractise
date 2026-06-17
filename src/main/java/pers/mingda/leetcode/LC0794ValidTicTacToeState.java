@@ -40,11 +40,7 @@ class LC0794Solution {
       if (i < 3) difference += num;
     }
     if (winsForX > 0 && winsForO > 0) return false;
-    else if (winsForX == 0 && winsForO == 0) return (
-      difference == 0 || difference == 1
-    );
-    return (
-      (winsForX > 0 && difference == 1) || (winsForO > 0 && difference == 0)
-    );
+    else if (winsForX == 0 && winsForO == 0) return (difference == 0 || difference == 1);
+    return ((winsForX > 0 && difference == 1) || (winsForO > 0 && difference == 0));
   }
 }

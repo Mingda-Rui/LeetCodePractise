@@ -4,18 +4,12 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LC3217DeleteNodesFromLinkedListPresentInArray {
-}
+public class LC3217DeleteNodesFromLinkedListPresentInArray {}
 
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode() {}
+ * ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val;
+ * this.next = next; } }
  */
 class LC3217Solution {
   public ListNode modifiedList(int[] nums, ListNode head) {

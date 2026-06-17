@@ -7,6 +7,9 @@ import java.util.stream.IntStream;
 
 public class LC1926NearestExitFromEntranceInMaze {
 
+  List<List<Integer>> offsets =
+      List.of(List.of(0, 1), List.of(0, -1), List.of(-1, 0), List.of(1, 0));
+
   public int nearestExit(char[][] maze, int[] entrance) {
     int row = maze.length;
     int col = maze[0].length;
@@ -29,19 +32,8 @@ public class LC1926NearestExitFromEntranceInMaze {
     return -1;
   }
 
-  List<List<Integer>> offsets = List.of(
-    List.of(0, 1),
-    List.of(0, -1),
-    List.of(-1, 0),
-    List.of(1, 0)
-  );
-
   private boolean findExit(
-    char[][] maze,
-    List<Integer> spot,
-    boolean[][] visited,
-    Queue<List<Integer>> toVisit
-  ) {
+      char[][] maze, List<Integer> spot, boolean[][] visited, Queue<List<Integer>> toVisit) {
     int row = spot.getFirst();
     int col = spot.getLast();
 
@@ -70,11 +62,6 @@ public class LC1926NearestExitFromEntranceInMaze {
 
   private boolean isExit(char[][] maze, int row, int col) {
     // boolean isEmptyCell = maze[row][col] == '.';
-    return (
-      row == 0 ||
-      col == 0 ||
-      row == maze.length - 1 ||
-      col == maze[0].length - 1
-    );
+    return (row == 0 || col == 0 || row == maze.length - 1 || col == maze[0].length - 1);
   }
 }

@@ -89,14 +89,14 @@ class MinesweeperBoard {
   private Cell[] bombs;
   private int numUnexposedRemaining;
   private int[][] deltas = { // Offsets of 8 surrounding cells
-    { -1, -1 },
-    { -1, 0 },
-    { -1, 1 },
-    { 0, -1 },
-    { 0, 1 },
-    { 1, -1 },
-    { 1, 0 },
-    { 1, 1 },
+    {-1, -1},
+    {-1, 0},
+    {-1, 1},
+    {0, -1},
+    {0, 1},
+    {1, -1},
+    {1, 0},
+    {1, 1},
   };
 
   public MinesweeperBoard(int r, int c, int b) {
@@ -206,12 +206,6 @@ class UserPlayResult {
 
 class MinesweeperGame {
 
-  public enum GameState {
-    WON,
-    LOST,
-    RUNNING,
-  }
-
   private MinesweeperBoard board;
   private int rows;
   private int columns;
@@ -236,5 +230,11 @@ class MinesweeperGame {
   public boolean playGame() {
     // ...
     return false;
+  }
+
+  public enum GameState {
+    WON,
+    LOST,
+    RUNNING,
   }
 }

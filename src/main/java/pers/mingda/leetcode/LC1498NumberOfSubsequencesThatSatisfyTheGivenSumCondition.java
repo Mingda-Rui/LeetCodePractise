@@ -2,8 +2,7 @@ package pers.mingda.leetcode;
 
 import java.util.Arrays;
 
-public class LC1498NumberOfSubsequencesThatSatisfyTheGivenSumCondition {
-}
+public class LC1498NumberOfSubsequencesThatSatisfyTheGivenSumCondition {}
 
 class LC1498Solution {
   public int numSubSeq(int[] nums, int target) {

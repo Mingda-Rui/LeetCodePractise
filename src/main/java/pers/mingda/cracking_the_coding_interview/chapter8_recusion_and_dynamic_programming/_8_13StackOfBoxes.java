@@ -18,10 +18,7 @@ public class _8_13StackOfBoxes {
     return maxHeight;
   }
 
-  private int stackBoxes(
-    List<Box> remainingBoxes,
-    Map<Box, Integer> heightMap
-  ) {
+  private int stackBoxes(List<Box> remainingBoxes, Map<Box, Integer> heightMap) {
     if (remainingBoxes.isEmpty()) {
       return 0;
     }
@@ -35,18 +32,15 @@ public class _8_13StackOfBoxes {
       Box nextBox = remainingBoxes.get(i);
       if (!nextBox.canStackOn(currentBox)) continue;
       int height =
-        currentBox.getHeight() +
-        stackBoxes(remainingBoxes.subList(i, remainingBoxes.size()), heightMap);
+          currentBox.getHeight()
+              + stackBoxes(remainingBoxes.subList(i, remainingBoxes.size()), heightMap);
       maxHeight = Math.max(maxHeight, height);
     }
     heightMap.put(currentBox, maxHeight);
     return maxHeight;
   }
 
-  private int stackBoxes2(
-    List<Box> remainingBoxes,
-    Map<Box, Integer> heightMap
-  ) {
+  private int stackBoxes2(List<Box> remainingBoxes, Map<Box, Integer> heightMap) {
     if (remainingBoxes.isEmpty()) {
       return 0;
     }
@@ -59,20 +53,15 @@ public class _8_13StackOfBoxes {
       return currentBox.getHeight();
     }
     int maxHeight = 0;
-    int nextHeight = findNextBox(remainingBoxes)
-      .map(next ->
-        stackBoxes2(
-          remainingBoxes.subList(next, remainingBoxes.size()),
-          heightMap
-        )
-      )
-      .orElse(0);
+    int nextHeight =
+        findNextBox(remainingBoxes)
+            .map(
+                next -> stackBoxes2(remainingBoxes.subList(next, remainingBoxes.size()), heightMap))
+            .orElse(0);
     maxHeight = Math.max(maxHeight, nextHeight + currentBox.getHeight());
 
-    int skipCurrentHeight = stackBoxes2(
-      remainingBoxes.subList(1, remainingBoxes.size()),
-      heightMap
-    );
+    int skipCurrentHeight =
+        stackBoxes2(remainingBoxes.subList(1, remainingBoxes.size()), heightMap);
     maxHeight = Math.max(maxHeight, skipCurrentHeight);
     heightMap.put(currentBox, maxHeight);
     return maxHeight;
@@ -101,10 +90,6 @@ class Box {
   }
 
   public boolean canStackOn(Box buttomBox) {
-    return (
-      buttomBox.height > height &&
-      buttomBox.width > width &&
-      buttomBox.depth > depth
-    );
+    return (buttomBox.height > height && buttomBox.width > width && buttomBox.depth > depth);
   }
 }

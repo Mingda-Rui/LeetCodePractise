@@ -7,9 +7,7 @@ import java.util.List;
 public class _17_25WordRectangle {
 
   String[] list;
-  WordRectangleWordGroup[] groupList = WordRectangleWordGroup.createWordGroups(
-    list
-  );
+  WordRectangleWordGroup[] groupList = WordRectangleWordGroup.createWordGroups(list);
   int maxWordLength = groupList.length;
   WordRectangleTrie[] trieList = new WordRectangleTrie[maxWordLength];
 
@@ -141,27 +139,6 @@ class WordRectangleWordGroup {
   private HashMap<String, Boolean> lookup = new HashMap<>();
   private ArrayList<String> group = new ArrayList<>();
 
-  public boolean containsWord(String s) {
-    return lookup.containsKey(s);
-  }
-
-  public int length() {
-    return group.size();
-  }
-
-  public String getWord(int i) {
-    return group.get(i);
-  }
-
-  public ArrayList<String> getWords() {
-    return group;
-  }
-
-  public void addWord(String s) {
-    group.add(s);
-    lookup.put(s, true);
-  }
-
   public static WordRectangleWordGroup[] createWordGroups(String[] list) {
     WordRectangleWordGroup[] groupList;
     int maxWordLength = 0;
@@ -185,6 +162,27 @@ class WordRectangleWordGroup {
       groupList[wordLength].addWord(s);
     }
     return groupList;
+  }
+
+  public boolean containsWord(String s) {
+    return lookup.containsKey(s);
+  }
+
+  public int length() {
+    return group.size();
+  }
+
+  public String getWord(int i) {
+    return group.get(i);
+  }
+
+  public ArrayList<String> getWords() {
+    return group;
+  }
+
+  public void addWord(String s) {
+    group.add(s);
+    lookup.put(s, true);
   }
 }
 

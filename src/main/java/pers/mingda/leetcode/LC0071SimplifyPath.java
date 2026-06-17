@@ -18,10 +18,8 @@ public class LC0071SimplifyPath {
         startWithDot = true;
         if (i + 1 == arr.length || arr[i + 1] == '/') {
           i++;
-        } else if (
-          (i + 2 == arr.length && arr[i + 1] == '.') ||
-          (arr[i + 1] == '.' && arr[i + 2] == '/')
-        ) {
+        } else if ((i + 2 == arr.length && arr[i + 1] == '.')
+            || (arr[i + 1] == '.' && arr[i + 2] == '/')) {
           if (stack.size() > 1) stack.pop();
           current = stack.peek();
           i += 2;
@@ -29,9 +27,7 @@ public class LC0071SimplifyPath {
           startWithDot = false;
         }
       }
-      if (
-        !startWithDot && (current < 0 || arr[current] != '/' || arr[i] != '/')
-      ) {
+      if (!startWithDot && (current < 0 || arr[current] != '/' || arr[i] != '/')) {
         current++;
         arr[current] = arr[i];
         if (arr[current] == '/') stack.push(current);

@@ -20,10 +20,7 @@ public class _8_8PermutationsWithDuplicates {
     return charCount;
   }
 
-  private List<String> getPerms(
-    Map<Character, Integer> charCount,
-    int remains
-  ) {
+  private List<String> getPerms(Map<Character, Integer> charCount, int remains) {
     if (remains == 0) {
       return List.of("");
     }

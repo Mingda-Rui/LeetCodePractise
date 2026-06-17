@@ -3,14 +3,9 @@ package pers.mingda.leetcode;
 public class LC1474DeleteNNodesAfterMNodesOfALinkedList {}
 
 /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
+ * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode() {}
+ * ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val;
+ * this.next = next; } }
  */
 class LC1474Solution {
 

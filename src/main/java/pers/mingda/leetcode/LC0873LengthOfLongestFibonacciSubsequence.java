@@ -3,8 +3,7 @@ package pers.mingda.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC0873LengthOfLongestFibonacciSubsequence {
-}
+public class LC0873LengthOfLongestFibonacciSubsequence {}
 
 class LC0873Solution {
   public int lenLongestFibSubsequence(int[] arr) {

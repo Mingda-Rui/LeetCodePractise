@@ -22,10 +22,7 @@ public class LC0224BasicCalculator {
         return result;
       } else if (Character.isDigit(c)) {
         currentVal = currentVal * 10 + (c - '0');
-        while (
-          indexHolder[0] + 1 < s.length() &&
-          Character.isDigit(s.charAt(indexHolder[0] + 1))
-        ) {
+        while (indexHolder[0] + 1 < s.length() && Character.isDigit(s.charAt(indexHolder[0] + 1))) {
           indexHolder[0]++;
           c = s.charAt(indexHolder[0]);
           currentVal = currentVal * 10 + (c - '0');

@@ -12,10 +12,7 @@ class LC2300Solution {
 
     int[] result = new int[spells.length];
     for (int i = 0; i < spells.length; i++) {
-      result[i] = findSuccess(
-        potions,
-        (long) Math.ceil((1.0 * success) / spells[i])
-      );
+      result[i] = findSuccess(potions, (long) Math.ceil((1.0 * success) / spells[i]));
     }
     return result;
   }

@@ -18,7 +18,7 @@ public class _16_21SumSwap {
     for (int num1 : array1) {
       int num2 = num1 - target;
       if (set2.contains(num2)) {
-        return new int[] { num1, num2 };
+        return new int[] {num1, num2};
       }
     }
 

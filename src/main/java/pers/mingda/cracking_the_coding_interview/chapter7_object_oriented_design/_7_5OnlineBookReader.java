@@ -190,13 +190,13 @@ class ReaderUser {
   private String details;
   private int accountType;
 
-  public void renewMembership() {}
-
   public ReaderUser(int id, String details, int accountType) {
     userId = id;
     this.details = details;
     this.accountType = accountType;
   }
+
+  public void renewMembership() {}
 
   /* Getters and setters */
   public int getID() {

@@ -64,6 +64,6 @@ class LC090Solution {
     int row = zeroBasedLabel / n;
     int remain = zeroBasedLabel % n;
     int col = row % 2 == 0 ? remain : n - 1 - remain;
-    return new int[] { (n - 1) - row, col };
+    return new int[] {(n - 1) - row, col};
   }
 }

@@ -3,8 +3,6 @@ package pers.mingda.cracking_the_coding_interview.chapter7_object_oriented_desig
 import java.util.ArrayList;
 import java.util.List;
 
-public class _7_1DeckOfCards {}
-
 enum Suit {
   Club(0),
   Diamond(1),
@@ -17,21 +15,21 @@ enum Suit {
     value = v;
   }
 
-  public int getValue() {
-    return value;
-  }
-
   public static Suit getSuitFromValue(int value) {
     for (Suit suit : Suit.values()) {
       if (suit.getValue() == value) {
         return suit;
       }
     }
-    throw new IllegalArgumentException(
-      "Can not determine suit of value " + value
-    );
+    throw new IllegalArgumentException("Can not determine suit of value " + value);
+  }
+
+  public int getValue() {
+    return value;
   }
 }
+
+public class _7_1DeckOfCards {}
 
 class Desk<T extends Card> {
 
@@ -70,14 +68,13 @@ class Desk<T extends Card> {
 
 abstract class Card {
 
-  private boolean available = true;
-
   /*
    * number or face that's on card - a number 2 through 10, or 11 for Jack, 12 for
    * Queen, 13 for King, or 1 for Ace
    * */
   protected int faceValue;
   protected Suit suit;
+  private boolean available = true;
 
   public Card(int c, Suit s) {
     faceValue = c;

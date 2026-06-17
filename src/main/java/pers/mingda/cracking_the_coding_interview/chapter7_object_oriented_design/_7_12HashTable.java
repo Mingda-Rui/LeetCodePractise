@@ -6,21 +6,6 @@ public class _7_12HashTable {}
 
 class Hash<K, V> {
 
-  /* Linked list node class. Used only within hash table. No one else should get
-   * access to this. Implemented as doubly linked list. */
-  private static class LinkedListNode<K, V> {
-
-    public LinkedListNode<K, V> next;
-    public LinkedListNode<K, V> prev;
-    public K key;
-    public V value;
-
-    public LinkedListNode(K k, V v) {
-      key = k;
-      value = v;
-    }
-  }
-
   private ArrayList<LinkedListNode<K, V>> arr;
 
   public Hash(int capacity) {
@@ -92,5 +77,20 @@ class Hash<K, V> {
   /* Really naive function to map a key to an index. */
   public int getIndexForKey(K key) {
     return Math.abs(key.hashCode() % arr.size());
+  }
+
+  /* Linked list node class. Used only within hash table. No one else should get
+   * access to this. Implemented as doubly linked list. */
+  private static class LinkedListNode<K, V> {
+
+    public LinkedListNode<K, V> next;
+    public LinkedListNode<K, V> prev;
+    public K key;
+    public V value;
+
+    public LinkedListNode(K k, V v) {
+      key = k;
+      value = v;
+    }
   }
 }

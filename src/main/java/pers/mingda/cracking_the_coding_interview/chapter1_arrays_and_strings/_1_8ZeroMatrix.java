@@ -52,11 +52,7 @@ public class _1_8ZeroMatrix {
     }
   }
 
-  private static void setZerosRowAndColumn(
-    int[][] matrix,
-    int row,
-    int column
-  ) {
+  private static void setZerosRowAndColumn(int[][] matrix, int row, int column) {
     if (row >= 0) {
       for (int j = 0; j < matrix[0].length; j++) {
         matrix[row][j] = 0;

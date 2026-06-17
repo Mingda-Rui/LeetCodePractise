@@ -64,8 +64,7 @@ public class _10_7MissingInt {
   }
 
   /* Get count of items within each range. */
-  private int[] getCountPerBlock(String filename, int rangeSize)
-    throws FileNotFoundException {
+  private int[] getCountPerBlock(String filename, int rangeSize) throws FileNotFoundException {
     int arraySize = Integer.MAX_VALUE / rangeSize + 1;
     int[] blocks = new int[arraySize];
 
@@ -89,11 +88,8 @@ public class _10_7MissingInt {
   }
 
   /* Create a bit vector for the values within a specific range. */
-  private byte[] getBitVectorForRange(
-    String filename,
-    int blockIndex,
-    int rangeSize
-  ) throws FileNotFoundException {
+  private byte[] getBitVectorForRange(String filename, int blockIndex, int rangeSize)
+      throws FileNotFoundException {
     int startRange = blockIndex * rangeSize;
     int endRange = startRange + rangeSize;
     byte[] bitVector = new byte[rangeSize];

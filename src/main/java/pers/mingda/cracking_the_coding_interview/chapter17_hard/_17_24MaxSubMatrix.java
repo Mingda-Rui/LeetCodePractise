@@ -35,9 +35,7 @@ public class _17_24MaxSubMatrix {
   int calculateSum(int[][] matrix, int[][] preComputedSum, int row, int col) {
     int leftSum = col - 1 < 0 ? 0 : preComputedSum[row][col - 1];
     int topSum = row - 1 < 0 ? 0 : preComputedSum[row - 1][col];
-    int topLeftSum = col - 1 < 0 || row - 1 < 0
-      ? 0
-      : preComputedSum[row - 1][col - 1];
+    int topLeftSum = col - 1 < 0 || row - 1 < 0 ? 0 : preComputedSum[row - 1][col - 1];
     return leftSum + topSum - topLeftSum + matrix[row][col];
   }
 

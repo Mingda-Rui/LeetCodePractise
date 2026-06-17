@@ -35,8 +35,7 @@ public class LC0690EmployeeImportance {
   private int getImportanceDfsHelper(Map<Integer, Employee> map, int id) {
     Employee employee = map.get(id);
     int totalImportance = employee.importance;
-    for (int subId : employee.subordinates) totalImportance +=
-      getImportanceDfsHelper(map, subId);
+    for (int subId : employee.subordinates) totalImportance += getImportanceDfsHelper(map, subId);
     return totalImportance;
   }
 }

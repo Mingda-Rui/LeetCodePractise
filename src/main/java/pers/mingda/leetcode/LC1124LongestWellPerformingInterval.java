@@ -26,11 +26,7 @@ public class LC1124LongestWellPerformingInterval {
         if (size > relaxDays) {
           int diff = size - relaxDays;
           int pDays =
-            days +
-            Math.min(
-              diff - 1,
-              tiringDays[head] + (hours.length - tiringDays[tail] - 1)
-            );
+              days + Math.min(diff - 1, tiringDays[head] + (hours.length - tiringDays[tail] - 1));
           max = Math.max(max, pDays);
         }
       }
@@ -115,10 +111,8 @@ public class LC1124LongestWellPerformingInterval {
           numOfRelaxDay = netRelaxDay;
           record[numOfRelaxDay] = i;
         }
-        if (netRelaxDay + 1 <= numOfRelaxDay) result = Math.max(
-          result,
-          i - record[netRelaxDay + 1]
-        );
+        if (netRelaxDay + 1 <= numOfRelaxDay)
+          result = Math.max(result, i - record[netRelaxDay + 1]);
       }
     }
 

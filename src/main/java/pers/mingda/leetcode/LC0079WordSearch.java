@@ -16,17 +16,9 @@ public class LC0079WordSearch {
   }
 
   private boolean exist(
-    char[][] board,
-    int x,
-    int y,
-    String word,
-    int wordIndex,
-    boolean[][] visited
-  ) {
+      char[][] board, int x, int y, String word, int wordIndex, boolean[][] visited) {
     if (wordIndex == word.length()) return true;
-    if (
-      x < 0 || x >= board.length || y < 0 || y >= board[0].length
-    ) return false;
+    if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) return false;
     char curr = word.charAt(wordIndex);
     if (visited[x][y] || board[x][y] != curr) return false;
 

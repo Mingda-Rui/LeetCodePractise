@@ -21,11 +21,8 @@ public class LC2462TotalCostToHireKWorkers {
         lastIndex--;
       }
 
-      if (
-        !firstCandidates.isEmpty() &&
-        (lastCandidates.isEmpty() ||
-          firstCandidates.peek() <= lastCandidates.peek())
-      ) {
+      if (!firstCandidates.isEmpty()
+          && (lastCandidates.isEmpty() || firstCandidates.peek() <= lastCandidates.peek())) {
         cost += firstCandidates.poll();
       } else if (!lastCandidates.isEmpty()) {
         cost += lastCandidates.poll();

@@ -42,9 +42,7 @@ class LC0742Solution {
   }
 
   private NodeCloestLeaf recordShortestDistanceToLeaf(
-    TreeNode root,
-    Map<TreeNode, NodeCloestLeaf> map
-  ) {
+      TreeNode root, Map<TreeNode, NodeCloestLeaf> map) {
     // 1. get the closest leaf to the current node
     // 2. build up this cloestlesgMsp ?
     // 3. fill up stack
@@ -54,37 +52,20 @@ class LC0742Solution {
     NodeCloestLeaf right = recordShortestDistanceToLeaf(root.right, map);
 
     NodeCloestLeaf shortestPath;
-    if (left == null && right == null) shortestPath = new NodeCloestLeaf(
-      root,
-      root,
-      0
-    );
+    if (left == null && right == null) shortestPath = new NodeCloestLeaf(root, root, 0);
     else if (left != null && right != null) {
       if (left.distance < right.distance) {
-        shortestPath = new NodeCloestLeaf(
-          root,
-          map.get(root.left).cloestLeafNode,
-          left.distance + 1
-        );
+        shortestPath =
+            new NodeCloestLeaf(root, map.get(root.left).cloestLeafNode, left.distance + 1);
       } else {
-        shortestPath = new NodeCloestLeaf(
-          root,
-          map.get(root.right).cloestLeafNode,
-          right.distance + 1
-        );
+        shortestPath =
+            new NodeCloestLeaf(root, map.get(root.right).cloestLeafNode, right.distance + 1);
       }
     } else if (left != null) {
-      shortestPath = new NodeCloestLeaf(
-        root,
-        map.get(root.left).cloestLeafNode,
-        left.distance + 1
-      );
+      shortestPath = new NodeCloestLeaf(root, map.get(root.left).cloestLeafNode, left.distance + 1);
     } else {
-      shortestPath = new NodeCloestLeaf(
-        root,
-        map.get(root.right).cloestLeafNode,
-        right.distance + 1
-      );
+      shortestPath =
+          new NodeCloestLeaf(root, map.get(root.right).cloestLeafNode, right.distance + 1);
     }
 
     map.put(root, shortestPath);
@@ -95,9 +76,7 @@ class LC0742Solution {
     if (root == null) return false;
     stack.push(root);
     if (root.val == k) return true;
-    if (
-      fillOutStack(root.left, stack, k) || fillOutStack(root.right, stack, k)
-    ) return true;
+    if (fillOutStack(root.left, stack, k) || fillOutStack(root.right, stack, k)) return true;
     stack.pop();
     return false;
   }
@@ -132,9 +111,7 @@ class LC0742BfsSolution {
 
       if (node.left != null && !seen.contains(node.left)) queue.add(node.left);
 
-      if (node.right != null && !seen.contains(node.right)) queue.add(
-        node.right
-      );
+      if (node.right != null && !seen.contains(node.right)) queue.add(node.right);
 
       TreeNode parent = childToParent.getOrDefault(node, null);
       if (parent != null && !seen.contains(parent)) queue.add(parent);
@@ -143,11 +120,7 @@ class LC0742BfsSolution {
   }
 
   /** build child -> parent map for the path between root to target */
-  private TreeNode buildChildToParentMap(
-    TreeNode node,
-    int target,
-    Map<TreeNode, TreeNode> map
-  ) {
+  private TreeNode buildChildToParentMap(TreeNode node, int target, Map<TreeNode, TreeNode> map) {
     if (node == null) return null;
 
     if (node.val == target) return node;

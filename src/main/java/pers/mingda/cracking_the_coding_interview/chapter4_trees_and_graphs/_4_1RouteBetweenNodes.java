@@ -15,9 +15,7 @@ public class _4_1RouteBetweenNodes {
       Node node = nodes.remove(0);
       if (node == end) return true;
       node.state = State.Visited;
-      for (Node next : node.getAdjacent()) if (
-        next.state != State.Visited
-      ) nodes.add(next);
+      for (Node next : node.getAdjacent()) if (next.state != State.Visited) nodes.add(next);
     }
 
     return false;

@@ -22,15 +22,15 @@ public class _8_9Parens {
     }
 
     List<String> allParens = new ArrayList<>();
-    List<String> openPrefix = generateParens(remainOpenP - 1, remainCloseP)
-      .stream()
-      .map(parens -> OPEN_PARENS + parens)
-      .toList();
+    List<String> openPrefix =
+        generateParens(remainOpenP - 1, remainCloseP).stream()
+            .map(parens -> OPEN_PARENS + parens)
+            .toList();
     allParens.addAll(openPrefix);
-    List<String> closePrefix = generateParens(remainOpenP, remainCloseP - 1)
-      .stream()
-      .map(parens -> CLOSE_PARENS + parens)
-      .toList();
+    List<String> closePrefix =
+        generateParens(remainOpenP, remainCloseP - 1).stream()
+            .map(parens -> CLOSE_PARENS + parens)
+            .toList();
     allParens.addAll(closePrefix);
     return allParens;
   }

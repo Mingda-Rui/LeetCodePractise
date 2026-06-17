@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class LC1489FindCriticalAndPseudoCriticalEdgesInMinimumSpanningTree {
-}
+public class LC1489FindCriticalAndPseudoCriticalEdgesInMinimumSpanningTree {}
 
 class LC1489Solution {
   public List<List<Integer>> findCriticalAndPseudoCriticalEdges(int n, int[][] edges) {
@@ -32,7 +31,8 @@ class LC1489Solution {
     return result;
   }
 
-  private int getMinimumMstWeight(int[][] sortedEdges, int n, int[] ignoredEdge, int[] enforcedEdge) {
+  private int getMinimumMstWeight(
+      int[][] sortedEdges, int n, int[] ignoredEdge, int[] enforcedEdge) {
     L1489UnionFind uf = new L1489UnionFind(n);
     int minMstWeight = enforcedEdge == null ? 0 : enforcedEdge[2];
     int usedEdgeCount = enforcedEdge == null ? 0 : 1;
@@ -60,8 +60,8 @@ class LC1489Solution {
 
 class L1489UnionFind {
 
-  final private int[] parents;
-  final private int[] ranks;
+  private final int[] parents;
+  private final int[] ranks;
 
   public L1489UnionFind(int size) {
     this.parents = new int[size];

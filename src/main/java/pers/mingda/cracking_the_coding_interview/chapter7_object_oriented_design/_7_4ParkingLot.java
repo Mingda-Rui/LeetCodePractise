@@ -2,13 +2,13 @@ package pers.mingda.cracking_the_coding_interview.chapter7_object_oriented_desig
 
 import java.util.ArrayList;
 
-public class _7_4ParkingLot {}
-
 enum VehicleSize {
   Motorcycle,
   Compact,
   Large,
 }
+
+public class _7_4ParkingLot {}
 
 abstract class Vehicle {
 
@@ -84,8 +84,8 @@ class Motorcycle extends Vehicle {
 
 class ParkingLot {
 
-  private Level[] levels;
   private final int NUM_LEVELS = 5;
+  private Level[] levels;
 
   public ParkingLot() {
     // ...
@@ -101,10 +101,10 @@ class ParkingLot {
 /* Represents a level in a parking garage */
 class Level {
 
+  private static final int SPOT_PER_ROW = 10;
   private int floor;
   private ParkingSpot[] spots;
   private int availableSpots = 0; // number of free spots
-  private static final int SPOT_PER_ROW = 10;
 
   public Level(int flr, int numberSpots) {
     // ...

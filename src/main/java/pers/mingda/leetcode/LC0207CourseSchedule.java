@@ -30,10 +30,7 @@ public class LC0207CourseSchedule {
       int preCourse = queue.remove();
       numCourses--;
 
-      for (int course : preMap.getOrDefault(
-        preCourse,
-        Collections.emptySet()
-      )) {
+      for (int course : preMap.getOrDefault(preCourse, Collections.emptySet())) {
         deps[course]--;
         if (deps[course] == 0) queue.add(course);
       }
@@ -60,11 +57,7 @@ public class LC0207CourseSchedule {
     return true;
   }
 
-  private boolean canFinishDfs(
-    int course,
-    Map<Integer, Set<Integer>> map,
-    boolean[] visited
-  ) {
+  private boolean canFinishDfs(int course, Map<Integer, Set<Integer>> map, boolean[] visited) {
     if (visited[course]) return false;
     visited[course] = true;
     for (int preCourse : map.getOrDefault(course, Collections.emptySet())) {

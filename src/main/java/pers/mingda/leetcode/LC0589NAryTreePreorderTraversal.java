@@ -17,9 +17,7 @@ public class LC0589NAryTreePreorderTraversal {
       result.add(current.val);
 
       List<LC0589Node> children = current.children;
-      for (int i = children.size() - 1; i >= 0; i--) stack.push(
-        children.get(i)
-      );
+      for (int i = children.size() - 1; i >= 0; i--) stack.push(children.get(i));
     }
     return result;
   }
@@ -29,10 +27,7 @@ public class LC0589NAryTreePreorderTraversal {
     return preorderRecursive(root, result);
   }
 
-  private List<Integer> preorderRecursive(
-    LC0589Node root,
-    List<Integer> result
-  ) {
+  private List<Integer> preorderRecursive(LC0589Node root, List<Integer> result) {
     if (root == null) return result;
     result.add(root.val);
 

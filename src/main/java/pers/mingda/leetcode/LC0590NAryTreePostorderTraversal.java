@@ -25,10 +25,7 @@ public class LC0590NAryTreePostorderTraversal {
     return postorderRecursive(root, result);
   }
 
-  private List<Integer> postorderRecursive(
-    LC0590Node root,
-    List<Integer> result
-  ) {
+  private List<Integer> postorderRecursive(LC0590Node root, List<Integer> result) {
     if (root == null) return result;
 
     for (LC0590Node child : root.children) postorderRecursive(child, result);

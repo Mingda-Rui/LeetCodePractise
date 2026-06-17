@@ -24,10 +24,7 @@ public class LC0138CopyListWithRandomPointer {
   }
 
   private LC0138Node copyByNext(
-    LC0138Node origin,
-    LC0138Node copy,
-    Map<LC0138Node, LC0138Node> map
-  ) {
+      LC0138Node origin, LC0138Node copy, Map<LC0138Node, LC0138Node> map) {
     if (origin == null) return origin;
     LC0138Node next = new LC0138Node(origin.val);
     map.put(origin, next);

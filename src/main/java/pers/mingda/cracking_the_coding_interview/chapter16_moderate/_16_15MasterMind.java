@@ -4,6 +4,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+enum MasterMindColor {
+  RED("R"),
+  YELLOW("Y"),
+  GREEN("G"),
+  BLUE("B");
+
+  String code;
+
+  MasterMindColor(String code) {
+    this.code = code;
+  }
+
+  public char getCode() {
+    return code.charAt(0);
+  }
+}
+
 public class _16_15MasterMind {
 
   MasterMindResult estimate(String guess, String solution) {
@@ -38,10 +55,10 @@ public class _16_15MasterMind {
     }
 
     return Arrays.stream(MasterMindColor.values())
-      .map(MasterMindColor::getCode)
-      .map(c -> Math.min(guessMap.get(c), solutionMap.get(c)))
-      .mapToInt(Integer::intValue)
-      .sum();
+        .map(MasterMindColor::getCode)
+        .map(c -> Math.min(guessMap.get(c), solutionMap.get(c)))
+        .mapToInt(Integer::intValue)
+        .sum();
   }
 }
 
@@ -53,22 +70,5 @@ class MasterMindResult {
   public MasterMindResult(int hits, int pseudoHits) {
     this.hits = hits;
     this.pseudoHits = pseudoHits;
-  }
-}
-
-enum MasterMindColor {
-  RED("R"),
-  YELLOW("Y"),
-  GREEN("G"),
-  BLUE("B");
-
-  String code;
-
-  MasterMindColor(String code) {
-    this.code = code;
-  }
-
-  public char getCode() {
-    return code.charAt(0);
   }
 }

@@ -6,6 +6,19 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
+interface LC0341NestedInteger {
+  // @return true if this LC0341NestedInteger holds a single integer, rather than a nested list.
+  public boolean isInteger();
+
+  // @return the single integer that this LC0341NestedInteger holds, if it holds a single integer
+  // Return null if this LC0341NestedInteger holds a nested list
+  public Integer getInteger();
+
+  // @return the nested list that this LC0341NestedInteger holds, if it holds a nested list
+  // Return empty list if this LC0341NestedInteger holds a single integer
+  public List<LC0341NestedInteger> getList();
+}
+
 public class LC0341FlattenNestedListIterator {}
 
 class NestedIterator implements Iterator<Integer> {
@@ -27,10 +40,7 @@ class NestedIterator implements Iterator<Integer> {
     return iterator.hasNext();
   }
 
-  private List<Integer> parseNestedInt(
-    List<LC0341NestedInteger> nestedList,
-    List<Integer> result
-  ) {
+  private List<Integer> parseNestedInt(List<LC0341NestedInteger> nestedList, List<Integer> result) {
     for (LC0341NestedInteger nestedInt : nestedList) {
       if (nestedInt.isInteger()) result.add(nestedInt.getInteger());
       else parseNestedInt(nestedInt.getList(), result);
@@ -107,17 +117,4 @@ class NestedIteratorWithIteratorStack implements Iterator<Integer> {
   private void populateStack(List<LC0341NestedInteger> nestedList) {
     stack.push(nestedList.listIterator());
   }
-}
-
-interface LC0341NestedInteger {
-  // @return true if this LC0341NestedInteger holds a single integer, rather than a nested list.
-  public boolean isInteger();
-
-  // @return the single integer that this LC0341NestedInteger holds, if it holds a single integer
-  // Return null if this LC0341NestedInteger holds a nested list
-  public Integer getInteger();
-
-  // @return the nested list that this LC0341NestedInteger holds, if it holds a nested list
-  // Return empty list if this LC0341NestedInteger holds a single integer
-  public List<LC0341NestedInteger> getList();
 }

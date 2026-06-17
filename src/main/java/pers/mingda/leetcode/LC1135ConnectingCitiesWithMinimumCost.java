@@ -3,8 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class LC1135ConnectingCitiesWithMinimumCost {
-}
+public class LC1135ConnectingCitiesWithMinimumCost {}
 
 class LC1135KruskalSolution {
   public int minimumCost(int n, int[][] connections) {
@@ -30,8 +29,8 @@ class LC1135KruskalSolution {
 
 class LC1135UnionFind {
 
-  final private int[] parent;
-  final private int[] rank;
+  private final int[] parent;
+  private final int[] rank;
 
   public LC1135UnionFind(int size) {
     this.parent = new int[size];

@@ -29,24 +29,14 @@ public class _17_14SmallestK {
   }
 
   int selectionSort(int[] array, int targetSize, int start, int boundary) {
-    SmallestKPartitionResult result = partition(
-      array,
-      array[start],
-      start,
-      boundary
-    );
+    SmallestKPartitionResult result = partition(array, array[start], start, boundary);
     int totalLeft = result.leftSize;
     int totalMiddle = result.leftSize + result.middleSize;
 
     if (totalLeft > targetSize) {
       return selectionSort(array, targetSize, start, start + totalLeft);
     } else if (totalMiddle < targetSize) {
-      return selectionSort(
-        array,
-        targetSize - totalMiddle,
-        start + totalMiddle,
-        boundary
-      );
+      return selectionSort(array, targetSize - totalMiddle, start + totalMiddle, boundary);
     }
     return array[start + totalMiddle];
   }
@@ -68,15 +58,10 @@ public class _17_14SmallestK {
   }
 
   /* Partition result into < pivot, equal to pivot -> bigger than pivot. */
-  SmallestKPartitionResult partition(
-    int[] array,
-    int pivot,
-    int start,
-    int end
-  ) {
-    int left = start;/* Stays at (right) edge of left side. */
-    int right = end;/* Stays at (left) edge of right side. */
-    int middle = start;/* Stays at (right) edge of middle. */
+  SmallestKPartitionResult partition(int[] array, int pivot, int start, int end) {
+    int left = start; /* Stays at (right) edge of left side. */
+    int right = end; /* Stays at (left) edge of right side. */
+    int middle = start; /* Stays at (right) edge of middle. */
     while (middle <= right) {
       if (array[middle] < pivot) {
         /* Middle is smaller than the pivot. Left is either smaller or equal to

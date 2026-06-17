@@ -67,11 +67,7 @@ class MyDoublyLinkedList {
       LC0707Node prevLC0707Node = getLC0707Node(index - 1);
       if (prevLC0707Node != null) {
         LC0707Node nextLC0707Node = prevLC0707Node.next;
-        LC0707Node LC0707Node = new LC0707Node(
-          val,
-          prevLC0707Node,
-          nextLC0707Node
-        );
+        LC0707Node LC0707Node = new LC0707Node(val, prevLC0707Node, nextLC0707Node);
         prevLC0707Node.next = LC0707Node;
         nextLC0707Node.prev = LC0707Node;
         size++;

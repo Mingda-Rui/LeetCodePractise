@@ -22,15 +22,11 @@ class LC0877Solution {
     int rightStones = stoneGame(piles, leftPile, rightPile - 1, record);
 
     if (isAlice) {
-      record[leftPile][rightPile] = Math.max(
-        piles[leftPile] + leftStones,
-        piles[rightPile] + rightStones
-      );
+      record[leftPile][rightPile] =
+          Math.max(piles[leftPile] + leftStones, piles[rightPile] + rightStones);
     } else {
-      record[leftPile][rightPile] = Math.min(
-        -piles[leftPile] + leftStones,
-        -piles[rightPile] + rightStones
-      );
+      record[leftPile][rightPile] =
+          Math.min(-piles[leftPile] + leftStones, -piles[rightPile] + rightStones);
     }
 
     return record[leftPile][rightPile];
@@ -53,9 +49,9 @@ class LC0877IterativeSolution {
           record[leftPile][rightPile] = max;
         } else {
           int leftPick =
-            -piles[leftPile] + (leftPile == rightPile ? 0 : record[leftPile + 1][rightPile]);
+              -piles[leftPile] + (leftPile == rightPile ? 0 : record[leftPile + 1][rightPile]);
           int rightPick =
-            -piles[rightPile] + (leftPile == rightPile ? 0 : record[leftPile][rightPile - 1]);
+              -piles[rightPile] + (leftPile == rightPile ? 0 : record[leftPile][rightPile - 1]);
           int max = Math.min(leftPick, rightPick);
           record[leftPile][rightPile] = max;
         }

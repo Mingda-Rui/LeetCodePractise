@@ -38,7 +38,7 @@ class LC0305UnionFind {
     this.column = column;
     this.positions = new int[row][column];
     this.numOfIslands = 0;
-    int[][] d = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+    int[][] d = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     this.dir = d;
     this.record = new HashMap<>();
   }
