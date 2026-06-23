@@ -14,7 +14,7 @@ class LC1043Solution {
   private int maxPartitionedSum(
       int[] arr, int index, int localMax, int currentPartitionSize, int k, int[] memo) {
     if (index == arr.length) {
-      return currentPartitionSize * localMax;
+      return 0;
     }
 
     if (memo[index] != -1 && currentPartitionSize == 0) {
