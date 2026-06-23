@@ -39,3 +39,20 @@ class LC1043Solution {
     return maxSum;
   }
 }
+
+class LC1043DpBottomUpSolution {
+  public int maxSumAfterPartitioning(int[] arr, int k) {
+    int[] tabulation = new int[arr.length + 1];
+    for (int i = arr.length - 1; i >= 0; i--) {
+      int maxNum = arr[i];
+      int maxSum = 0;
+      for (int j = i; j < Math.min(arr.length, i + k); j++) {
+        maxNum = Math.max(maxNum, arr[j]);
+        int sum = (j - i + 1) * maxNum + tabulation[j + 1];
+        maxSum = Math.max(maxSum, sum);
+      }
+      tabulation[i] = maxSum;
+    }
+    return tabulation[0];
+  }
+}
