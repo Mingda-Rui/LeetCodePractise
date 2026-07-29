@@ -37,9 +37,7 @@ class LC4002Solution {
     BigInteger result = BigInteger.ONE;
 
     for (int i = 1; i <= k; i++) {
-      result = result
-          .multiply(BigInteger.valueOf(n - k + i))
-          .divide(BigInteger.valueOf(i));
+      result = result.multiply(BigInteger.valueOf(n - k + i)).divide(BigInteger.valueOf(i));
     }
 
     return result;
