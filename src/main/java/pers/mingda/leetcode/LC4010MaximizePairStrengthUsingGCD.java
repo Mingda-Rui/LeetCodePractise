@@ -2,7 +2,7 @@ package pers.mingda.leetcode;
 
 public class LC4010MaximizePairStrengthUsingGCD {}
 
-class Solution {
+class LC4010Solution {
   public long maxPairStrength(int[] nums) {
     long maxStrength = 0;
     for (int i = 0; i < nums.length; i++) {
