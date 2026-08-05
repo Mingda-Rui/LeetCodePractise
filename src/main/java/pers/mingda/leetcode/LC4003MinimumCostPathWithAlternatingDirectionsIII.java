@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 public class LC4003MinimumCostPathWithAlternatingDirectionsIII {}
 
-class Solution {
+class LC4003Solution {
   public long minCost(int m, int n, int[][] penalty) {
     long[][][] dist = new long[m][n][2];
 
