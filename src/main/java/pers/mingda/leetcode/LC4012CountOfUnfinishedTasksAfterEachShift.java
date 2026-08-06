@@ -10,51 +10,43 @@ class LC4012Solution {
       taskSum[i] = taskSum[i - 1] + (long) tasks[i];
     }
     int[] count = new int[shifts.length];
-    int startTask = 0;
-    int leftOver = 0;
+    int taskIndex = 0;
+    int currTaskWorked = 0;
     for (int i = 0; i < shifts.length; i++) {
       int shift = shifts[i];
-      if (shift < leftOver) {
-        leftOver -= shift;
-        count[i] = count[i - 1];
-      } else if (shift == leftOver) {
-        leftOver -= shift;
-        startTask++;
-        count[i] = count[i - 1] - 1;
-      } else {
-        int prevTaskFinished = leftOver == 0 ? 0 : tasks[startTask] - leftOver;
-        int[] shiftResult = doShift(taskSum, startTask, prevTaskFinished, shift);
 
-        int nextTask = shiftResult[0];
-        leftOver = shiftResult[1];
-        int prevCount = i - 1 >= 0 ? count[i - 1] : 0;
-        count[i] = tasks.length - nextTask;
-        startTask = nextTask;
+      long target = (taskIndex - 1 >= 0 ? taskSum[taskIndex - 1] : 0) + currTaskWorked + shift;
+      taskIndex = doShift(taskSum, taskIndex, target);
+
+      if (taskIndex == tasks.length || target == taskSum[taskIndex]) {
+        currTaskWorked = 0;
+      } else {
+        int leftOver = (int) (taskSum[taskIndex] - target);
+        currTaskWorked = tasks[taskIndex] - leftOver;
       }
-      if (startTask == tasks.length) {
-        startTask = 0;
-        leftOver = 0;
+      count[i] = tasks.length - taskIndex;
+
+      if (taskIndex == tasks.length) {
+        taskIndex = 0;
       }
     }
     return count;
   }
 
-  private int[] doShift(long[] taskSum, int startTask, int prevTaskFinished, int shift) {
-    long target = (startTask - 1 >= 0 ? taskSum[startTask - 1] : 0) + shift + prevTaskFinished;
-    int start = startTask;
+  private int doShift(long[] taskSum, int taskIndex, long target) {
+    int start = taskIndex;
     int end = taskSum.length;
     while (start < end) {
       int mid = start + (end - start) / 2;
       if (taskSum[mid] == target) {
         end = mid + 1;
-        return new int[] {end, 0};
+        return end;
       } else if (taskSum[mid] < target) {
         start = mid + 1;
       } else {
         end = mid;
       }
     }
-    int leftOver = (end == taskSum.length ? 0 : (int) (taskSum[end] - target));
-    return new int[] {end, leftOver};
+    return end;
   }
 }
