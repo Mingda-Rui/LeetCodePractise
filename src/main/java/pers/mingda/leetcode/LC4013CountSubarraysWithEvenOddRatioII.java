@@ -1,5 +1,9 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class LC4013CountSubarraysWithEvenOddRatioII {}
 
 class LC4013Solution {
@@ -64,5 +68,81 @@ class LC4013Solution {
       index++;
     }
     System.arraycopy(temp, 0, arr, start, temp.length);
+  }
+}
+
+class LC4013FenwickTreeSolution {
+  public long countRatioSubarrays(int[] nums, int a, int b) {
+    long[] prefixSum = getPrefixSum(nums, a, b);
+    Map<Long, Integer> coordCompMap = coordinateComp(prefixSum);
+
+    FenwickTree ft = new FenwickTree(coordCompMap.size() + 1);
+    long result = 0;
+    for (long p : prefixSum) {
+      int coordinateCompIndex = coordCompMap.get(p);
+
+      result += ft.querySum(coordinateCompIndex);
+      if (p >= 0) {
+        result++;
+      }
+      ft.increase(coordinateCompIndex);
+    }
+    return result;
+  }
+
+  private long[] getPrefixSum(int[] nums, int a, int b) {
+    long[] prefixSum = new long[nums.length];
+    // x / y <= a / b
+    // x * b <= y * a
+    // y * a - x * b >= 0
+    // x -> even number
+    // y -> odd number
+
+    for (int i = 0; i < nums.length; i++) {
+      int num = nums[i];
+      prefixSum[i] = (i == 0 ? 0 : prefixSum[i - 1]) + (num % 2 == 0 ? -b : a);
+    }
+
+    return prefixSum;
+  }
+
+  private Map<Long, Integer> coordinateComp(long[] prefixSum) {
+    Map<Long, Integer> coordinateComp = new HashMap<>();
+    long[] copied = Arrays.copyOf(prefixSum, prefixSum.length);
+    Arrays.sort(copied);
+    int index = 1;
+    for (long p : copied) {
+      if (!coordinateComp.containsKey(p)) {
+        coordinateComp.put(p, index);
+        index++;
+      }
+    }
+    return coordinateComp;
+  }
+}
+
+class FenwickTree {
+  long[] tree;
+  int size;
+
+  public FenwickTree(int size) {
+    this.size = size;
+    this.tree = new long[size];
+  }
+
+  public void increase(int index) {
+    while (index < size) {
+      tree[index]++;
+      index += (index & -index);
+    }
+  }
+
+  public long querySum(int index) {
+    long sum = 0;
+    while (index > 0) {
+      sum += tree[index];
+      index -= (index & -index);
+    }
+    return sum;
   }
 }
