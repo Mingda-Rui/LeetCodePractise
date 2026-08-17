@@ -76,7 +76,7 @@ class LC4013FenwickTreeSolution {
     long[] prefixSum = getPrefixSum(nums, a, b);
     Map<Long, Integer> coordCompMap = coordinateComp(prefixSum);
 
-    FenwickTree ft = new FenwickTree(coordCompMap.size() + 1);
+    LC4013FenwickTree ft = new LC4013FenwickTree(coordCompMap.size() + 1);
     long result = 0;
     for (long p : prefixSum) {
       int coordinateCompIndex = coordCompMap.get(p);
@@ -121,11 +121,11 @@ class LC4013FenwickTreeSolution {
   }
 }
 
-class FenwickTree {
+class LC4013FenwickTree {
   long[] tree;
   int size;
 
-  public FenwickTree(int size) {
+  public LC4013FenwickTree(int size) {
     this.size = size;
     this.tree = new long[size];
   }
