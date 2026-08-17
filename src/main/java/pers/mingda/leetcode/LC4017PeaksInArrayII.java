@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LC4017PeaksInArrayII {}
 
-class Solution {
+class LC4017Solution {
   public long[] countOfPeaks(int[] nums, int[][] queries) {
     // l p1 p2 p3 r
     // [p1 - l] * [r - p1]
