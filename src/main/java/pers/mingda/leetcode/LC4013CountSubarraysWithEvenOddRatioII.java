@@ -152,7 +152,7 @@ class LC4013SegmentTreeSolution {
     long[] prefixSum = getPrefixSum(nums, a, b);
     Map<Long, Integer> coordCompMap = coordinateComp(prefixSum);
 
-    SegmentTree st = new SegmentTree(coordCompMap.size());
+    LC4013SegmentTree st = new LC4013SegmentTree(coordCompMap.size());
     long result = 0;
     for (long p : prefixSum) {
       int coordinateCompIndex = coordCompMap.get(p);
@@ -198,17 +198,17 @@ class LC4013SegmentTreeSolution {
   }
 }
 
-class SegmentTree {
+class LC4013SegmentTree {
   int size;
-  SegTreeNode root;
+  LC4013SegTreeNode root;
 
-  public SegmentTree(int size) {
+  public LC4013SegmentTree(int size) {
     this.size = size;
     this.root = init(0, size);
   }
 
-  private SegTreeNode init(int start, int end) {
-    SegTreeNode node = new SegTreeNode(0, start, end);
+  private LC4013SegTreeNode init(int start, int end) {
+    LC4013SegTreeNode node = new LC4013SegTreeNode(0, start, end);
     if (start + 1 < end) {
       int mid = (start + end) / 2;
       node.left = init(start, mid);
@@ -221,7 +221,7 @@ class SegmentTree {
     increase(root, index);
   }
 
-  public void increase(SegTreeNode root, int index) {
+  public void increase(LC4013SegTreeNode root, int index) {
     if (root.start == index && root.end == index + 1) {
       root.val++;
     } else if (root.start <= index && root.end > index) {
@@ -235,7 +235,7 @@ class SegmentTree {
     return query(root, start, end);
   }
 
-  private long query(SegTreeNode root, int start, int end) {
+  private long query(LC4013SegTreeNode root, int start, int end) {
     if (root.end <= start || root.start >= end) {
       return 0;
     } else if (root.start >= start && root.end <= end) {
@@ -245,14 +245,14 @@ class SegmentTree {
   }
 }
 
-class SegTreeNode {
+class LC4013SegTreeNode {
   int start;
   int end;
   long val;
-  SegTreeNode left;
-  SegTreeNode right;
+  LC4013SegTreeNode left;
+  LC4013SegTreeNode right;
 
-  public SegTreeNode(long val, int start, int end) {
+  public LC4013SegTreeNode(long val, int start, int end) {
     this.val = val;
     this.start = start;
     this.end = end;
