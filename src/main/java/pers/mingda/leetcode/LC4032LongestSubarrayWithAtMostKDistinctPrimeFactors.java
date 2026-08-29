@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class LC4032LongestSubarrayWithAtMostKDistinctPrimeFactors {}
 
-class Solution {
+class LC4032Solution {
   public int longestSubarray(int[] nums, int k) {
     int max = Arrays.stream(nums).max().orElseThrow();
 
@@ -94,5 +94,51 @@ class Solution {
     }
     primeFactorRecord.put(num, result);
     return result;
+  }
+}
+
+class LC4032ModifiedSieveSolution {
+  public int longestSubarray(int[] nums, int k) {
+    int max = Arrays.stream(nums).max().orElseThrow();
+
+    Map<Integer, Set<Integer>> primeFactorRecord = new HashMap<>();
+    for (int i = 2; i <= max; i++) {
+      if (!primeFactorRecord.containsKey(i)) {
+        primeFactorRecord.put(i, new HashSet<>());
+        primeFactorRecord.get(i).add(i);
+        for (int j = i * 2; j <= max; j += i) {
+          primeFactorRecord.computeIfAbsent(j, key -> new HashSet<>()).add(i);
+        }
+      }
+    }
+
+    int start = 0;
+    int end = 0;
+    int maxLen = 0;
+    Map<Integer, Integer> primeCount = new HashMap<>();
+    while (end <= nums.length) {
+      if (primeCount.size() > k) {
+        for (int prime : primeFactorRecord.get(nums[start])) {
+          int count = primeCount.get(prime);
+          if (count == 1) {
+            primeCount.remove(prime);
+          } else {
+            primeCount.put(prime, count - 1);
+          }
+        }
+        start++;
+      } else {
+        maxLen = Math.max(maxLen, end - start);
+        if (end < nums.length) {
+          for (int prime : primeFactorRecord.get(nums[end])) {
+            int count = primeCount.getOrDefault(prime, 0);
+            primeCount.put(prime, count + 1);
+          }
+        }
+        end++;
+      }
+    }
+
+    return maxLen;
   }
 }
