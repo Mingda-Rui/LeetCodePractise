@@ -142,3 +142,67 @@ class LC4032ModifiedSieveSolution {
     return maxLen;
   }
 }
+
+class LC4032SmallestPrimeFactorSolution {
+  public int longestSubarray(int[] nums, int k) {
+    int max = Arrays.stream(nums).max().orElseThrow();
+
+    int[] spf = new int[max + 1];
+    for (int i = 0; i < spf.length; i++) {
+      spf[i] = i;
+    }
+    for (int i = 2; (long) i * i < spf.length; i++) {
+      if (spf[i] != i) {
+        continue;
+      }
+      for (int j = i * i; j < spf.length; j += i) {
+        spf[j] = i;
+      }
+    }
+    Map<Integer, Set<Integer>> primeFactorRecord = new HashMap<>();
+    for (int num : nums) {
+      if (!primeFactorRecord.containsKey(num)) {
+        primeFactorRecord.put(num, getPrimeFactors(num, spf));
+      }
+    }
+
+    int start = 0;
+    int end = 0;
+    int maxLen = 0;
+    Map<Integer, Integer> primeCount = new HashMap<>();
+    while (end <= nums.length) {
+      if (primeCount.size() > k) {
+        for (int prime : primeFactorRecord.get(nums[start])) {
+          int count = primeCount.get(prime);
+          if (count == 1) {
+            primeCount.remove(prime);
+          } else {
+            primeCount.put(prime, count - 1);
+          }
+        }
+        start++;
+      } else {
+        maxLen = Math.max(maxLen, end - start);
+        if (end < nums.length) {
+          for (int prime : primeFactorRecord.get(nums[end])) {
+            int count = primeCount.getOrDefault(prime, 0);
+            primeCount.put(prime, count + 1);
+          }
+        }
+        end++;
+      }
+    }
+
+    return maxLen;
+  }
+
+  private Set<Integer> getPrimeFactors(int num, int[] spf) {
+    Set<Integer> result = new HashSet<>();
+    while (num > 1) {
+      int smallestPrimeFactor = spf[num];
+      result.add(smallestPrimeFactor);
+      num /= smallestPrimeFactor;
+    }
+    return result;
+  }
+}
