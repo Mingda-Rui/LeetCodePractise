@@ -70,3 +70,86 @@ class LC4033Solution {
     return leftMostDist;
   }
 }
+
+class LC4033MoAlgorithmSolution {
+  public boolean[] validSubarrays(int[] nums, int k, int[][] queries) {
+    int qLen = queries.length;
+    int[][] iQueries = new int[qLen][3];
+    for (int i = 0; i < qLen; i++) {
+      int[] query = queries[i];
+      iQueries[i][0] = query[0];
+      iQueries[i][1] = query[1];
+      iQueries[i][2] = i;
+    }
+    int blockSize = Math.max(1, (int) Math.sqrt(nums.length));
+    Arrays.sort(
+        iQueries,
+        (q1, q2) -> {
+          int block1 = q1[0] / blockSize;
+          int block2 = q2[0] / blockSize;
+          if (block1 == block2) {
+            return block1 % 2 == 0 ? Integer.compare(q1[1], q2[1]) : Integer.compare(q2[1], q1[1]);
+          }
+          return Integer.compare(block1, block2);
+        });
+
+    Map<Integer, Integer> numCounter = new HashMap<>();
+    boolean[] result = new boolean[qLen];
+
+    int lPointer = 0;
+    int rPointer = -1;
+    int odds = 0;
+    for (int[] query : iQueries) {
+      int l = query[0];
+      int r = query[1];
+      if (lPointer > l) {
+        while (lPointer != l) {
+          lPointer--;
+          int count = numCounter.getOrDefault(nums[lPointer], 0);
+          numCounter.put(nums[lPointer], count + 1);
+          odds += ((count + 1) % 2 == 0 ? -1 : 1);
+        }
+      }
+
+      if (rPointer < r) {
+        while (rPointer != r) {
+          rPointer++;
+          int count = numCounter.getOrDefault(nums[rPointer], 0);
+          numCounter.put(nums[rPointer], count + 1);
+          odds += ((count + 1) % 2 == 0 ? -1 : 1);
+        }
+      }
+
+      if (lPointer < l) {
+        while (lPointer != l) {
+          int count = numCounter.get(nums[lPointer]);
+          if (count == 1) {
+            numCounter.remove(nums[lPointer]);
+          } else {
+            numCounter.put(nums[lPointer], count - 1);
+          }
+          odds += ((count - 1) % 2 == 0 ? -1 : 1);
+          lPointer++;
+        }
+      }
+
+      if (rPointer > r) {
+        while (rPointer != r) {
+          int count = numCounter.get(nums[rPointer]);
+          if (count == 1) {
+            numCounter.remove(nums[rPointer]);
+          } else {
+            numCounter.put(nums[rPointer], count - 1);
+          }
+          odds += ((count - 1) % 2 == 0 ? -1 : 1);
+          rPointer--;
+        }
+      }
+
+      int index = query[2];
+      result[index] = numCounter.size() == k && odds == 0;
+    }
+
+    return result;
+  }
+}
