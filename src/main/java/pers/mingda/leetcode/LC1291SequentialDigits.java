@@ -45,3 +45,19 @@ class LC1291Solution {
     return result;
   }
 }
+
+class LC1291SlidingWindowSolution {
+  public List<Integer> sequentialDigits(int low, int high) {
+    String nums = "123456789";
+    List<Integer> result = new ArrayList<>();
+    for (int len = 2; len < 10; len++) {
+      for (int start = 0; start + len - 1 < 9; start++) {
+        int digits = Integer.parseInt(nums.substring(start, start + len));
+        if (digits >= low && digits <= high) {
+          result.add(digits);
+        }
+      }
+    }
+    return result;
+  }
+}
