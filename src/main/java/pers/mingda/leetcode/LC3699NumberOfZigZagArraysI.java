@@ -1,5 +1,7 @@
 package pers.mingda.leetcode;
 
+import java.util.Arrays;
+
 public class LC3699NumberOfZigZagArraysI {
 }
 
@@ -33,5 +35,37 @@ class LC3699DpSolution {
     }
 
     return (prefixSum1[r] + prefixSum2[r]) % modulo;
+  }
+}
+
+class LC36991DDPSolution {
+  public int zigZagArrays(int n, int l, int r) {
+    int modulo = 1_000_000_007;
+    int[] dp = new int[r - l + 1];
+    Arrays.fill(dp, 1);
+
+    for (int len = 2; len <= n; len++) {
+      int sum = 0;
+      if (len % 2 == 0) {
+        for (int curr = 0; curr < dp.length; curr++) {
+          int val = dp[curr];
+          dp[curr] = sum;
+          sum = (sum + val) % modulo;
+        }
+      } else {
+        for (int curr = dp.length - 1; curr >= 0; curr--) {
+          int val = dp[curr];
+          dp[curr] = sum;
+          sum = (sum + val) % modulo;
+        }
+      }
+    }
+
+    int count = 0;
+    for (int val : dp) {
+      count += val;
+      count %= modulo;
+    }
+    return (2 * count) % modulo;
   }
 }
