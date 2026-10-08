@@ -3,7 +3,7 @@ package pers.mingda.leetcode;
 public class LC3699NumberOfZigZagArraysI {
 }
 
-class DpSolution {
+class LC3699DpSolution {
   public int zigZagArrays(int n, int l, int r) {
     int modulo = 1_000_000_007;
     int[] dp1 = new int[r + 1];
