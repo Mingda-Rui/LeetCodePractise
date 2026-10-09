@@ -32,17 +32,17 @@ class LC1502SetSolution {
       min = Math.min(min, num);
       max = Math.max(max, num);
     }
-    if (set.size() != 1 && set.size() != arr.length) {
-      return false;
-    }
     if (set.size() == 1) {
       return true;
     }
-
-    if ((max - min) % (set.size() - 1) != 0) {
+    if (set.size() != arr.length) {
       return false;
     }
-    int diff = (max - min) / (set.size() - 1);
+
+    if ((max - min) % (arr.length - 1) != 0) {
+      return false;
+    }
+    int diff = (max - min) / (arr.length - 1);
     for (int num : arr) {
       if ((num - min) % diff != 0) {
         return false;
