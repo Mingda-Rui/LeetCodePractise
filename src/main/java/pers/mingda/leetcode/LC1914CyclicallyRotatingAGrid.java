@@ -101,3 +101,64 @@ class LC1914MathematicalSolution {
     return layer + length - 1;
   }
 }
+
+class LC1914Solution {
+  public int[][] rotateGrid(int[][] grid, int k) {
+    int m = grid.length;
+    int n = grid[0].length;
+
+    int layers = Math.min(m, n) / 2;
+    for (int l = 0; l < layers; l++) {
+      int perimeter = (m + n - 4 * l - 2) * 2;
+      int[] rows = new int[perimeter];
+      int[] cols = new int[perimeter];
+      int[] vals = new int[perimeter];
+
+      int bottom = l + m - 2 * l - 1;
+      int right = l + n - 2 * l - 1;
+      int index = 0;
+
+      // go down
+      for (int r = l; r < bottom; r++) {
+        rows[index] = r;
+        cols[index] = l;
+        vals[index] = grid[r][l];
+        index++;
+      }
+
+      // go right
+      for (int c = l; c < right; c++) {
+        rows[index] = bottom;
+        cols[index] = c;
+        vals[index] = grid[bottom][c];
+        index++;
+      }
+
+      // go up
+      for (int r = bottom; r > l; r--) {
+        rows[index] = r;
+        cols[index] = right;
+        vals[index] = grid[r][right];
+        index++;
+      }
+
+      // go left
+      for (int c = right; c > l; c--) {
+        rows[index] = l;
+        cols[index] = c;
+        vals[index] = grid[l][c];
+        index++;
+      }
+
+      int rotation = k % perimeter;
+      for (int i = 0; i < perimeter; i++) {
+        int r = rows[i];
+        int c = cols[i];
+
+        int rotatedIndex = (i + perimeter - rotation) % perimeter;
+        grid[r][c] = vals[rotatedIndex];
+      }
+    }
+    return grid;
+  }
+}
