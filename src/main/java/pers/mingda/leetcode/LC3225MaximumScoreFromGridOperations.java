@@ -52,3 +52,53 @@ class LC3225DpSolution {
     return result;
   }
 }
+
+class LC3225OneDimensionDpSolution {
+  public long maximumScore(int[][] grid) {
+    int n = grid.length;
+
+    // colPrefix[col][prefixSum]
+    long[][] colPrefix = new long[n][n + 1];
+    for (int col = 0; col < n; col++) {
+      long sum = 0;
+      for (int r = 1; r <= n; r++) {
+        sum += grid[r - 1][col];
+        colPrefix[col][r] = sum;
+      }
+    }
+
+    // prevScoredByLeft[height];
+    long[] prevScoredByLeft = new long[n + 1];
+    long[] prevUnscoredByLeft = new long[n + 1];
+    for (int col = 1; col < n; col++) {
+      int prevCol = col - 1;
+      long[] scoredByLeft = new long[n + 1];
+      long[] unscoredByLeft = new long[n + 1];
+      for (int currH = 0; currH <= n; currH++) {
+        for (int prevH = 0; prevH <= n; prevH++) {
+
+          if (currH >= prevH) {
+            long prevColScore = colPrefix[prevCol][currH] - colPrefix[prevCol][prevH];
+            long maxPrevColScore = Math.max(prevScoredByLeft[prevH], prevUnscoredByLeft[prevH] + prevColScore);
+
+            scoredByLeft[currH] = Math.max(scoredByLeft[currH], maxPrevColScore);
+            unscoredByLeft[currH] = Math.max(unscoredByLeft[currH], maxPrevColScore);
+          } else {
+            long currScore = colPrefix[col][prevH] - colPrefix[col][currH];
+            scoredByLeft[currH] = Math.max(scoredByLeft[currH], prevScoredByLeft[prevH] + currScore);
+            unscoredByLeft[currH] = Math.max(unscoredByLeft[currH], prevScoredByLeft[prevH]);
+          }
+        }
+      }
+
+      prevScoredByLeft = scoredByLeft;
+      prevUnscoredByLeft = unscoredByLeft;
+    }
+
+    long result = 0;
+    for (long score : prevScoredByLeft) {
+      result = Math.max(result, score);
+    }
+    return result;
+  }
+}
