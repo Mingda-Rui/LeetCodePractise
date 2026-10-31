@@ -16,3 +16,18 @@ class LC1665GreedyDifferenceIncreasingSolution {
     return ans;
   }
 }
+
+class LC1665GreedDifferenceDecreasingSolution {
+  public int minimumEffort(int[][] tasks) {
+    Arrays.sort(tasks, (t1, t2) -> (t2[1] - t2[0]) - (t1[1] - t1[0]));
+
+    int total = 0;
+    int remaining = 0;
+
+    for (int[] task : tasks) {
+      total += Math.max(0, task[1] - remaining);
+      remaining = Math.max(remaining, task[1]) - task[0];
+    }
+    return total;
+  }
+}
