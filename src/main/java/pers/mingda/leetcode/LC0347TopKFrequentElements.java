@@ -1,6 +1,7 @@
 package pers.mingda.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -66,5 +67,45 @@ public class LC0347TopKFrequentElements {
     }
 
     return result.stream().mapToInt(i -> i).toArray();
+  }
+}
+
+class LC0347TopKFrequentElementsQuickSelectSolution {
+  public int[] topKFrequent(int[] nums, int k) {
+    Map<Integer, Integer> freq = new HashMap<>();
+    for (int num : nums) {
+      int count = freq.getOrDefault(num, 0) + 1;
+      freq.put(num, count);
+    }
+
+    int[] uniqueNums = freq.keySet().stream().mapToInt(Integer::intValue).toArray();
+    return findTopFreq(uniqueNums, freq, 0, uniqueNums.length, k);
+  }
+
+  private int[] findTopFreq(int[] nums, Map<Integer, Integer> freq, int start, int end, int k) {
+    int pivot = nums[end - 1];
+    int boundary = start;
+    for (int i = start; i < end - 1; i++) {
+      if (freq.get(pivot) > freq.get(nums[i])) {
+        swap(nums, boundary, i);
+        boundary++;
+      }
+    }
+    if (freq.get(pivot) <= freq.get(nums[boundary])) {
+      swap(nums, boundary, end - 1);
+    }
+    if (nums.length - boundary == k) {
+      return Arrays.copyOfRange(nums, boundary, nums.length);
+    } else if (nums.length - boundary > k) {
+      return findTopFreq(nums, freq, boundary + 1, end, k);
+    } else {
+      return findTopFreq(nums, freq, start, boundary, k);
+    }
+  }
+
+  private void swap(int[] nums, int index1, int index2) {
+    int tmp = nums[index1];
+    nums[index1] = nums[index2];
+    nums[index2] = tmp;
   }
 }
