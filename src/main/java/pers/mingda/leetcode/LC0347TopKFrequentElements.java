@@ -91,9 +91,8 @@ class LC0347TopKFrequentElementsQuickSelectSolution {
         boundary++;
       }
     }
-    if (freq.get(pivot) <= freq.get(nums[boundary])) {
-      swap(nums, boundary, end - 1);
-    }
+    swap(nums, boundary, end - 1);
+
     if (nums.length - boundary == k) {
       return Arrays.copyOfRange(nums, boundary, nums.length);
     } else if (nums.length - boundary > k) {
