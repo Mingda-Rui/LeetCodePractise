@@ -52,3 +52,77 @@ public class LC0084LargestRectangleInHistogram {
     return result;
   }
 }
+
+class Solution {
+  public int largestRectangleArea(int[] heights) {
+    SegTree st = new SegTree(heights);
+    return largestRectangleArea(heights, st, 0, heights.length);
+  }
+
+  private int largestRectangleArea(int[] heights, SegTree st, int from, int to) {
+    if (from == to) {
+      return 0;
+    } else if (from + 1 == to) {
+      return heights[from];
+    }
+
+    int miniIndex = st.getShortestIndex(heights, from, to);
+    int largestArea = heights[miniIndex] * (to - from);
+    int leftLargest = largestRectangleArea(heights, st, from, miniIndex);
+    int rightLargest = largestRectangleArea(heights, st, miniIndex + 1, to);
+    largestArea = Math.max(largestArea, leftLargest);
+    largestArea = Math.max(largestArea, rightLargest);
+    return largestArea;
+  }
+
+  private int findShortestBar(int[] heights, int from, int to) {
+    int shortestIndex = from;
+    for (int i = from; i < to; i++) {
+      if (heights[shortestIndex] > heights[i]) {
+        shortestIndex = i;
+      }
+    }
+    return shortestIndex;
+  }
+}
+
+class SegTree {
+  int shortestIndex;
+  int from;
+  int to;
+  SegTree left;
+  SegTree right;
+
+  public SegTree(int[] heights) {
+    this(heights, 0, heights.length);
+  }
+
+  private SegTree(int[] heights, int from, int to) {
+    this.from = from;
+    this.to = to;
+    if (from + 1 == to) {
+      this.shortestIndex = from;
+      return;
+    }
+    int n = heights.length;
+    int mid = (from + to) / 2;
+    this.left = new SegTree(heights, from, mid);
+    this.right = new SegTree(heights, mid, to);
+    this.shortestIndex = heights[left.shortestIndex] < heights[right.shortestIndex] ? left.shortestIndex : right.shortestIndex;
+  }
+
+  public int getShortestIndex(int[] heights, int from, int to) {
+    if (from <= this.from && to >= this.to) {
+      return this.shortestIndex;
+    } else if (from >= this.to || to <= this.from) {
+      return -1;
+    }
+    int leftShortest = this.left.getShortestIndex(heights, from, to);
+    int rightShortest = this.right.getShortestIndex(heights, from, to);
+
+    if (leftShortest != -1 && rightShortest != -1) {
+      return heights[leftShortest] < heights[rightShortest] ? leftShortest : rightShortest;
+    }
+    return leftShortest == -1 ? rightShortest : leftShortest;
+  }
+}
