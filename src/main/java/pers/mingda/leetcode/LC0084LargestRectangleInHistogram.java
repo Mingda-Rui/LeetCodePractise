@@ -53,13 +53,13 @@ public class LC0084LargestRectangleInHistogram {
   }
 }
 
-class Solution {
+class LC0084DivideAndConquerSolution {
   public int largestRectangleArea(int[] heights) {
-    SegTree st = new SegTree(heights);
+    LC0084SegTree st = new LC0084SegTree(heights);
     return largestRectangleArea(heights, st, 0, heights.length);
   }
 
-  private int largestRectangleArea(int[] heights, SegTree st, int from, int to) {
+  private int largestRectangleArea(int[] heights, LC0084SegTree st, int from, int to) {
     if (from == to) {
       return 0;
     } else if (from + 1 == to) {
@@ -86,18 +86,18 @@ class Solution {
   }
 }
 
-class SegTree {
+class LC0084SegTree {
   int shortestIndex;
   int from;
   int to;
-  SegTree left;
-  SegTree right;
+  LC0084SegTree left;
+  LC0084SegTree right;
 
-  public SegTree(int[] heights) {
+  public LC0084SegTree(int[] heights) {
     this(heights, 0, heights.length);
   }
 
-  private SegTree(int[] heights, int from, int to) {
+  private LC0084SegTree(int[] heights, int from, int to) {
     this.from = from;
     this.to = to;
     if (from + 1 == to) {
@@ -106,8 +106,8 @@ class SegTree {
     }
     int n = heights.length;
     int mid = (from + to) / 2;
-    this.left = new SegTree(heights, from, mid);
-    this.right = new SegTree(heights, mid, to);
+    this.left = new LC0084SegTree(heights, from, mid);
+    this.right = new LC0084SegTree(heights, mid, to);
     this.shortestIndex = heights[left.shortestIndex] < heights[right.shortestIndex] ? left.shortestIndex : right.shortestIndex;
   }
 
