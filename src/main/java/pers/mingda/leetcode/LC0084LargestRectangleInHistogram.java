@@ -25,28 +25,28 @@ public class LC0084LargestRectangleInHistogram {
   }
 
   public int largestRectangleAreaDp(int[] heights) {
-    int[] leftBoundrayRecord = new int[heights.length];
+    int[] leftBoundaryRecord = new int[heights.length];
     for (int i = 0; i < heights.length; i++) {
       int currentH = heights[i];
       int leftBoundray = i - 1;
       while (leftBoundray >= 0 && heights[leftBoundray] >= currentH)
-        leftBoundray = leftBoundrayRecord[leftBoundray];
-      leftBoundrayRecord[i] = leftBoundray;
+        leftBoundray = leftBoundaryRecord[leftBoundray];
+      leftBoundaryRecord[i] = leftBoundray;
     }
 
-    int[] rightBoundrayRecord = new int[heights.length];
+    int[] rightBoundaryRecord = new int[heights.length];
     for (int i = heights.length - 1; i >= 0; i--) {
       int currentH = heights[i];
       int rightBoundray = i + 1;
       while (rightBoundray < heights.length && heights[rightBoundray] >= currentH)
-        rightBoundray = rightBoundrayRecord[rightBoundray];
-      rightBoundrayRecord[i] = rightBoundray;
+        rightBoundray = rightBoundaryRecord[rightBoundray];
+      rightBoundaryRecord[i] = rightBoundray;
     }
 
     int result = 0;
     for (int i = 0; i < heights.length; i++) {
       int currentH = heights[i];
-      int distance = rightBoundrayRecord[i] - leftBoundrayRecord[i] - 1;
+      int distance = rightBoundaryRecord[i] - leftBoundaryRecord[i] - 1;
       result = Math.max(result, distance * currentH);
     }
     return result;
