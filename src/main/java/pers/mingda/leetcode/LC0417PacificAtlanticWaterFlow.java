@@ -1,8 +1,10 @@
 package pers.mingda.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LC0417PacificAtlanticWaterFlow {
 
@@ -44,5 +46,69 @@ public class LC0417PacificAtlanticWaterFlow {
 
   private boolean checkCoord(int[][] heights, int x, int y) {
     return x >= 0 && x < heights.length && y >= 0 && y < heights[0].length;
+  }
+}
+
+class LC0417PacificAtlanticWaterFlowBfsSolution {
+  public List<List<Integer>> pacificAtlantic(int[][] heights) {
+    Queue<Integer> pacific = new LinkedList<>();
+    Queue<Integer> atlantic = new LinkedList<>();
+
+    int m = heights.length;
+    int n = heights[0].length;
+
+    for (int i = 0; i < m; i++) {
+      pacific.add(i);
+      pacific.add(0);
+      atlantic.add(i);
+      atlantic.add(n - 1);
+    }
+
+    for (int j = 0; j < n; j++) {
+      pacific.add(0);
+      pacific.add(j);
+      atlantic.add(m - 1);
+      atlantic.add(j);
+    }
+
+    boolean[][] pacificReachable = reachOcean(heights, pacific);
+    boolean[][] atlanticReachable = reachOcean(heights, atlantic);
+
+    List<List<Integer>> result = new ArrayList<>();
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (pacificReachable[i][j] && atlanticReachable[i][j]) {
+          result.add(List.of(i, j));
+        }
+      }
+    }
+    return result;
+  }
+
+  private boolean[][] reachOcean(int[][] heights, Queue<Integer> locations) {
+    int m = heights.length;
+    int n = heights[0].length;
+    boolean[][] reachable = new boolean[m][n];
+    int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    while (!locations.isEmpty()) {
+      int i = locations.remove();
+      int j = locations.remove();
+      reachable[i][j] = true;
+      for (int[] dir : directions) {
+        int nextI = i + dir[0];
+        int nextJ = j + dir[1];
+        if (nextI < 0 || nextI >= m || nextJ < 0 || nextJ >= n) {
+          continue;
+        }
+        if (reachable[nextI][nextJ]) {
+          continue;
+        }
+        if (heights[nextI][nextJ] >= heights[i][j]) {
+          locations.add(nextI);
+          locations.add(nextJ);
+        }
+      }
+    }
+    return reachable;
   }
 }
