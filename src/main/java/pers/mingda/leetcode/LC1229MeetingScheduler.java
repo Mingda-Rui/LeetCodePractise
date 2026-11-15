@@ -3,6 +3,7 @@ package pers.mingda.leetcode;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class LC1229MeetingScheduler {
 }
@@ -38,5 +39,33 @@ class LC1229TwoPointersSolution {
 
   private boolean isIntersect(int[] slot1, int[] slot2) {
     return slot1[0] < slot2[1] && slot2[0] < slot1[1];
+  }
+}
+
+class LC1229PriorityQueueSolution {
+  public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+    PriorityQueue<int[]> slotQueue = new PriorityQueue<>(Comparator.comparingInt(i -> i[0]));
+    enqueueByDuration(slotQueue, slots1, duration);
+    enqueueByDuration(slotQueue, slots2, duration);
+
+    while (slotQueue.size() > 1) {
+      int[] slot1 = slotQueue.remove();
+      int[] slot2 = slotQueue.peek();
+      if (slot2 != null && slot1[1] - slot2[0] >= duration) {
+        return List.of(slot2[0], slot2[0] + duration);
+      }
+    }
+    return List.of();
+  }
+
+  private void enqueueByDuration(PriorityQueue<int[]> queue, int[][] slots, int duration) {
+    for (int[] slot : slots) {
+      int start = slot[0];
+      int end = slot[1];
+      if (end - start < duration) {
+        continue;
+      }
+      queue.add(slot);
+    }
   }
 }
