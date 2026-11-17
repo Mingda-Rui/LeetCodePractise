@@ -12,7 +12,7 @@ public class LC1644LowestCommonAncestorOfABinaryTreeII {
  *     TreeNode(int x) { val = x; }
  * }
  */
-class Solution {
+class LC1644Solution {
 
   boolean foundAncestor = false;
 
