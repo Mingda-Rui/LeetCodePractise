@@ -29,3 +29,15 @@ class LC1650SetSolution {
     return null;
   }
 }
+
+class LC1650TwoRunnersCircleTrackSolution {
+  public LC1659Node lowestCommonAncestor(LC1659Node p, LC1659Node q) {
+    LC1659Node a = p;
+    LC1659Node b = q;
+    while (a != b) {
+      a = (a == null ? q : a.parent);
+      b = (b == null ? p : b.parent);
+    }
+    return a;
+  }
+}
