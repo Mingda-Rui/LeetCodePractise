@@ -3,7 +3,7 @@ package pers.mingda.leetcode;
 public class LC1319NumberOfOperationsToMakeNetworkConnected {
 }
 
-class Solution {
+class LC1319UnionFindSolution {
   public int makeConnected(int n, int[][] connections) {
     if (connections.length < n - 1) {
       return -1;
